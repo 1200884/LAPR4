@@ -128,7 +128,7 @@ object Plant_Info<<Value Object>>{
 -type_of_plant
 }
 
-Entity AVG{
+Entity AGV{
 *id
 --
 -short_description
@@ -203,10 +203,10 @@ Row -right- "1..N" Shelf : \t
 Shelf -right- "1..N" Bin : \t
 Bin -right- Product : \t
 Plant_Info "1..N" -- Warehouse
-AVG "1..N" -- Location : is based at
-AVG -- Status
-AVG "1..N" -right- Warehouse : \t belongs \t
-Task "1..N" --> AVG
+AGV "1..N" -- Location : is based at
+AGV -- Status
+AGV "1..N" -right- Warehouse : \t belongs \t
+Task "1..N" --> AGV
 Task -> Order
 Warehouse_Employee <-- "1..N" Task : creates, inspects and packages the products
 Order "1..N" -- Carrier
