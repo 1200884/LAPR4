@@ -1,0 +1,189 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+Entity Product{
+*id
+--
+-name
+-photos
+-base_price
+}
+
+object Description <<Value Object>>{
+-short_description
+-extended_description
+}
+
+object Category <<Value Object>>{
+*category_id
+--
+-description
+}
+
+object Barcode <<Value Object>>{
+*barcode_id
+--
+-type_of_barcode
+}
+
+object Brand <<Value Object>>{
+*brand_id
+--
+-name
+-reference
+}
+
+Entity Salesclerk{
+*id
+--
+-name
+}
+
+Entity Warehouse{
+*id
+}
+
+object Aisle<<Value Object>>{
+}
+
+object Row<<Value Object>>{
+}
+
+object Shelf<<Value Object>>{
+}
+
+object Bin<<Value Object>>{
+-size
+}
+
+
+object Price <<Value Object>>{
+-base_price
+-final_price_with_tax
+}
+
+Entity Customer{
+*VAT
+__
+-name
+-birth_date
+-gender
+-phone_number
++email
+}
+
+object Billing_Address <<Value Object>>{
+*address
+--
+-country
+}
+
+object Delivering_Address <<Value Object>>{
+*address
+--
+-country
+-tax
+}
+
+Entity Order{
+*id
+--
+-order_state
+-date_time
++address
+}
+
+object Shopping_Cart<<Value Object>>{
+*id
+--
++customer_id
+}
+
+Entity Payment_Method{
+*payment_type_id
+--
+-payment_type
+}
+
+object Validation<<Value Object>>{
+-email
+-phone_number
+}
+
+object Product_Quantities<<Value Object>>{
+*shopping_cart_id
+*product_id
+--
+-quantity
+}
+
+object Shipment_Method<<Value Object>>{
+*method_id
+--
+-method
+-cost
+}
+
+object Type_of_product<<Value Object>>{
+*id
+--
+-description
+}
+
+object Plant_Info<<Value Object>>{
+-type_of_plant
+}
+
+Entity AVG{
+*id
+--
+-short_description
+-model
+-maximum_weight
+}
+
+object Location<<Value Object>>{
+*location_id
+--
+-location
+}
+
+object Status<<Value Object>>{
+-time_left
+-task
+}
+
+object Task<<Value Object>>{
+
+}
+
+Order "1" -- "1" Price
+Product "1" -- "1" Description
+Product "1..N" -- "1" Category
+Product "1" -- "1" Barcode
+Product "1" -- "1" Brand
+Customer "1" -- "1..N" Billing_Address
+Customer "1" -- "1..N" Delivering_Address
+Order "1..N" -- "1" Shopping_Cart
+Customer "1" <- "1..N" Order
+Product "1" - "1..N" Product_Quantities
+Order "1" -- "1" Shipment_Method
+Shopping_Cart "1" -- "1..N" Product_Quantities
+Order "1" -- "1" Payment_Method
+Customer "1" - "1" Shopping_Cart : possesses
+Customer "1" -- "1" Validation : undergoes
+Customer "1" -- "1..N" Product_Quantities : selects
+Salesclerk "0..1" <-- "1..N" Order : registers
+Warehouse "1" -right- "1..N" Aisle : \t
+Aisle "1" -right- "1..N" Row : \t
+Row "1" -right- "1..N" Shelf : \t
+Shelf "1" -right- "1..N" Bin : \t
+Bin "1" -right- "1" Product : \t
+Plant_Info "1..N" -- "1" Warehouse
+AVG "1..N" -- "1" Location : is based at
+AVG "1" -- "1" Status
+AVG "1..N" -right- "1" Warehouse : \t belongs \t
+Task "1..N" --> AVG
+Task -> Order
+
+@enduml
