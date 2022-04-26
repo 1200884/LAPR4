@@ -1,9 +1,8 @@
-import Entity.User;
+package Domain;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.Scanner;
 
 public class Main {
@@ -30,7 +29,7 @@ public class Main {
                 System.out.println("Welcome Warehouse Employee! What do you pretend to do?\n1-Upload a JSON file\n2-Configure a AGV");
             }
             if (softwareproductclient(name, password)) {
-                System.out.println("Welcome Software Product Client! What do you pretend to do=\n1-Check the presentation");
+                System.out.println("Welcome Software Domain.Product Client! What do you pretend to do=\n1-Check the presentation");
             }
     }
 
@@ -70,7 +69,7 @@ public class Main {
         employee3.setPassword("we");
 
         User employee4 = new User();
-        employee4.setId("Software Product Client");
+        employee4.setId("Software Domain.Product Client");
         employee4.setPassword("spc");
 
 

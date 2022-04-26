@@ -1,4 +1,4 @@
-package Entity;
+package Domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 @Entity
