@@ -1,4 +1,4 @@
-package Domain.Product;
+package Domain.Warehouse;
 
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;

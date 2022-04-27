@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Category implements ValueObject {
     private Integer category_ID;
     private String description;
+
     public Category (){
     }
 

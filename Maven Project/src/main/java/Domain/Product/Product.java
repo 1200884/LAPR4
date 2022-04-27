@@ -1,7 +1,9 @@
 package Domain.Product;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 
 @Entity
 public class Product {
@@ -11,20 +13,38 @@ public class Product {
     private int baseprice;
     private String name;
     private final int id_default = 0, photos_id_default = 0, base_price_default = 0;
+    private final String NAME_DEFAULT = "No Name";
 
-    public Product(int id, String name, int photos_id, int baseprice) {
+    @Embedded
+    private Category category;
+    @Embedded
+    private Description description;
+    @Embedded
+    private Barcode barcode;
+
+    public Product(int id, String name, int photos_id, int baseprice, Category category,Description description1,Barcode barcode1) {
         this.id = id;
         this.name = name;
         this.photos_id = photos_id;
         this.baseprice = baseprice;
+        this.category=category;
+        description=description1;
+        barcode=barcode1;
     }
 
     public Product() {
         this.id = id_default;
-        String name_default = "No Name";
-        this.name = name_default;
+        this.name = NAME_DEFAULT;
         this.baseprice = base_price_default;
         this.photos_id = photos_id_default;
+    }
+
+    public Description getDescription() {
+        return description;
+    }
+
+    public void setDescription(Description description1) {
+        description = description1;
     }
 
     public String getName() {
@@ -33,6 +53,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setId(int id) {
@@ -57,5 +85,13 @@ public class Product {
 
     public int getId() {
         return id;
+    }
+
+    public Barcode getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(Barcode barcode1) {
+        barcode = barcode1;
     }
 }
