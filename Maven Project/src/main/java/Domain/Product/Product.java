@@ -2,12 +2,15 @@ package Domain.Product;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 
 @Entity
-public class Product {
+public class Product implements Serializable {
     @Id
+    @GeneratedValue
     private int id;
     private int photos_id;
     private int baseprice;
@@ -22,23 +25,20 @@ public class Product {
     @Embedded
     private Barcode barcode;
 
-    public Product(int id, String name, int photos_id, int baseprice, Category category,Description description1,Barcode barcode1) {
-        this.id = id;
+    public Product(String name, int photos_id, int baseprice, Category category,Barcode barcode1) {
         this.name = name;
         this.photos_id = photos_id;
         this.baseprice = baseprice;
         this.category=category;
-        description=description1;
         barcode=barcode1;
     }
 
-    public Product() {
+    protected Product() {
         this.id = id_default;
         this.name = NAME_DEFAULT;
         this.baseprice = base_price_default;
         this.photos_id = photos_id_default;
     }
-
     public Description getDescription() {
         return description;
     }
@@ -51,20 +51,12 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setBaseprice(int baseprice) {

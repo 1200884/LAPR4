@@ -9,17 +9,11 @@ import java.util.Objects;
 @Embeddable
 
 public class Description implements ValueObject {
-    private String short_description;
-    private String extended_description;
-    public Description (){
-    }
-
-    public void setShort_description( String short_description) {
-        this.short_description = short_description;
-    }
-
-    public void setExtended_description( String extended_description) {
-        this.extended_description = extended_description;
+    private final String short_description;
+    private final String extended_description;
+    public Description (String short_description, String extended_description){
+        this.extended_description=extended_description;
+        this.short_description=short_description;
     }
 
     public String getShort_description() {
