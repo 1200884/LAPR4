@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.app.backoffice.console.src.main.java.eapli.base.app.backoffice.console.presentation.authz;
+package eapli.base.app.backoffice.console.presentation.authz;
 
 import java.util.HashSet;
 import java.util.Set;

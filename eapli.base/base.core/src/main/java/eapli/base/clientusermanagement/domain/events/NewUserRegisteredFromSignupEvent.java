@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.events;
+package eapli.base.clientusermanagement.domain.events;
 
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.MecanographicNumber;
+import eapli.base.clientusermanagement.domain.MecanographicNumber;
 import eapli.framework.domain.events.DomainEvent;
 import eapli.framework.domain.events.DomainEventBase;
 import eapli.framework.infrastructure.authz.domain.model.Username;

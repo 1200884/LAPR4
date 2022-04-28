@@ -18,7 +18,7 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package eapli.base.base.persistence.impl.src.main.java.eapli.base.persistence.impl.jpa;
+package eapli.base.persistence.impl.jpa;
 
 /**
  *
@@ -26,7 +26,7 @@ package eapli.base.base.persistence.impl.src.main.java.eapli.base.persistence.im
  */
 class PersistenceSettings {
 
-    public static final String PERSISTENCE_UNIT_NAME = "src/eapli.base";
+    public static final String PERSISTENCE_UNIT_NAME = "eapli.base";
 
     private PersistenceSettings() {
     }

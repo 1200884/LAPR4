@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.app.user.console.src.main.java.eapli.base.app.user.console.presentation;
+package eapli.base.app.user.console.presentation;
 
-import eapli.base.base.app.common.console.src.main.java.eapli.base.app.common.console.presentation.authz.LoginUI;
+import eapli.base.app.common.console.presentation.authz.LoginUI;
 import eapli.base.app.user.console.presentation.myuser.SignupRequestAction;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.ChainedAction;

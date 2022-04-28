@@ -1,4 +1,4 @@
-package eapli.base.base.app.common.console.src.test.java.eapli.base.consoleapp.common;
+package eapli.base.consoleapp.common;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

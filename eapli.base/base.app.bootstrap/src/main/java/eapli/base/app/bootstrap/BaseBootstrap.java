@@ -18,16 +18,16 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package eapli.base.base.app.bootstrap.src.main.java.eapli.base.app.bootstrap;
+package eapli.base.app.bootstrap;
 
-import eapli.base.base.app.common.console.src.main.java.eapli.base.app.common.console.BaseApplication;
+import eapli.base.app.common.console.BaseApplication;
 import eapli.base.clientusermanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
 import eapli.base.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
-import eapli.base.base.bootstrappers.src.main.java.eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
-import eapli.base.base.bootstrappers.src.main.java.eapli.base.infrastructure.bootstrapers.demo.BaseDemoBootstrapper;
+import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
+import eapli.base.infrastructure.bootstrapers.demo.BaseDemoBootstrapper;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.base.bootstrappers.src.main.java.eapli.base.infrastructure.smoketests.BaseDemoSmokeTester;
+import eapli.base.infrastructure.smoketests.BaseDemoSmokeTester;
 import eapli.base.usermanagement.application.eventhandlers.SignupAcceptedWatchDog;
 import eapli.base.usermanagement.domain.BasePasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;

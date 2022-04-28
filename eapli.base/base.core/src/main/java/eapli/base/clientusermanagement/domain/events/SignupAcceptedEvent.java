@@ -18,10 +18,10 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.events;
+package eapli.base.clientusermanagement.domain.events;
 
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.MecanographicNumber;
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.SignupRequest;
+import eapli.base.clientusermanagement.domain.MecanographicNumber;
+import eapli.base.clientusermanagement.domain.SignupRequest;
 import eapli.framework.domain.events.DomainEventBase;
 import eapli.framework.general.domain.model.EmailAddress;
 import eapli.framework.infrastructure.authz.domain.model.Name;

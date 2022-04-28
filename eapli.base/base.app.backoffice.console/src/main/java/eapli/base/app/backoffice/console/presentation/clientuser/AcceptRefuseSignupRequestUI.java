@@ -18,7 +18,7 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package eapli.base.base.app.backoffice.console.src.main.java.eapli.base.app.backoffice.console.presentation.clientuser;
+package eapli.base.app.backoffice.console.presentation.clientuser;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

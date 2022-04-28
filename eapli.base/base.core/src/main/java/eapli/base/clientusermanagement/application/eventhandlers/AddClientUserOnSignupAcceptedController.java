@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.application.eventhandlers;
+package eapli.base.clientusermanagement.application.eventhandlers;
 
 import java.util.Optional;
 
 import eapli.base.clientusermanagement.domain.ClientUser;
 import eapli.base.clientusermanagement.domain.ClientUserBuilder;
 import eapli.base.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.repositories.ClientUserRepository;
+import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.framework.functional.Functions;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;

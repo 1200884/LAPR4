@@ -18,14 +18,14 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.myclientuser.application;
+package eapli.base.myclientuser.application;
 
 import java.util.Optional;
 
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.ClientUser;
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.repositories.ClientUserRepository;
-import eapli.base.base.core.src.main.java.eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.base.core.src.main.java.eapli.base.usermanagement.domain.BaseRoles;
+import eapli.base.clientusermanagement.domain.ClientUser;
+import eapli.base.clientusermanagement.repositories.ClientUserRepository;
+import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.application.UserSession;

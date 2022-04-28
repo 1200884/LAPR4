@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.app.common.console.src.main.java.eapli.base.app.common.console.presentation.authz;
+package eapli.base.app.common.console.presentation.authz;
 
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;

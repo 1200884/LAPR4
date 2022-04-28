@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.application.eventhandlers;
+package eapli.base.clientusermanagement.application.eventhandlers;
 
 import eapli.base.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.framework.domain.events.DomainEvent;

@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.bootstrappers.src.main.java.eapli.base.infrastructure.bootstrapers.demo;
+package eapli.base.infrastructure.bootstrapers.demo;
 
-import eapli.base.base.bootstrappers.src.main.java.eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
+import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.application.AuthenticationService;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;

@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.usermanagement.domain;
+package eapli.base.usermanagement.domain;
 
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.SignupRequestBuilder;
+import eapli.base.clientusermanagement.domain.SignupRequestBuilder;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
 import eapli.framework.util.Utility;

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.bootstrappers.src.main.java.eapli.base.infrastructure.bootstrapers;
+package eapli.base.infrastructure.bootstrapers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

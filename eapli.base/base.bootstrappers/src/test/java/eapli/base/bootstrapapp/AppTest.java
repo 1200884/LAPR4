@@ -1,4 +1,4 @@
-package eapli.base.base.bootstrappers.src.test.java.eapli.base.bootstrapapp;
+package eapli.base.bootstrapapp;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

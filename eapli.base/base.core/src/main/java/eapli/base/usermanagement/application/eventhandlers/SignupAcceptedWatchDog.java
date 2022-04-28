@@ -18,12 +18,12 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.usermanagement.application.eventhandlers;
+package eapli.base.usermanagement.application.eventhandlers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eapli.base.base.core.src.main.java.eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
+import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
 import eapli.framework.domain.events.DomainEvent;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.eventpubsub.EventHandler;

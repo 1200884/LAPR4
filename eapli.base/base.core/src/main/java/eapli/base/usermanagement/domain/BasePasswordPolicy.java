@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package eapli.base.base.core.src.main.java.eapli.base.usermanagement.domain;
+package eapli.base.usermanagement.domain;
 
 import eapli.framework.infrastructure.authz.application.PasswordPolicy;
 import eapli.framework.strings.util.StringPredicates;

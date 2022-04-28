@@ -47,6 +47,15 @@
 			<artifactId>eapli.framework.infrastructure.pubsub</artifactId>
 			<version>${eapli.framework.pubsub.version}</version>
 		</dependency>
+
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.24</version>
+                <scope>provided</scope>
+            </dependency>
+
 		
 		<!-- keep junit4 for now -->
 		<dependency>

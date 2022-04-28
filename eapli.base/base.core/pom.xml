@@ -6,7 +6,6 @@
     <parent>
         <groupId>eapli</groupId>
         <artifactId>base</artifactId>
-        <relativePath>../</relativePath>
         <version>1.4.0-SNAPSHOT</version>
     </parent>
     
