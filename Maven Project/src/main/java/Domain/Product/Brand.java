@@ -4,6 +4,8 @@ import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Objects;
 
@@ -11,21 +13,23 @@ import java.util.Objects;
 @Embeddable
 
 public class Brand implements ValueObject {
-    private Integer brand_id;
-    private String name;
-    private String reference;
-    public Brand (){
+    @GeneratedValue
+    private final int brand_id;
+    private final String name;
+    private final String reference;
+    private final int brand_id_default = 0;
+    private final String name_default = "No name available", reference_default = "No reference available";
+
+    public Brand() {
+        this.brand_id = brand_id_default;
+        this.name = name_default;
+        this.reference = reference_default;
     }
 
-    public void setBrand_id( Integer brand_id) {
-        this.brand_id = brand_id;
-    }
-
-    public void setName( String name) {
-        this.name = name;
-    }
-    public void setReference(String reference){
+    public Brand(int brand_id, String name, String reference) {
         this.reference = reference;
+        this.brand_id = brand_id;
+        this.name = name;
     }
 
     public Integer getBrand_id() {
@@ -35,7 +39,8 @@ public class Brand implements ValueObject {
     public String getName() {
         return name;
     }
-    public String getReference(){
+
+    public String getReference() {
         return reference;
     }
 
@@ -52,9 +57,10 @@ public class Brand implements ValueObject {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Brand brand  = (Brand) o;
+        Brand brand = (Brand) o;
         return Objects.equals(brand_id, brand.brand_id) && Objects.equals(name, brand.name) && Objects.equals(reference, brand.reference);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(brand_id, name, reference);

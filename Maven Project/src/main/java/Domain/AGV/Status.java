@@ -47,13 +47,6 @@ public class Status implements ValueObject {
         return Objects.equals(time_left, status.time_left) && Objects.equals(task, status.task);
     }
 
-    public void setTask(String task) {
-        this.task = task;
-    }
-
-    public void setTime_left(int time_left) {
-        this.time_left = time_left;
-    }
 
     @Override
     public int hashCode() {

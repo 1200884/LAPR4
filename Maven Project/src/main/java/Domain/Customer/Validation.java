@@ -10,17 +10,11 @@ import java.util.Objects;
 @Embeddable
 
 public class Validation implements ValueObject {
-    private String email;
-    private String phone_number;
-    public Validation (){
-    }
-
-    public void setEmail( String email) {
-        this.email = email;
-    }
-
-    public void setPhone_number( String phone_number) {
-        this.phone_number = phone_number;
+    private final String email;
+    private final String phone_number;
+    public Validation (String email,String phone_number){
+        this.email=email;
+        this.phone_number=phone_number;
     }
 
     public String getEmail() {

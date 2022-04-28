@@ -12,18 +12,13 @@ import java.util.Objects;
 @Embeddable
 
 public class Billing_Address implements ValueObject{
-    private String address;
-    private String country;
-    public Billing_Address (){
+    private final String address;
+    private final String country;
+    public Billing_Address (String address,String country){
+    this.address=address;
+    this.country=country;
     }
 
-    public void setCountry( String country) {
-        this.country = country;
-    }
-
-    public void setAddress( String address) {
-        this.address = address;
-    }
 
     public String getCountry() {
         return country;

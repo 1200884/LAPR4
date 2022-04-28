@@ -12,16 +12,12 @@ public class Delivering_Address implements ValueObject {
     private String address;
     private String country;
     private int tax;
-    public Delivering_Address (){
+    public Delivering_Address (int tax, String address,String country){
+        this.address=address;
+        this.country=country;
+        this.tax=tax;
     }
 
-    public void setCountry( String country) {
-        this.country = country;
-    }
-
-    public void setAddress( String address) {
-        this.address = address;
-    }
 
     public String getCountry() {
         return country;
@@ -30,9 +26,7 @@ public class Delivering_Address implements ValueObject {
     public String getAddress() {
         return address;
     }
-    public void setTax(Integer tax){
-        this.tax = tax;
-    }
+
     public Integer getTax(){
         return tax;
     }

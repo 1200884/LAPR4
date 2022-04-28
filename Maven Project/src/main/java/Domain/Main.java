@@ -69,7 +69,7 @@ public class Main {
         employee3.setPassword("we");
 
         User employee4 = new User();
-        employee4.setId("Software.Product Client");
+        employee4.setId("Software Product Client");
         employee4.setPassword("spc");
 
 

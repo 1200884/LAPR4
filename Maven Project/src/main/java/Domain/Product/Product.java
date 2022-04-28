@@ -24,13 +24,16 @@ public class Product implements Serializable {
     private Description description;
     @Embedded
     private Barcode barcode;
+    @Embedded
+    private Brand brand;
 
-    public Product(String name, int photos_id, int baseprice, Category category,Barcode barcode1) {
+    public Product(String name, int photos_id, int baseprice, Category category,Barcode barcode1,Brand brand) {
         this.name = name;
         this.photos_id = photos_id;
         this.baseprice = baseprice;
         this.category=category;
         barcode=barcode1;
+        this.brand=brand;
     }
 
     protected Product() {

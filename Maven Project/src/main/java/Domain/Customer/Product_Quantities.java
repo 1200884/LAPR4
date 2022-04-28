@@ -10,23 +10,16 @@ import java.util.Objects;
 @Embeddable
 
 public class Product_Quantities implements ValueObject {
-    private int shopping_cart_id;
-    private int product_id;
-    private int quantity;
-    public Product_Quantities (){
+    private final int shopping_cart_id;
+    private final int product_id;
+    private final int quantity;
+    public Product_Quantities (int shopping_cart_id, int product_id, int quantity){
+        this.product_id=product_id;
+        this.quantity=quantity;
+        this.shopping_cart_id=shopping_cart_id;
     }
 
-    public void setShopping_cart_id( Integer shopping_cart_id) {
-        this.shopping_cart_id = shopping_cart_id;
-    }
 
-    public void setProduct_id( Integer product_id) {
-        this.product_id = product_id;
-    }
-
-    public void setQuantity(Integer quantity){
-        this.quantity = quantity;
-    }
 
     public Integer getShopping_cart_id(){
         return shopping_cart_id;

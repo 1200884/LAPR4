@@ -4,22 +4,26 @@ import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
 import java.util.Objects;
+
 @Immutable
 @Embeddable
 
 public class Category implements ValueObject {
-    private Integer category_ID;
-    private String description;
+    @GeneratedValue
+    private final int category_ID;
+    private final String description;
+    private final int category_ID_default = 0;
+    private final String description_default = "No description available";
 
-    public Category (){
+    public Category() {
+        this.category_ID = category_ID_default;
+        this.description = description_default;
     }
 
-    public void setCategory_ID( Integer category_ID) {
+    public Category(int category_ID, String description) {
         this.category_ID = category_ID;
-    }
-
-    public void setDescription( String description) {
         this.description = description;
     }
 
@@ -43,9 +47,10 @@ public class Category implements ValueObject {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category  = (Category) o;
+        Category category = (Category) o;
         return Objects.equals(category_ID, category.category_ID) && Objects.equals(description, category.description);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(category_ID, description);
