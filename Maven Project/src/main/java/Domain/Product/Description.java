@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Description implements ValueObject {
     private final String short_description;
     private final String extended_description;
+
     public Description (String short_description, String extended_description){
         this.extended_description=extended_description;
         this.short_description=short_description;

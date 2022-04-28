@@ -12,16 +12,17 @@ import java.util.Objects;
 public class Barcode implements ValueObject {
     private final int barcode_ID;
     private final String type_of_barcode;
-    private final int barcode_id_default=0;
-    private final String typeof_barcode_default="No type of barcode available";
+
     public Barcode (){
-        this.barcode_ID=barcode_id_default;
-        this.type_of_barcode=typeof_barcode_default;
+        this.barcode_ID= 0;
+        this.type_of_barcode= "No type of barcode available";
     }
+
     public Barcode(int barcode_ID,String type_of_barcode){
         this.barcode_ID=barcode_ID;
         this.type_of_barcode=type_of_barcode;
     }
+
     public Integer getBarcode_ID() {
         return barcode_ID;
     }

@@ -1,25 +1,22 @@
 package Domain.Product;
 
-import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
-@Immutable
-@Embeddable
-
+@Entity
 public class Category implements ValueObject {
+    @Id
     @GeneratedValue
-    private final int category_ID;
-    private final String description;
-    private final int category_ID_default = 0;
-    private final String description_default = "No description available";
+    private int category_ID;
+    private String description;
 
     public Category() {
-        this.category_ID = category_ID_default;
-        this.description = description_default;
+        this.category_ID = 0;
+        this.description = "No description available";
     }
 
     public Category(int category_ID, String description) {
@@ -33,6 +30,10 @@ public class Category implements ValueObject {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description1){
+        this.description=description1;
     }
 
     @Override

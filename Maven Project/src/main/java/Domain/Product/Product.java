@@ -1,9 +1,6 @@
 package Domain.Product;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 
@@ -18,7 +15,7 @@ public class Product implements Serializable {
     private final int id_default = 0, photos_id_default = 0, base_price_default = 0;
     private final String NAME_DEFAULT = "No Name";
 
-    @Embedded
+    @ManyToOne
     private Category category;
     @Embedded
     private Description description;
@@ -31,7 +28,7 @@ public class Product implements Serializable {
         this.name = name;
         this.photos_id = photos_id;
         this.baseprice = baseprice;
-        this.category=category;
+        //this.category=category;
         barcode=barcode1;
         this.brand=brand;
     }
@@ -54,16 +51,12 @@ public class Product implements Serializable {
         return name;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     public void setBaseprice(int baseprice) {
         this.baseprice = baseprice;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public int getBaseprice() {
