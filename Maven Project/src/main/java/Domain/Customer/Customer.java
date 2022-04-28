@@ -11,8 +11,8 @@ import java.util.Set;
 public class Customer implements Serializable {
     @Id
     private int vat;
-    int phone_number;
-    private String birth_date, gender, email;
+    private int phone_number;
+    private String birth_date, gender, email,name;
     private final int vat_default = 0, phone_numberdefault = 0;
     private final String birth_datedefault = "No birth daate available", gender_default = "No gender available", email_default = "No email available";
     @ElementCollection
@@ -27,18 +27,16 @@ public class Customer implements Serializable {
     private Validation validation;
 
     protected Customer() {
-        this.birth_date = birth_datedefault;
         this.email = email_default;
-        this.gender = gender_default;
         this.vat = vat_default;
         this.phone_number = phone_numberdefault;
+        this.name="No name available";
     }
 
-    public Customer(int vat, int phone_number, String birth_date, String gender, String email) {
+    public Customer(String name,int vat, int phone_number, String email) {
         this.vat = vat;
+        this.name=name;
         this.phone_number = phone_number;
-        this.birth_date = birth_date;
-        this.gender = gender;
         this.email = email;
     }
 
@@ -57,21 +55,24 @@ public class Customer implements Serializable {
     public void setBilling_addresses(Set<Billing_Address> billing_addresses) {
         this.billing_addresses = billing_addresses;
     }
-    public void addBiling_adresses(Billing_Address billing_addresses){
+
+    public void addBiling_adresses(Billing_Address billing_addresses) {
         this.billing_addresses.add(billing_addresses);
     }
 
     public void setDelivering_addresses(Set<Delivering_Address> delivering_addresses) {
         this.delivering_addresses = delivering_addresses;
     }
-    public void addDelivering_adresses(Delivering_Address delivering_address){
+
+    public void addDelivering_adresses(Delivering_Address delivering_address) {
         this.delivering_addresses.add((delivering_address));
     }
 
     public void setProduct_quantities(Set<Product_Quantities> product_quantities) {
         this.product_quantities = product_quantities;
     }
-    public void addProduct_quantities(Product_Quantities product_quantities){
+
+    public void addProduct_quantities(Product_Quantities product_quantities) {
         this.product_quantities.add(product_quantities);
     }
 
