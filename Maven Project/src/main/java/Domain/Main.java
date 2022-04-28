@@ -12,7 +12,7 @@ public class Main {
         bootstrap();
         System.out.println("Welcome!\nPlease login with your credentials!\n Email -");
         String name = scanner.next();
-        System.out.println("Password -");
+        System.out.println("Password-");
         String password = scanner.next();
         while (!salesclerk(name, password) && !projectmanager(name, password) && !softwareproductclient(name, password) && !warehouseemployee(name, password)) {
             System.out.println("Invalid Credentials, please try again");

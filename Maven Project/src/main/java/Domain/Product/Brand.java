@@ -17,12 +17,13 @@ public class Brand implements ValueObject {
     private final int brand_id;
     private final String name;
     private final String reference;
-    private final int brand_id_default = 0;
-    private final String name_default = "No name available", reference_default = "No reference available";
 
     public Brand() {
+        int brand_id_default = 0;
         this.brand_id = brand_id_default;
+        String name_default = "No name available";
         this.name = name_default;
+        String reference_default = "No reference available";
         this.reference = reference_default;
     }
 
