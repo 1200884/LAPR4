@@ -4,8 +4,10 @@ import eapli.base.customermanagement.domain.model.Customer;
 import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.infrastructure.repositories.Repository;
 
-import java.util.Calendar;
+import java.util.Optional;
 
-public interface CustomerRepository extends Repository<Customer,Integer> {
+public interface CustomerRepository extends DomainRepository<Integer,Customer> {
+
+    Optional<Customer> findByVat(int vat);
 
 }

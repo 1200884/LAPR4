@@ -1,12 +1,15 @@
 package eapli.base.customermanagement.domain.model;
 
+import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.domain.model.DomainEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Customer implements Serializable {
+public class Customer implements Serializable, DomainEntity<Integer>, AggregateRoot<Integer> {
     @Id
     private int vat;
     private int phone_number;
@@ -36,6 +39,7 @@ public class Customer implements Serializable {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
+        this.shopping_cart=new Shopping_Cart();
     }
 
     public Set<Billing_Address> getBilling_addresses() {
@@ -128,5 +132,15 @@ public class Customer implements Serializable {
 
     public int getVat() {
         return vat;
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        return false;
+    }
+
+    @Override
+    public Integer identity() {
+        return null;
     }
 }

@@ -24,6 +24,8 @@ import eapli.base.app.common.console.BaseApplication;
 import eapli.base.clientusermanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
 import eapli.base.clientusermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import eapli.base.clientusermanagement.domain.events.SignupAcceptedEvent;
+import eapli.base.customermanagement.domain.model.Customer;
+import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.bootstrapers.demo.BackofficeUsersBootstrapper;
 import eapli.base.infrastructure.bootstrapers.demo.BaseDemoBootstrapper;
@@ -31,10 +33,15 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.infrastructure.smoketests.BaseDemoSmokeTester;
 import eapli.base.usermanagement.application.eventhandlers.SignupAcceptedWatchDog;
 import eapli.base.usermanagement.domain.BasePasswordPolicy;
+import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.eventpubsub.EventDispatcher;
+import eapli.framework.infrastructure.repositories.Repository;
 import eapli.framework.util.ArrayPredicates;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
 
 /**
  * Base Bootstrapping data app
@@ -55,7 +62,6 @@ public final class BaseBootstrap extends BaseApplication {
 
         AuthzRegistry.configure(PersistenceContext.repositories().users(), new BasePasswordPolicy(),
                 new PlainTextEncoder());
-
         new BaseBootstrap().run(args);
     }
 
