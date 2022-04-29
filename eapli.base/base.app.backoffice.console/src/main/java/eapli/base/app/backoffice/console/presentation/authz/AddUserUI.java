@@ -52,7 +52,7 @@ public class AddUserUI extends AbstractUI {
     protected boolean doShow() {
         // FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
         // UtenteApp
-        final String username = Console.readLine("Username");
+        final String username = Console.readLine(")Username");
         final String password = Console.readLine("Password");
         final String firstName = Console.readLine("First Name");
         final String lastName = Console.readLine("Last Name");
