@@ -1,5 +1,7 @@
 package eapli.base.app.backoffice.console.Domain.Product;
 import eapli.base.app.backoffice.console.Persistence.CategoryPersist;
+import eapli.base.productmanagement.Product.domain.Category;
+
 
 public class CategoryController {
 

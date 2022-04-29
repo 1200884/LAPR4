@@ -24,12 +24,15 @@
 package eapli.base.app.backoffice.console.presentation;
 
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.ListCustomerAction;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.Shopping_CartAction;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.Shopping_CartUI;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
+import eapli.base.customermanagement.domain.model.Shopping_Cart;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -189,7 +192,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Customer >");
 
         menu.addItem(LIST_CUSTOMER_OPTION, "List all Customer", new ListCustomerAction());
-        menu.addItem(MANAGE_SHOPPING_CART, "Manage Shopping Carts", new ListUsersAction());
+        menu.addItem(MANAGE_SHOPPING_CART, "Manage Shopping Carts", new Shopping_CartAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;

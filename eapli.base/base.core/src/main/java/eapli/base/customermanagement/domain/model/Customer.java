@@ -20,8 +20,6 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
     private Set<Billing_Address> billing_addresses = new HashSet<>();
     @ElementCollection
     private Set<Delivering_Address> delivering_addresses = new HashSet<>();
-    @ElementCollection
-    private Set<Product_Quantities> product_quantities = new HashSet<>();
     @Embedded
     private Shopping_Cart shopping_cart;
     @Embedded
@@ -70,24 +68,12 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
         this.delivering_addresses.add((delivering_address));
     }
 
-    public void setProduct_quantities(Set<Product_Quantities> product_quantities) {
-        this.product_quantities = product_quantities;
-    }
-
-    public void addProduct_quantities(Product_Quantities product_quantities) {
-        this.product_quantities.add(product_quantities);
-    }
-
     public void setValidation(Validation validation) {
         this.validation = validation;
     }
 
     public void setShopping_cart(Shopping_Cart shopping_cart) {
         this.shopping_cart = shopping_cart;
-    }
-
-    public Set<Product_Quantities> getProduct_quantities() {
-        return product_quantities;
     }
 
     public Validation getValidation() {

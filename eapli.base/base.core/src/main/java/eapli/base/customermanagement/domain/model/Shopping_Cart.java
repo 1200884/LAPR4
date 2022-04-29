@@ -3,9 +3,12 @@ package eapli.base.customermanagement.domain.model;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Immutable
 @Embeddable
@@ -13,28 +16,28 @@ import java.util.Objects;
 public class Shopping_Cart implements ValueObject {
     @GeneratedValue
     private int ID;
-    private int customer_id;
+    @ElementCollection
+    private Set<Product_Quantities> product_quantities = new HashSet<>();
 
-    protected Shopping_Cart(){
-    }
-
-    public Shopping_Cart(int customer_id) {
-        this.customer_id = customer_id;
+    public Shopping_Cart(){
     }
 
     public Integer getID() {
         return ID;
     }
 
-    public Integer getCustomer_id() {
-        return customer_id;
+    public Set<Product_Quantities> getProduct_quantities() {
+        return product_quantities;
     }
 
+    public void addToCart(Product_Quantities product_quantities){
+        this.product_quantities.add(product_quantities);
+    }
     @Override
     public String toString() {
         return "Shopping_Cart{" +
-                "ID='" + ID + '\'' +
-                ", Customer_ID ='" + customer_id + '\'' +
+                "ID=" + ID +
+                ", product_quantities=" + product_quantities +
                 '}';
     }
 
@@ -42,12 +45,12 @@ public class Shopping_Cart implements ValueObject {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Shopping_Cart shopping_cart = (Shopping_Cart) o;
-        return Objects.equals(ID, shopping_cart.ID) && Objects.equals(customer_id, shopping_cart.customer_id);
+        Shopping_Cart that = (Shopping_Cart) o;
+        return ID == that.ID && Objects.equals(product_quantities, that.product_quantities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, customer_id);
+        return Objects.hash(ID);
     }
 }

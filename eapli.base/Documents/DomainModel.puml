@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/object-diagram
 
+package Product as Product{
+
 Entity Product{
 *id
 --
@@ -33,12 +35,18 @@ object Brand <<Value Object>>{
 -reference
 }
 
+}
 Entity Salesclerk{
 *id
 --
 -name
 }
 
+package Warehouse as Warehouse{
+
+object Plant_Info<<Value Object>>{
+-type_of_plant
+}
 Entity Warehouse{
 *id
 }
@@ -55,13 +63,10 @@ object Shelf<<Value Object>>{
 object Bin<<Value Object>>{
 -size
 }
-
-
-object Price <<Value Object>>{
--base_price
--final_price_with_tax
 }
 
+
+package Customer as Customer{
 Entity Customer{
 *VAT
 __
@@ -71,7 +76,6 @@ __
 -phone_number
 +email
 }
-
 object Billing_Address <<Value Object>>{
 *address
 --
@@ -85,6 +89,24 @@ object Delivering_Address <<Value Object>>{
 -tax
 }
 
+object Validation<<Value Object>>{
+ -email
+ -phone_number
+ }
+}
+
+package Order as Order{
+
+object Product_Quantities<<Value Object>>{
+-quantity
+}
+
+object Shopping_Cart<<Value Object>>{
+  *id
+  --
+  +customer_id
+  }
+
 Entity Order{
 *id
 --
@@ -92,26 +114,10 @@ Entity Order{
 -date_time
 +address
 }
-
-object Shopping_Cart<<Value Object>>{
-*id
---
-+customer_id
-}
-
 Entity Payment_Method{
 *payment_type_id
 --
 -payment_type
-}
-
-object Validation<<Value Object>>{
--email
--phone_number
-}
-
-object Product_Quantities<<Value Object>>{
--quantity
 }
 
 object Shipment_Method<<Value Object>>{
@@ -121,9 +127,28 @@ object Shipment_Method<<Value Object>>{
 -cost
 }
 
-object Plant_Info<<Value Object>>{
--type_of_plant
+Entity Carrier {
+ *company_id
+ }
+
+ object Price <<Value Object>>{
+  -base_price
+  -final_price_with_tax
+  }
 }
+
+
+
+
+object Validation<<Value Object>>{
+-email
+-phone_number
+}
+
+
+
+
+
 
 Entity AGV{
 *id
@@ -154,9 +179,7 @@ Entity Warehouse_Employee {
 -name
 }
 
-Entity Carrier {
-*company_id
-}
+
 
 Entity Questionnaire {
 
@@ -184,15 +207,13 @@ Product -- Barcode
 Product -- Brand
 Customer -- "1..N" Billing_Address
 Customer -- "1..N" Delivering_Address
-Order "1..N" -- Shopping_Cart
 Customer <- "1..N" Order
-Product - "1..N" Product_Quantities
+Product - "1..N" Order
 Order -- Shipment_Method
 Shopping_Cart -- "1..N" Product_Quantities
 Order -- Payment_Method
-Customer - Shopping_Cart : possesses
+Order - Shopping_Cart : possesses
 Customer -- Validation : undergoes
-Customer -- "1..N" Product_Quantities : selects
 Salesclerk "0..1" <-- "1..N" Order : registers
 Warehouse -right- "1..N" Aisle : \t
 Aisle -right- "1..N" Row : \t
