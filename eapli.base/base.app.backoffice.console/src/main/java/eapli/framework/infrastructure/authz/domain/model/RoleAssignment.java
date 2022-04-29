@@ -48,6 +48,7 @@ public class RoleAssignment implements ValueObject, Serializable {
     @GeneratedValue // (strategy = GenerationType.IDENTITY)
     private Long pk;
 
+    @Embedded
     private final Role type;
 
     @Temporal(TemporalType.DATE)
@@ -57,6 +58,10 @@ public class RoleAssignment implements ValueObject, Serializable {
     private Calendar unassignedOn;
 
     private boolean expired;
+
+    public Role getType() {
+        return type;
+    }
 
     /**
      * @param type

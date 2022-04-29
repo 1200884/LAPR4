@@ -1,6 +1,6 @@
 package eapli.base.app.backoffice.console.Persistence;
 
-import eapli.base.productmanagement.Product.domain.Category;
+import eapli.base.app.backoffice.console.Domain.Product.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
