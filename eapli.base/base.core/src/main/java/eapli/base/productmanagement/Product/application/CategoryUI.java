@@ -1,6 +1,7 @@
-package eapli.base.productmanagement.Product.domain;
+package eapli.base.productmanagement.Product.application;
 
-import eapli.base.productmanagement.Product.domain.repositories.CategoryRepository;
+import eapli.base.productmanagement.Product.application.CategoryController;
+import eapli.base.productmanagement.Product.repositories.CategoryRepository;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;

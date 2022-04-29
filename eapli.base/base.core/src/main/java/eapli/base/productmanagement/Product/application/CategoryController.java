@@ -1,5 +1,6 @@
-package eapli.base.productmanagement.Product.domain;
-import eapli.base.productmanagement.Product.domain.CategoryPersist;
+package eapli.base.productmanagement.Product.application;
+import eapli.base.productmanagement.Product.application.CategoryPersist;
+import eapli.base.productmanagement.Product.domain.Category;
 
 public class CategoryController {
 

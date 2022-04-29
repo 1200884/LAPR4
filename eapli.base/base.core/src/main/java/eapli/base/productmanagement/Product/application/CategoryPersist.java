@@ -1,4 +1,4 @@
-package eapli.base.productmanagement.Product.domain;
+package eapli.base.productmanagement.Product.application;
 
 import eapli.base.productmanagement.Product.domain.Category;
 
