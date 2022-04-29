@@ -1,5 +1,6 @@
 package eapli.base.productmanagement.Product.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Entity;
@@ -8,7 +9,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Category implements ValueObject {
+public class Category implements ValueObject, AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int category_ID;
