@@ -60,39 +60,12 @@ public class MainMenu extends AbstractUI {
     private static final int DEACTIVATE_USER_OPTION = 3;
     private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
 
-    // SETTINGS
-    private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
-
-    // DISH TYPES
-    private static final int DISH_TYPE_REGISTER_OPTION = 1;
-    private static final int DISH_TYPE_LIST_OPTION = 2;
-    private static final int DISH_TYPE_CHANGE_OPTION = 3;
-    private static final int DISH_TYPE_ACTIVATE_DEACTIVATE_OPTION = 4;
-
-    // DISHES
-    private static final int DISH_REGISTER_OPTION = 5;
-    private static final int DISH_LIST_OPTION = 6;
-    private static final int DISH_REGISTER_DTO_OPTION = 7;
-    private static final int DISH_LIST_DTO_OPTION = 8;
-    private static final int DISH_ACTIVATE_DEACTIVATE_OPTION = 9;
-    private static final int DISH_CHANGE_OPTION = 10;
-
-    // DISH PROPERTIES
-    private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
-    private static final int CHANGE_DISH_PRICE_OPTION = 2;
-
-    // MATERIALS
-    private static final int MATERIAL_REGISTER_OPTION = 1;
-    private static final int MATERIAL_LIST_OPTION = 2;
-
-    // REPORTING
-    private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
-    private static final int REPORTING_HIGH_CALORIES_DISHES_OPTION = 2;
-    private static final int REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION = 3;
-
-    // MEALS
-    private static final int LIST_MEALS_OPTION = 1;
-    private static final int MEAL_REGISTER_OPTION = 2;
+    // SETTINGS Sales Clerk
+    private static final int SPECIGY_PRODUCT = 1;
+    private static final int PRODUCT_CATALOG = 2;
+    private static final int CUSTOMER_REGISTER = 3;
+    private static final int CREATE_ORDER = 4;
+    private static final int PRODUCT_CATEGORY = 5;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -152,6 +125,11 @@ public class MainMenu extends AbstractUI {
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
         }
 
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.SALES_CLERK)) {
+            final Menu settingsMenu = buildSalesClerkSettingsMenu();
+            mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
+        }
+
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
         }
@@ -164,7 +142,25 @@ public class MainMenu extends AbstractUI {
     private Menu buildAdminSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 
-        menu.addItem(SET_KITCHEN_ALERT_LIMIT_OPTION, "Set kitchen alert limit",
+        menu.addItem(SPECIGY_PRODUCT, "Set kitchen alert limit",
+                new ShowMessageAction("Not implemented yet"));
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+
+    private Menu buildSalesClerkSettingsMenu() {
+        final Menu menu = new Menu("Settings >");
+
+        menu.addItem(SPECIGY_PRODUCT, "Specify new product for sale",
+                new ShowMessageAction("Not implemented yet"));
+        menu.addItem(PRODUCT_CATALOG, "View/Search the products catalog",
+                new ShowMessageAction("Not implemented yet"));
+        menu.addItem(CUSTOMER_REGISTER, "Register new Customer",
+                new ShowMessageAction("Not implemented yet"));
+        menu.addItem(CREATE_ORDER, "Create a new Products Order on behalf of a given Customer",
+                new ShowMessageAction("Not implemented yet"));
+        menu.addItem(PRODUCT_CATEGORY, "Define a new Category of Products",
                 new ShowMessageAction("Not implemented yet"));
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
