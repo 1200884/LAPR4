@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.AGV;
+package eapli.base.AGVmanagement.AGV.domain;
 
 
 import eapli.framework.domain.model.Immutable;
@@ -13,8 +13,7 @@ import java.util.Objects;
 public class Status implements ValueObject {
     private int time_left;
     private String task;
-    private int time_left_default=0;
-    private String task_default="No task available";
+
     public Status() {
     }
 
@@ -29,6 +28,14 @@ public class Status implements ValueObject {
 
     public int getTime_left() {
         return time_left;
+    }
+
+    private void setTask(String task) {
+        this.task = task;
+    }
+
+    private void setTime_left(int time_left) {
+        this.time_left = time_left;
     }
 
     @Override

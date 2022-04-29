@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Product;
+package eapli.base.productmanagement.Product.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

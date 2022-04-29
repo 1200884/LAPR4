@@ -100,6 +100,7 @@ public class SystemUser implements AggregateRoot<Username>, DTOable<GeneralDTO>,
         this(username, password, name, email, roles, Calendars.now());
     }
 
+
     /**
      *
      * @param username

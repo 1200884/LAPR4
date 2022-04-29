@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.AGV;
+package eapli.base.AGVmanagement.AGV.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

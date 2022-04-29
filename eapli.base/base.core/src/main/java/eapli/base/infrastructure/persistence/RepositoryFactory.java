@@ -23,6 +23,7 @@ package eapli.base.infrastructure.persistence;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
+import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
 /**

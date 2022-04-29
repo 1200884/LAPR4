@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Customer;
+package eapli.base.customermanagement.domain.model;
 
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
@@ -32,6 +32,18 @@ public class Delivering_Address implements ValueObject {
 
     public Integer getTax(){
         return tax;
+    }
+
+    private void setCountry(String country) {
+        this.country = country;
+    }
+
+    private void setAddress(String address) {
+        this.address = address;
+    }
+
+    private void setTax(int tax) {
+        this.tax = tax;
     }
 
     @Override

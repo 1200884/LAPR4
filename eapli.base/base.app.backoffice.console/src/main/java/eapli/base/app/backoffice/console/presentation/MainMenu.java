@@ -23,6 +23,7 @@
  */
 package eapli.base.app.backoffice.console.presentation;
 
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.ListCustomerAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
@@ -60,6 +61,11 @@ public class MainMenu extends AbstractUI {
     private static final int DEACTIVATE_USER_OPTION = 3;
     private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
 
+
+    // Customer
+    private static final int LIST_CUSTOMER_OPTION = 1;
+    private static final int MANAGE_SHOPPING_CART = 2;
+
     // SETTINGS Sales Clerk
     private static final int SPECIGY_PRODUCT = 1;
     private static final int PRODUCT_CATALOG = 2;
@@ -71,10 +77,7 @@ public class MainMenu extends AbstractUI {
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
     private static final int SETTINGS_OPTION = 4;
-    private static final int DISH_OPTION = 5;
-    private static final int TRACEABILITY_OPTION = 6;
-    private static final int MEALS_OPTION = 7;
-    private static final int REPORTING_DISHES_OPTION = 8;
+    private static final int CUSTOMER_OPTION = 5;
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -126,6 +129,8 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.SALES_CLERK)) {
+            final Menu customerMenu = buildCustomerMenu();
+            mainMenu.addSubMenu(CUSTOMER_OPTION, customerMenu);
             final Menu settingsMenu = buildSalesClerkSettingsMenu();
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
         }
@@ -175,6 +180,16 @@ public class MainMenu extends AbstractUI {
         menu.addItem(DEACTIVATE_USER_OPTION, "Deactivate User", new DeactivateUserAction());
         menu.addItem(ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION, "Accept/Refuse Signup Request",
                 new AcceptRefuseSignupRequestAction());
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+
+    private Menu buildCustomerMenu() {
+        final Menu menu = new Menu("Customer >");
+
+        menu.addItem(LIST_CUSTOMER_OPTION, "List all Customer", new ListCustomerAction());
+        menu.addItem(MANAGE_SHOPPING_CART, "Manage Shopping Carts", new ListUsersAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;

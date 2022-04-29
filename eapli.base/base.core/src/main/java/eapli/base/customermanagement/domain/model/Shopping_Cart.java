@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Customer;
+package eapli.base.customermanagement.domain.model;
 
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;

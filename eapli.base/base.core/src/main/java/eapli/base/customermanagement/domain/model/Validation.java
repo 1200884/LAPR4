@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Customer;
+package eapli.base.customermanagement.domain.model;
 
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
@@ -25,6 +25,14 @@ public class Validation implements ValueObject {
 
     public String getPhone_number() {
         return phone_number;
+    }
+
+    private void setEmail(String email) {
+        this.email = email;
+    }
+
+    private void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     @Override

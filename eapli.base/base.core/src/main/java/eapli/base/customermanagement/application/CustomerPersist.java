@@ -1,7 +1,6 @@
-package eapli.base.app.backoffice.console.Persistence;
+package eapli.base.customermanagement.application;
 
-import eapli.base.app.backoffice.console.Domain.Customer.Customer;
-import eapli.base.app.backoffice.console.Domain.Customer.Customer;
+import eapli.base.customermanagement.domain.model.Customer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -20,6 +20,7 @@
  */
 package eapli.framework.infrastructure.authz.application;
 
+import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.util.Singleton;
 import eapli.framework.validations.Invariants;

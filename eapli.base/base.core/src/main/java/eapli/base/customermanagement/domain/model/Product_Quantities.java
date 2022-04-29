@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Customer;
+package eapli.base.customermanagement.domain.model;
 
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
@@ -33,6 +33,18 @@ public class Product_Quantities implements ValueObject {
 
     public Integer getQuantity(){
         return quantity;
+    }
+
+    private void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
+    private void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    private void setShopping_cart_id(int shopping_cart_id) {
+        this.shopping_cart_id = shopping_cart_id;
     }
 
     @Override

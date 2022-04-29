@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Product;
+package eapli.base.productmanagement.Product.domain;
 
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
@@ -26,6 +26,14 @@ public class Description implements ValueObject {
 
     public String getExtended_description() {
         return extended_description;
+    }
+
+    private void setExtended_description(String extended_description) {
+        this.extended_description = extended_description;
+    }
+
+    private void setShort_description(String short_description) {
+        this.short_description = short_description;
     }
 
     @Override

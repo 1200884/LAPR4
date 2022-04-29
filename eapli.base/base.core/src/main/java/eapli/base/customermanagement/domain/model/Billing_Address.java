@@ -1,7 +1,5 @@
-package eapli.base.app.backoffice.console.Domain.Customer;
+package eapli.base.customermanagement.domain.model;
 
-import eapli.base.app.backoffice.console.Domain.AGV.Status;
-import com.sun.istack.NotNull;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
@@ -30,6 +28,15 @@ public class Billing_Address implements ValueObject{
 
     public String getAddress() {
         return address;
+    }
+
+
+    private void setAddress(String address) {
+        this.address = address;
+    }
+
+    private void setCountry(String country) {
+        this.country = country;
     }
 
     @Override

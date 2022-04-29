@@ -1,6 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Customer;
-
-import eapli.base.app.backoffice.console.Domain.Product.Product;
+package eapli.base.customermanagement.domain.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

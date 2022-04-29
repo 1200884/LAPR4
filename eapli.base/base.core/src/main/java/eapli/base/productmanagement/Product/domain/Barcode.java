@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Product;
+package eapli.base.productmanagement.Product.domain;
 
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
@@ -27,6 +27,14 @@ public class Barcode implements ValueObject {
 
     public String getType_of_barcode() {
         return type_of_barcode;
+    }
+
+    private void setBarcode_ID(int barcode_ID) {
+        this.barcode_ID = barcode_ID;
+    }
+
+    private void setType_of_barcode(String type_of_barcode) {
+        this.type_of_barcode = type_of_barcode;
     }
 
     @Override
