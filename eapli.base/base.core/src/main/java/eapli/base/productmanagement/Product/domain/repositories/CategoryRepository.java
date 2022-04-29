@@ -1,4 +1,4 @@
-package eapli.base.productmanagement.Product.repositories;
+package eapli.base.productmanagement.Product.domain.repositories;
 
 import eapli.base.productmanagement.Product.domain.Category;
 import eapli.framework.domain.repositories.DomainRepository;

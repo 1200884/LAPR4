@@ -4,7 +4,7 @@ import eapli.base.productmanagement.Product.domain.Barcode;
 import eapli.base.productmanagement.Product.domain.Brand;
 import eapli.base.productmanagement.Product.domain.Category;
 import eapli.base.productmanagement.Product.domain.Product;
-import eapli.base.productmanagement.Product.repositories.CategoryRepository;
+import eapli.base.productmanagement.Product.domain.repositories.CategoryRepository;
 
 public class ProductController {
 
