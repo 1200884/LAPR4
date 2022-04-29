@@ -15,7 +15,7 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
     private int category_ID;
     private String description;
 
-    public Category() {
+    protected Category() {
     }
 
     public Category(int category_ID, String description) {
@@ -54,6 +54,16 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
     @Override
     public int hashCode() {
         return Objects.hash(category_ID, description);
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        return false;
+    }
+
+    @Override
+    public Integer identity() {
+        return null;
     }
 }
 

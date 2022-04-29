@@ -1,16 +1,16 @@
 package eapli.base.productmanagement.Product.domain;
 
-import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
-@Immutable
-@Embeddable
+@Entity
 
 public class Brand implements ValueObject {
+    @Id
     @GeneratedValue
     private int brand_id;
     private String name;
@@ -23,6 +23,10 @@ public class Brand implements ValueObject {
         this.reference = reference;
         this.brand_id = brand_id;
         this.name = name;
+    }
+
+    public Integer getBrand_id() {
+        return brand_id;
     }
 
     public String getName() {

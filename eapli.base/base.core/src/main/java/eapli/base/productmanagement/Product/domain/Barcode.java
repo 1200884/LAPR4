@@ -5,20 +5,34 @@ import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
 import java.util.Objects;
+import java.util.Random;
 
 @Immutable
 @Embeddable
 
 public class Barcode implements ValueObject {
+
+    private static final int LOW = 10000000;
+    private static final int MAX = 99999999;
+
     private int barcode_ID;
     private String type_of_barcode;
 
     public Barcode (){
     }
 
-    public Barcode(int barcode_ID,String type_of_barcode){
-        this.barcode_ID=barcode_ID;
+    public Barcode(String type_of_barcode){
+        Random r = new Random();
+        int prov = r.nextInt(MAX-LOW) + LOW;
+        while (!isBarcodeValid(prov)){
+            prov = r.nextInt(MAX-LOW) + LOW;
+        }
+        this.barcode_ID = prov;
         this.type_of_barcode=type_of_barcode;
+    }
+
+    public boolean isBarcodeValid(int num) {
+        return LOW <= num && num <= MAX;
     }
 
     public Integer getBarcode_ID() {
