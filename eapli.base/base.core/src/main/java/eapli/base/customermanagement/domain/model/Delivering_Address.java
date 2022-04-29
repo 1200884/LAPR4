@@ -11,11 +11,10 @@ import java.util.Objects;
 public class Delivering_Address implements ValueObject {
     private String address;
     private String country;
-    private int tax;
-    public Delivering_Address (int tax, String address,String country){
+    public Delivering_Address (String address,String country){
         this.address=address;
         this.country=country;
-        this.tax=tax;
+
     }
 
     protected Delivering_Address(){
@@ -30,9 +29,7 @@ public class Delivering_Address implements ValueObject {
         return address;
     }
 
-    public Integer getTax(){
-        return tax;
-    }
+
 
     private void setCountry(String country) {
         this.country = country;
@@ -42,16 +39,13 @@ public class Delivering_Address implements ValueObject {
         this.address = address;
     }
 
-    private void setTax(int tax) {
-        this.tax = tax;
-    }
+
 
     @Override
     public String toString() {
         return "Delivering_Address{" +
                 "country='" + country + '\'' +
                 ", address ='" + address + '\'' +
-                ", tax = " + tax + '\'' +
                 '}';
     }
 
@@ -60,10 +54,10 @@ public class Delivering_Address implements ValueObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Delivering_Address delivering_address = (Delivering_Address) o;
-        return Objects.equals(country, delivering_address.country) && Objects.equals(address, delivering_address.address) && Objects.equals(tax, delivering_address.tax);
+        return Objects.equals(country, delivering_address.country) && Objects.equals(address, delivering_address.address);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(country, address, tax);
+        return Objects.hash(country, address);
     }
 }

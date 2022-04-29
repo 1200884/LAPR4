@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Persistence;
+package eapli.base.productmanagement.Product.domain.repositories;
 
 import eapli.base.productmanagement.Product.domain.Category;
 

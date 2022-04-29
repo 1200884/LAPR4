@@ -1,7 +1,6 @@
-package eapli.base.app.backoffice.console.Domain.Product;
-import eapli.base.app.backoffice.console.Persistence.CategoryPersist;
+package eapli.base.productmanagement.Product.application;
+import eapli.base.productmanagement.Product.domain.repositories.CategoryPersist;
 import eapli.base.productmanagement.Product.domain.Category;
-
 
 public class CategoryController {
 
@@ -9,7 +8,6 @@ public class CategoryController {
         CategoryPersist categoryPersist = new CategoryPersist();
         Category category = new Category(category_id, description);
         category.setDescription(description);
-
         categoryPersist.createcategorypersist(category);
     }
 }

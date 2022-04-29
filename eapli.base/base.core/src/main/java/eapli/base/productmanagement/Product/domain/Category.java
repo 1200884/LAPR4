@@ -1,5 +1,6 @@
 package eapli.base.productmanagement.Product.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Entity;
@@ -8,13 +9,13 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Category implements ValueObject {
+public class Category implements ValueObject, AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int category_ID;
     private String description;
 
-    public Category() {
+    protected Category() {
     }
 
     public Category(int category_ID, String description) {
@@ -53,6 +54,16 @@ public class Category implements ValueObject {
     @Override
     public int hashCode() {
         return Objects.hash(category_ID, description);
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        return false;
+    }
+
+    @Override
+    public Integer identity() {
+        return null;
     }
 }
 

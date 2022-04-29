@@ -24,15 +24,13 @@
 package eapli.base.app.backoffice.console.presentation;
 
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.ListCustomerAction;
-import eapli.base.app.backoffice.console.presentation.salesclerkuser.Shopping_CartAction;
-import eapli.base.app.backoffice.console.presentation.salesclerkuser.Shopping_CartUI;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
-import eapli.base.customermanagement.domain.model.Shopping_Cart;
+import eapli.base.customermanagement.application.RegisterCustomerUI;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -70,7 +68,7 @@ public class MainMenu extends AbstractUI {
     private static final int MANAGE_SHOPPING_CART = 2;
 
     // SETTINGS Sales Clerk
-    private static final int SPECIGY_PRODUCT = 1;
+    private static final int SPECIFY_PRODUCT = 1;
     private static final int PRODUCT_CATALOG = 2;
     private static final int CUSTOMER_REGISTER = 3;
     private static final int CREATE_ORDER = 4;
@@ -150,7 +148,7 @@ public class MainMenu extends AbstractUI {
     private Menu buildAdminSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 
-        menu.addItem(SPECIGY_PRODUCT, "Set kitchen alert limit",
+        menu.addItem(SPECIFY_PRODUCT, "Set kitchen alert limit",
                 new ShowMessageAction("Not implemented yet"));
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
@@ -160,24 +158,20 @@ public class MainMenu extends AbstractUI {
     private Menu buildSalesClerkSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 
-        menu.addItem(SPECIGY_PRODUCT, "Specify new product for sale",
+        menu.addItem(SPECIFY_PRODUCT, "Specify new product for sale",
                 new ShowMessageAction("Not implemented yet"));
         menu.addItem(PRODUCT_CATALOG, "View/Search the products catalog",
                 new ShowMessageAction("Not implemented yet"));
-        menu.addItem(CUSTOMER_REGISTER, "Register new Customer",
-                new ShowMessageAction("Not implemented yet"));
+        menu.addItem(CUSTOMER_REGISTER, "Register new Customer", new RegisterCustomerUI()::show);
         menu.addItem(CREATE_ORDER, "Create a new Products Order on behalf of a given Customer",
                 new ShowMessageAction("Not implemented yet"));
         menu.addItem(PRODUCT_CATEGORY, "Define a new Category of Products",
                 new ShowMessageAction("Not implemented yet"));
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-
-        return menu;
-    }
+        return menu;}
 
     private Menu buildUsersMenu() {
         final Menu menu = new Menu("Users >");
-
         menu.addItem(ADD_USER_OPTION, "Add User", new AddUserUI()::show);
         menu.addItem(LIST_USERS_OPTION, "List all Users", new ListUsersAction());
         menu.addItem(DEACTIVATE_USER_OPTION, "Deactivate User", new DeactivateUserAction());
@@ -192,7 +186,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Customer >");
 
         menu.addItem(LIST_CUSTOMER_OPTION, "List all Customer", new ListCustomerAction());
-        menu.addItem(MANAGE_SHOPPING_CART, "Manage Shopping Carts", new Shopping_CartAction());
+        menu.addItem(MANAGE_SHOPPING_CART, "Manage Shopping Carts", new ListUsersAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;

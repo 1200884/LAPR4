@@ -9,11 +9,9 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    private int photos_id;
-    private int baseprice;
+    private byte[] photo;
+    private double base_price;
     private String name;
-    private final int id_default = 0, photos_id_default = 0, base_price_default = 0;
-    private final String NAME_DEFAULT = "No Name";
 
     @ManyToOne
     private Category category;
@@ -21,23 +19,19 @@ public class Product implements Serializable {
     private Description description;
     @Embedded
     private Barcode barcode;
-    @Embedded
+    @ManyToOne
     private Brand brand;
 
-    public Product(String name, int photos_id, int baseprice, Category category,Barcode barcode1,Brand brand) {
+    public Product(String name, byte[] photo, double base_price, Category category, Barcode barcode, Brand brand) {
         this.name = name;
-        this.photos_id = photos_id;
-        this.baseprice = baseprice;
-        //this.category=category;
-        barcode=barcode1;
+        this.photo = photo;
+        this.base_price = base_price;
+        this.category=category;
+        this.barcode=barcode;
         this.brand=brand;
     }
 
     protected Product() {
-        this.id = id_default;
-        this.name = NAME_DEFAULT;
-        this.baseprice = base_price_default;
-        this.photos_id = photos_id_default;
     }
     public Description getDescription() {
         return description;
@@ -51,24 +45,28 @@ public class Product implements Serializable {
         return name;
     }
 
-    public void setBaseprice(int baseprice) {
-        this.baseprice = baseprice;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBase_price(int base_price) {
+        this.base_price = base_price;
     }
 
     public Category getCategory() {
         return category;
     }
 
-    public int getBaseprice() {
-        return baseprice;
+    public double getBase_price() {
+        return base_price;
     }
 
-    public void setPhotos_id(int photos_id) {
-        this.photos_id = photos_id;
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
-    public int getPhotos_id() {
-        return photos_id;
+    public byte[] getPhoto() {
+        return photo;
     }
 
     public int getId() {
@@ -78,8 +76,7 @@ public class Product implements Serializable {
     public Barcode getBarcode() {
         return barcode;
     }
-
-    public void setBarcode(Barcode barcode1) {
-        barcode = barcode1;
-    }
 }
+
+
+
