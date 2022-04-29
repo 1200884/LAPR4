@@ -19,9 +19,8 @@ public class Brand implements ValueObject {
     protected Brand() {
     }
 
-    public Brand(int brand_id, String name, String reference) {
+    public Brand(String name, String reference) {
         this.reference = reference;
-        this.brand_id = brand_id;
         this.name = name;
     }
 

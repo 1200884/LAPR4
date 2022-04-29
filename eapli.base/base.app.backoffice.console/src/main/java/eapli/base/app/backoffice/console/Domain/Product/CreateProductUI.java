@@ -1,17 +1,19 @@
 package eapli.base.app.backoffice.console.Domain.Product;
 
 import eapli.base.productmanagement.Product.application.ProductController;
+import eapli.framework.presentation.console.AbstractUI;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class ProductUI {
+public class CreateProductUI extends AbstractUI {
 
     private static final ProductController productController = new ProductController();
 
-    public void createProduct() {
+    @Override
+    protected boolean doShow() {
         print("Please, for now, introduce the name of the product, the photo, the base price");
         Scanner sc = new Scanner(System.in);
         print("First the name:");
@@ -29,6 +31,8 @@ public class ProductUI {
         //display the category list
         int categoryNum = sc.nextInt();
         print("Lastly, from the list select a ");
+        //selecionar e criar o produto
+        return false;
     }
 
     private byte[] getFileBytes(String filePath) throws Exception{
@@ -38,5 +42,10 @@ public class ProductUI {
 
     private void print(String string) {
         System.out.println(string);
+    }
+
+    @Override
+    public String headline() {
+        return "Add Product";
     }
 }

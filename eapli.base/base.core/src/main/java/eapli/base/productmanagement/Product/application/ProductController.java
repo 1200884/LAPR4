@@ -20,7 +20,7 @@ public class ProductController {
     }
 
     private Brand fetchBrand(int brandNum) {  // ir buscar a lista que foi dada ao utilizador e ir buscar o msm numero
-        Brand brand = new Brand(1, "prov", "prov");
+        Brand brand = new Brand("prov", "prov");
         return brand;
     }
 
@@ -31,6 +31,7 @@ public class ProductController {
 
     public String findCategories() {
         CategoryRepository categoryRepository;
+        //por as categorias numa lista estatica para depois ir buscar a mesma lista no método fetch
         return "";
     }
 }
