@@ -49,6 +49,10 @@ public class Product implements Serializable, AggregateRoot<Integer> {
         return name;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
