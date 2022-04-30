@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Warehouse;
+package eapli.base.app.backoffice.console.presentation.warehouseuser;
 
 import eapli.base.AGVmanagement.AGV.application.AGVController;
 import eapli.framework.io.util.Console;
