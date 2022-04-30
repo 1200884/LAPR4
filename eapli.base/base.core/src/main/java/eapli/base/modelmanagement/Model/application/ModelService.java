@@ -1,7 +1,7 @@
-package eapli.base.AGVmanagement.AGV.application;
+package eapli.base.modelmanagement.Model.application;
 
-import eapli.base.AGVmanagement.AGV.domain.Model;
-import eapli.base.AGVmanagement.AGV.domain.repository.ModelPersist;
+import eapli.base.modelmanagement.Model.domain.Model;
+import eapli.base.modelmanagement.Model.domain.repositories.ModelPersist;
 
 public class ModelService {
 

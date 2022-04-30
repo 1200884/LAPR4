@@ -20,11 +20,15 @@
  */
 package eapli.base.persistence.impl.inmemory;
 
+import eapli.base.AGVmanagement.AGV.domain.repository.AGVRepository;
+import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
+import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.InMemoryUserRepository;
@@ -74,6 +78,46 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public CustomerRepository customers() {
         return customers(null);
+    }
+
+    @Override
+    public ProductRepository products(TransactionalContext autoTx) {
+        return null;
+    }
+
+    @Override
+    public ProductRepository products() {
+        return null;
+    }
+
+    @Override
+    public BrandRepository brands(TransactionalContext autoTx) {
+        return null;
+    }
+
+    @Override
+    public BrandRepository brands() {
+        return null;
+    }
+
+    @Override
+    public AGVRepository AGVs(TransactionalContext autoTx) {
+        return null;
+    }
+
+    @Override
+    public AGVRepository AGVs() {
+        return null;
+    }
+
+    @Override
+    public ModelRepository Models(TransactionalContext autoTx) {
+        return null;
+    }
+
+    @Override
+    public ModelRepository Models() {
+        return null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package eapli.base.productmanagement.Product.domain;
+package eapli.base.brandmanagement.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;

@@ -1,5 +1,6 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
+import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;

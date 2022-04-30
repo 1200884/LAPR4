@@ -1,4 +1,4 @@
-package eapli.base.AGVmanagement.AGV.domain;
+package eapli.base.modelmanagement.Model.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;

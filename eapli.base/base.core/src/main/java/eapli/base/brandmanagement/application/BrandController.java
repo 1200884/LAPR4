@@ -1,6 +1,6 @@
-package eapli.base.productmanagement.Product.application;
+package eapli.base.brandmanagement.application;
 
-import eapli.base.productmanagement.Product.domain.Brand;
+import eapli.base.brandmanagement.domain.Brand;
 
 public class BrandController {
 

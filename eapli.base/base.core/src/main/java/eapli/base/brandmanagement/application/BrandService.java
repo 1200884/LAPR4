@@ -1,7 +1,7 @@
-package eapli.base.productmanagement.Product.application;
+package eapli.base.brandmanagement.application;
 
-import eapli.base.productmanagement.Product.domain.Brand;
-import eapli.base.productmanagement.Product.domain.repositories.BrandPersist;
+import eapli.base.brandmanagement.domain.Brand;
+import eapli.base.brandmanagement.domain.repository.BrandPersist;
 
 public class BrandService {
 

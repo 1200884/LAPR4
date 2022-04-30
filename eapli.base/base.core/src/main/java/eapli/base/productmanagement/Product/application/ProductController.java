@@ -1,10 +1,10 @@
 package eapli.base.productmanagement.Product.application;
 
 import eapli.base.productmanagement.Product.domain.Barcode;
-import eapli.base.productmanagement.Product.domain.Brand;
+import eapli.base.brandmanagement.domain.Brand;
 import eapli.base.productmanagement.Product.domain.Category;
 import eapli.base.productmanagement.Product.domain.Product;
-import eapli.base.productmanagement.Product.domain.repositories.BrandRepository;
+import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.productmanagement.Product.domain.repositories.CategoryRepository;
 
 import java.util.List;

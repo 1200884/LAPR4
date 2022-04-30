@@ -1,7 +1,7 @@
 package eapli.base.AGVmanagement.AGV.application;
 
 import eapli.base.AGVmanagement.AGV.domain.AGV;
-import eapli.base.AGVmanagement.AGV.domain.Model;
+import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.AGVmanagement.AGV.domain.repository.AGVPersist;
 
 public class AGVService {
