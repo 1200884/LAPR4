@@ -4,7 +4,7 @@
 'Product'
 package Product as Product{
 
-Entity Product{
+Entity Product <<Root>>{
 *id
 --
 -name
@@ -17,23 +17,37 @@ object Description <<Value Object>>{
 -extended_description
 }
 
-object Category <<Value Object>>{
-*category_id
---
--description
-}
-
 object Barcode <<Value Object>>{
 *barcode_id
 --
 -type_of_barcode
 }
 
-object Brand <<Value Object>>{
+}
+
+'-----------------------------------------'
+
+'Brand'
+package Brand as Brand{
+Entity Brand <<Root>>{
 *brand_id
 --
 -name
 -reference
+}
+
+}
+
+'-----------------------------------------'
+
+'Category'
+
+package Category as Category{
+
+Entity Category <<Root>>{
+*category_id
+--
+-description
 }
 
 }
@@ -46,7 +60,7 @@ package Warehouse as Warehouse{
 object Plant_Info<<Value Object>>{
 -type_of_plant
 }
-Entity Warehouse{
+Entity Warehouse <<Root>>{
 *id
 }
 
@@ -69,7 +83,8 @@ object Bin<<Value Object>>{
 
 'Customer'
 package Customer as Customer{
-Entity Customer{
+
+Entity Customer <<Root>>{
 *VAT
 __
 -name
@@ -78,6 +93,7 @@ __
 -phone_number
 +email
 }
+
 object Billing_Address <<Value Object>>{
 *address
 --
@@ -113,7 +129,7 @@ object Shopping_Cart<<Value Object>>{
   +customer_id
   }
 
-Entity Order{
+Entity Order <<Root>>{
 *id
 --
 -order_state
@@ -155,7 +171,7 @@ Entity Salesclerk{
 
 'AGV'
 package AGV as AGV{
-Entity AGV{
+Entity AGV <<Root>>{
 *id
 --
 -short_description

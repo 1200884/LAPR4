@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-
 public class Brand implements ValueObject, AggregateRoot<Integer> {
     @Id
     @GeneratedValue

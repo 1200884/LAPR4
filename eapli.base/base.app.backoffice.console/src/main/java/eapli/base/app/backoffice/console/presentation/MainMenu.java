@@ -24,6 +24,7 @@
 package eapli.base.app.backoffice.console.presentation;
 
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.ListCustomerAction;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.ListProductUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Shopping_CartAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
@@ -159,10 +160,8 @@ public class MainMenu extends AbstractUI {
     private Menu buildSalesClerkSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 
-        menu.addItem(SPECIFY_PRODUCT, "Specify new product for sale",
-                new ShowMessageAction("Not implemented yet"));
-        menu.addItem(PRODUCT_CATALOG, "View/Search the products catalog",
-                new ShowMessageAction("Not implemented yet"));
+        menu.addItem(SPECIFY_PRODUCT, "Specify new product for sale", new AddUserUI()::show);
+        menu.addItem(PRODUCT_CATALOG, "View/Search the products catalog", new ListProductUI()::show);
         menu.addItem(CUSTOMER_REGISTER, "Register new Customer", new RegisterCustomerUI()::show);
         menu.addItem(CREATE_ORDER, "Create a new Products Order on behalf of a given Customer",
                 new ShowMessageAction("Not implemented yet"));
