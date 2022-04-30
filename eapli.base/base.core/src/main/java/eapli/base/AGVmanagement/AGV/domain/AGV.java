@@ -1,13 +1,15 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
+
 import javax.persistence.*;
 
 @Entity
-public class AGV {
+public class AGV implements AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int id;
-    int maximum_weight;
+    double maximum_weight;
     private String shortDescription;
     private String baseLocation;
     @ManyToOne
@@ -18,7 +20,7 @@ public class AGV {
     protected AGV() {
     }
 
-    public AGV(int maximum_weight, String baseLocation, String shortDescription, Model model) {
+    public AGV(double maximum_weight, String baseLocation, String shortDescription, Model model) {
         this.maximum_weight = maximum_weight;
         this.shortDescription = shortDescription;
         this.model = model;
@@ -33,7 +35,7 @@ public class AGV {
         return id;
     }
 
-    public int getMaximum_weight() {
+    public double getMaximum_weight() {
         return maximum_weight;
     }
 
@@ -55,5 +57,15 @@ public class AGV {
 
     public void setShortDescription(String short_description) {
         this.shortDescription = short_description;
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        return false;
+    }
+
+    @Override
+    public Integer identity() {
+        return null;
     }
 }

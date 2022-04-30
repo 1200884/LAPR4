@@ -1,5 +1,6 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Entity;
@@ -7,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Model implements ValueObject {
+public class Model implements ValueObject, AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int id;
@@ -32,5 +33,24 @@ public class Model implements ValueObject {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        return false;
+    }
+
+    @Override
+    public Integer identity() {
+        return null;
     }
 }

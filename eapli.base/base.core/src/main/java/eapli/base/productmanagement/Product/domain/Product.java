@@ -1,11 +1,14 @@
 package eapli.base.productmanagement.Product.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Arrays;
 
 
 @Entity
-public class Product implements Serializable {
+public class Product implements Serializable, AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int id;
@@ -75,6 +78,21 @@ public class Product implements Serializable {
 
     public Barcode getBarcode() {
         return barcode;
+    }
+
+    @Override
+    public String toString() {
+        return "ID:\n" + id + "\nPhoto:\n" + Arrays.toString(photo) +"\nBase Price:\n" + base_price + "\nName:\n" + name + "\nCategory:\n" + category + "\nDescription:\n" + description + "\nBarcode:\n" + barcode + "\nBrand:\n" + brand;
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        return false;
+    }
+
+    @Override
+    public Integer identity() {
+        return null;
     }
 }
 

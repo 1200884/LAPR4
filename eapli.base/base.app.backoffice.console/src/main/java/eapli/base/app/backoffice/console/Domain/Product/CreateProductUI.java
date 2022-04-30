@@ -1,12 +1,12 @@
 package eapli.base.app.backoffice.console.Domain.Product;
 
 import eapli.base.productmanagement.Product.application.ProductController;
+import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class CreateProductUI extends AbstractUI {
 
@@ -15,23 +15,21 @@ public class CreateProductUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         print("Please, for now, introduce the name of the product, the photo, the base price");
-        Scanner sc = new Scanner(System.in);
-        print("First the name:");
-        String name = sc.nextLine();
-        print("Now the photo (write down it's path):");
-        String path = sc.nextLine();
+        String name = Console.readLine("First the name:");
+        String path = Console.readLine("Now the photo (write down it's path):");
+        byte[] photo = new byte[0];
         try {
-            byte[] photo = getFileBytes(path);
+            photo = getFileBytes(path);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        print("Now it's base price:");
-        double price = sc.nextDouble();
-        print("Now, from the list select a category:");
-        //display the category list
-        int categoryNum = sc.nextInt();
-        print("Lastly, from the list select a ");
-        //selecionar e criar o produto
+        double price = Console.readDouble("Now it's base price:");
+        print(productController.findCategories());
+        int categoryNum = Console.readInteger("Now, from the list select the product's category:");
+        print(productController.findBrand());
+        int brandNum = Console.readInteger("Lastly, from the list select the product's brand:");
+        print("Here is your created product:");
+        print(productController.createProduct(name, photo, price, categoryNum, brandNum));
         return false;
     }
 
