@@ -16,6 +16,7 @@ public class ListCustomerController {
     private ListCustomerServices lcs=new ListCustomerServices();
 
     public Iterable<Customer> allCustomers() {
+        StringBuilder string = new StringBuilder();
         authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.SALES_CLERK);
         return lcs.allCustomers();
     }

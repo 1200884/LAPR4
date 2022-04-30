@@ -1,6 +1,8 @@
 package eapli.base.customermanagement.application;
 
+import eapli.framework.application.UseCaseController;
 
+@UseCaseController
 public class CustomerController {
 
     CustomerRegisterService customerRegisterService = new CustomerRegisterService();

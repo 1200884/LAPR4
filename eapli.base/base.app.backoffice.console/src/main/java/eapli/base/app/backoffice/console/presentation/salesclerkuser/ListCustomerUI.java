@@ -2,10 +2,10 @@ package eapli.base.app.backoffice.console.presentation.salesclerkuser;
 
 import eapli.base.customermanagement.application.ListCustomerController;
 import eapli.base.customermanagement.domain.model.Customer;
-import eapli.base.usermanagement.application.ListUsersController;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
+
+import java.util.ArrayList;
 
 public class ListCustomerUI extends AbstractListUI<Customer> {
     private ListCustomerController theController = new ListCustomerController();
@@ -22,7 +22,14 @@ public class ListCustomerUI extends AbstractListUI<Customer> {
 
     @Override
     protected Iterable<Customer> elements() {
-        return theController.allCustomers();
+        StringBuilder string = new StringBuilder();
+        ArrayList<Customer> list = (ArrayList<Customer>) theController.allCustomers();
+        for (Customer customer : list){
+            string.append(customer.toString());
+            string.append("\n");
+        }
+        System.out.println(string);
+        return list;
     }
 
     @Override

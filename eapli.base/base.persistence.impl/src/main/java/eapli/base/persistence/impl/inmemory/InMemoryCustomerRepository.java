@@ -15,7 +15,7 @@ public class InMemoryCustomerRepository extends InMemoryDomainRepository<Custome
 
 
     @Override
-    public Optional<Customer> findByVat(int vat) {
+    public Optional<Customer> findByPhoneNumber(Integer vat) {
         return Optional.of(data().get(vat));
     }
 }

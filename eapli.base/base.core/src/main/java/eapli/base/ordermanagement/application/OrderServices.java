@@ -14,7 +14,7 @@ public class OrderServices {
     @Autowired
     OrderRepository order_repository;
     public Optional<Customer> findByvat(int customer){
-        return customer_repository.findByVat(customer);
+        return customer_repository.findByPhoneNumber(customer);
     }
 
     public void createOrder(Shopping_Cart shopping_cart) {

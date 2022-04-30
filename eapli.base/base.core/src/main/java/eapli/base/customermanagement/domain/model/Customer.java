@@ -9,13 +9,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Customer implements Serializable, DomainEntity<Integer>, AggregateRoot<Integer> {
+public class Customer implements Serializable, DomainEntity<Integer>, AggregateRoot<Integer>{
     @Id
     private int vat;
-    private int phone_number;
-    private String birth_date, gender, email, name;
-    private final int vat_default = 0, phone_numberdefault = 0;
-    private final String birth_datedefault = "No birth daate available", gender_default = "No gender available", email_default = "No email available";
+    private String birth_date;
+    private String gender;
+    @Column(nullable = false,insertable = false, updatable = false)
+    private String email;
+
+    @Column(nullable = false,insertable = false, updatable = false)
+    private Integer phone_number;
+    private String name;
     @ElementCollection
     private Set<Billing_Address> billing_addresses = new HashSet<>();
     @ElementCollection
@@ -26,10 +30,6 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
     private Validation validation;
 
     protected Customer() {
-        this.email = email_default;
-        this.vat = vat_default;
-        this.phone_number = phone_numberdefault;
-        this.name = "No name available";
     }
 
     public Customer(String name, int vat, int phone_number, String email) {
@@ -80,7 +80,7 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
         return validation;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(Integer phone_number) {
         this.phone_number = phone_number;
     }
 
@@ -128,5 +128,15 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
     @Override
     public Integer identity() {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "vat=" + vat +
+                ", email='" + email + '\'' +
+                ", phone_number=" + phone_number +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface CustomerRepository extends DomainRepository<Integer,Customer> {
 
-    Optional<Customer> findByVat(int vat);
+    Optional<Customer> findByPhoneNumber(Integer id);
 
 }

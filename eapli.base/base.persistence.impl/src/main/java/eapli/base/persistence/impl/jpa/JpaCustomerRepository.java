@@ -22,10 +22,10 @@ public class JpaCustomerRepository extends JpaAutoTxRepository<Customer,Integer,
     }
 
     @Override
-    public Optional<Customer> findByVat(int vat) {
+    public Optional<Customer> findByPhoneNumber(Integer number) {
         final Map<String, Object> params = new HashMap<>();
-        params.put("vat", vat);
-        return matchOne("e.systemUser.username=:name", params);
+        params.put("number", number);
+        return matchOne("e.phone_number=:number", params);
     }
 
 }

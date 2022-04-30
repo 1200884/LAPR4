@@ -3,13 +3,13 @@ package eapli.base.customermanagement.application;
 import eapli.base.customermanagement.domain.model.Billing_Address;
 import eapli.base.customermanagement.domain.model.Customer;
 import eapli.base.customermanagement.domain.model.Delivering_Address;
+import org.springframework.stereotype.Component;
 
 
-import java.util.Collection;
-import java.util.Iterator;
+import javax.transaction.Transactional;
+import java.util.*;
 
-import java.util.Set;
-
+@Component
 public class CustomerRegisterService {
    CustomerPersist customerPersist=new CustomerPersist();
 
@@ -25,143 +25,15 @@ public class CustomerRegisterService {
         customerPersist.createcustomerpersist(customer);
 
     }
+
+    @Transactional
     public void registerCustomer(String nome, int vat, int phonenumber, String email, String billingadresscountry, String billingadressadress, String delivering_addresscountry, String delivering_adressadress, String birth, String gender) {
         System.out.println("lalala");
         Billing_Address billing_address =  new Billing_Address(billingadressadress, billingadresscountry);
         Delivering_Address delivering_address = new Delivering_Address(delivering_adressadress, delivering_addresscountry);
-        Set<Billing_Address> b= new Set<>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Billing_Address> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Billing_Address billing_address) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends Billing_Address> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-        };
+        Set<Billing_Address> b= new HashSet<>();
         b.add(billing_address);
-        Set<Delivering_Address> d= new Set<>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Delivering_Address> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Delivering_Address delivering_address) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends Delivering_Address> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-        };
+        Set<Delivering_Address> d= new HashSet<>();
         d.add(delivering_address);
         System.out.println("30 service");
         System.out.println("delivering address"+delivering_address);
