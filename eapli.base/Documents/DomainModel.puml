@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/object-diagram
 
+'Product'
 package Product as Product{
 
 Entity Product{
@@ -36,12 +37,10 @@ object Brand <<Value Object>>{
 }
 
 }
-Entity Salesclerk{
-*id
---
--name
-}
 
+'-----------------------------------------'
+
+'WareHouse'
 package Warehouse as Warehouse{
 
 object Plant_Info<<Value Object>>{
@@ -63,9 +62,12 @@ object Shelf<<Value Object>>{
 object Bin<<Value Object>>{
 -size
 }
+
 }
 
+'-----------------------------------------'
 
+'Customer'
 package Customer as Customer{
 Entity Customer{
 *VAT
@@ -93,8 +95,12 @@ object Validation<<Value Object>>{
  -email
  -phone_number
  }
+
 }
 
+'-----------------------------------------'
+
+'Order'
 package Order as Order{
 
 object Product_Quantities<<Value Object>>{
@@ -135,21 +141,20 @@ Entity Carrier {
   -base_price
   -final_price_with_tax
   }
+
 }
 
+'-----------------------------------------'
 
 
-
-object Validation<<Value Object>>{
--email
--phone_number
+Entity Salesclerk{
+*id
+--
+-name
 }
 
-
-
-
-
-
+'AGV'
+package AGV as AGV{
 Entity AGV{
 *id
 --
@@ -172,6 +177,11 @@ object Status<<Value Object>>{
 object Task<<Value Object>>{
 
 }
+
+}
+
+'-----------------------------------------'
+
 
 Entity Warehouse_Employee {
 *id
@@ -219,13 +229,12 @@ Warehouse -right- "1..N" Aisle : \t
 Aisle -right- "1..N" Row : \t
 Row -right- "1..N" Shelf : \t
 Shelf -right- "1..N" Bin : \t
-Bin -right- Product : \t
-Plant_Info "1..N" -- Warehouse
-AGV "1..N" -- Location : is based at
-AGV -- Status
+Plant_Info "1..N" -- Warehouse: \t
+AGV "1..N" -- Location : \t
+AGV -- Status\t
 AGV "1..N" -right- Warehouse : \t belongs \t
-Task "1..N" --> AGV
-Task -> Order
+Task "1..N" --> AGV\t
+Task -> Order\t
 Warehouse_Employee <-- "1..N" Task : creates, inspects and packages the products
 Order "1..N" -- Carrier
 Questionnaire -down- "1..N" Section
@@ -234,5 +243,5 @@ Question -- "1..N" Answer
 Question - Question
 Question_Type -- Question
 Customer -- Questionnaire
-
+Warehouse -- Product
 @enduml

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ListCustomerController {
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
     @Autowired
-    private ListCustomerServices lcs;
+    private ListCustomerServices lcs=new ListCustomerServices();
 
     public Iterable<Customer> allCustomers() {
         authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.SALES_CLERK);

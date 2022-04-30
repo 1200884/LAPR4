@@ -84,4 +84,8 @@ public interface RepositoryFactory {
      */
     SignupRequestRepository signupRequests();
 
+    CustomerRepository customers(TransactionalContext autoTx);
+
+    CustomerRepository customers();
+
 }
