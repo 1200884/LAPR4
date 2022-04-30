@@ -3,7 +3,9 @@ package eapli.base.productmanagement.Product.application.listproducts;
 import eapli.base.brandmanagement.domain.Brand;
 import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.productmanagement.Product.domain.Barcode;
 import eapli.base.productmanagement.Product.domain.Category;
+import eapli.base.productmanagement.Product.domain.Product;
 import eapli.base.productmanagement.Product.domain.repositories.CategoryRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import java.util.ArrayList;
@@ -16,6 +18,20 @@ public class ListProductService {
     BrandRepository brandRepository = PersistenceContext.repositories().brands();
 
     public StringBuilder allProducts(String f1) {
+        System.out.println("OLAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        Brand brand1 = new Brand("Nike","niky");
+        Brand brand2 = new Brand("Adidas","adidi");
+        Category category1 = new Category("Sapatilhas");
+        Product product1 = new Product("Air Max",new byte[3],99,category1,new Barcode("123"),brand1);
+        Product product2 = new Product("Sweater",new byte[3],99,category1,new Barcode("1234"),brand2);
+        System.out.println("ADEEEEEEUUUUUUUUUSSSSSSSSS");
+        brandRepository.save(brand1);
+        brandRepository.save(brand2);
+        System.out.println("11111111111111111111111111111");
+        categoryRepository.save(category1);
+        System.out.println("22222222222222222222222222222222");
+        productRepository.save(product1);
+        productRepository.save(product2);
         StringBuilder stringBuilder = new StringBuilder();
         if(f1.equals("brand")){
             ArrayList<Brand> brandList = (ArrayList<Brand>) brandRepository.findAll();

@@ -27,6 +27,7 @@ import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
+import eapli.base.persistence.impl.inmemory.InMemoryProductRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -82,42 +83,42 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public ProductRepository products(TransactionalContext autoTx) {
-        return null;
+        return new JpaProductRepository(autoTx);
     }
 
     @Override
     public ProductRepository products() {
-        return null;
+        return new JpaProductRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override
     public BrandRepository brands(TransactionalContext autoTx) {
-        return null;
+        return new JpaBrandRepository(autoTx);
     }
 
     @Override
     public BrandRepository brands() {
-        return null;
+        return new JpaBrandRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override
     public AGVRepository AGVs(TransactionalContext autoTx) {
-        return null;
+        return new JpaAGVRepository(autoTx);
     }
 
     @Override
     public AGVRepository AGVs() {
-        return null;
+        return new JpaAGVRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override
     public ModelRepository Models(TransactionalContext autoTx) {
-        return null;
+        return new JpaModelRepository(autoTx);
     }
 
     @Override
     public ModelRepository Models() {
-        return null;
+        return new JpaModelRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override

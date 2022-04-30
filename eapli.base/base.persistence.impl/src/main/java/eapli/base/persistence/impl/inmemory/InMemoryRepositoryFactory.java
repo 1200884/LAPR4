@@ -82,42 +82,42 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
     @Override
     public ProductRepository products(TransactionalContext autoTx) {
-        return null;
+        return new InMemoryProductRepository();
     }
 
     @Override
     public ProductRepository products() {
-        return null;
+        return products(null);
     }
 
     @Override
     public BrandRepository brands(TransactionalContext autoTx) {
-        return null;
+        return new InMemoryBrandRepository();
     }
 
     @Override
     public BrandRepository brands() {
-        return null;
+        return brands(null);
     }
 
     @Override
     public AGVRepository AGVs(TransactionalContext autoTx) {
-        return null;
+        return new InMemoryAGVRepository();
     }
 
     @Override
     public AGVRepository AGVs() {
-        return null;
+        return AGVs(null);
     }
 
     @Override
     public ModelRepository Models(TransactionalContext autoTx) {
-        return null;
+        return new InMemoryModelRepository();
     }
 
     @Override
     public ModelRepository Models() {
-        return null;
+        return Models(null);
     }
 
     @Override

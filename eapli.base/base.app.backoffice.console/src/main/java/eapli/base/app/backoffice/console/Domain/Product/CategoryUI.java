@@ -13,11 +13,10 @@ public class CategoryUI  extends AbstractUI{
     private final CategoryController categoryController = new CategoryController();
     @Override
     protected boolean doShow(){
-        final Integer category_id = Console.readInteger("Category_ID");
         final String description = Console.readLine("Description");
 
         try{
-            this.categoryController.createnewcategory(category_id, description);
+            this.categoryController.createnewcategory(description);
         }catch (final IntegrityViolationException | ConcurrencyException e){
             System.out.println("This category is already in use");
         }
@@ -29,7 +28,7 @@ public class CategoryUI  extends AbstractUI{
     private void CreateCategory(String category){
         System.out.println("Insira nova category");
         category = ler.nextLine();
-        categoryController.createnewcategory(1,category);
+        categoryController.createnewcategory(category);
 
     }
 

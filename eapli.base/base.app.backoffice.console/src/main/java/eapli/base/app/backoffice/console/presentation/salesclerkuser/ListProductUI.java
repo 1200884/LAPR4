@@ -1,5 +1,6 @@
-package eapli.base.productmanagement.Product.application.listproducts;
+package eapli.base.app.backoffice.console.presentation.salesclerkuser;
 
+import eapli.base.productmanagement.Product.application.listproducts.ListProductController;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 

@@ -4,9 +4,9 @@ import eapli.base.productmanagement.Product.domain.Category;
 
 public class CategoryController {
 
-    public void createnewcategory(int category_id, String description){
+    public void createnewcategory(String description){
         CategoryPersist categoryPersist = new CategoryPersist();
-        Category category = new Category(category_id, description);
+        Category category = new Category(description);
         category.setDescription(description);
         categoryPersist.createcategorypersist(category);
     }

@@ -18,8 +18,7 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
     protected Category() {
     }
 
-    public Category(int category_ID, String description) {
-        this.category_ID = category_ID;
+    public Category(String description) {
         this.description = description;
     }
 
