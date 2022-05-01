@@ -17,56 +17,53 @@
 
 # 2. Analysis
 
-*Neste secção a equipa deve relatar o estudo/análise/comparação que fez com o intuito de tomar as melhores opções de design para a funcionalidade bem como aplicar diagramas/artefactos de análise adequados.*
+- 1. Concepts: Customers
 
-*Recomenda-se que organize este conteúdo por subsecções.*
+- 2. Organization: The Customer UI gathers the necessary information to created the customer, the controller validates it, the service with the information gathered creates the customer itself, as the persist saves it.
+    
 
-- 1. Concepts:
+- 3. Code excerpt to validate the name: 
 
-- 2. Organization: 
 
-- 3. Code: 
+    private boolean hasSpecialCharacters(String str) {
+    String specialCharactersString = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
+    for (int i = 0; i < str.length(); i++) {
+    char ch = str.charAt(i);
+    if (specialCharactersString.contains(Character.toString(ch))) {
+    return true;
+    } else if (i == str.length() - 1)
+    return false;}
+    return false;
+    }
 
+    
 # 3. Design
 
 ## 3.1. Functionalities (SSD)
 
-*Nesta secção deve apresentar e descrever o fluxo/sequência que permite realizar a funcionalidade.*
-
+(On documents folder)
 ## 3.2. Class Diagram
 
-*Nesta secção deve apresentar e descrever as principais classes envolvidas na realização da funcionalidade.*
-
+(On documents folder)
 ## 3.3. Applied standards
 
-*Nesta secção deve apresentar e explicar quais e como foram os padrões de design aplicados e as melhores práticas.*
+The standard information gathering was made in a way which the information could be valid all the time, this is, if the Sales Clerk introduced invalid information he couldn't continue until the provided information was in accordance to the patterns defined by the team (ex: vat length is 9).
 
 ## 3.4. Tests 
-*Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+No tests implemented yet.
 
 # 4. Implementation
 
-*Nesta secção a equipa deve providenciar, se necessário, algumas evidências de que a implementação está em conformidade com o design efetuado. Para além disso, deve mencionar/descrever a existência de outros ficheiros (e.g. de configuração) relevantes e destacar commits relevantes;*
+- The development of the User Story is in accordance with the Diagrams shown in the latter topic, which can be visible, mainly in the controller methods that validate the information.
 
-- When analysing the code it is possible to see how it is in accordance with the diagrams done for this US.
-
-- Other files worth mentioning:
-
-- Relevant commits:
+- The relevant commits for this US were the ones made by João Gaspar, specially the commit "4fe3af4", which had a base of the US implementation with it being updated, and most importantly, enhanced in the next ones
 
 
 # 5. Integration/ Documentation
 
-*Nesta secção a equipa deve descrever os esforços realizados no sentido de integrar a funcionalidade desenvolvida com as restantes funcionalidades do sistema.*
+This US was made with special precaution regarding the US of listing all customers, in order to check if the Customers were created successfully, which they were.
 
 # 6. Observations
 
-*Nesta secção sugere-se que a equipa apresente uma perspetiva critica sobre o trabalho desenvolvido apontando, por exemplo, outras alternativas e ou trabalhos futuros relacionados.*
-
+Although this is a functional US according to the orientation given, it doesn't solve conflits regarding information duplication such as the vat, which could be solved in a near future.
