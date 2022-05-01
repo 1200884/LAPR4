@@ -15,28 +15,23 @@ public class CustomerRegisterService {
 
 
     private void createCustomer(String nome, int vat, int phonenumber, String email, Set<Billing_Address> billing_addresses, Set<Delivering_Address> delivering_addresses, String birth, String gender) {
-        System.out.println("17 service");
         Customer customer = new Customer(nome, vat, phonenumber, email);
         customer.setBilling_addresses(billing_addresses);
         customer.setDelivering_addresses(delivering_addresses);
         customer.setBirth_date(birth);
         customer.setGender(gender);
-        System.out.println("23 service");
         customerPersist.createcustomerpersist(customer);
 
     }
 
     @Transactional
     public void registerCustomer(String nome, int vat, int phonenumber, String email, String billingadresscountry, String billingadressadress, String delivering_addresscountry, String delivering_adressadress, String birth, String gender) {
-        System.out.println("lalala");
         Billing_Address billing_address =  new Billing_Address(billingadressadress, billingadresscountry);
         Delivering_Address delivering_address = new Delivering_Address(delivering_adressadress, delivering_addresscountry);
         Set<Billing_Address> b= new HashSet<>();
         b.add(billing_address);
         Set<Delivering_Address> d= new HashSet<>();
         d.add(delivering_address);
-        System.out.println("30 service");
-        System.out.println("delivering address"+delivering_address);
         createCustomer(nome, vat, phonenumber, email,  b, d, birth, gender);
     }
 }

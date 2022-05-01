@@ -13,7 +13,6 @@ public class CustomerController {
 
 
     public void customerinformation(String nome, int vat, int phonenumber, String email, String billingadresscountry, String billingadressadress, String delivering_addresscountry, String delivering_adressadress, String birth, String gender) {
-        System.out.println("27 customer controller");
         customerRegisterService.registerCustomer(nome, vat, phonenumber, email, billingadresscountry, billingadressadress, delivering_addresscountry, delivering_adressadress, birth, gender);
     }
 
