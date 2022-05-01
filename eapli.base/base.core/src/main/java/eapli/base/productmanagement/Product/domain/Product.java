@@ -18,20 +18,21 @@ public class Product implements Serializable, AggregateRoot<Integer> {
     private double base_price;
     private String name;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Category category;
     @Embedded
     private Description description;
     @Embedded
     private Barcode barcode;
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Brand brand;
 
-    public Product(String name, byte[] photo, double base_price, Category category, Barcode barcode, Brand brand) {
+    public Product(String name, byte[] photo, double base_price, Description description, Category category, Barcode barcode, Brand brand) {
         this.name = name;
         this.photo = photo;
         this.base_price = base_price;
         this.category=category;
+        this.description = description;
         this.barcode=barcode;
         this.brand=brand;
     }

@@ -1,11 +1,12 @@
 package eapli.base.categorymanagement.domain;
 
+import eapli.base.productmanagement.Product.domain.Product;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +15,9 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
     @GeneratedValue
     private int category_ID;
     private String description;
+
+    @OneToMany (cascade = CascadeType.ALL)
+    private Collection<Product> products = new ArrayList<>();
 
     protected Category() {
     }
@@ -28,6 +32,10 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
 
     public String getDescription() {
         return description;
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
 
     public void setDescription(String description1){

@@ -23,13 +23,15 @@ public class AddProductUI extends AbstractUI{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        String shortDescription = Console.readLine("Insert a small description of the product");
+        String longDescription = Console.readLine("Now insert a long description for the product");
         double price = Console.readDouble("Now it's base price:");
         print(productController.findCategories());
         int categoryNum = Console.readInteger("Now, from the list select the product's category:");
         print(productController.findBrand());
         int brandNum = Console.readInteger("Lastly, from the list select the product's brand:");
         print("Here is your created product:");
-        print(productController.createProduct(name, photo, price, categoryNum, brandNum));
+        print(productController.createProduct(name, photo, price, shortDescription, longDescription, categoryNum, brandNum));
         return false;
     }
 

@@ -10,6 +10,8 @@ public class ProductPersist {
     private static ProductRepository productRepository = PersistenceContext.repositories().products();
 
     public void createProductPersist(Product product) {
+        product.getCategory().addProduct(product);
+        product.getBrand().addProduct(product);
         productRepository.save(product);
     }
 }
