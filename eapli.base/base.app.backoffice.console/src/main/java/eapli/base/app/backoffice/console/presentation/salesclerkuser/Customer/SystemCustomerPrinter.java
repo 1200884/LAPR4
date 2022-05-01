@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.presentation.salesclerkuser;
+package eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer;
 
 import eapli.base.customermanagement.domain.model.Customer;
 import eapli.framework.visitor.Visitor;

@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 public class Brand implements ValueObject, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int brand_id;
     private String name;
     private String reference;
@@ -28,7 +28,7 @@ public class Brand implements ValueObject, AggregateRoot<Integer> {
         this.name = name;
     }
 
-    public Integer getBrand_id() {
+    public int getBrand_id() {
         return brand_id;
     }
 

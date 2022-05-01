@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.presentation.salesclerkuser;
+package eapli.base.app.backoffice.console.presentation.salesclerkuser.Order;
 
 import eapli.base.ordermanagement.application.CreateOrderController;
 import eapli.framework.io.util.Console;

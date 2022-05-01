@@ -112,23 +112,22 @@ object Validation<<Value Object>>{
  -phone_number
  }
 
+object Shopping_Cart<<Value Object>>{
+  *id
+  --
+  +customer_id
+}
+
+object Product_Quantities<<Value Object>>{
+ -quantity
+ }
+
 }
 
 '-----------------------------------------'
 
 'Order'
 package Order as Order{
-
-object Product_Quantities<<Value Object>>{
--quantity
-}
-
-object Shopping_Cart<<Value Object>>{
-  *id
-  --
-  +customer_id
-  }
-
 Entity Order <<Root>>{
 *id
 --
@@ -136,7 +135,8 @@ Entity Order <<Root>>{
 -date_time
 +address
 }
-Entity Payment_Method{
+
+object Payment_Method<<Value Object>>{
 *payment_type_id
 --
 -payment_type
@@ -151,12 +151,12 @@ object Shipment_Method<<Value Object>>{
 
 Entity Carrier {
  *company_id
- }
+}
 
- object Price <<Value Object>>{
+object Price <<Value Object>>{
   -base_price
   -final_price_with_tax
-  }
+}
 
 }
 
@@ -236,9 +236,9 @@ Customer -- "1..N" Delivering_Address
 Customer <- "1..N" Order
 Product - "1..N" Order
 Order -- Shipment_Method
-Shopping_Cart -- "1..N" Product_Quantities
+Shopping_Cart - "1..N" Product_Quantities
+Shopping_Cart -- "1..1" Customer
 Order -- Payment_Method
-Order - Shopping_Cart : possesses
 Customer -- Validation : undergoes
 Salesclerk "0..1" <-- "1..N" Order : registers
 Warehouse -right- "1..N" Aisle : \t

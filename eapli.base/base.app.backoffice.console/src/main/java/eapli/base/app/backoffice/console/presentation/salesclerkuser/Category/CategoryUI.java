@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.Domain.Product;
+package eapli.base.app.backoffice.console.presentation.salesclerkuser.Category;
 
 import eapli.base.categorymanagement.application.CategoryController;
 import eapli.base.categorymanagement.domain.Category;

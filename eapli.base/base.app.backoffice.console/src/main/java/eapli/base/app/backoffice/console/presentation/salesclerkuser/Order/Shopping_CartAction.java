@@ -1,6 +1,7 @@
-package eapli.base.app.backoffice.console.presentation.salesclerkuser;
+package eapli.base.app.backoffice.console.presentation.salesclerkuser.Order;
 
 import eapli.base.Application;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.AddProductUI;
 import eapli.framework.actions.Action;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;

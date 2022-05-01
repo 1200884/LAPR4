@@ -1,6 +1,5 @@
-package eapli.base.app.backoffice.console.presentation.salesclerkuser;
+package eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer;
 
-import eapli.base.app.backoffice.console.presentation.authz.SystemUserPrinter;
 import eapli.base.customermanagement.application.ListCustomerController;
 import eapli.base.customermanagement.domain.model.Customer;
 import eapli.framework.presentation.console.AbstractListUI;

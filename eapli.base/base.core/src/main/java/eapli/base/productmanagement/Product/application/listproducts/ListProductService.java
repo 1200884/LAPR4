@@ -14,7 +14,7 @@ import java.util.Comparator;
 
 public class ListProductService {
     ProductRepository productRepository = PersistenceContext.repositories().products();
-    CategoryRepository categoryRepository;
+    CategoryRepository categoryRepository = PersistenceContext.repositories().category();
     BrandRepository brandRepository = PersistenceContext.repositories().brands();
 
     public StringBuilder allProducts(String f1) {

@@ -12,11 +12,10 @@ import java.util.Objects;
 @Entity
 public class Category implements ValueObject, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int category_ID;
     @Column (unique = true)
     private String description;
-
     @OneToMany (cascade = CascadeType.ALL)
     private Collection<Product> products = new ArrayList<>();
 
@@ -27,7 +26,7 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
         this.description = description;
     }
 
-    public Integer getCategory_ID() {
+    public int getCategory_ID() {
         return category_ID;
     }
 
