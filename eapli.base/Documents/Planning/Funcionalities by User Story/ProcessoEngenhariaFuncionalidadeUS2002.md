@@ -8,11 +8,11 @@
 
 **2002** As Warehouse Employee, I want to configure the AGVs available on the warehouse.
 
-- 2002.1. Main goal:
+- 2002.1. Main goal: The main goal of this US was to create an AGV as an warehouse employee
 
-- 2002.2. Functionalities:
+- 2002.2. Functionalities: The AGV is available to be configured by choosing one of the available models
 
-- 2002.3. Dependencies:
+- 2002.3. Dependencies: It doesn't depend on any other US
 
 # 2. Analysis
 
@@ -20,11 +20,11 @@
 
 *Recomenda-se que organize este conteúdo por subsecções.*
 
-- 1. Concepts:
+- 1. Concepts: There was a need to use UIs, Controllers, Services, Persist, Repositories and the class of the AGV itself
 
-- 2. Organization: 
+- 2. Organization: The UI was responsible to gather and display information from/to the user, the Controller was an intermediary between the UI and the Service classes, the latest was responsible for the creation of the AGV and the Persist class was made for saving the AGV in the database using the repository
 
-- 3. Code: 
+- 3. Code: The code was made in the simplest way possible for the exception of some methods to display the available categories and brands that were needed to be made with some duplications
 
 # 3. Design
 
@@ -52,20 +52,14 @@
 
 # 4. Implementation
 
-*Nesta secção a equipa deve providenciar, se necessário, algumas evidências de que a implementação está em conformidade com o design efetuado. Para além disso, deve mencionar/descrever a existência de outros ficheiros (e.g. de configuração) relevantes e destacar commits relevantes;*
-
-- When analysing the code it is possible to see how it is in accordance with the diagrams done for this US.
-
-- Other files worth mentioning:
-
-- Relevant commits:
+- The code was made according to the SSD and according to the Domain Model
+- The most relevant commit were done by 1200876
 
 
 # 5. Integration/ Documentation
 
-*Nesta secção a equipa deve descrever os esforços realizados no sentido de integrar a funcionalidade desenvolvida com as restantes funcionalidades do sistema.*
+- There was integration with the Model class for the AGV to be created
 
 # 6. Observations
 
-*Nesta secção sugere-se que a equipa apresente uma perspetiva critica sobre o trabalho desenvolvido apontando, por exemplo, outras alternativas e ou trabalhos futuros relacionados.*
-
+- The US was made according to the examples of the eCafeteria project and help was used from the TP slides
