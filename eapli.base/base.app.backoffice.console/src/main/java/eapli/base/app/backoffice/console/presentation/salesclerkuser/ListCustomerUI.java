@@ -1,5 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.salesclerkuser;
 
+import eapli.base.app.backoffice.console.presentation.authz.SystemUserPrinter;
 import eapli.base.customermanagement.application.ListCustomerController;
 import eapli.base.customermanagement.domain.model.Customer;
 import eapli.framework.presentation.console.AbstractListUI;
@@ -22,29 +23,23 @@ public class ListCustomerUI extends AbstractListUI<Customer> {
 
     @Override
     protected Iterable<Customer> elements() {
-        StringBuilder string = new StringBuilder();
         ArrayList<Customer> list = (ArrayList<Customer>) theController.allCustomers();
-        for (Customer customer : list){
-            string.append(customer.toString());
-            string.append("\n");
-        }
-        System.out.println(string);
         return list;
     }
 
     @Override
     protected Visitor<Customer> elementPrinter() {
-        return null;
+        return new SystemCustomerPrinter();
     }
 
     @Override
     protected String elementName() {
-        return null;
+        return "Customer";
     }
 
     @Override
     protected String listHeader() {
-        return null;
+        return String.format("#  %-10s%-20s%-30s%-30s", "NAME", "VAT", "EMAIL", "PHONE_NUMBER");
     }
 
 }

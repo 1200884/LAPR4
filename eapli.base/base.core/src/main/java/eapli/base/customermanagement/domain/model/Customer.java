@@ -14,10 +14,9 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
     private int vat;
     private String birth_date;
     private String gender;
-    @Column(nullable = false,insertable = false, updatable = false)
+    @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false,insertable = false, updatable = false)
+    @Column(nullable = false)
     private Integer phone_number;
     private String name;
     @ElementCollection
@@ -26,8 +25,6 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
     private Set<Delivering_Address> delivering_addresses = new HashSet<>();
     @Embedded
     private Shopping_Cart shopping_cart;
-    @Embedded
-    private Validation validation;
 
     protected Customer() {
     }
@@ -68,17 +65,10 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
         this.delivering_addresses.add((delivering_address));
     }
 
-    public void setValidation(Validation validation) {
-        this.validation = validation;
-    }
-
     public void setShopping_cart(Shopping_Cart shopping_cart) {
         this.shopping_cart = shopping_cart;
     }
 
-    public Validation getValidation() {
-        return validation;
-    }
 
     public void setPhone_number(Integer phone_number) {
         this.phone_number = phone_number;
@@ -114,6 +104,10 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
 
     public int getPhone_number() {
         return phone_number;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getVat() {

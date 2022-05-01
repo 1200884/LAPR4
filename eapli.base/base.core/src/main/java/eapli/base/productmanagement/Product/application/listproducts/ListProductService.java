@@ -18,13 +18,11 @@ public class ListProductService {
     BrandRepository brandRepository = PersistenceContext.repositories().brands();
 
     public StringBuilder allProducts(String f1) {
-        System.out.println("OLAAAAAAAAAAAAAAAAAAAAAAAAAA");
         Brand brand1 = new Brand("Nike","niky");
         Brand brand2 = new Brand("Adidas","adidi");
         Category category1 = new Category("Sapatilhas");
         Product product1 = new Product("Air Max",new byte[3],99,category1,new Barcode("123"),brand1);
         Product product2 = new Product("Sweater",new byte[3],99,category1,new Barcode("1234"),brand2);
-        System.out.println("ADEEEEEEUUUUUUUUUSSSSSSSSS");
         brandRepository.save(brand1);
         brandRepository.save(brand2);
         System.out.println("11111111111111111111111111111");
