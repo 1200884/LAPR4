@@ -4,15 +4,16 @@
 
 # 1. Requirements
 
-*Nesta secção a equipa deve indicar a funcionalidade desenvolvida bem como descrever a sua interpretação sobre a mesma e sua correlação e/ou dependência de/com outros requisitos.*
+
 
 **1003** As Sales Clerk, I want to register a new customer.
 
-- 1003.1. Main goal:
+- Create a new customer as a Sales Clerk.
 
-- 1003.2. Functionalities:
+- This option is on the customer menu,and the customer is created only with valid information which is checked on its introduction
 
-- 1003.3. Dependencies:
+- No dependencies
+
 
 # 2. Analysis
 
