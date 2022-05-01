@@ -13,11 +13,8 @@ public class ProductBootstrapper extends ProductBootstrapperBase implements Acti
     @Override
     public boolean execute() {
         Brand brand = createBrand("Pink Lady", "123");
-        System.out.println("Brand criada");
         Category category = createCategory("Fruta");
-        System.out.println("Categoria criada");
         registerProduct("Maçã", new byte[1], 15, new Description("Boa", "Muito boa"), category, new Barcode("Code123"), brand);
-        System.out.println("Produto criado");
         return true;
     }
 

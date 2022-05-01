@@ -8,11 +8,11 @@
 
 **1001** As Sales Clerk, I want to specify a new product for sale.
 
-- 1001.1. Main goal:
+- 1001.1. Main goal: Create a product that can be seen or ordered by any customer visiting the application
 
-- 1001.2. Functionalities:
+- 1001.2. Functionalities: Creation
 
-- 1001.3. Dependencies:
+- 1001.3. Dependencies: It depends on the US that allows a Sales Clerk to create/specify a category for products
 
 # 2. Analysis
 
@@ -20,11 +20,11 @@
 
 *Recomenda-se que organize este conteúdo por subsecções.*
 
-- 1. Concepts:
+- 1. Concepts: There was a need to use UIs, Controllers, Services, Persist, Repositories and the class of the Product itself
 
-- 2. Organization: 
+- 2. Organization: The UI was responsible to gather and display information from/to the user, the Controller was an intermediary between the UI and the Service classes, the latest was responsible for the creation of the Product and the Persist class was made for saving the Product in the database using the repository
 
-- 3. Code: 
+- 3. Code: The code was made in the simplest way possible for the exception of some methods to display the available categories and brands that were needed to be made with some duplications
 
 # 3. Design
 
@@ -52,20 +52,14 @@
 
 # 4. Implementation
 
-*Nesta secção a equipa deve providenciar, se necessário, algumas evidências de que a implementação está em conformidade com o design efetuado. Para além disso, deve mencionar/descrever a existência de outros ficheiros (e.g. de configuração) relevantes e destacar commits relevantes;*
-
-- When analysing the code it is possible to see how it is in accordance with the diagrams done for this US.
-
-- Other files worth mentioning:
-
-- Relevant commits:
+- The code was made according to the SSD and according to the Domain Model
+- The most relevant commit were done by 1200876
 
 
 # 5. Integration/ Documentation
 
-*Nesta secção a equipa deve descrever os esforços realizados no sentido de integrar a funcionalidade desenvolvida com as restantes funcionalidades do sistema.*
+- There was integration with the Category and Brand classes for the Product to be created
 
 # 6. Observations
 
-*Nesta secção sugere-se que a equipa apresente uma perspetiva critica sobre o trabalho desenvolvido apontando, por exemplo, outras alternativas e ou trabalhos futuros relacionados.*
-
+- The US was made according to the examples of the eCafeteria project and help was used from the TP slides

@@ -1,0 +1,50 @@
+@startuml
+autonumber
+actor SalesClerk as Admin
+participant ":ListProductUI" as UI
+participant ":ListProductController" as Controller
+participant ":ListProductService" as Service
+participant ":BrandRepository" as BR
+participant ":CategoryRepository" as CR
+participant ":ProductRepository" as PR
+
+
+activate Admin
+Admin -> UI: Requests to show the product's catalog
+activate UI
+
+loop while option is incorrect
+UI --> Admin: Show options to sort by (category or brand)
+deactivate UI
+Admin -> UI: Enters one of the options
+activate UI
+end
+UI -> Controller:allProducts(filtro1)
+activate Controller
+Controller -> Service: allProducts(filtro1)
+activate Service
+
+alt filtro1= brand
+Service -> BR: findAll()
+activate BR
+BR -> PR: findByBrand(b)
+activate PR
+PR --> BR: Iterable<Product>
+deactivate PR
+deactivate BR
+else filtro1= category
+Service -> CR: findAll()
+activate CR
+CR -> PR: findByCategory()
+activate PR
+PR --> CR: Iterable<Product>
+deactivate PR
+deactivate CR
+end
+Service --> Controller: stringBuilder
+deactivate Service
+Controller --> UI: stringBuilder
+deactivate Controller
+UI --> Admin: Shows list of products organized
+deactivate Admin
+@enduml
