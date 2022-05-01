@@ -21,17 +21,11 @@
 
 # 3. Design
 
-## 3.1. Functionalities (SSD)
+## 3.1. Applied standards
 
+*This US does not have diagrams.*
 
-## 3.2. Class Diagram
-
-
-## 3.3. Applied standards
-
-*Nesta secção deve apresentar e explicar quais e como foram os padrões de design aplicados e as melhores práticas.*
-
-## 3.4. Tests 
+## 3.2. Tests 
 
 **Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
 
