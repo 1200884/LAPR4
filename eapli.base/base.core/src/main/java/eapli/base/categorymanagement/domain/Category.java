@@ -14,6 +14,7 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int category_ID;
+    @Column (unique = true)
     private String description;
 
     @OneToMany (cascade = CascadeType.ALL)
