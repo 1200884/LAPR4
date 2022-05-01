@@ -9,7 +9,6 @@ public class CategoryService {
 
     public Category createnewcategory(String description){
             Category category = new Category(description);
-            category.setDescription(description);
             categoryPersist.createnewcategory(category);
             return category;
     }

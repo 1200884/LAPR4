@@ -7,34 +7,27 @@ import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class CategoryUI  extends AbstractUI{
-    CategoryPersist categoryPersist = new CategoryPersist();
-    Scanner ler = new Scanner(System.in);
     private final CategoryController categoryController = new CategoryController();
     @Override
     protected boolean doShow(){
-        final String description = Console.readLine("Description");
+         String description = Console.readLine("Description");
+        while(!this.categoryController.createnewcategory(description)){
 
-        try{
-            this.categoryController.createnewcategory(description);
-        }catch (final IntegrityViolationException | ConcurrencyException e){
-            System.out.println("This category is already in use");
+            description = Console.readLine("\nDescription: ");
         }
-        return false;
-    }
-    private boolean showCategory(){
+        System.out.println("Here is the created category");
+        System.out.println(description);
         return true;
+
     }
-    private void CreateCategory(String category){
-        System.out.println("Insira nova category");
-        category = ler.nextLine();
-        categoryController.createnewcategory(category);
-      }
-
-
     @Override
     public String headline(){return "Add Category";}
 }

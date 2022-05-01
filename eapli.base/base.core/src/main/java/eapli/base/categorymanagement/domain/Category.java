@@ -3,6 +3,7 @@ package eapli.base.categorymanagement.domain;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int category_ID;
+    @Column(unique = true)
     private String description;
 
     protected Category() {
