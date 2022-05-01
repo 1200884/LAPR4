@@ -20,7 +20,7 @@ public class CustomerRegisterService {
         customer.setDelivering_addresses(delivering_addresses);
         customer.setBirth_date(birth);
         customer.setGender(gender);
-        customerPersist.createcustomerpersist(customer);
+        customerPersist.createCustomerPersist(customer);
 
     }
 

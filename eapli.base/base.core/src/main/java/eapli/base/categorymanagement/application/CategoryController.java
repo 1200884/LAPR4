@@ -1,16 +1,21 @@
 package eapli.base.categorymanagement.application;
 import eapli.base.categorymanagement.domain.Category;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 
 import java.util.List;
 
 public class CategoryController {
 
     private static CategoryService categoryService = new CategoryService();
-    private static List<Category> categoryList;
 
-    public String createnewcategory(String description){
-        Category category = categoryService.createnewcategory(description);
-        return category.toString();
+    public boolean createnewcategory(String description){
+        try{
+            Category category = categoryService.createnewcategory(description);
+            return true;
+        }catch (Exception a){
+            System.out.println("This category is already in use");
+        }
+        return false;
     }
 
 }
