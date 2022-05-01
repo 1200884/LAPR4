@@ -25,6 +25,8 @@ package eapli.base.app.backoffice.console.presentation;
 
 import eapli.base.app.backoffice.console.Domain.Product.CategoryUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.*;
+import eapli.base.app.backoffice.console.presentation.warehouseuser.CreateAGVUI;
+import eapli.base.app.backoffice.console.presentation.warehouseuser.JSONUI;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
@@ -73,6 +75,9 @@ public class MainMenu extends AbstractUI {
     private static final int CUSTOMER_REGISTER = 3;
     private static final int CREATE_ORDER = 4;
     private static final int PRODUCT_CATEGORY = 5;
+    // SETTINGS Warehouse Employee
+    private static final int UPLOAD_JSON = 1;
+    private static final int CONFIGURE_AGV = 2;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -135,6 +140,10 @@ public class MainMenu extends AbstractUI {
             final Menu settingsMenu = buildSalesClerkSettingsMenu();
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
         }
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.WAREHOUSE_EMPLOYEE)) {
+            final Menu settingsMenu = buildWarehouseEmployeeSettingsMenu();
+            mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
+        }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
@@ -156,7 +165,7 @@ public class MainMenu extends AbstractUI {
     }
 
     private Menu buildSalesClerkSettingsMenu() {
-        final Menu menu = new Menu("Settings >");
+        final Menu menu = new Menu("Options >");
 
         menu.addItem(SPECIFY_PRODUCT, "Specify new product for sale", new AddProductUI()::show);
         menu.addItem(PRODUCT_CATALOG, "View/Search the products catalog", new ListProductUI()::show);
@@ -166,7 +175,14 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PRODUCT_CATEGORY, "Define a new Category of Products",
                 new CategoryUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-        return menu;}
+        return menu;
+    }
+
+    private Menu buildWarehouseEmployeeSettingsMenu() {
+        final Menu menu = new Menu("Options >");
+        menu.addItem(UPLOAD_JSON,"Upload a JSON file",new JSONUI()::show);
+        menu.addItem(CONFIGURE_AGV,"Configure the AGVs available in the warehouse",new CreateAGVUI()::show);
+    return menu;}
 
     private Menu buildUsersMenu() {
         final Menu menu = new Menu("Users >");
@@ -189,9 +205,6 @@ public class MainMenu extends AbstractUI {
 
         return menu;
     }
-
-
-
 
 
 }
