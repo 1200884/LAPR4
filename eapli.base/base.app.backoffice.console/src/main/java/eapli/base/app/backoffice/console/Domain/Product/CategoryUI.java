@@ -1,6 +1,8 @@
 package eapli.base.app.backoffice.console.Domain.Product;
 
-import eapli.base.productmanagement.Product.application.CategoryController;
+import eapli.base.categorymanagement.application.CategoryController;
+import eapli.base.categorymanagement.domain.Category;
+import eapli.base.categorymanagement.domain.repositories.CategoryPersist;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;
@@ -9,6 +11,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import java.util.Scanner;
 
 public class CategoryUI  extends AbstractUI{
+    CategoryPersist categoryPersist = new CategoryPersist();
     Scanner ler = new Scanner(System.in);
     private final CategoryController categoryController = new CategoryController();
     @Override
@@ -29,10 +32,10 @@ public class CategoryUI  extends AbstractUI{
         System.out.println("Insira nova category");
         category = ler.nextLine();
         categoryController.createnewcategory(category);
-
-    }
+      }
 
 
     @Override
     public String headline(){return "Add Category";}
 }
+

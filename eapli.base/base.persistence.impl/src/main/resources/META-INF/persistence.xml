@@ -15,7 +15,7 @@
     <class>eapli.base.customermanagement.domain.model.Customer</class>
     <class>eapli.base.brandmanagement.domain.Brand</class>
     <class>eapli.base.productmanagement.Product.domain.Product</class>
-    <class>eapli.base.productmanagement.Product.domain.Category</class>
+    <class>eapli.base.categorymanagement.domain.Category</class>
     <class>eapli.base.AGVmanagement.AGV.domain.AGV</class>
     <class>eapli.base.modelmanagement.Model.domain.Model</class>
 

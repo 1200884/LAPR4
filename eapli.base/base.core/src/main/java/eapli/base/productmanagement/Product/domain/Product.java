@@ -1,6 +1,7 @@
 package eapli.base.productmanagement.Product.domain;
 
 import eapli.base.brandmanagement.domain.Brand;
+import eapli.base.categorymanagement.domain.Category;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;

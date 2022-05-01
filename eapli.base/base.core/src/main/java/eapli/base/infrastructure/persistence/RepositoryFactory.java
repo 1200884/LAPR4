@@ -25,6 +25,7 @@ import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
 import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.base.customermanagement.domain.repositories.CustomerRepository;
@@ -95,6 +96,10 @@ public interface RepositoryFactory {
     ProductRepository products(TransactionalContext autoTx);
 
     ProductRepository products();
+
+    CategoryRepository category(TransactionalContext autotx);
+
+    CategoryRepository category();
 
     BrandRepository brands(TransactionalContext autoTx);
 

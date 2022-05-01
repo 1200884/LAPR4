@@ -23,6 +23,7 @@
  */
 package eapli.base.app.backoffice.console.presentation;
 
+import eapli.base.app.backoffice.console.Domain.Product.CategoryUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.ListCustomerAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.ListProductUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Shopping_CartAction;
@@ -166,7 +167,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(CREATE_ORDER, "Create a new Products Order on behalf of a given Customer",
                 new ShowMessageAction("Not implemented yet"));
         menu.addItem(PRODUCT_CATEGORY, "Define a new Category of Products",
-                new ShowMessageAction("Not implemented yet"));
+                new CategoryUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
         return menu;}
 

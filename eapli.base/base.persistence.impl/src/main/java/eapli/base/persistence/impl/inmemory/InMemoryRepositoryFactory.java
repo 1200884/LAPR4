@@ -28,6 +28,7 @@ import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
+import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -88,6 +89,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public ProductRepository products() {
         return products(null);
+    }
+
+    @Override
+    public CategoryRepository category(TransactionalContext autotx) {return new InMemoryCategoryRepository();
+    }
+
+    @Override
+    public CategoryRepository category() {
+        return category(null);
     }
 
     @Override

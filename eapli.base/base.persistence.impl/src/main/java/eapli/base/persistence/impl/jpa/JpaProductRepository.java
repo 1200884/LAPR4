@@ -2,7 +2,7 @@ package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
 import eapli.base.brandmanagement.domain.Brand;
-import eapli.base.productmanagement.Product.domain.Category;
+import eapli.base.categorymanagement.domain.Category;
 import eapli.base.productmanagement.Product.domain.Product;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
