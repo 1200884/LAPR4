@@ -94,8 +94,9 @@ public class JSONReader {
                     System.out.println(wsquareEndRow);
                     Long shelves = (Long) e.get("shelves");
                     System.out.println(shelves);
-                    row.add(new Row(idr,lsquareRow,wsquareRow,lsquareEndRow,wsquareEndRow,shelves,aisle1));
+                    row.add(new Row(idr,lsquareRow,wsquareRow,lsquareEndRow,wsquareEndRow,shelves));
                 }
+                aisle1.setRows(row);
                 aisle.add(aisle1);
             }
 
@@ -127,7 +128,7 @@ public class JSONReader {
                 String acessability = (String) g.get("accessibility");
                 System.out.println(acessability);
             }
-            theController.createWarehouse(length,width,square,unit,aisle,docks,row);
+            theController.createWarehouse(length,width,square,unit,aisle,docks);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }

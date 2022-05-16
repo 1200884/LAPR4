@@ -20,8 +20,6 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
     @ElementCollection
     private Set<Aisle> aisle = new HashSet<>();
     @ElementCollection
-    private Set<Row> rows = new HashSet<>();
-    @ElementCollection
     private Set<AGVDocks> docks = new HashSet<>();
 
     protected Warehouse(){
@@ -98,18 +96,6 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
 
     public String getUnit() {
         return unit;
-    }
-
-    public Set<Row> getRows() {
-        return rows;
-    }
-
-    public void setRows(Set<Row> rows) {
-        this.rows = rows;
-    }
-
-    public void addRow(Row row){
-        this.rows.add(row);
     }
 
     @Override

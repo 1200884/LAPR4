@@ -3,31 +3,31 @@ package eapli.base.warehousemanagement.Domain;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Immutable
-@Embeddable
+@Entity
 public class Row implements ValueObject {
+    @Id
     private Long id;
     @Embedded
     private BeginDimension begin;
     @Embedded
     private EndDimension end;
-    /*@Embedded
-    private Aisle aisle;*/
+
     private Long shelves;
 
     protected Row(){
 
     }
 
-    public Row(Long id,Long bwidth,Long blength,Long ewidth,Long elength,Long shelves,Aisle aisle){
+    public Row(Long id,Long bwidth,Long blength,Long ewidth,Long elength,Long shelves){
         this.begin= new BeginDimension(bwidth,blength);
         this.end= new EndDimension(ewidth,elength);
         this.shelves=shelves;
         this.id=id;
-        //this.aisle=aisle;
     }
 
     public EndDimension getEnd() {

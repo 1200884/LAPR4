@@ -4,13 +4,15 @@ import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Immutable
-@Embeddable
+@Entity
 public class Aisle implements ValueObject {
+    @Id
     private Long id;
     @Embedded
     private BeginDimension begin;
@@ -18,6 +20,8 @@ public class Aisle implements ValueObject {
     private EndDimension end;
     @Embedded
     private DepthDimension depth;
+    @ElementCollection
+    private Set<Row> rows = new HashSet<>();
     private String accessibility;
 
     protected Aisle(){
@@ -70,6 +74,18 @@ public class Aisle implements ValueObject {
 
     private void setEnd(EndDimension end) {
         this.end = end;
+    }
+
+    public Set<Row> getRows() {
+        return rows;
+    }
+
+    public void setRows(Set<Row> rows) {
+        this.rows = rows;
+    }
+
+    public void addRow(Row row){
+        this.rows.add(row);
     }
 
     @Override

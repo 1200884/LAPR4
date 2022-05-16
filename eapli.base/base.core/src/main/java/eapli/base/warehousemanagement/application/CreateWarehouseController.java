@@ -17,9 +17,9 @@ public class CreateWarehouseController {
     @Autowired
     private CreateWarehouseService cws=new CreateWarehouseService();
 
-    public boolean createWarehouse(Long length, Long width, Long square, String unit, Set<Aisle> aisle, Set<AGVDocks> docks, Set<Row> rows){
+    public boolean createWarehouse(Long length, Long width, Long square, String unit, Set<Aisle> aisle, Set<AGVDocks> docks){
         authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.WAREHOUSE_EMPLOYEE);
-        cws.createWarehouse(length, width, square, unit,aisle,docks,rows);
+        cws.createWarehouse(length, width, square, unit,aisle,docks);
         return true;
     }
 }
