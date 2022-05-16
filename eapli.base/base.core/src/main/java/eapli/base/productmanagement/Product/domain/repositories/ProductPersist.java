@@ -23,9 +23,18 @@ public class ProductPersist {
     private static CategoryRepository categoryRepository = PersistenceContext.repositories().category();
 
     public void createProductPersist(Product product) {
-        Brand brand = ((ArrayList<Brand>)brandRepository.findAll()).get(0);
-        Category category = ((ArrayList<Category>)categoryRepository.findAll()).get(0);
-
+        Brand brand=null;
+        for(Brand b : ((ArrayList<Brand>)brandRepository.findAll())){
+            if(b.getName().equals(product.getBrand().getName())){
+                brand = b;
+            }
+        };
+        Category category = null;
+        for(Category c :((ArrayList<Category>)categoryRepository.findAll())){
+            if(c.getDescription().equals(product.getCategory().getDescription())){
+                category = c;
+            }
+        };
         product.setCategory(category);
         product.setBrand(brand);
 

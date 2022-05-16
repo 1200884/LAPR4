@@ -187,6 +187,8 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PRODUCT_CATALOG, "View/Search the products catalog", new ListProductUI()::show);
         menu.addItem(PRODUCT_CATEGORY, "Define a new Category of Products",
                 new CategoryUI()::show);
+        menu.addItem(PRODUCT_CATEGORY, "Define a new Brand of Products",
+                new CategoryUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
         return menu;}
 
