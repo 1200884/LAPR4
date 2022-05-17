@@ -18,7 +18,7 @@ public class RegisterCustomerUI extends AbstractUI {
             username = Console.readLine("Name:");
         }
         String vatstr = Console.readLine("VAT:");
-        while (!customerController.validVAT(vatstr)) {
+        while (!CustomerController.validVAT(vatstr)) {
             System.out.println("The vat information was incorrect. Please enter a valid vat with 9 digits.");
             vatstr = Console.readLine("VAT:");
         }
@@ -31,7 +31,7 @@ public class RegisterCustomerUI extends AbstractUI {
         phonenumber = Integer.parseInt(phonenumberstr);
 
         String email = Console.readLine("E-mail");
-        while (!customerController.validEmail(email)) {
+        while (!CustomerController.validEmail(email)) {
             System.out.println("The email information was incorrect. Please enter a valid email");
             email = Console.readLine("E-mail");
         }
