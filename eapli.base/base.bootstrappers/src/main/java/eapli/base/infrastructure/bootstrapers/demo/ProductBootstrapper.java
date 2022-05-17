@@ -13,8 +13,11 @@ public class ProductBootstrapper extends ProductBootstrapperBase implements Acti
     @Override
     public boolean execute() {
         Brand brand = createBrand("Pink Lady", "123");
+        Brand brand1 = createBrand("Adidas", "333");
         Category category = createCategory("Fruta");
-        registerProduct("Maçã", new byte[1], 15, new Description("Boa", "Muito boa"), category, new Barcode("Code123"), brand);
+        Category category1 = createCategory("Sapatilhas");
+        registerProduct("Maçã", new byte[1], 1, new Description("Boa", "Muito boa"), category, new Barcode("Code123"), brand);
+        registerProduct("All Star", new byte[1], 80, new Description("Boas", "Muito boas"), category1, new Barcode("Code123"), brand1);
         return true;
     }
 

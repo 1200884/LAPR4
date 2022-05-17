@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ModelPersist {
 
     @Autowired
-    private static ModelRepository modelRepository = PersistenceContext.repositories().Models();
+    private static ModelRepository modelRepository = PersistenceContext.repositories().models();
 
     public void createModelPersist(Model model) {
         modelRepository.save(model);

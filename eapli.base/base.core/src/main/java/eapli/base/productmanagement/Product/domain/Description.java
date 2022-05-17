@@ -38,10 +38,7 @@ public class Description implements ValueObject {
 
     @Override
     public String toString() {
-        return "Description{" +
-                "short_description='" + short_description + '\'' +
-                ", extended_description ='" + extended_description + '\'' +
-                '}';
+        return "Short Description: " + short_description + "\nExtended Description: " + extended_description;
     }
 
     @Override

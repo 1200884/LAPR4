@@ -15,7 +15,10 @@ public class CreateAGVUI extends AbstractUI {
         String baseLocation = Console.readLine("Now the base location for the AGV:");
         String description = Console.readLine("Now a short description for the AGV:");
         print(agvController.findModels());
-        int modelNum = Console.readInteger("Lastly, from the list above, select the model of the AGV:");
+        int modelNum = Console.readInteger("Lastly, from the list above, select the ID of the model for the AGV:");
+        while (!agvController.verifyModel(modelNum)) {
+            modelNum = Console.readInteger("The number inserted did not match any of the models, please insert a new one:");
+        }
         print("Here is the created AGV:");
         print(agvController.createAVG(masWeight, baseLocation, description, modelNum));
         return false;

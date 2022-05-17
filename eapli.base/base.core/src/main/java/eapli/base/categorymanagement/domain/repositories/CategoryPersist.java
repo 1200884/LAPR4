@@ -10,7 +10,6 @@ public class CategoryPersist {
     CategoryRepository categoryRepository = PersistenceContext.repositories().category();
     public void createnewcategory(Category category){
         categoryRepository.save(category);
-        System.out.println(categoryRepository.findAll());
     }
 
 }

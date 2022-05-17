@@ -53,10 +53,7 @@ public class Barcode implements ValueObject {
 
     @Override
     public String toString() {
-        return "Barcode{" +
-                "Barcode_ID='" + barcode_ID + '\'' +
-                ", Type_of_barcode ='" + type_of_barcode + '\'' +
-                '}';
+        return "ID: " + barcode_ID + "\nType of barcode: " + type_of_barcode;
     }
 
     @Override

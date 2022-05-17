@@ -23,7 +23,6 @@ public class AGVBootstrapperBase {
         Model model = null;
         try {
             model = modelService.createModel(name, description);
-            LOGGER.debug("»»» %s", name);
         }catch (final IntegrityViolationException | ConcurrencyException e) {
             model = null;
         }

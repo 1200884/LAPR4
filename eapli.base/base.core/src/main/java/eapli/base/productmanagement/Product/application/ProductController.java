@@ -1,6 +1,7 @@
 package eapli.base.productmanagement.Product.application;
 
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.productmanagement.Product.domain.Barcode;
 import eapli.base.brandmanagement.domain.Brand;
 import eapli.base.categorymanagement.domain.Category;
@@ -32,11 +33,25 @@ public class ProductController {
     }
 
     private Category fetchCategory(int categoryNum) {
-        return categoryList.get(categoryNum);
+        for (Category category : categoryList) {
+            if (category.getCategory_ID() == categoryNum) return category;
+        }
+        return null;
+    }
+
+    public boolean verifyCategory(int categoryNum) {
+        return fetchCategory(categoryNum) != null;
     }
 
     private Brand fetchBrand(int brandNum) {
-        return brandList.get(brandNum);
+        for (Brand brand : brandList) {
+            if (brand.getBrand_id() == brandNum) return brand;
+        }
+        return null;
+    }
+
+    public boolean verifyBrand(int brandNum) {
+        return fetchBrand(brandNum) != null;
     }
 
     private Barcode createBarcode() {
@@ -47,8 +62,8 @@ public class ProductController {
         Iterable<Category> iterable = categoryRepository.findAll();
         iterable.forEach(categoryList::add);
         StringBuilder string = new StringBuilder();
-        for (int i = 0; i < categoryList.size(); i++) {
-            string.append(i).append(":\n").append(categoryList.get(i).toString());
+        for (Category category : categoryList) {
+            string.append(category.toString()).append("\n");
         }
         return string.toString();
     }
@@ -57,8 +72,8 @@ public class ProductController {
         Iterable<Brand> iterable = brandRepository.findAll();
         iterable.forEach(brandList::add);
         StringBuilder string = new StringBuilder();
-        for (int i = 0; i < brandList.size(); i++) {
-            string.append(i).append(":\n").append(brandList.get(i).toString());
+        for (Brand brand : brandList) {
+            string.append(brand.toString()).append("\n");
         }
         return string.toString();
     }

@@ -84,7 +84,7 @@ public final class BaseBootstrap extends BaseApplication {
         }
         new BackofficeUsersBootstrapper().execute();
         new ProductBootstrapper().execute();
-        //new AGVBootstrapper().execute();
+        new AGVBootstrapper().execute();
     }
 
     private void handleArgs(final String[] args) {

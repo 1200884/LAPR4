@@ -10,6 +10,7 @@ public class AGVPersist {
     private static AGVRepository agvRepository = PersistenceContext.repositories().AGVs();
 
     public void createAGVPersist(AGV agv) {
+        agv.getModel().addAGV(agv);
         agvRepository.save(agv);
     }
 }

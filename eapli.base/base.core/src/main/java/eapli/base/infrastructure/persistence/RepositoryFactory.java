@@ -109,8 +109,8 @@ public interface RepositoryFactory {
 
     AGVRepository AGVs();
 
-    ModelRepository Models(TransactionalContext autoTx);
+    ModelRepository models(TransactionalContext autoTx);
 
-    ModelRepository Models();
+    ModelRepository models();
 
 }

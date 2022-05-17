@@ -89,7 +89,7 @@ public class Product implements Serializable, AggregateRoot<Integer> {
 
     @Override
     public String toString() {
-        return "ID:\n" + id + "\nPhoto:\n" + Arrays.toString(photo) +"\nBase Price:\n" + base_price + "\nName:\n" + name + "\nCategory:\n" + category + "\nDescription:\n" + description + "\nBarcode:\n" + barcode + "\nBrand:\n" + brand;
+        return "ID: " + id + "\nPhoto: " + Arrays.toString(photo) +"\nBase Price: " + base_price + "\nName: " + name + "\nCategory:\n" + category + "\nDescription:\n" + description + "\nBarcode:\n" + barcode + "\nBrand:\n" + brand;
     }
 
     @Override

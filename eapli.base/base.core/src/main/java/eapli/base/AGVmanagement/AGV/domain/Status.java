@@ -40,10 +40,7 @@ public class Status implements ValueObject {
 
     @Override
     public String toString() {
-        return "Status{" +
-                "time_left='" + time_left + '\'' +
-                ", task='" + task + '\'' +
-                '}';
+        return "Task: " + task + "\nTime Left: " + time_left;
     }
 
     @Override

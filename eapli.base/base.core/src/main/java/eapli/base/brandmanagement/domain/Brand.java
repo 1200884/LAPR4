@@ -46,11 +46,7 @@ public class Brand implements ValueObject, AggregateRoot<Integer> {
 
     @Override
     public String toString() {
-        return "Brand{" +
-                "brand_id='" + brand_id + '\'' +
-                ", name ='" + name + '\'' +
-                ", reference = " + reference + '\'' +
-                '}';
+        return "ID: " + brand_id + "\nName: " + name + "\nReference: " + reference;
     }
 
     @Override

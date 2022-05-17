@@ -121,13 +121,13 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public ModelRepository Models(TransactionalContext autoTx) {
+    public ModelRepository models(TransactionalContext autoTx) {
         return new InMemoryModelRepository();
     }
 
     @Override
-    public ModelRepository Models() {
-        return Models(null);
+    public ModelRepository models() {
+        return models(null);
     }
 
     @Override

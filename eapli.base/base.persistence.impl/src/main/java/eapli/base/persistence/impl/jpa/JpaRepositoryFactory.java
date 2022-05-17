@@ -123,12 +123,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public ModelRepository Models(TransactionalContext autoTx) {
+    public ModelRepository models(TransactionalContext autoTx) {
         return new JpaModelRepository(autoTx);
     }
 
     @Override
-    public ModelRepository Models() {
+    public ModelRepository models() {
         return new JpaModelRepository(Application.settings().getPersistenceUnitName());
     }
 

@@ -45,7 +45,7 @@ public class Category implements ValueObject, AggregateRoot<Integer> {
 
     @Override
     public String toString() {
-        return  "Category ID = " + category_ID + "\nDescription = " + description;
+        return  "ID: " + category_ID + "\nDescription: " + description;
     }
 
     @Override

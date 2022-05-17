@@ -1,11 +1,13 @@
 package eapli.base.modelmanagement.Model.domain;
 
+import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.productmanagement.Product.domain.Product;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 public class Model implements ValueObject, AggregateRoot<Integer> {
@@ -14,6 +16,9 @@ public class Model implements ValueObject, AggregateRoot<Integer> {
     private int id;
     private String name;
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<AGV> AGVs = new ArrayList<>();
 
     protected Model() {
     }
@@ -35,13 +40,13 @@ public class Model implements ValueObject, AggregateRoot<Integer> {
         return name;
     }
 
+    public void addAGV(AGV agv) {
+        AGVs.add(agv);
+    }
+
     @Override
     public String toString() {
-        return "Model{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "ID: " + id + "\nName: " + name + "\nDescription: " + description;
     }
 
     @Override
