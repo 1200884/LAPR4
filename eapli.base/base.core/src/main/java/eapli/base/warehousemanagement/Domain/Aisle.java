@@ -14,13 +14,14 @@ import java.util.Set;
 public class Aisle implements ValueObject {
     @Id
     private Long id;
-    @Embedded
-    private BeginDimension begin;
-    @Embedded
-    private EndDimension end;
-    @Embedded
-    private DepthDimension depth;
-    @ElementCollection
+    private Long bwidth;
+    private Long blength;
+    private Long ewidth;
+    private Long elength;
+    private Long dwidth;
+    private Long dlength;
+    @OneToMany (cascade = CascadeType.ALL)
+    @JoinColumn (name="AisleId")
     private Set<Row> rows = new HashSet<>();
     private String accessibility;
 
@@ -31,25 +32,16 @@ public class Aisle implements ValueObject {
     public Aisle(Long id, Long blength,Long bwidth,Long elength,Long ewidth,Long slength,Long swidth,String accessibility){
         this.id=id;
         this.accessibility=accessibility;
-        this.end = new EndDimension(ewidth,elength);
-        this.begin = new BeginDimension(bwidth,blength);
-        this.depth = new DepthDimension(swidth,slength);
+        this.ewidth= ewidth;
+        this.elength=elength;
+        this.bwidth= bwidth;
+        this.blength=blength;
+        this.dwidth=swidth;
+        this.dlength=slength;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public Dimensions getBegin() {
-        return begin;
-    }
-
-    public Dimensions getDepth() {
-        return depth;
-    }
-
-    public Dimensions getEnd() {
-        return end;
     }
 
     public String getAccessibility() {
@@ -64,16 +56,52 @@ public class Aisle implements ValueObject {
         this.id = id;
     }
 
-    private void setDepth(DepthDimension depth) {
-        this.depth = depth;
+    public Long getBlength() {
+        return blength;
     }
 
-    private void setBegin(BeginDimension begin) {
-        this.begin = begin;
+    public Long getBwidth() {
+        return bwidth;
     }
 
-    private void setEnd(EndDimension end) {
-        this.end = end;
+    public Long getDlength() {
+        return dlength;
+    }
+
+    public Long getDwidth() {
+        return dwidth;
+    }
+
+    public Long getElength() {
+        return elength;
+    }
+
+    public Long getEwidth() {
+        return ewidth;
+    }
+
+    public void setBlength(Long blength) {
+        this.blength = blength;
+    }
+
+    public void setBwidth(Long bwidth) {
+        this.bwidth = bwidth;
+    }
+
+    public void setDlength(Long dlength) {
+        this.dlength = dlength;
+    }
+
+    public void setDwidth(Long dwidth) {
+        this.dwidth = dwidth;
+    }
+
+    public void setElength(Long elength) {
+        this.elength = elength;
+    }
+
+    public void setEwidth(Long ewidth) {
+        this.ewidth = ewidth;
     }
 
     public Set<Row> getRows() {
@@ -90,6 +118,6 @@ public class Aisle implements ValueObject {
 
     @Override
     public String toString() {
-        return "Aisle" +"id=" + id +", begin=" + begin +", end=" + end +", depth=" + depth +", accessibility='" + accessibility;
+        return "Aisle" +"id=" + id +", accessibility='" + accessibility;
     }
 }

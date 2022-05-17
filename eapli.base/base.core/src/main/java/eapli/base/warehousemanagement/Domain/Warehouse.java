@@ -13,11 +13,12 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
     @Id
     @GeneratedValue
     private Long id;
-    @Embedded
-    private Dimensions dimensions;
+    private Long width;
+    private Long length;
     private Long square;
     private String unit;
-    @ElementCollection
+    @OneToMany (cascade = CascadeType.ALL)
+    @JoinColumn(name="WarehouseId")
     private Set<Aisle> aisle = new HashSet<>();
     @ElementCollection
     private Set<AGVDocks> docks = new HashSet<>();
@@ -27,7 +28,8 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
     }
 
     public Warehouse(Long length,Long width,Long square,String unit){
-        this.dimensions=new Dimensions(width,length);
+        this.width=width;
+        this.length=length;
         this.square=square;
         this.unit=unit;
     }
@@ -54,10 +56,6 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
         return id;
     }
 
-    public Dimensions getDimensions() {
-        return dimensions;
-    }
-
     public Long getSquare() {
         return square;
     }
@@ -72,10 +70,6 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
 
     public void setAisle(Set<Aisle> aisle) {
         this.aisle = aisle;
-    }
-
-    public void setDimensions(Dimensions dimensions) {
-        this.dimensions = dimensions;
     }
 
     public void setDocks(Set<AGVDocks> docks) {
@@ -98,8 +92,24 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
         return unit;
     }
 
+    public Long getWidth() {
+        return width;
+    }
+
+    public Long getLength() {
+        return length;
+    }
+
+    public void setWidth(Long width) {
+        this.width = width;
+    }
+
+    public void setLength(Long length) {
+        this.length = length;
+    }
+
     @Override
     public String toString() {
-        return "Warehouse: id=" + id + ", dimensions=" + dimensions +", square=" + square +", unit='" + unit;
+        return "Warehouse: id=" + id + ", dimensions=" + width +", square=" + square +", unit='" + unit;
     }
 }

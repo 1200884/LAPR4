@@ -12,7 +12,7 @@ import java.util.Arrays;
 @Entity
 public class Product implements Serializable, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private byte[] photo;
     private double base_price;

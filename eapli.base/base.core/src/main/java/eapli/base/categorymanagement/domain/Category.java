@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 public class Category implements ValueObject, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int category_ID;
     @Column (unique = true)
     private String description;

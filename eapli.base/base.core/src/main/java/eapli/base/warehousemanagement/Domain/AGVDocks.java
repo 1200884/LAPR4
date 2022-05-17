@@ -10,12 +10,12 @@ import javax.persistence.Embedded;
 @Embeddable
 public class AGVDocks implements ValueObject {
     private Long id;
-    @Embedded
-    private BeginDimension begin;
-    @Embedded
-    private EndDimension end;
-    @Embedded
-    private DepthDimension depth;
+    private Long bwidth;
+    private Long blength;
+    private Long ewidth;
+    private Long elength;
+    private Long dwidth;
+    private Long dlength;
     private String accessibility;
 
     protected AGVDocks(){
@@ -24,37 +24,20 @@ public class AGVDocks implements ValueObject {
 
     public AGVDocks(Long id, Long bwidth,Long blength,Long ewidth,Long elength,Long swidth,Long slength,String accessibility){
         this.accessibility=accessibility;
-        this.begin=new BeginDimension(bwidth,blength);
-        this.end=new EndDimension(ewidth,elength);
-        this.depth=new DepthDimension(swidth,slength);
+        this.ewidth= ewidth;
+        this.elength=elength;
+        this.bwidth= bwidth;
+        this.blength=blength;
+        this.dwidth=swidth;
+        this.dlength=slength;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Dimensions getBegin() {
-        return begin;
-    }
-
-    public Dimensions getEnd() {
-        return end;
-    }
-
     public String getAccessibility() {
         return accessibility;
-    }
-
-    public Dimensions getDepth() {
-        return depth;
-    }
-
-    private void setEnd(EndDimension end) {
-        this.end = end;
-    }
-
-    private void setBegin(BeginDimension begin) {
-        this.begin = begin;
     }
 
     private void setId(Long id) {
@@ -65,17 +48,58 @@ public class AGVDocks implements ValueObject {
         this.accessibility = accessibility;
     }
 
-    private void setDepth(DepthDimension depth) {
-        this.depth = depth;
+    private Long getDlength() {
+        return dlength;
+    }
+
+    private void setBwidth(Long bwidth) {
+        this.bwidth = bwidth;
+    }
+
+    private Long getDwidth() {
+        return dwidth;
+    }
+
+    private void setBlength(Long blength) {
+        this.blength = blength;
+    }
+
+    private Long getEwidth() {
+        return ewidth;
+    }
+
+    private void setElength(Long elength) {
+        this.elength = elength;
+    }
+
+    private Long getElength() {
+        return elength;
+    }
+
+    private void setEwidth(Long ewidth) {
+        this.ewidth = ewidth;
+    }
+
+    private void setDwidth(Long dwidth) {
+        this.dwidth = dwidth;
+    }
+
+    private void setDlength(Long dlength) {
+        this.dlength = dlength;
+    }
+
+    private Long getBwidth() {
+        return bwidth;
+    }
+
+    private Long getBlength() {
+        return blength;
     }
 
     @Override
     public String toString() {
         return "AGVDocks{" +
                 "id=" + id +
-                ", begin=" + begin +
-                ", end=" + end +
-                ", depth=" + depth +
                 ", accessibility='" + accessibility + '\'' +
                 '}';
     }
