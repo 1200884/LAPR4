@@ -12,7 +12,7 @@ import java.util.Arrays;
 @Entity
 public class Product implements Serializable, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private int id;
     private byte[] photo;
     private double base_price;
@@ -67,14 +67,6 @@ public class Product implements Serializable, AggregateRoot<Integer> {
         return category;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
     public double getBase_price() {
         return base_price;
     }
@@ -97,7 +89,11 @@ public class Product implements Serializable, AggregateRoot<Integer> {
 
     @Override
     public String toString() {
-        return "\nName: " + name + " Base Price: " + base_price + " Category: " + category + " Description: " + description.getShort_description() + " Brand: " + brand.getName();
+        return "ID:\n" + id + "\nPhoto:\n" + Arrays.toString(photo) +"\nBase Price:\n" + base_price + "\nName:\n" + name + "\nCategory:\n" + category + "\nDescription:\n" + description + "\nBarcode:\n" + barcode + "\nBrand:\n" + brand;
+    }
+
+    public String toStringShow() {
+        return "ID: " + id + "\nPhoto: " + Arrays.toString(photo) +"\nBase Price: " + base_price + "\nName: " + name + "\nCategory:\n" + category + "\nDescription:\n" + description + "\nBarcode:\n" + barcode + "\nBrand:\n" + brand;
     }
 
     @Override

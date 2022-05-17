@@ -29,7 +29,7 @@ public class ProductController {
         Barcode barcode = createBarcode();
         Brand brand = fetchBrand(brandNum);
         Product product = productService.createProduct(name, photo, basePrice, description, category, barcode, brand);
-        return product.toString();
+        return product.toStringShow();
     }
 
     private Category fetchCategory(int categoryNum) {
