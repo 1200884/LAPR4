@@ -323,9 +323,9 @@ public class JpaAutoTxRepository<T, K, I> implements IterableRepository<T, K>, L
      * Allows to create a typed query (SELECT, INSERT, UPDATE, DELETE) in case the {@code match*()}
      * family of methods is not enough.
      *
-     * @param <R>
-     * @param jpql
-     * @param classz
+     ** @param <U>
+     * @param queryString
+     * @param class1
      *
      * @return
      */

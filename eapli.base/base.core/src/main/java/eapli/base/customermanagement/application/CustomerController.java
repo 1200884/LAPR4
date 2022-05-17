@@ -16,7 +16,7 @@ public class CustomerController {
         customerRegisterService.registerCustomer(nome, vat, phonenumber, email, billingadresscountry, billingadressadress, delivering_addresscountry, delivering_adressadress, birth, gender);
     }
 
-    public boolean validName(String name) {
+    public static boolean validName(String name) {
         if (hasNumbers(name) || hasSpecialCharacters(name)) {
             return false;
         } else {
@@ -24,15 +24,15 @@ public class CustomerController {
         }
     }
 
-    public boolean validVAT(String vat) {
+    public static boolean validVAT(String vat) {
         return length(vat, VATLENGHT);
     }
 
-    public boolean validPhoneNumber(String phonenumber) {
+    public static boolean validPhoneNumber(String phonenumber) {
         return length(phonenumber, PHONENUMBERLENGTH);
     }
 
-    private boolean length(String phonenumber, int length) {
+    private static boolean length(String phonenumber, int length) {
         if (phonenumber.length() != length) {
             return false;
         }
@@ -44,14 +44,14 @@ public class CustomerController {
         return true;
     }
 
-    public boolean validEmail(String email) {
+    public static boolean validEmail(String email) {
         if (email.length() > EMAILMAXLENGTH) {
             return false;
         }
         return email.contains("@") && email.contains(".");
     }
 
-    private boolean hasSpecialCharacters(String str) {
+    private static boolean hasSpecialCharacters(String str) {
         String specialCharactersString = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
@@ -64,11 +64,15 @@ public class CustomerController {
         return false;
     }
 
-    private boolean hasNumbers(String str) {
+    private static boolean hasNumbers(String str) {
+        String specialCharactersString = "1234567890";
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) <= '0' && str.charAt(i) >= '9') {
+            char ch = str.charAt(i);
+            if (specialCharactersString.contains(Character.toString(ch))) {
                 return true;
-            }
+            } else if (i == str.length() - 1)
+                return false;
+
         }
         return false;
     }
