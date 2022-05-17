@@ -16,8 +16,8 @@ public class ProductBootstrapper extends ProductBootstrapperBase implements Acti
         Brand brand1 = createBrand("Adidas", "333");
         Category category = createCategory("Fruta");
         Category category1 = createCategory("Sapatilhas");
-        registerProduct("Maçã", new byte[1], 1, new Description("Boa", "Muito boa"), category, new Barcode("Code123"), brand);
-        registerProduct("All Star", new byte[1], 80, new Description("Boas", "Muito boas"), category1, new Barcode("Code123"), brand1);
+        registerProduct("Maçã", new byte[0], 1, new Description("Boa", "Muito boa"), category, new Barcode("Code123"), brand);
+        registerProduct("All Star", new byte[0], 80, new Description("Boas", "Muito boas"), category1, new Barcode("Code123"), brand1);
         return true;
     }
 

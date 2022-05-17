@@ -35,6 +35,7 @@ public class AGVController {
 
     public String findModels() {
         Iterable<Model> iterable = modelRepository.findAll();
+        modelList.clear();
         iterable.forEach(modelList::add);
         StringBuilder string = new StringBuilder();
         for (Model model : modelList) {

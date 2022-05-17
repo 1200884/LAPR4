@@ -60,6 +60,7 @@ public class ProductController {
 
     public String findCategories() {
         Iterable<Category> iterable = categoryRepository.findAll();
+        categoryList.clear();
         iterable.forEach(categoryList::add);
         StringBuilder string = new StringBuilder();
         for (Category category : categoryList) {
@@ -70,6 +71,7 @@ public class ProductController {
 
     public String findBrand() {
         Iterable<Brand> iterable = brandRepository.findAll();
+        brandList.clear();
         iterable.forEach(brandList::add);
         StringBuilder string = new StringBuilder();
         for (Brand brand : brandList) {

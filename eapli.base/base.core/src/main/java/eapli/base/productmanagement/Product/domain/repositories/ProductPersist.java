@@ -4,7 +4,6 @@ import eapli.base.brandmanagement.domain.Brand;
 import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.categorymanagement.domain.Category;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
-import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.productmanagement.Product.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;

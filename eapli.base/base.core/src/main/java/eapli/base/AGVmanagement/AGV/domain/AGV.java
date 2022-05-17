@@ -48,6 +48,10 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         return model;
     }
 
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
