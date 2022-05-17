@@ -37,6 +37,7 @@ import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
+import eapli.base.customermanagement.domain.model.Customer;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -84,7 +85,11 @@ public class MainMenu extends AbstractUI {
     private static final int SETTINGS = 2;
     private static final int UPLOAD_JSON = 2;
     private static final int CONFIGURE_AGV = 3;
-
+    private static final int ACESS_ORDERS=4;
+    private static final int UPDATE_ORDERS=5;
+    private static final int PRESENTAGVSTATUS=6;
+    private static final int ACESS_ALREADYMADEORDERS=7;
+    private static final int UPDATE_ALREADYMADEORDERS=8;
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
@@ -178,6 +183,11 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Options >");
         menu.addItem(UPLOAD_JSON,"Upload a JSON file",new JSONUI()::show);
         menu.addItem(CONFIGURE_AGV,"Configure the AGVs available in the warehouse",new CreateAGVUI()::show);
+        menu.addItem(ACESS_ORDERS,"Access the list of orders to be prepared/AGV order assignment",new JSONUI()::show);//MUDAR PRA UI CORRETA
+        menu.addItem(UPDATE_ORDERS,"Assign orders yet t to the AGV",new JSONUI()::show);//MUDAR PRA UI CORRETA
+        menu.addItem(PRESENTAGVSTATUS,"Check the AGV Status",new JSONUI()::show);//MUDAR PRA UI CORRETA
+        menu.addItem(ACESS_ALREADYMADEORDERS,"Acess ready orders", new JSONUI()::show);//MUDAR PRA UI CORRETA
+        menu.addItem(UPDATE_ALREADYMADEORDERS,"Update Status to customer delivery",new JSONUI()::show);//MUDAR PRA UI CORRETA;
         return menu;
     }
 
