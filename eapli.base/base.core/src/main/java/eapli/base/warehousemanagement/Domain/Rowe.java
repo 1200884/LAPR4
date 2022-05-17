@@ -3,16 +3,17 @@ package eapli.base.warehousemanagement.Domain;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Immutable
 @Entity
-public class Row implements ValueObject {
+public class Rowe implements ValueObject {
     @Id
-    private Long id;
+    @GeneratedValue
+    private int id;
+    private Long rowe_id;
     private Long bwidth;
     private Long blength;
     private Long ewidth;
@@ -20,17 +21,17 @@ public class Row implements ValueObject {
 
     private Long shelves;
 
-    protected Row(){
+    protected Rowe(){
 
     }
 
-    public Row(Long id,Long bwidth,Long blength,Long ewidth,Long elength,Long shelves){
+    public Rowe(Long rowe_id, Long bwidth, Long blength, Long ewidth, Long elength, Long shelves){
         this.ewidth= ewidth;
         this.elength=elength;
         this.bwidth= bwidth;
         this.blength=blength;
         this.shelves=shelves;
-        this.id=id;
+        this.rowe_id =rowe_id;
     }
 
     public Long getEwidth() {
@@ -65,17 +66,16 @@ public class Row implements ValueObject {
         this.blength = blength;
     }
 
-
-    public Long getId() {
-        return id;
+    public Long getRowe_id() {
+        return rowe_id;
     }
 
     public Long getShelves() {
         return shelves;
     }
 
-    private void setId(Long id) {
-        this.id = id;
+    private void setRowe_id(Long rowe_id) {
+        this.rowe_id = rowe_id;
     }
 
     private void setShelves(Long shelves) {

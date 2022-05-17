@@ -2,7 +2,7 @@ package eapli.base.warehousemanagement.application;
 
 import eapli.base.warehousemanagement.Domain.AGVDocks;
 import eapli.base.warehousemanagement.Domain.Aisle;
-import eapli.base.warehousemanagement.Domain.Row;
+import eapli.base.warehousemanagement.Domain.Rowe;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -35,11 +35,8 @@ public class JSONReader {
 
             String unit = (String) a.get("Unit");
 
-            System.out.println("1111111111111111111111");
-
             JSONArray aisles = (JSONArray) a.get("Aisles");
             Set<Aisle> aisle = new HashSet<>();
-            Set<Row> row = new HashSet<>();
             for (Object b : aisles) {
                 JSONObject c = (JSONObject) b;
 
@@ -58,9 +55,10 @@ public class JSONReader {
                 Long wsquareDepth = (Long) depth.get("wsquare");
 
                 String acessability = (String) c.get("accessibility");
-                System.out.println("2222222222222222222222222222222222");
+
                 JSONArray rows = (JSONArray) c.get("rows");
                 Aisle aisle1 = new Aisle(id,lsquare,wsquare,lsquareEnd,wsquareEnd,lsquareDepth,wsquareDepth,acessability);
+                Set<Rowe> row = new HashSet<>();
                 for (Object d : rows) {
                     JSONObject e = (JSONObject) d;
 
@@ -74,7 +72,7 @@ public class JSONReader {
                     Long wsquareEndRow = (Long) endRow.get("wsquare");
 
                     Long shelves = (Long) e.get("shelves");
-                    row.add(new Row(idr,lsquareRow,wsquareRow,lsquareEndRow,wsquareEndRow,shelves));
+                    row.add(new Rowe(idr,lsquareRow,wsquareRow,lsquareEndRow,wsquareEndRow,shelves));
                 }
                 aisle1.setRows(row);
                 aisle.add(aisle1);

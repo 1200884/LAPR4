@@ -78,6 +78,7 @@ public class MainMenu extends AbstractUI {
     private static final int PRODUCT_CATALOG = 2;
     private static final int CUSTOMER_REGISTER = 3;
     private static final int PRODUCT_CATEGORY = 5;
+    private static final int BRAND_CATEGORY = 6;
 
     // Warehouse Employee
     private static final int SETTINGS = 2;
@@ -187,7 +188,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PRODUCT_CATALOG, "View/Search the products catalog", new ListProductUI()::show);
         menu.addItem(PRODUCT_CATEGORY, "Define a new Category of Products",
                 new CategoryUI()::show);
-        menu.addItem(PRODUCT_CATEGORY, "Define a new Brand of Products",
+        menu.addItem(BRAND_CATEGORY, "Define a new Brand of Products",
                 new CategoryUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
         return menu;}

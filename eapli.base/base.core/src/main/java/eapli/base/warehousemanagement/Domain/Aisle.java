@@ -21,8 +21,7 @@ public class Aisle implements ValueObject {
     private Long dwidth;
     private Long dlength;
     @OneToMany (cascade = CascadeType.ALL)
-    @JoinColumn (name="AisleId")
-    private Set<Row> rows = new HashSet<>();
+    private Set<Rowe> rows = new HashSet<>();
     private String accessibility;
 
     protected Aisle(){
@@ -104,15 +103,15 @@ public class Aisle implements ValueObject {
         this.ewidth = ewidth;
     }
 
-    public Set<Row> getRows() {
+    public Set<Rowe> getRows() {
         return rows;
     }
 
-    public void setRows(Set<Row> rows) {
+    public void setRows(Set<Rowe> rows) {
         this.rows = rows;
     }
 
-    public void addRow(Row row){
+    public void addRow(Rowe row){
         this.rows.add(row);
     }
 
