@@ -26,32 +26,29 @@ public class ProductBootstrapperBase {
     }
 
     protected Category registerCategory(final String description) {
-        Category category = null;
         try {
-            category = categoryService.createnewcategory(description);
+            Category category = categoryService.createnewcategory(description);
+            return category;
         }catch (final IntegrityViolationException | ConcurrencyException e) {
-            category = null;
+            return null;
         }
-        return category;
     }
 
     protected Brand registerBrand(final String name, final String reference) {
-        Brand brand = null;
         try {
-            brand = brandService.createBrand(name, reference);
+            Brand brand = brandService.createBrand(name, reference);
+            return brand;
         }catch (final IntegrityViolationException | ConcurrencyException e) {
-            brand = null;
+            return null;
         }
-        return brand;
     }
 
     protected Product registerProduct(final String name, final byte[] photo, final double basePrice, final Description description, final Category category, final Barcode barcode, final Brand brand) {
-        Product product = null;
         try {
-            product = productService.createProduct(name, photo, basePrice, description, category, barcode, brand);
+            Product product = productService.createProduct(name, photo, basePrice, description, category, barcode, brand);
+            return product;
         }catch (final IntegrityViolationException | ConcurrencyException e) {
-            product = null;
+            return null;
         }
-        return product;
     }
 }

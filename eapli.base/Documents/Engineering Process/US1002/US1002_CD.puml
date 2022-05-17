@@ -1,0 +1,27 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+ListProductsUI --> ListProductsController
+ListProductsController --> ListProductService
+ListProductService --> ProductRepository
+
+class ListProductsUI{
+ +doShow()
+ +headLine()
+}
+class ListProductsController{
+-ListProductService
++allProducts(String f1)
+}
+class ListProductService{
+-ProductRepository
+-CategoryRepository
+-BrandRepository
++allProducts(String f1)
+}
+interface ProductRepository{
++findByCategory(Category c)
++findByBrand(Brand b)
+
+}
+@enduml

@@ -26,6 +26,7 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
     @Embedded
     private Shopping_Cart shopping_cart;
 
+
     protected Customer() {
     }
 

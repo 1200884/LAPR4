@@ -11,11 +11,11 @@ import java.util.Optional;
 public class CreateOrderController {
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
     @Autowired
-    private OrderServices os;
+    private OrderServices os = new OrderServices();
 
-    public Optional<Customer> optionMenu(int customer) {
+    public Optional<Customer> optionMenu(int vat) {
         authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.SALES_CLERK);
-        return os.findByvat(customer);
+        return os.findByvat(vat);
     }
 
     public boolean createOrder(int vat){
@@ -24,8 +24,8 @@ public class CreateOrderController {
             System.out.println("Customer not found");
             return false;
         }
-        os.createOrder(optionMenu(vat).get().getShopping_cart());
-        optionMenu(vat).get().getShopping_cart().getProduct_quantities().clear();
+        os.createOrder(customer.get().getShopping_cart());
+        customer.get().getShopping_cart().getProduct_quantities().clear();
         return true;
     }
 }

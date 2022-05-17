@@ -13,49 +13,24 @@
 - 1900.3. Dependencies: More than what this part of the project is dependent on, it is more relavant to highlight how much the project is dependent on it. This US allows us to have information on the catalog each time the system is initialized.
 
 # 2. Analysis
-- 1. Concepts: 
+- 1. Concepts: there was the need to have a more in depth look at how the bootstrap works.
 
 - 2. Organization: There was some confusion on how to integrate everythng needed with the base project, in terms of which packages to use for certain parts. 
 
-- 3. Code: 
+- 3. Code: everytime the bootstrap is run it creates instances
 
 # 3. Design
 
-## 3.1. Functionalities (SSD)
+## 3.1. Applied standards
 
-
-## 3.2. Class Diagram
-
-
-## 3.3. Applied standards
-
-*Nesta secção deve apresentar e explicar quais e como foram os padrões de design aplicados e as melhores práticas.*
-
-## 3.4. Tests 
-
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+*This US does not have diagrams.*
 
 # 4. Implementation
-
-*Nesta secção a equipa deve providenciar, se necessário, algumas evidências de que a implementação está em conformidade com o design efetuado. Para além disso, deve mencionar/descrever a existência de outros ficheiros (e.g. de configuração) relevantes e destacar commits relevantes;*
 
 - When analysing the code it is possible to see how it is in accordance with the diagrams done for this US.
 
 - Other files worth mentioning: files related with persistance
 
-- Relevant commits:
-
-
 # 5. Integration/ Documentation
 
-*Nesta secção a equipa deve descrever os esforços realizados no sentido de integrar a funcionalidade desenvolvida com as restantes funcionalidades do sistema.*
-
-# 6. Observations
-
-*Nesta secção sugere-se que a equipa apresente uma perspetiva critica sobre o trabalho desenvolvido apontando, por exemplo, outras alternativas e ou trabalhos futuros relacionados.*
-
+- The foundation was what was already in projeto.base, from there we just added some more code 

@@ -24,11 +24,10 @@ US1002
 
 ## 3.1. Functionalities (SSD)
 
-*Nesta secção deve apresentar e descrever o fluxo/sequência que permite realizar a funcionalidade.*
-
+- This diagram can be found under Documents> Engineering Process> US1002
 ## 3.2. Class Diagram
 
-*Nesta secção deve apresentar e descrever as principais classes envolvidas na realização da funcionalidade.*
+- This diagram can be found under Documents> Engineering Process> US1002
 
 ## 3.3. Applied standards
 

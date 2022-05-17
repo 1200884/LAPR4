@@ -18,6 +18,9 @@
     <class>eapli.base.categorymanagement.domain.Category</class>
     <class>eapli.base.AGVmanagement.AGV.domain.AGV</class>
     <class>eapli.base.modelmanagement.Model.domain.Model</class>
+    <class>eapli.base.warehousemanagement.Domain.Warehouse</class>
+    <class>eapli.base.warehousemanagement.Domain.Aisle</class>
+    <class>eapli.base.warehousemanagement.Domain.Rowe</class>
 
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/base"/>-->

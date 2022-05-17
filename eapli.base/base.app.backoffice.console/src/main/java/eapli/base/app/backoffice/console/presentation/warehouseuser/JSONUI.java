@@ -1,6 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.warehouseuser;
 
-import eapli.base.warehousemanagement.JSONReader;
+import eapli.base.warehousemanagement.application.JSONReader;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
@@ -14,10 +14,11 @@ public class JSONUI extends AbstractUI {
         String path = Console.readLine("Please enter the path of the JSON file");
         try {
             jsonReader.jsonReader(path);
+            System.out.println("Warehouse created");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
     @Override
