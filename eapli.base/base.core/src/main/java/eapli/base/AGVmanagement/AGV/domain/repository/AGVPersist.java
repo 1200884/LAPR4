@@ -20,7 +20,7 @@ public class AGVPersist {
     public void createAGVPersist(AGV agv) {
         Model model=null;
         for(Model m : ((ArrayList<Model>)modelRepository.findAll())){
-            if(m.getId() == agv.getModel().getId()){
+            if(m.getName().equals(agv.getModel().getName())){
                 model = m;
             }
         }

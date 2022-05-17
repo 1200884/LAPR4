@@ -2,7 +2,6 @@ package eapli.base.AGVmanagement.AGV.domain;
 
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.framework.domain.model.AggregateRoot;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import java.io.Serializable;
 @Entity
 public class AGV implements Serializable, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private int id;
     double maximum_weight;
     private String shortDescription;
