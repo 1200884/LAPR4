@@ -43,6 +43,7 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
         registerMenuManager("chef", PASSWORD1, "Master", "Chef", "master.chef@emai.l.com");
         registerSalesClerk("sales_clerk",TestDataConstants.PASSWORD1,"Abilio","Maia","sirAbilio@gmail.com");
         registerWarehouseEmployee("warehouse_employee",PASSWORD1,"Kuku", "Fidelis","kuku@email.com");
+        registerAGVManager("AGV Manager",PASSWORD1,"Fernando", "Andrade","nandices@email.com");
         return true;
     }
 
@@ -63,6 +64,13 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
         roles.add(BaseRoles.MENU_MANAGER);
+
+        registerUser(username, password, firstName, lastName, email, roles);
+    }
+    private void registerAGVManager(final String username, final String password,
+                                     final String firstName, final String lastName, final String email) {
+        final Set<Role> roles = new HashSet<>();
+        roles.add(BaseRoles.AGV_MANAGER);
 
         registerUser(username, password, firstName, lastName, email, roles);
     }

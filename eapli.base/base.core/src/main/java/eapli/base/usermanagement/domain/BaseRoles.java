@@ -27,7 +27,6 @@ import eapli.framework.infrastructure.authz.domain.model.Role;
 
 /**
  * @author Paulo Gandra Sousa
- *
  */
 public final class BaseRoles {
     /**
@@ -51,6 +50,7 @@ public final class BaseRoles {
      */
     public static final Role WAREHOUSE_EMPLOYEE = Role.valueOf("WAREHOUSE EMPLOYEE");
 
+    public static final Role AGV_MANAGER = Role.valueOf("AGV MANAGER");
 
     public static final Role MENU_MANAGER = Role.valueOf("MENU_MANAGER");
     /**
@@ -64,7 +64,7 @@ public final class BaseRoles {
      * @return
      */
     public static Role[] nonUserValues() {
-        return new Role[] { ADMIN, SALES_CLERK, WAREHOUSE_EMPLOYEE, MENU_MANAGER, CUSTOMER };
+        return new Role[]{ADMIN, SALES_CLERK, WAREHOUSE_EMPLOYEE, AGV_MANAGER, MENU_MANAGER, CUSTOMER};
     }
 
     public boolean isCollaborator(final Role role) {

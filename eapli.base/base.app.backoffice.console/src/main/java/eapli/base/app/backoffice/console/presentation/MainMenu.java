@@ -29,8 +29,7 @@ import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.Re
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Order.Shopping_CartAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.AddProductUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.ListProductUI;
-import eapli.base.app.backoffice.console.presentation.warehouseuser.CreateAGVUI;
-import eapli.base.app.backoffice.console.presentation.warehouseuser.JSONUI;
+import eapli.base.app.backoffice.console.presentation.warehouseuser.*;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
@@ -85,11 +84,11 @@ public class MainMenu extends AbstractUI {
     private static final int SETTINGS = 2;
     private static final int UPLOAD_JSON = 2;
     private static final int CONFIGURE_AGV = 3;
-    private static final int ACESS_ORDERS=4;
-    private static final int UPDATE_ORDERS=5;
-    private static final int PRESENTAGVSTATUS=6;
-    private static final int ACESS_ALREADYMADEORDERS=7;
-    private static final int UPDATE_ALREADYMADEORDERS=8;
+    private static final int ACESS_ORDERS = 4;
+    private static final int UPDATE_ORDERS = 5;
+    private static final int PRESENTAGVSTATUS = 6;
+    private static final int ACESS_ALREADYMADEORDERS = 7;
+    private static final int UPDATE_ALREADYMADEORDERS = 8;
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
@@ -133,37 +132,30 @@ public class MainMenu extends AbstractUI {
 
     private Menu buildMainMenu() {
         final Menu mainMenu = new Menu();
-
         final Menu myUserMenu = new MyUserMenu();
         mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
         }
-
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.ADMIN)) {
             final Menu usersMenu = buildUsersMenu();
             mainMenu.addSubMenu(USERS_OPTION, usersMenu);
             final Menu settingsMenu = buildAdminSettingsMenu();
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
         }
-
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.SALES_CLERK)) {
             final Menu customerMenu = buildCustomerMenu();
             mainMenu.addSubMenu(CUSTOMER_OPTION, customerMenu);
             final Menu settingsMenu = buildSalesClerkProductMenu();
             mainMenu.addSubMenu(PRODUCT_OPTION, settingsMenu);
         }
-
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.WAREHOUSE_EMPLOYEE)) {
             final Menu settingsMenu = buildWarehouseEmployeeSettingsMenu();
             mainMenu.addSubMenu(SETTINGS, settingsMenu);
         }
-
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
         }
-
         mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
         return mainMenu;
@@ -181,13 +173,14 @@ public class MainMenu extends AbstractUI {
 
     private Menu buildWarehouseEmployeeSettingsMenu() {
         final Menu menu = new Menu("Options >");
-        menu.addItem(UPLOAD_JSON,"Upload a JSON file",new JSONUI()::show);
-        menu.addItem(CONFIGURE_AGV,"Configure the AGVs available in the warehouse",new CreateAGVUI()::show);
-        menu.addItem(ACESS_ORDERS,"Access the list of orders to be prepared/AGV order assignment",new JSONUI()::show);//MUDAR PRA UI CORRETA
-        menu.addItem(UPDATE_ORDERS,"Assign orders yet t to the AGV",new JSONUI()::show);//MUDAR PRA UI CORRETA
-        menu.addItem(PRESENTAGVSTATUS,"Check the AGV Status",new JSONUI()::show);//MUDAR PRA UI CORRETA
-        menu.addItem(ACESS_ALREADYMADEORDERS,"Acess ready orders", new JSONUI()::show);//MUDAR PRA UI CORRETA
-        menu.addItem(UPDATE_ALREADYMADEORDERS,"Update Status to customer delivery",new JSONUI()::show);//MUDAR PRA UI CORRETA;
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+        menu.addItem(UPLOAD_JSON, "Upload a JSON file", new JSONUI()::show);
+        menu.addItem(CONFIGURE_AGV, "Configure the AGVs available in the warehouse", new CreateAGVUI()::show);
+        menu.addItem(ACESS_ORDERS, "Access the list of orders to be prepared", new UnassignedOrdersUI()::show);
+        menu.addItem(UPDATE_ORDERS, "Assign orders to the AGV", new OrderAGVAssignmentUI()::show);
+        menu.addItem(PRESENTAGVSTATUS, "Check the AGV Status", new CheckAGVStatusUI()::show);
+        menu.addItem(ACESS_ALREADYMADEORDERS, "Acess ready orders", new PreparedOrdersUI()::show);
+        menu.addItem(UPDATE_ALREADYMADEORDERS, "Update Status to customer delivery", new UpdateOrdersUI()::show);
         return menu;
     }
 
@@ -201,7 +194,8 @@ public class MainMenu extends AbstractUI {
         menu.addItem(BRAND_CATEGORY, "Define a new Brand of Products",
                 new CategoryUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-        return menu;}
+        return menu;
+    }
 
     private Menu buildUsersMenu() {
         final Menu menu = new Menu("Users >");
@@ -225,9 +219,6 @@ public class MainMenu extends AbstractUI {
 
         return menu;
     }
-
-
-
 
 
 }

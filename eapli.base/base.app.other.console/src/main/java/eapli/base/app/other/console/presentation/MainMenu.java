@@ -50,8 +50,13 @@ public class MainMenu extends AbstractUI {
     private static final int EXIT_OPTION = 0;
 
     // MAIN MENU
+    private static final int  SUPPORTS= 1;
+    private static final int FIFO = 2;
     private static final int MY_USER_OPTION = 1;
-    private static final int SALES_OPTION = 7;
+    private static final int USERS_OPTION = 2;
+    private static final int SETTINGS_OPTION = 4;
+    //USERS
+    private static final int AGV_MANAGER=1;
 
     private static final int RECHARGE_USER_CARD_OPTION = 1;
 
@@ -96,16 +101,16 @@ public class MainMenu extends AbstractUI {
     private Menu buildMainMenu() {
         final Menu mainMenu = new Menu();
 
-        final Menu myUserMenu = new MyUserMenu(BaseRoles.CASHIER);
+        final Menu myUserMenu = new MyUserMenu(BaseRoles.AGV_MANAGER);
         mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
         }
 
-        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.CASHIER)) {
-            final Menu cashierMenu = buildCashierMenu();
-            mainMenu.addSubMenu(SALES_OPTION, cashierMenu);
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.AGV_MANAGER)) {
+            final Menu agvManager = buildAGVManager();
+            mainMenu.addSubMenu(AGV_MANAGER, agvManager);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -117,11 +122,12 @@ public class MainMenu extends AbstractUI {
         return mainMenu;
     }
 
-    private Menu buildCashierMenu() {
-        final Menu cashierMenu = new Menu("Sales  >");
+    private Menu buildAGVManager() {
+        final Menu agvmanagermenu = new Menu("Options  >");
 
-        cashierMenu.addItem(EXIT_OPTION, "Return", Actions.SUCCESS);
-
-        return cashierMenu;
+        //agvmanagermenu.addItem(SUPPORTS,"4001",); à frente da , por a UI correta
+        //agvmanagermenu.addItem(FIFO,"4002",); à frente da , por a UI correta
+        agvmanagermenu.addItem(EXIT_OPTION, "Return", Actions.SUCCESS);
+        return agvmanagermenu;
     }
 }
