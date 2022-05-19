@@ -29,6 +29,8 @@ import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
+import eapli.base.ordermanagement.domain.Order;
+import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -36,7 +38,6 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.InMemoryUserRepository;
 
 /**
- *
  * Created by nuno on 20/03/16.
  */
 public class InMemoryRepositoryFactory implements RepositoryFactory {
@@ -60,6 +61,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public ClientUserRepository clientUsers(final TransactionalContext tx) {
 
         return new InMemoryClientUserRepository();
+    }
+
+    @Override
+    public OrderRepository Order(TransactionalContext autoTx) {
+        return new InMemoryOrderRepository();
+    }
+
+    @Override
+    public OrderRepository Order() {
+        return Order(null);
     }
 
     @Override
@@ -93,7 +104,8 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public CategoryRepository category(TransactionalContext autotx) {return new InMemoryCategoryRepository();
+    public CategoryRepository category(TransactionalContext autotx) {
+        return new InMemoryCategoryRepository();
     }
 
     @Override

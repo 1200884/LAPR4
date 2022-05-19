@@ -14,7 +14,6 @@ public class OrderAGVAssignmentController {
         return Order.isValidId(answer);
     }
     public static boolean existsOrderId(String answer){
-        //Perguntar ao gus se se poe no order services
-        return true;
+        return Order.existsId(answer);
     }
 }

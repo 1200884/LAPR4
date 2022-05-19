@@ -9,9 +9,11 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
 public class JpaWarehouseRepository extends JpaAutoTxRepository<Warehouse,Long,Long> implements WarehouseRepository {
 
-    public JpaWarehouseRepository(final TransactionalContext autoTx){super(autoTx,"id");}
+    public JpaWarehouseRepository(final TransactionalContext autoTx) {
+        super(autoTx, "id");
+    }
 
-    public JpaWarehouseRepository(final String puname){
+    public JpaWarehouseRepository(final String puname) {
         super(puname, Application.settings().getExtendedPersistenceProperties(),
                 "id");
     }

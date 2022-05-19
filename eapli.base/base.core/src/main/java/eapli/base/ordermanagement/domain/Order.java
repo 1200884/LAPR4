@@ -1,18 +1,25 @@
 package eapli.base.ordermanagement.domain;
 
+import eapli.base.customermanagement.domain.model.Shopping_Cart;
+import eapli.base.ordermanagement.application.OrderServices;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntity;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.util.Random;
+
 
 @Entity
-public class Order implements Serializable, DomainEntity<Integer>, AggregateRoot<Integer> {
-    @Id
-    private int id;
+public class Order implements Serializable, DomainEntity<String>, AggregateRoot<String> {
 
+    @Id
+    private String id;
     private String time;
     private String address;
     @Embedded
@@ -21,25 +28,42 @@ public class Order implements Serializable, DomainEntity<Integer>, AggregateRoot
     private Payment_Method payment_method;
     @Embedded
     private Price price;
+    @Embedded
+    private Shopping_Cart shopping_cart;
     /* @Embedded
      Carrier(?)*/
+    private static final int IDLENGTH = 9;
 
-    private static final int IDLENGTH=9;
     //9 digitos regra de negócio
     protected Order() {
     }
 
-    public Order(int id, String time, String address, Shipment_Method shipmentMethod, Payment_Method payment_method, Price price) {
-        this.id=id;
-        this.time=time;
-        this.address=address;
-        this.shipmentMethod=shipmentMethod;
-        this.payment_method=payment_method;
-        this.price=price;
+    public String generateTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+
     }
 
-    public int getId() {
+    public Order(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
+        this.id = generateId();
+        this.time = generateTime();
+        this.address = address;
+        this.shipmentMethod = shipmentMethod;
+        this.payment_method = payment_method;
+        this.shopping_cart=shopping_cart;
+    }
+
+    public String getId() {
         return id;
+    }
+
+    public Shopping_Cart getShopping_cart() {
+        return shopping_cart;
+    }
+
+    public void setShopping_cart(Shopping_Cart shopping_cart) {
+        this.shopping_cart = shopping_cart;
     }
 
     public Price getPrice() {
@@ -62,10 +86,6 @@ public class Order implements Serializable, DomainEntity<Integer>, AggregateRoot
         return time;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setShipmentMethod(Shipment_Method shipmentMethod) {
         this.shipmentMethod = shipmentMethod;
     }
@@ -82,22 +102,35 @@ public class Order implements Serializable, DomainEntity<Integer>, AggregateRoot
         this.price = price;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-     public static boolean isValidId(String id){
-        if(id.length()==IDLENGTH){
-            for(int i=0;i<IDLENGTH;i++){
-                if(!(id.charAt(i)>='0'&&id.charAt(i)<='9')){
+    public static boolean isValidId(String id) {
+        if (id.length() == IDLENGTH) {
+            for (int i = 0; i < IDLENGTH; i++) {
+                if (!(id.charAt(i) >= '0' && id.charAt(i) <= '9')) {
                     return false;
                 }
             }
             return true;
         }
         return false;
-     }
+    }
 
+    public static String generateId() {
+        boolean flag=false;
+        while(!flag) {
+            Random rnd = new Random();
+            int number = rnd.nextInt(999999999);
+            if (!existsId(String.valueOf(number))) {
+                flag=true;
+                return String.format("%06d", number);
+            }
+        }
+        return null;
+    }
 
+    public static boolean existsId(String id) {
+        OrderServices orderServices = new OrderServices();
+        return orderServices.existsid(id);
+    }
 
 
     @Override
@@ -118,7 +151,7 @@ public class Order implements Serializable, DomainEntity<Integer>, AggregateRoot
     }
 
     @Override
-    public Integer identity() {
+    public String identity() {
         return null;
     }
 }

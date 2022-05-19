@@ -17,6 +17,8 @@ public class OrderAGVAssignmentUI extends AbstractUI {
                 orderId=Console.readLine("Please introduce the id of the order to assign to the AGV, when available");
                 validateId(orderId);
                 //valid id at this point
+
+
                 break;
             case "2":
                 orderId=Console.readLine("Please introduce the id of the order to immediately assign to the AGV");

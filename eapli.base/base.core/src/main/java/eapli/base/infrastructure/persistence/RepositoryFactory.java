@@ -26,6 +26,8 @@ import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
+import eapli.base.ordermanagement.domain.Order;
+import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -34,7 +36,6 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
 /**
  * @author Paulo Gandra Sousa
- *
  */
 public interface RepositoryFactory {
 
@@ -46,9 +47,7 @@ public interface RepositoryFactory {
     TransactionalContext newTransactionalContext();
 
     /**
-     *
-     * @param autoTx
-     *            the transactional context to enrol
+     * @param autoTx the transactional context to enrol
      * @return
      */
     UserRepository users(TransactionalContext autoTx);
@@ -61,9 +60,7 @@ public interface RepositoryFactory {
     UserRepository users();
 
     /**
-     *
-     * @param autoTx
-     *            the transactional context to enroll
+     * @param autoTx the transactional context to enroll
      * @return
      */
     ClientUserRepository clientUsers(TransactionalContext autoTx);
@@ -76,9 +73,7 @@ public interface RepositoryFactory {
     ClientUserRepository clientUsers();
 
     /**
-     *
-     * @param autoTx
-     *            the transactional context to enroll
+     * @param autoTx the transactional context to enroll
      * @return
      */
     SignupRequestRepository signupRequests(TransactionalContext autoTx);
@@ -117,5 +112,9 @@ public interface RepositoryFactory {
     WarehouseRepository Warehouse(TransactionalContext autoTx);
 
     WarehouseRepository Warehouse();
+
+    OrderRepository Order();
+
+    OrderRepository Order(TransactionalContext autoTx);
 
 }
