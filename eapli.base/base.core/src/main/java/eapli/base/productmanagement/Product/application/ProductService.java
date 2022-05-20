@@ -13,7 +13,6 @@ public class ProductService {
 
     public Product createProduct(String name, byte[] photo, double basePrice, Description description, Category category, Barcode barcode, Brand brand) {
         Product product = new Product(name, photo, basePrice, description, category, barcode, brand);
-        productPersist.createProductPersist(product);
-        return product;
+        return productPersist.createProductPersist(product);
     }
 }

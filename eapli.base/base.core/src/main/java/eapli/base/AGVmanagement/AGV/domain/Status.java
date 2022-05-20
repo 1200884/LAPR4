@@ -11,14 +11,14 @@ import java.util.Objects;
 @Embeddable
 @Immutable
 public class Status implements ValueObject {
-    private int time_left;
+    private int battery_left;
     private String task;
 
     public Status() {
     }
 
-    public Status(int time_left, String task) {
-        this.time_left = time_left;
+    public Status(int battery_left, String task) {
+        this.battery_left = battery_left;
         this.task = task;
     }
 
@@ -26,21 +26,21 @@ public class Status implements ValueObject {
         return task;
     }
 
-    public int getTime_left() {
-        return time_left;
+    public int getBattery_left() {
+        return battery_left;
     }
 
     private void setTask(String task) {
         this.task = task;
     }
 
-    private void setTime_left(int time_left) {
-        this.time_left = time_left;
+    private void setBattery_left(int time_left) {
+        this.battery_left = time_left;
     }
 
     @Override
     public String toString() {
-        return "Task: " + task + "\nTime Left: " + time_left;
+        return "Task: " + task + "\nTime Left: " + battery_left;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class Status implements ValueObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Status status = (Status) o;
-        return Objects.equals(time_left, status.time_left) && Objects.equals(task, status.task);
+        return Objects.equals(battery_left, status.battery_left) && Objects.equals(task, status.task);
     }
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(time_left, task);
+        return Objects.hash(battery_left, task);
     }
 }

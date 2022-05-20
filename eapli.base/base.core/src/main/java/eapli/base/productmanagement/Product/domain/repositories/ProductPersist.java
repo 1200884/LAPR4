@@ -21,19 +21,19 @@ public class ProductPersist {
     @Autowired
     private static CategoryRepository categoryRepository = PersistenceContext.repositories().category();
 
-    public void createProductPersist(Product product) {
+    public Product createProductPersist(Product product) {
         Brand brand=null;
-        for(Brand b : ((ArrayList<Brand>)brandRepository.findAll())){
+        for(Brand b : brandRepository.findAll()){
             if(b.getName().equals(product.getBrand().getName())){
                 brand = b;
             }
-        };
+        }
         Category category = null;
-        for(Category c :((ArrayList<Category>)categoryRepository.findAll())){
+        for(Category c : categoryRepository.findAll()){
             if(c.getDescription().equals(product.getCategory().getDescription())){
                 category = c;
             }
-        };
+        }
         product.setCategory(category);
         product.setBrand(brand);
 
@@ -41,5 +41,7 @@ public class ProductPersist {
         brand.addProduct(product);
 
         productRepository.save(product);
+
+        return ((ArrayList<Product>)productRepository.findAll()).get(((ArrayList<Product>)productRepository.findAll()).size()-1);
     }
 }

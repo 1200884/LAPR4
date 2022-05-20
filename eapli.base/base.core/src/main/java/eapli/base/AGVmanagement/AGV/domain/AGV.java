@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 public class AGV implements Serializable, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private int id;
     double maximum_weight;
     private String shortDescription;

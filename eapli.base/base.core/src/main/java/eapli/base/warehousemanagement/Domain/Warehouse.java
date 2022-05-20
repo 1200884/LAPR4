@@ -17,8 +17,10 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
     private Long length;
     private Long square;
     private String unit;
+
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Aisle> aisle = new HashSet<>();
+
     @ElementCollection
     private Set<AGVDocks> docks = new HashSet<>();
 

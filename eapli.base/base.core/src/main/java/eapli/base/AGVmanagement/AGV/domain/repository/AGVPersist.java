@@ -17,9 +17,9 @@ public class AGVPersist {
     @Autowired
     private static ModelRepository modelRepository = PersistenceContext.repositories().models();
 
-    public void createAGVPersist(AGV agv) {
+    public AGV createAGVPersist(AGV agv) {
         Model model=null;
-        for(Model m : ((ArrayList<Model>)modelRepository.findAll())){
+        for(Model m : (modelRepository.findAll())){
             if(m.getName().equals(agv.getModel().getName())){
                 model = m;
             }
@@ -28,5 +28,7 @@ public class AGVPersist {
 
         model.addAGV(agv);
         agvRepository.save(agv);
+
+        return ((ArrayList<AGV>)agvRepository.findAll()).get(((ArrayList<AGV>)agvRepository.findAll()).size()-1);
     }
 }
