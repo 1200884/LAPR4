@@ -35,10 +35,7 @@ public class Shopping_Cart implements ValueObject {
     }
     @Override
     public String toString() {
-        return "Shopping_Cart{" +
-                "ID=" + ID +
-                ", product_quantities=" + product_quantities +
-                '}';
+        return "Shopping_Cart: \n"+ product_quantities.toString();
     }
 
     @Override

@@ -25,6 +25,7 @@
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/base"/>-->
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:~\base;MV_STORE=FALSE;AUTO_SERVER=true;"/>
+      <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://vs714.dei.isep.ipp.pt:1521/LAPR4;"/>-->
 
       <property name="javax.persistence.jdbc.user" value="sa"/>
       <property name="javax.persistence.jdbc.password" value="eapli"/>

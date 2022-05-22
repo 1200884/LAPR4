@@ -26,7 +26,8 @@ package eapli.base.app.backoffice.console.presentation;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Category.CategoryUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.ListCustomerAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.RegisterCustomerUI;
-import eapli.base.app.backoffice.console.presentation.salesclerkuser.Order.Shopping_CartAction;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.Order.Shopping_CartUI;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.AddProductToCartAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.AddProductUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.ListProductUI;
 import eapli.base.app.backoffice.console.presentation.warehouseuser.*;
@@ -72,6 +73,8 @@ public class MainMenu extends AbstractUI {
     // Customer
     private static final int LIST_CUSTOMER_OPTION = 1;
     private static final int MANAGE_SHOPPING_CART = 2;
+    private static final int ADD_PRODUCT_OPTION = 1;
+    private static final int CUSTOMER_OPTION = 2;
 
     // SETTINGS Sales Clerk
     private static final int SPECIFY_PRODUCT = 1;
@@ -95,8 +98,9 @@ public class MainMenu extends AbstractUI {
     private static final int SETTINGS_OPTION = 4;
 
     //Sales Clerk
-    private static final int CUSTOMER_OPTION = 2;
+    private static final int SALES_CUSTOMER_OPTION = 2;
     private static final int PRODUCT_OPTION = 3;
+
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -144,11 +148,17 @@ public class MainMenu extends AbstractUI {
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
         }
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.SALES_CLERK)) {
-            final Menu customerMenu = buildCustomerMenu();
+            final Menu customerMenu = buildSalesCustomerMenu();
             mainMenu.addSubMenu(CUSTOMER_OPTION, customerMenu);
             final Menu settingsMenu = buildSalesClerkProductMenu();
             mainMenu.addSubMenu(PRODUCT_OPTION, settingsMenu);
         }
+
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.CUSTOMER)) {
+            final Menu customerMenu = buildCustomerMenu();
+            mainMenu.addSubMenu(CUSTOMER_OPTION, customerMenu);
+        }
+
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.WAREHOUSE_EMPLOYEE)) {
             final Menu settingsMenu = buildWarehouseEmployeeSettingsMenu();
             mainMenu.addSubMenu(SETTINGS, settingsMenu);
@@ -159,6 +169,13 @@ public class MainMenu extends AbstractUI {
         mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
         return mainMenu;
+    }
+
+    private Menu buildCustomerMenu() {
+        final Menu menu = new Menu("Options >");
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+        menu.addItem(UPLOAD_JSON, "Add products to shopping Cart", new AddProductToCartAction());
+        return menu;
     }
 
     private Menu buildAdminSettingsMenu() {
@@ -209,14 +226,13 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
-    private Menu buildCustomerMenu() {
+    private Menu buildSalesCustomerMenu() {
         final Menu menu = new Menu("Customer >");
 
         menu.addItem(LIST_CUSTOMER_OPTION, "List all Customer", new ListCustomerAction());
-        menu.addItem(MANAGE_SHOPPING_CART, "Manage Shopping Carts", new Shopping_CartAction());
+        menu.addItem(MANAGE_SHOPPING_CART, "Convert Shopping Cart to Order", new Shopping_CartUI()::show);
         menu.addItem(CUSTOMER_REGISTER, "Register new Customer", new RegisterCustomerUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-
         return menu;
     }
 

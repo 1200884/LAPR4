@@ -39,15 +39,15 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
 
     @Override
     public boolean execute() {
-        registerCashier("customer", PASSWORD1, "Johny", "Cash", "johny.doe@emai.l.com");
+        registerCustomer("customer", PASSWORD1, "Pierre", "Kalulu", "kalulu@emai.l.com");
         registerMenuManager("chef", PASSWORD1, "Master", "Chef", "master.chef@emai.l.com");
         registerSalesClerk("sales_clerk",TestDataConstants.PASSWORD1,"Abilio","Maia","sirAbilio@gmail.com");
         registerWarehouseEmployee("warehouse_employee",PASSWORD1,"Kuku", "Fidelis","kuku@email.com");
-        registerAGVManager("AGV Manager",PASSWORD1,"Fernando", "Andrade","nandices@email.com");
+        registerAGVManager("AGV_Manager",PASSWORD1,"Fernando", "Andrade","nandices@email.com");
         return true;
     }
 
-    private void registerCashier(final String username, final String password,
+    private void registerCustomer(final String username, final String password,
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
         roles.add(BaseRoles.CUSTOMER);
