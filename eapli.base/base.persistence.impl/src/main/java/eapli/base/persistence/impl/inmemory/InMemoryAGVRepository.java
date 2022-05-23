@@ -8,4 +8,9 @@ public class InMemoryAGVRepository extends InMemoryDomainRepository<AGV, Integer
     static {
         InMemoryInitializer.init();
     }
+
+    @Override
+    public Iterable<AGV> findAll() {
+        return super.findAll();
+    }
 }

@@ -17,14 +17,16 @@ public class OrderAGVAssignmentUI extends AbstractUI {
                 orderId=Console.readLine("Please introduce the id of the order to assign to the AGV, when available");
                 validateId(orderId);
                 //valid id at this point
-
+                System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n"+OrderAGVAssignmentController.assigntasktoaagv(orderId));
 
                 break;
             case "2":
                 orderId=Console.readLine("Please introduce the id of the order to immediately assign to the AGV");
                 validateId(orderId);
                 //valid id at this point
-
+                if(OrderAGVAssignmentController.assigntaskimmediatlytoagv(orderId).equals("Null")){
+                    System.out.println("Currently we cannot assign a task immediately to an AGV as all our AGVs doing some sort of task.");
+            }
                 break;
         }
         return true;

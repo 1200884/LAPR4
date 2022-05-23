@@ -5,6 +5,7 @@ import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Entity
 public class AGV implements Serializable, AggregateRoot<Integer> {
@@ -15,7 +16,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     private String shortDescription;
     private String baseLocation;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Model model;
     @Embedded
     private Status status;
@@ -31,12 +32,31 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         this.status = status;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public boolean hastasks() {
+       return this.status.hastasks();
+    }
+    public int numberoftasks(){
+        return this.status.numberoftasks();
+    }
+
+    public ArrayList<String> getagvtasks() {
+        return this.status.gettasks();
+    }
+
     public void setId(int id) {
         this.id = id;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void addTasks(String task, int tasktime) {
+        this.status.addTask(task, tasktime);
     }
 
     public double getMaximum_weight() {
@@ -83,6 +103,6 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
 
     @Override
     public String toString() {
-        return "ID: " + id + "\nMax Weight: " + maximum_weight +"\nDescription: " + shortDescription +"\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status;
+        return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status;
     }
 }

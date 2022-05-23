@@ -6,32 +6,57 @@ import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
 
-import java.util.Objects;
+import java.util.*;
 
 @Embeddable
 @Immutable
 public class Status implements ValueObject {
     private int battery_left;
-    private String task;
+    private Map<String, Integer> task;
 
     public Status() {
     }
 
-    public Status(int battery_left, String task) {
+    public Status(int battery_left, String task, int tasktime) {
         this.battery_left = battery_left;
-        this.task = task;
+        addTask(task, tasktime);
     }
 
-    public String getTask() {
-        return task;
+    public ArrayList<String> gettasks() {
+        ArrayList<String> str = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : task.entrySet()) {
+            str.add(entry.getKey());
+        }
+        return str;
+    }
+    public int numberoftasks(){
+        return gettasks().size();
+    }
+
+    public boolean hastasks(){
+        return !this.task.isEmpty();
+    }
+    public void removelatesttask(){
+        ArrayList<String> str = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : task.entrySet()) {
+            str.add(entry.getKey());
+        }
+        for (Map.Entry<String, Integer> entry : task.entrySet()) {
+            if(Objects.equals(entry.getKey(), str.get(0))){
+                this.task.remove(entry);
+            }
+        }
     }
 
     public int getBattery_left() {
         return battery_left;
     }
 
+    public void addTask(String task, int tasktime) {
+        this.task.put(task, tasktime);
+    }
+
     private void setTask(String task) {
-        this.task = task;
     }
 
     private void setBattery_left(int time_left) {

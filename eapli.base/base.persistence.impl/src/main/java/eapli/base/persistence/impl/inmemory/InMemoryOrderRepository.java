@@ -4,6 +4,8 @@ import eapli.base.ordermanagement.domain.Order;
 import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
+import java.util.ArrayList;
+
 public class InMemoryOrderRepository extends InMemoryDomainRepository<Order, String> implements OrderRepository {
     static {
         InMemoryInitializer.init();

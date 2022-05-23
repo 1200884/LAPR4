@@ -30,6 +30,8 @@ public class Order implements Serializable, DomainEntity<String>, AggregateRoot<
     private Price price;
     @Embedded
     private Shopping_Cart shopping_cart;
+    @Embedded
+    private OrderLevel orderLevel;
     /* @Embedded
      Carrier(?)*/
     private static final int IDLENGTH = 9;
@@ -45,13 +47,22 @@ public class Order implements Serializable, DomainEntity<String>, AggregateRoot<
 
     }
 
-    public Order(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
+    public Order(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method,OrderLevel orderLevel) {
         this.id = generateId();
         this.time = generateTime();
         this.address = address;
         this.shipmentMethod = shipmentMethod;
         this.payment_method = payment_method;
         this.shopping_cart=shopping_cart;
+        this.orderLevel=orderLevel;
+    }
+
+    public OrderLevel getOrderLevel() {
+        return orderLevel;
+    }
+
+    public void setOrderLevel(OrderLevel orderLevel) {
+        this.orderLevel = orderLevel;
     }
 
     public String getId() {

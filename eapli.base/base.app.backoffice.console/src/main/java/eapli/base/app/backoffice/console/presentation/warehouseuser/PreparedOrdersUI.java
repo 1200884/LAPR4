@@ -28,12 +28,12 @@ public class PreparedOrdersUI extends AbstractListUI<Order> {
 
     @Override
     protected String emptyMessage() {
-        return null;
+        return "No Dispatched orders yet.";
 
     }
 
     @Override
     public String headline() {
-        return null;
+        return "List Dispatched Orders";
     }
 }
