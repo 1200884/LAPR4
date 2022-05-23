@@ -1,37 +1,41 @@
 package eapli.base.app.backoffice.console.presentation.warehouseuser;
 
+import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Order;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
 
+import java.util.Collections;
+
 public class UnassignedOrdersUI  extends AbstractListUI<Order> {
     @Override
     protected Iterable<Order> elements() {
-        return null;
+            OrderServices orderServices =new OrderServices();
+            return orderServices.findUnassigned();
     }
 
     @Override
     protected Visitor<Order> elementPrinter() {
-        return null;
+        return new SystemOrderPrinter();
     }
 
     @Override
     protected String elementName() {
-        return null;
+        return "Unassigned Order";
     }
 
     @Override
     protected String listHeader() {
-        return null;
+        return String.format("#  %-10s%-20s%-30s%-30s","ID","TIME", "ADDRESS", "SHOPPING CART", "SHIPMENT METHOD", "PAYMENT METHOD","LEVEL");
     }
 
     @Override
     protected String emptyMessage() {
-        return null;
+        return "Fortunately, there's no unassigned orders. All existent orders are being treated by an AGV!";
     }
 
     @Override
     public String headline() {
-        return null;
+        return "List Unassigned Orders";
     }
 }

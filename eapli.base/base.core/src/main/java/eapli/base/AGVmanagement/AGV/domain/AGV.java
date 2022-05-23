@@ -46,6 +46,9 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     public ArrayList<String> getagvtasks() {
         return this.status.gettasks();
     }
+    public boolean hasOrder(String orderid){
+       return this.status.hasOrder(orderid);
+    }
 
     public void setId(int id) {
         this.id = id;

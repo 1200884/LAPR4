@@ -13,6 +13,7 @@ import java.util.*;
 public class Status implements ValueObject {
     private int battery_left;
     private Map<String, Integer> task;
+    private int tasktime;
 
     public Status() {
     }
@@ -20,6 +21,7 @@ public class Status implements ValueObject {
     public Status(int battery_left, String task, int tasktime) {
         this.battery_left = battery_left;
         addTask(task, tasktime);
+        this.tasktime=tasktime;
     }
 
     public ArrayList<String> gettasks() {
@@ -29,23 +31,42 @@ public class Status implements ValueObject {
         }
         return str;
     }
-    public int numberoftasks(){
+
+    public int getTasktime() {
+        return tasktime;
+    }
+
+    private void setTasktime(int tasktime) {
+        this.tasktime = tasktime;
+    }
+
+    public int numberoftasks() {
         return gettasks().size();
     }
 
-    public boolean hastasks(){
+    public boolean hastasks() {
         return !this.task.isEmpty();
     }
-    public void removelatesttask(){
+
+    public void removelatesttask() {
         ArrayList<String> str = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : task.entrySet()) {
             str.add(entry.getKey());
         }
         for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            if(Objects.equals(entry.getKey(), str.get(0))){
+            if (Objects.equals(entry.getKey(), str.get(0))) {
                 this.task.remove(entry);
             }
         }
+    }
+
+    public boolean hasOrder(String orderid) {
+        for (Map.Entry<String, Integer> entry : task.entrySet()) {
+            if (entry.getKey().equals(orderid)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getBattery_left() {
