@@ -37,17 +37,19 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     }
 
     public boolean hastasks() {
-       return this.status.hastasks();
+        return this.status.hastasks();
     }
-    public int numberoftasks(){
+
+    public int numberoftasks() {
         return this.status.numberoftasks();
     }
 
     public ArrayList<String> getagvtasks() {
         return this.status.gettasks();
     }
-    public boolean hasOrder(String orderid){
-       return this.status.hasOrder(orderid);
+
+    public boolean hasOrder(String orderid) {
+        return this.status.hasOrder(orderid);
     }
 
     public void setId(int id) {
@@ -58,8 +60,12 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         return id;
     }
 
-    public void addTasks(String task, int tasktime) {
+    public void addTask(String task, int tasktime) {
         this.status.addTask(task, tasktime);
+    }
+
+    public void removeTask(String task) {
+        this.status.removetask(task);
     }
 
     public double getMaximum_weight() {

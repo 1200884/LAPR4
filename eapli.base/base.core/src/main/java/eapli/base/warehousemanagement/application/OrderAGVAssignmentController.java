@@ -3,16 +3,11 @@ package eapli.base.warehousemanagement.application;
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
 import eapli.base.AGVmanagement.AGV.domain.Status;
-import eapli.base.AGVmanagement.AGV.domain.repository.AGVRepository;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Order;
 import eapli.base.ordermanagement.domain.OrderLevel;
-import eapli.base.ordermanagement.domain.Shipment_Method;
-import eapli.base.ordermanagement.repositories.OrderRepository;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -45,14 +40,16 @@ public class OrderAGVAssignmentController {
 
     public static String assigntasktoaagv(String orderid) {
         OrderServices orderServices=new OrderServices();
+        //If there isn't any AGV available (0 tasks), the order will be set to the AGV that has less tasks
         if (notasks().getShortDescription().equals("Empty")) {
             AGV agvwithlesstasks = agvwithlesstasks();
-            agvwithlesstasks.addTasks(orderid, randomizetasktime());
+            agvwithlesstasks.addTask(orderid, randomizetasktime());
            orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
             return agvwithlesstasks.toString();
+        //Otherwise, the AGV that will be responsible for the order will be one that has 0 tasks.
         } else {
             AGV agvwithnotasks = notasks();
-            agvwithnotasks.addTasks(orderid, randomizetasktime());
+            agvwithnotasks.addTask(orderid, randomizetasktime());
             orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
             return agvwithnotasks.toString();
         }
@@ -63,7 +60,7 @@ public class OrderAGVAssignmentController {
         OrderServices orderServices=new OrderServices();
         if (notasks().getShortDescription().equals("Empty")) {
             AGV agvwithlesstasks = agvwithlesstasks();
-            agvwithlesstasks.addTasks(orderid, randomizetasktime());
+            agvwithlesstasks.addTask(orderid, randomizetasktime());
             orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
             return agvwithlesstasks.toString();
         }

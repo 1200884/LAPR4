@@ -65,7 +65,7 @@ public class OrderServices {
         }
         return assigned;
     }
-
+    //Method that returns the orders that are assigned to an AGV, and have a task time=0, this is, the agv has finished the order so its ready to send to the customer.
     public Iterable<Order> findReadyAssigned() {
         ArrayList<Order> orders = (ArrayList<Order>) order_repository.findAll();
         ArrayList<AGV> agvs = (ArrayList<AGV>) agvRepository.findAll();

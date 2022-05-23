@@ -48,13 +48,9 @@ public class Status implements ValueObject {
         return !this.task.isEmpty();
     }
 
-    public void removelatesttask() {
-        ArrayList<String> str = new ArrayList<>();
+    public void removetask(String orderid) {
         for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            str.add(entry.getKey());
-        }
-        for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            if (Objects.equals(entry.getKey(), str.get(0))) {
+            if (entry.getKey().equals(orderid)) {
                 this.task.remove(entry);
             }
         }
