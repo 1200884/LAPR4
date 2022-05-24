@@ -1,6 +1,7 @@
 package eapli.base.AGVmanagement.AGV.application;
 
 import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
@@ -24,6 +25,9 @@ public class AGVController {
 
     public String createAVG(double maxWeight, String baseLocation, String shortDescription, int modelID) {
         Model model = fetchModel(modelID);
+        System.out.println("alfredo");
+        Status status=new Status(2,"null",0);
+        System.out.println("alberto");
         AGV agv = agvService.createAGV(maxWeight, baseLocation, shortDescription, model);
         return agv.toString();
     }

@@ -1,6 +1,7 @@
 package eapli.base.AGVmanagement.AGV.domain.repository;
 
 import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
 import eapli.base.brandmanagement.domain.Brand;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.modelmanagement.Model.domain.Model;
@@ -25,8 +26,8 @@ public class AGVPersist {
             }
         }
         agv.setModel(model);
-
         model.addAGV(agv);
+        agv.setStatus(new Status(2,"null",0));
         agvRepository.save(agv);
 
         return ((ArrayList<AGV>)agvRepository.findAll()).get(((ArrayList<AGV>)agvRepository.findAll()).size()-1);

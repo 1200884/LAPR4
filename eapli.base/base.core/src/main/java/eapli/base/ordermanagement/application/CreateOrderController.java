@@ -28,7 +28,7 @@ public class CreateOrderController {
         }
         Shipment_Method shipmentMethod=new Shipment_Method(Shipment_Method.ShipmentMethod.valueOf(shipment_method));
         Payment_Method paymentMethod= new Payment_Method(Payment_Method.PaymentMethod.valueOf(payment_method));
-        os.createOrder(customer.get().getShopping_cart(),shipmentMethod,paymentMethod);
+        os.createOrder("rua das 5 casas porta 6",customer.get().getShopping_cart(),shipmentMethod,paymentMethod);
         customer.get().getShopping_cart().getProduct_quantities().clear();
         return true;
     }

@@ -13,10 +13,14 @@ public class OrderLevel {
         ASSIGNED,
         UNASSIGNED
     }
+
     private Level level;
-    protected OrderLevel(){}
-    public OrderLevel(Level level){
-        this.level=level;
+
+    protected OrderLevel() {
+    }
+
+    public OrderLevel(Level level) {
+        this.level = level;
     }
 
     public Level getLevel() {

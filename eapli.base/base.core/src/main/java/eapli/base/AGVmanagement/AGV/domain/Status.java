@@ -1,10 +1,14 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
 
+import com.sun.istack.NotNull;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyColumn;
 
 import java.util.*;
 
@@ -12,10 +16,12 @@ import java.util.*;
 @Immutable
 public class Status implements ValueObject {
     private int battery_left;
-    private Map<String, Integer> task;
+    @ElementCollection
+    @MapKeyColumn (name="tasks")
+    private Map<String, Integer> task = new HashMap<>();
     private int tasktime;
 
-    public Status() {
+    protected Status() {
     }
 
     public Status(int battery_left, String task, int tasktime) {

@@ -13,12 +13,14 @@ public class AGVService {
 
     private static final AGVPersist agvPersist = new AGVPersist();
     private static final AGVRepository agvrepository = PersistenceContext.repositories().AGVs();
-    public AGV createAGV(double maxWeight, String baseLocation, String shortDescription, Model model) {
-        AGV agv = new AGV(maxWeight, baseLocation, shortDescription, model, new Status(2, null,3));
 
+    public AGV createAGV(double maxWeight, String baseLocation, String shortDescription, Model model) {
+        System.out.println("19");
+        AGV agv = new AGV(maxWeight, baseLocation, shortDescription, model,new Status(2,"null",2));
+        System.out.println("21");
         return agvPersist.createAGVPersist(agv);
     }
-    public static ArrayList<AGV> getAgvs(){
+   public static ArrayList<AGV> getAgvs(){
       return (ArrayList<AGV>) agvrepository.findAll();
     }
 }

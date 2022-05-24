@@ -28,9 +28,10 @@ public class OrderServices {
         return customer_repository.ofIdentity(vat);
     }
 
-    public void createOrder(Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
-        Orders order = new Orders("Rua",shopping_cart,shipmentMethod,payment_method);
+    public Orders createOrder(String address,Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
+        Orders order = new Orders(address,shopping_cart,shipmentMethod,payment_method);
         order_repository.save(order);
+        return order;
     }
 
     public boolean existsid(String id){

@@ -2,6 +2,7 @@ package eapli.base.infrastructure.bootstrapers;
 
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
 import eapli.base.modelmanagement.Model.application.ModelService;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.framework.domain.repositories.ConcurrencyException;
@@ -32,7 +33,10 @@ public class AGVBootstrapperBase {
     protected AGV registerAGV(final double maximum_weight, final String baseLocation, final String shortDescription, final Model model) {
         AGV agv = null;
         try {
+
+            System.out.println("37");
             agv = agvService.createAGV(maximum_weight, baseLocation, shortDescription, model);
+
         }catch (final IntegrityViolationException | ConcurrencyException e) {
             agv = null;
         }
