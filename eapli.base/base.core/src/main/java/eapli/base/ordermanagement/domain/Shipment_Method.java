@@ -4,14 +4,15 @@ import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
 @Immutable
 @Embeddable
 public class Shipment_Method implements ValueObject {
-    private int method_id;
-    enum ShipmentMethod {
+
+    public enum ShipmentMethod {
         EXPRESS,
         NORMAL
     }
@@ -21,21 +22,12 @@ public class Shipment_Method implements ValueObject {
     protected Shipment_Method() {
     }
 
-    public Shipment_Method(int method_id, ShipmentMethod shipmentMethod) {
-        this.method_id = method_id;
+    public Shipment_Method(ShipmentMethod shipmentMethod) {
         this.shipmentMethod = shipmentMethod;
-    }
-
-    public int getMethod_id() {
-        return method_id;
     }
 
     public ShipmentMethod getShipmentMethod() {
         return shipmentMethod;
-    }
-
-    private void setMethod_id(int method_id) {
-        this.method_id = method_id;
     }
 
     private void setShipmentMethod(ShipmentMethod shipmentMethod) {

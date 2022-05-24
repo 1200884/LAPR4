@@ -5,7 +5,7 @@ import eapli.base.AGVmanagement.AGV.domain.AGV;
 import eapli.base.AGVmanagement.AGV.domain.Status;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.ordermanagement.application.OrderServices;
-import eapli.base.ordermanagement.domain.Order;
+import eapli.base.ordermanagement.domain.Orders;
 import eapli.base.ordermanagement.domain.OrderLevel;
 
 import java.util.List;
@@ -20,11 +20,11 @@ public class OrderAGVAssignmentController {
 
     public static boolean isValidId(String answer) {
 
-        return Order.isValidId(answer);
+        return Orders.isValidId(answer);
     }
 
     public static boolean existsOrderId(String answer) {
-        return Order.existsId(answer);
+        return Orders.existsId(answer);
     }
 
     public static AGV notasks() {

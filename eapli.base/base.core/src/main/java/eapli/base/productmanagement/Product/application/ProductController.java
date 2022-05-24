@@ -11,6 +11,7 @@ import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductController {

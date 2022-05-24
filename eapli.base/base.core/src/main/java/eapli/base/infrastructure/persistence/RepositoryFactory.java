@@ -26,7 +26,6 @@ import eapli.base.brandmanagement.domain.repository.BrandRepository;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
-import eapli.base.ordermanagement.domain.Order;
 import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;

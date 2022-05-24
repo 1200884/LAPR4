@@ -1,10 +1,10 @@
 package eapli.base.ordermanagement.domain;
 
+import eapli.base.customermanagement.domain.model.Product_Quantities;
 import eapli.base.customermanagement.domain.model.Shopping_Cart;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntity;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import java.util.Random;
 
 
 @Entity
-public class Order implements Serializable, DomainEntity<String>, AggregateRoot<String> {
+public class Orders implements Serializable, DomainEntity<String>, AggregateRoot<String> {
 
     @Id
     private String id;
@@ -37,7 +37,7 @@ public class Order implements Serializable, DomainEntity<String>, AggregateRoot<
     private static final int IDLENGTH = 9;
 
     //9 digitos regra de negócio
-    protected Order() {
+    protected Orders() {
     }
 
     public String generateTime() {
@@ -47,14 +47,24 @@ public class Order implements Serializable, DomainEntity<String>, AggregateRoot<
 
     }
 
-    public Order(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method,OrderLevel orderLevel) {
+    public Orders(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
         this.id = generateId();
         this.time = generateTime();
         this.address = address;
         this.shipmentMethod = shipmentMethod;
         this.payment_method = payment_method;
         this.shopping_cart=shopping_cart;
-        this.orderLevel=orderLevel;
+        this.price=calculatePrice();
+        this.orderLevel=new OrderLevel(OrderLevel.Level.UNASSIGNED);
+    }
+
+    private Price calculatePrice() {
+        int final_price=0;
+        for(Product_Quantities product_quantities: shopping_cart.getProduct_quantities()){
+            final_price+=product_quantities.getProduct().getBase_price();
+        }
+        double final_price_with_tax=final_price+(final_price*0.23);
+        return new Price(final_price,final_price_with_tax);
     }
 
     public OrderLevel getOrderLevel() {
@@ -126,16 +136,9 @@ public class Order implements Serializable, DomainEntity<String>, AggregateRoot<
     }
 
     public static String generateId() {
-        boolean flag=false;
-        while(!flag) {
-            Random rnd = new Random();
-            int number = rnd.nextInt(999999999);
-            if (!existsId(String.valueOf(number))) {
-                flag=true;
-                return String.format("%06d", number);
-            }
-        }
-        return null;
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999999);
+        return String.valueOf(number);
     }
 
     public static boolean existsId(String id) {

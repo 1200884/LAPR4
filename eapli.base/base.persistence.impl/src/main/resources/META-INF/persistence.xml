@@ -21,6 +21,7 @@
     <class>eapli.base.warehousemanagement.Domain.Warehouse</class>
     <class>eapli.base.warehousemanagement.Domain.Aisle</class>
     <class>eapli.base.warehousemanagement.Domain.Rowe</class>
+    <class>eapli.base.ordermanagement.domain.Orders</class>
 
     <properties>
       <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/base"/>-->

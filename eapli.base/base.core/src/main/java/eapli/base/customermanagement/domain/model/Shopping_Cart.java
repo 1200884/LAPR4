@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class Shopping_Cart implements ValueObject {
     @GeneratedValue
-    private int ID;
+    private int shoppingCart_ID;
     @ElementCollection
     private Set<Product_Quantities> product_quantities = new HashSet<>();
 
@@ -23,7 +23,7 @@ public class Shopping_Cart implements ValueObject {
     }
 
     public Integer getID() {
-        return ID;
+        return shoppingCart_ID;
     }
 
     public Set<Product_Quantities> getProduct_quantities() {
@@ -43,11 +43,11 @@ public class Shopping_Cart implements ValueObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shopping_Cart that = (Shopping_Cart) o;
-        return ID == that.ID && Objects.equals(product_quantities, that.product_quantities);
+        return shoppingCart_ID == that.shoppingCart_ID && Objects.equals(product_quantities, that.product_quantities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID);
+        return Objects.hash(shoppingCart_ID);
     }
 }

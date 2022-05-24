@@ -13,15 +13,15 @@ class OrderTest {
         int correct1 = 987654321;
         String wrong = "Fernando Andrade";
         String wrong1 = "Cédric Soares";
-        assertTrue(Order.isValidId(String.valueOf(correct)));
-        assertTrue(Order.isValidId(String.valueOf(correct1)));
-        assertFalse(Order.isValidId(wrong));
-        assertFalse(Order.isValidId(wrong1));
+        assertTrue(Orders.isValidId(String.valueOf(correct)));
+        assertTrue(Orders.isValidId(String.valueOf(correct1)));
+        assertFalse(Orders.isValidId(wrong));
+        assertFalse(Orders.isValidId(wrong1));
     }
 
     @Test
     void generateId() {
-        String k = Order.generateId();
+        String k = Orders.generateId();
         assertNotNull(k);
         for (int i = 1; i < 100; i++) {
             assertNotEquals(k.length(), idlength + i);

@@ -1,20 +1,19 @@
 package eapli.base.app.backoffice.console.presentation.warehouseuser;
 
 import eapli.base.ordermanagement.application.OrderServices;
-import eapli.base.ordermanagement.domain.Order;
+import eapli.base.ordermanagement.domain.Orders;
 import eapli.framework.presentation.console.AbstractListUI;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.visitor.Visitor;
 
-public class PreparedOrdersUI extends AbstractListUI<Order> {
+public class PreparedOrdersUI extends AbstractListUI<Orders> {
     @Override
-    protected Iterable<Order> elements() {
+    protected Iterable<Orders> elements() {
         OrderServices orderServices = new OrderServices();
         return orderServices.findReadyAssigned();
     }
 
     @Override
-    protected Visitor<Order> elementPrinter() {
+    protected Visitor<Orders> elementPrinter() {
         return new SystemOrderPrinter();
     }
 

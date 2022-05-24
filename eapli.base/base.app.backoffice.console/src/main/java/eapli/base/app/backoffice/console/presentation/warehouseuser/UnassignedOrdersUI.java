@@ -1,21 +1,21 @@
 package eapli.base.app.backoffice.console.presentation.warehouseuser;
 
 import eapli.base.ordermanagement.application.OrderServices;
-import eapli.base.ordermanagement.domain.Order;
+import eapli.base.ordermanagement.domain.Orders;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
 
 import java.util.Collections;
 
-public class UnassignedOrdersUI  extends AbstractListUI<Order> {
+public class UnassignedOrdersUI  extends AbstractListUI<Orders> {
     @Override
-    protected Iterable<Order> elements() {
+    protected Iterable<Orders> elements() {
             OrderServices orderServices =new OrderServices();
             return orderServices.findUnassigned();
     }
 
     @Override
-    protected Visitor<Order> elementPrinter() {
+    protected Visitor<Orders> elementPrinter() {
         return new SystemOrderPrinter();
     }
 

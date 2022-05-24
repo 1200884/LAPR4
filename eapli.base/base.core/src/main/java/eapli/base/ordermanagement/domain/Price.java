@@ -10,12 +10,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Price implements ValueObject {
     private int baseprice;
-    private int basepricewithtax;
+    private double basepricewithtax;
 
     protected Price() {
     }
 
-    public Price(int baseprice, int basepricewithtax) {
+    public Price(int baseprice, double basepricewithtax) {
         this.baseprice = baseprice;
         this.basepricewithtax = basepricewithtax;
     }
@@ -24,7 +24,7 @@ public class Price implements ValueObject {
         return baseprice;
     }
 
-    public int getBasepricewithtax() {
+    public double getBasepricewithtax() {
         return basepricewithtax;
     }
 
@@ -32,7 +32,7 @@ public class Price implements ValueObject {
         this.baseprice = baseprice;
     }
 
-    private void setBasepricewithtax(int basepricewithtax) {
+    private void setBasepricewithtax(double basepricewithtax) {
         this.basepricewithtax = basepricewithtax;
     }
 }

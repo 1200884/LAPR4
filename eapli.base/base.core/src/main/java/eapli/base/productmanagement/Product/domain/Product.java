@@ -14,6 +14,8 @@ public class Product implements Serializable, AggregateRoot<Integer> {
     @Id
     @GeneratedValue
     private int id;
+    @Lob
+    @Column(name = "picByte", length = 1000)
     private byte[] photo;
     private double base_price;
     private String name;
