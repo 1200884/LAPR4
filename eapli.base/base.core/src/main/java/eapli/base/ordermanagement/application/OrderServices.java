@@ -52,7 +52,7 @@ public class OrderServices {
         ArrayList<Orders> orders = (ArrayList<Orders>) order_repository.findAll();
         ArrayList<Orders> dispatched = new ArrayList<>();
         for (Orders o : orders) {
-            if (o.getOrderLevel().equals(OrderLevel.Level.DISPATCHED)) {
+            if (o.getOrderLevel().getLevel().equals(OrderLevel.Level.DISPATCHED)) {
                 dispatched.add(o);
             }
         }
@@ -63,7 +63,7 @@ public class OrderServices {
         ArrayList<Orders> orders = (ArrayList<Orders>) order_repository.findAll();
         ArrayList<Orders> assigned = new ArrayList<>();
         for (Orders o : orders) {
-            if (o.getOrderLevel().equals(OrderLevel.Level.ASSIGNED)) {
+            if (o.getOrderLevel().getLevel().equals(OrderLevel.Level.ASSIGNED)) {
                 assigned.add(o);
             }
         }
@@ -77,7 +77,7 @@ public class OrderServices {
         ArrayList<Orders> assigned = new ArrayList<>();
         for (Orders o : orders) {
             for (AGV agv : agvs) {
-                if (o.getOrderLevel().equals(OrderLevel.Level.ASSIGNED)&&agv.hasOrder(o.getId())&& agv.getStatus().getTasktime()==0) {
+                if (o.getOrderLevel().getLevel().equals(OrderLevel.Level.ASSIGNED)&&agv.hasOrder(o.getId())) {
                     assigned.add(o);
                 }
             }
@@ -89,7 +89,7 @@ public class OrderServices {
         ArrayList<Orders> orders = (ArrayList<Orders>) order_repository.findAll();
         ArrayList<Orders> unassigned = new ArrayList<>();
         for (Orders o : orders) {
-            if (o.getOrderLevel().equals(OrderLevel.Level.UNASSIGNED)) {
+            if (o.getOrderLevel().getLevel().equals(OrderLevel.Level.UNASSIGNED)) {
                 unassigned.add(o);
             }
         }

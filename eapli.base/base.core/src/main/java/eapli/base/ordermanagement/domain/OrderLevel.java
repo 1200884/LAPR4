@@ -9,6 +9,7 @@ import javax.persistence.Embeddable;
 public class OrderLevel {
 
     public enum Level {
+        DELIVERED,
         DISPATCHED,
         ASSIGNED,
         UNASSIGNED

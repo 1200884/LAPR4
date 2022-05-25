@@ -26,7 +26,7 @@ public class AGVController {
     public String createAVG(double maxWeight, String baseLocation, String shortDescription, int modelID) {
         Model model = fetchModel(modelID);
         System.out.println("alfredo");
-        Status status=new Status(2,"null",0);
+        Status status=new Status(2,"null");
         System.out.println("alberto");
         AGV agv = agvService.createAGV(maxWeight, baseLocation, shortDescription, model);
         return agv.toString();

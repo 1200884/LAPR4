@@ -27,7 +27,7 @@ public class AGVPersist {
         }
         agv.setModel(model);
         model.addAGV(agv);
-        agv.setStatus(new Status(2,"null",0));
+        agv.setStatus(new Status(2,"null"));
         agvRepository.save(agv);
 
         return ((ArrayList<AGV>)agvRepository.findAll()).get(((ArrayList<AGV>)agvRepository.findAll()).size()-1);
