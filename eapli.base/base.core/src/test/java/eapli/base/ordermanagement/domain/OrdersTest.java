@@ -9,18 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrdersTest {
 
     @Test
-    void generateTime() {
-    }
-
-    @Test
-    void isValidId() {
-
-    }
-
-    @Test
-    void generateId() {
+    void ensureIdHas9Letters() {
         Orders order = new Orders("Rua das Flores", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        String id=order.getId();
-        Assert.assertEquals(order.getId(),id);
+        Assert.assertTrue(order.getId().length()==9);
     }
+
+    @Test
+    void ensureMustHaveAddress() {
+        assertThrows(IllegalArgumentException.class, () -> new Orders(null, new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD)));
+    }
+
+    @Test
+    void ensureMustHaveShoppingCart() {
+        assertThrows(IllegalArgumentException.class, () -> new Orders("Rua das Flores", null, new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD)));
+    }
+
 }

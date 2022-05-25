@@ -3,6 +3,7 @@ package eapli.base.productmanagement.Product.domain;
 import eapli.base.brandmanagement.domain.Brand;
 import eapli.base.categorymanagement.domain.Category;
 import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.validations.Preconditions;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class Product implements Serializable, AggregateRoot<Integer> {
     private Brand brand;
 
     public Product(String name, byte[] photo, double base_price, Description description, Category category, Barcode barcode, Brand brand) {
+        Preconditions.ensure(base_price>0);
         this.name = name;
         this.photo = photo;
         this.base_price = base_price;

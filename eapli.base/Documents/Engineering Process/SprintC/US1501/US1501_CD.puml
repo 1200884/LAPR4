@@ -1,0 +1,44 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+AddProductToCartAction -->ListProductsUI
+AddProductToCartAction -->AddProductToCartUI
+AddProductToCartUI --> AddProductToCartController
+AddProductToCartController --> OrderRepository
+OrderRepository --> JpaOrderRepository
+OrderRepository --> InMemoryOrderRepository
+
+class ListProductsUI{
+ +doShow()
+ +headLine()
+}
+
+class AddProductToCartUI{
+ +doShow()
+ +repeatLoop()
+ +chooseProduct()
+ +chooseQuantity()
+ +chooseCustomer()
+ +headLine()
+}
+
+class AddProductToCartController{
+-ListProductService
++validateNameOfProduct(String name)
++addProduct(String name, int quantity)
++validateCustomer(int vat)
++saveCart()
+}
+
+interface OrderRepository{
++findByPhoneNumber(Integer id)
+}
+
+class JpaOrderRepository{
++findByPhoneNumber(Integer id)
+}
+
+class InMemoryOrderRepository{
++findByPhoneNumber(Integer id)
+}
+@enduml

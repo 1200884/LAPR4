@@ -5,6 +5,7 @@ import eapli.base.customermanagement.domain.model.Shopping_Cart;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntity;
+import eapli.framework.validations.Preconditions;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -48,7 +49,10 @@ public class Orders implements Serializable, DomainEntity<String>, AggregateRoot
     }
 
     public Orders(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
+        Preconditions.ensure(shopping_cart!=null);
+        Preconditions.ensure(address!=null);
         this.id = generateId();
+        Preconditions.ensure(this.id.length()==9);
         this.time = generateTime();
         this.address = address;
         this.shipmentMethod = shipmentMethod;
