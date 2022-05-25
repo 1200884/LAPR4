@@ -17,33 +17,19 @@ import java.util.*;
 public class Status implements ValueObject {
     private int battery_left;
     @ElementCollection
-    @MapKeyColumn (name="tasks")
-    private Map<String, Integer> task = new HashMap<>();
-    private int tasktime;
+    private Set<String> task=new HashSet<>();
 
     protected Status() {
     }
 
-    public Status(int battery_left, String task, int tasktime) {
+    public Status(int battery_left, String task) {
         this.battery_left = battery_left;
-        addTask(task, tasktime);
-        this.tasktime=tasktime;
+        addTask(task);
     }
 
     public ArrayList<String> gettasks() {
-        ArrayList<String> str = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            str.add(entry.getKey());
-        }
-        return str;
-    }
 
-    public int getTasktime() {
-        return tasktime;
-    }
-
-    private void setTasktime(int tasktime) {
-        this.tasktime = tasktime;
+        return (ArrayList<String>) this.task;
     }
 
     public int numberoftasks() {
@@ -55,16 +41,12 @@ public class Status implements ValueObject {
     }
 
     public void removetask(String orderid) {
-        for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            if (entry.getKey().equals(orderid)) {
-                this.task.remove(entry);
-            }
-        }
+        this.task.removeIf(order -> order.equals(orderid));
     }
 
     public boolean hasOrder(String orderid) {
-        for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            if (entry.getKey().equals(orderid)) {
+        for (String order:this.task) {
+            if (order.equals(orderid)) {
                 return true;
             }
         }
@@ -75,8 +57,8 @@ public class Status implements ValueObject {
         return battery_left;
     }
 
-    public void addTask(String task, int tasktime) {
-        this.task.put(task, tasktime);
+    public void addTask(String task) {
+        this.task.add(task);
     }
 
     private void setTask(String task) {

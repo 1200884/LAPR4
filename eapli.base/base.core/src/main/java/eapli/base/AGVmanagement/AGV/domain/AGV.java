@@ -60,8 +60,8 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         return id;
     }
 
-    public void addTask(String task, int tasktime) {
-        this.status.addTask(task, tasktime);
+    public void addTask(String task) {
+        this.status.addTask(task);
     }
 
     public void removeTask(String task) {

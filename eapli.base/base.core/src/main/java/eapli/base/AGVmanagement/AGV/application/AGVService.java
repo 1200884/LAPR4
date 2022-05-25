@@ -16,7 +16,7 @@ public class AGVService {
 
     public AGV createAGV(double maxWeight, String baseLocation, String shortDescription, Model model) {
         System.out.println("19");
-        AGV agv = new AGV(maxWeight, baseLocation, shortDescription, model,new Status(2,"null",2));
+        AGV agv = new AGV(maxWeight, baseLocation, shortDescription, model,new Status(2,"null"));
         System.out.println("21");
         return agvPersist.createAGVPersist(agv);
     }

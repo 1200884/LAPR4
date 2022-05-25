@@ -23,7 +23,7 @@ public class OrderBootstrapper extends OrderBootstrapperBase implements Action {
     }
 
     private Orders createOrder(final String address, final Shopping_Cart shopping_cart, final Shipment_Method shipmentMethod, final Payment_Method payment_method) {
-        registerOrder(address, shopping_cart, shipmentMethod, payment_method);
-        return null;
+        return registerOrder(address, shopping_cart, shipmentMethod, payment_method);
+
     }
 }

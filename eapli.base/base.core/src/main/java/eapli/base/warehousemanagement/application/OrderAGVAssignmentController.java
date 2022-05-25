@@ -29,7 +29,7 @@ public class OrderAGVAssignmentController {
 
     public static AGV notasks() {
         List<AGV> agvs = AGVService.getAgvs();
-        AGV emptyagv = new AGV(1, "Empty", "Empty", new Model("Empty", "Empty"), new Status(2, "Empty", 0));
+        AGV emptyagv = new AGV(1, "Empty", "Empty", new Model("Empty", "Empty"), new Status(2, "Empty"));
         for (AGV a : agvs) {
             if (!(a.hastasks())) {
                 return a;
@@ -43,13 +43,13 @@ public class OrderAGVAssignmentController {
         //If there isn't any AGV available (0 tasks), the order will be set to the AGV that has less tasks
         if (notasks().getShortDescription().equals("Empty")) {
             AGV agvwithlesstasks = agvwithlesstasks();
-            agvwithlesstasks.addTask(orderid, randomizetasktime());
+            agvwithlesstasks.addTask(orderid);
            orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
             return agvwithlesstasks.toString();
         //Otherwise, the AGV that will be responsible for the order will be one that has 0 tasks.
         } else {
             AGV agvwithnotasks = notasks();
-            agvwithnotasks.addTask(orderid, randomizetasktime());
+            agvwithnotasks.addTask(orderid);
             orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
             return agvwithnotasks.toString();
         }
@@ -60,7 +60,7 @@ public class OrderAGVAssignmentController {
         OrderServices orderServices=new OrderServices();
         if (notasks().getShortDescription().equals("Empty")) {
             AGV agvwithlesstasks = agvwithlesstasks();
-            agvwithlesstasks.addTask(orderid, randomizetasktime());
+            agvwithlesstasks.addTask(orderid);
             orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
             return agvwithlesstasks.toString();
         }
