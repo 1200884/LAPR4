@@ -40,7 +40,7 @@ public class Orders implements Serializable, DomainEntity<String>, AggregateRoot
     protected Orders() {
     }
 
-    public String generateTime() {
+    private String generateTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
