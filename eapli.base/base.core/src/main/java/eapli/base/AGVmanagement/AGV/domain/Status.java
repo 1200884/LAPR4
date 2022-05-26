@@ -1,14 +1,11 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
 
-import com.sun.istack.NotNull;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
-import javax.persistence.MapKey;
-import javax.persistence.MapKeyColumn;
 
 import java.util.*;
 
@@ -27,9 +24,9 @@ public class Status implements ValueObject {
         addTask(task);
     }
 
-    public ArrayList<String> gettasks() {
+    public Set<String> gettasks() {
 
-        return (ArrayList<String>) this.task;
+        return this.task;
     }
 
     public int numberoftasks() {

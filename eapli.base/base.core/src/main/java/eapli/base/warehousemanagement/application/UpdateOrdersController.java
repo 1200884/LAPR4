@@ -25,6 +25,7 @@ public class UpdateOrdersController {
                 o.setOrderLevel(dispatched);
                 if(!(agvresponsible.getShortDescription().equals("AGV responsible for ready tasks"))){
                 agvresponsible.removeTask(orderid);}
+                orderServices.updateOrders(o);
                 return true;
             }
         }

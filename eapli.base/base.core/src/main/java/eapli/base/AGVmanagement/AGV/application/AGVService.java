@@ -15,6 +15,7 @@ public class AGVService {
     private static final AGVRepository agvrepository = PersistenceContext.repositories().AGVs();
 
     public AGV createAGV(double maxWeight, String baseLocation, String shortDescription, Model model) {
+        ArrayList emptylist=new ArrayList();
         System.out.println("19");
         AGV agv = new AGV(maxWeight, baseLocation, shortDescription, model,new Status(2,"null"));
         System.out.println("21");

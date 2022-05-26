@@ -33,4 +33,9 @@ public class Shipment_Method implements ValueObject {
     private void setShipmentMethod(ShipmentMethod shipmentMethod) {
         this.shipmentMethod = shipmentMethod;
     }
+
+    @Override
+    public String toString() {
+        return ""+shipmentMethod;
+    }
 }

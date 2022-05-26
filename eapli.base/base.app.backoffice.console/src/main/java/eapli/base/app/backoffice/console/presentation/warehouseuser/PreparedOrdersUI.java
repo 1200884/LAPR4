@@ -9,7 +9,7 @@ public class PreparedOrdersUI extends AbstractListUI<Orders> {
     @Override
     protected Iterable<Orders> elements() {
         OrderServices orderServices = new OrderServices();
-        return orderServices.findReadyAssigned();
+        return orderServices.findAssigned();
     }
 
     @Override
@@ -29,12 +29,12 @@ public class PreparedOrdersUI extends AbstractListUI<Orders> {
 
     @Override
     protected String emptyMessage() {
-        return "No Dispatched orders yet.";
+        return "No orders to dispatch yet.";
 
     }
 
     @Override
     public String headline() {
-        return "List Dispatched Orders";
+        return "List of orders to dispatch";
     }
 }

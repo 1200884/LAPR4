@@ -31,4 +31,9 @@ public class OrderLevel {
     private void setLevel(Level level) {
         this.level = level;
     }
+
+    @Override
+    public String toString() {
+        return "Level is"+level;
+    }
 }

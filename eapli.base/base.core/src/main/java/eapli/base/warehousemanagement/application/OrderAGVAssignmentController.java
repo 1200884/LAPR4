@@ -31,7 +31,7 @@ public class OrderAGVAssignmentController {
         List<AGV> agvs = AGVService.getAgvs();
         AGV emptyagv = new AGV(1, "Empty", "Empty", new Model("Empty", "Empty"), new Status(2, "Empty"));
         for (AGV a : agvs) {
-            if (!(a.hastasks())) {
+            if (a.getagvtasks().size() == 1) {
                 return a;
             }
         }
@@ -39,32 +39,59 @@ public class OrderAGVAssignmentController {
     }
 
     public static String assigntasktoaagv(String orderid) {
-        OrderServices orderServices=new OrderServices();
-        //If there isn't any AGV available (0 tasks), the order will be set to the AGV that has less tasks
-        if (notasks().getShortDescription().equals("Empty")) {
-            AGV agvwithlesstasks = agvwithlesstasks();
-            agvwithlesstasks.addTask(orderid);
-           orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
-            return agvwithlesstasks.toString();
-        //Otherwise, the AGV that will be responsible for the order will be one that has 0 tasks.
+        OrderServices orderServices = new OrderServices();
+        OrderLevel orderLevel = new OrderLevel(OrderLevel.Level.ASSIGNED);
+        if (orderServices.findbyid(orderid).getOrderLevel().getLevel().equals(OrderLevel.Level.UNASSIGNED)) {
+            //If there isn't any AGV available (0 tasks), the order will be set to the AGV that has less tasks
+            if (notasks().getShortDescription().equals("Empty")) {
+                AGV agvwithlesstasks = agvwithlesstasks();
+                if (agvwithlesstasks.hasOrder(orderid)) {
+                    for (AGV agv : AGVService.getAgvs()) {
+                        if (!agv.equals(agvwithlesstasks)) {
+                            agvwithlesstasks = agv;
+                            break;
+                        }
+                    }
+                }
+                agvwithlesstasks.addTask(orderid);
+                System.out.println("Order certa" + orderServices.findbyid(orderid).getId());
+                System.out.println("Order level before" + orderServices.findbyid(orderid).getOrderLevel());
+                orderServices.findbyid(orderid).setOrderLevel(orderLevel);
+                orderServices.updateOrders(orderServices.findbyid(orderid));
+                System.out.println("Order level after" + orderServices.findbyid(orderid).getOrderLevel());
+                return agvwithlesstasks.toString();
+                //Otherwise, the AGV that will be responsible for the order will be one that has 0 tasks.
+            } else {
+                AGV agvwithnotasks = notasks();
+                if (agvwithnotasks.hasOrder(orderid)) {
+                    for (AGV agv : AGVService.getAgvs()) {
+                        if (!agv.equals(agvwithnotasks)) {
+                            agvwithnotasks = agv;
+                            break;
+                        }
+                    }
+                }
+                agvwithnotasks.addTask(orderid);
+                System.out.println("Order level before" + orderServices.findbyid(orderid).getOrderLevel());
+                orderServices.findbyid(orderid).setOrderLevel(orderLevel);
+                orderServices.updateOrders(orderServices.findbyid(orderid));
+                System.out.println("Order level after" + orderServices.findbyid(orderid).getOrderLevel());
+                return agvwithnotasks.toString();
+            }
         } else {
-            AGV agvwithnotasks = notasks();
-            agvwithnotasks.addTask(orderid);
-            orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
-            return agvwithnotasks.toString();
+            return "It is impossible to assign your order as it already is in a hihgher stage";
         }
-
     }
 
     public static String assigntaskimmediatlytoagv(String orderid) {
-        OrderServices orderServices=new OrderServices();
+        OrderServices orderServices = new OrderServices();
         if (notasks().getShortDescription().equals("Empty")) {
             AGV agvwithlesstasks = agvwithlesstasks();
             agvwithlesstasks.addTask(orderid);
             orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
+            orderServices.updateOrders(orderServices.findbyid(orderid));
             return agvwithlesstasks.toString();
-        }
-        else return "Null";
+        } else return "Null";
     }
 
     public static AGV agvwithlesstasks() {
