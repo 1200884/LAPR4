@@ -48,7 +48,7 @@ public class AGVBootstrapperBase {
         return warehouse;
     }
 
-    protected AGV registerAGV(final double maximum_weight, final AGVDocks baseLocation, final String shortDescription, final Model model) {
+    protected AGV registerAGV(final double maximum_weight, final String baseLocation, final String shortDescription, final Model model) {
         AGV agv = null;
         try {
 

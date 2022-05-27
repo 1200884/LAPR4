@@ -28,7 +28,7 @@ public class AGVBootstrapper extends AGVBootstrapperBase implements Action {
         createAGV(80,"Espanha","AGV espanhol",model,status);
         createAGV(90,"Setubal","AGV de Setúbal", model,status);
         System.out.println(AGVService.getAgvs());
-       return true;
+        return true;
     }
 
     private Model createModel(final String name, final String description) {

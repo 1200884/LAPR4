@@ -16,9 +16,8 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     private int id;
     double maximum_weight;
     private String shortDescription;
+    private String baseLocation;
 
-    @Embedded
-    private AGVDocks baseLocation;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Model model;
     @Embedded
@@ -27,7 +26,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     protected AGV() {
     }
 
-    public AGV(double maximum_weight, AGVDocks baseLocation, String shortDescription, Model model, Status status) {
+    public AGV(double maximum_weight, String baseLocation, String shortDescription, Model model, Status status) {
         this.maximum_weight = maximum_weight;
         this.shortDescription = shortDescription;
         this.model = model;
@@ -87,11 +86,11 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         this.status = status;
     }
 
-    public void setBaseLocation(AGVDocks baseLocation) {
+    public void setBaseLocation(String baseLocation) {
         this.baseLocation = baseLocation;
     }
 
-    public AGVDocks getBaseLocation() {
+    public String getBaseLocation() {
         return baseLocation;
     }
 
