@@ -1,13 +1,21 @@
 package eapli.base.connectionmanagement.application;
 
-import eapli.base.connectionmanagement.domain.model.AGVClientConnection;
+import eapli.base.connectionmanagement.domain.model.ClientConnection;
 
 public class ConnectionController {
 
-    private static final AGVClientConnection CLIENT_CONNECTION = new AGVClientConnection();
+    private static final ClientConnection CLIENT_CONNECTION = new ClientConnection();
 
-    public boolean establishAGVConnection(){
-        return CLIENT_CONNECTION.establishConnection();
+    public boolean establishAGVTwinConnection(){
+        return CLIENT_CONNECTION.establishConnection(1);
+    }
+
+    public boolean establishAGVManagerConnection(){
+        return CLIENT_CONNECTION.establishConnection(2);
+    }
+
+    public boolean establishOrdersConnection(){
+        return CLIENT_CONNECTION.establishConnection(3);
     }
 
     public boolean sendMessage(String message) {

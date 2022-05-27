@@ -3,18 +3,32 @@ package eapli.base.connectionmanagement.domain.model;
 import java.io.*;
 import java.net.Socket;
 
-public class AGVClientConnection {
+public class ClientConnection {
 
-    private static final String AGV_TWIN_HOST = "10.9.22.214";
-    private static final int PORT = 8000;
+    private static final String HOST = "10.9.22.214";
+    private static final int AGV_TWIN_PORT = 123;
+    private static final int AGV_MANAGER_PORT = 124;
+    private static final int ORDERS_PORT = 125;
 
     private static Socket socket;
     private static DataOutputStream sOut;
     private static DataInputStream sIn;
 
-    public boolean establishConnection() {
+    public boolean establishConnection(int num) {
+       switch (num) {
+           case 1:
+               return establishConnection(HOST, AGV_TWIN_PORT);
+           case 2:
+               return establishConnection(HOST, AGV_MANAGER_PORT);
+           case 3:
+               return establishConnection(HOST, ORDERS_PORT);
+           default:
+               return false;
+       }
+    }
+    private boolean establishConnection(String host, int port) {
         try {
-            socket = new Socket(AGV_TWIN_HOST, PORT);
+            socket = new Socket(host, port);
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
         }catch (Exception e) {

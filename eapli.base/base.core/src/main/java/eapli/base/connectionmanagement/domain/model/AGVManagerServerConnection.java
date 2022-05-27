@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class AGVDigitalTwinServerConnection {
+public class AGVManagerServerConnection {
     static Socket sock;
 
     public static void main(String args[]) throws Exception {
 
-        ServerSocket serverSocket = new ServerSocket(123);
+        ServerSocket serverSocket = new ServerSocket(124);
         while(true) {
             try {
                 sock = serverSocket.accept();

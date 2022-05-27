@@ -4,14 +4,14 @@ import eapli.base.connectionmanagement.application.ConnectionController;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
-public class ConnectDigitalTwinUI extends AbstractUI {
+public class ConnectAGVManagerUI extends AbstractUI {
 
     private static final ConnectionController CONNECTION_CONTROLLER = new ConnectionController();
 
     @Override
     protected boolean doShow() {
-        print("Establishing connection with the AGV Manager server");
-        if (CONNECTION_CONTROLLER.establishAGVTwinConnection()) {
+        print("Establishing connection with the AGV Digital Twin server");
+        if (CONNECTION_CONTROLLER.establishAGVManagerConnection()) {
             print("Connection established with success!");
         }else {
             print("There was a problem with the connection to the server");
@@ -42,7 +42,7 @@ public class ConnectDigitalTwinUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Creating Connection to AGV Digital Twin";
+        return "Creating Connection to AGV Manager";
     }
 
     private void print(String string) {
