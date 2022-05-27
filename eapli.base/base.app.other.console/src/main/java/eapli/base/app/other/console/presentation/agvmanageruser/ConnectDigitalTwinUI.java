@@ -16,10 +16,28 @@ public class ConnectDigitalTwinUI extends AbstractUI {
         }else {
             print("There was a problem with the connection to the server");
         }
-        String message;
+        byte version, code;
+        String message, finalMessage = "";
         do {
+            do {
+                try {
+                    version = Byte.parseByte(Console.readLine("Please insert the version of the message you wish to send to the server:"));
+                    break;
+                } catch (Exception e) {
+                    print("The version you inserted is not a valid one");
+                }
+            }while (true);
+            do {
+                try {
+                    code = Byte.parseByte(Console.readLine("Please insert the code of the message you wish to send to the server:"));
+                    break;
+                } catch (Exception e) {
+                    print("The version you inserted is not a valid one");
+                }
+            }while (true);
             message = Console.readLine("Please insert the message you wish to send to the server:");
-            if (!CONNECTION_CONTROLLER.sendMessage(message)) {
+            finalMessage += version + ";" + code + ";" + message.length() + ";" + message;
+            if (!CONNECTION_CONTROLLER.sendMessage(finalMessage)) {
                 print("There was a problem sending your message to the server");
                 CONNECTION_CONTROLLER.close();
                 break;
@@ -30,7 +48,7 @@ public class ConnectDigitalTwinUI extends AbstractUI {
                 CONNECTION_CONTROLLER.close();
                 break;
             }
-            if (answer.equals("")) {
+            if (code == 2) {
                 print("The connection will be ended now!");
                 CONNECTION_CONTROLLER.close();
                 break;

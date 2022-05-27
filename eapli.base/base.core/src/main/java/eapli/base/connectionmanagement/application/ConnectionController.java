@@ -4,7 +4,7 @@ import eapli.base.connectionmanagement.domain.model.ClientConnection;
 
 public class ConnectionController {
 
-    private static final ClientConnection CLIENT_CONNECTION = new ClientConnection();
+    private final ClientConnection CLIENT_CONNECTION = new ClientConnection();
 
     public boolean establishAGVTwinConnection(){
         return CLIENT_CONNECTION.establishConnection(1);

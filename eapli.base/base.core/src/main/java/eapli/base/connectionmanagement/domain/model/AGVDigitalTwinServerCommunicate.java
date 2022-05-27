@@ -1,5 +1,10 @@
 package eapli.base.connectionmanagement.domain.model;
 
+import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
+import eapli.base.AGVmanagement.AGV.domain.repository.AGVRepository;
+import eapli.base.infrastructure.persistence.PersistenceContext;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,6 +13,9 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 public class AGVDigitalTwinServerCommunicate implements Runnable{
+
+    private static final AGVRepository agvrepository = PersistenceContext.repositories().AGVs();
+
     private Socket socket;
     private DataOutputStream sOut;
     private DataInputStream sIn;
@@ -55,14 +63,29 @@ public class AGVDigitalTwinServerCommunicate implements Runnable{
                             break;
                         case 3:
                             if (s != null){
-                                String[] data = s.split(";", -2);
+                                String[] data = s.split("/", -2);
                                 String[] AGVID = data[0].split("=", -2);
                                 String[] status = data[1].split("=", -2);
 
+                                outerLoop:
+                                for (AGV agv : agvrepository.findAll()) {
+                                    if (agv.getId() == Integer.parseInt(AGVID[1])) {
+                                        switch (status[1]) {
+                                            case "Available":
+                                                agv.getStatus().setAvailability(Status.Availability.AVAILABLE);
+                                                break outerLoop;
+                                            case "Working":
+                                                agv.getStatus().setAvailability(Status.Availability.WORKING);
+                                                break outerLoop;
+                                            default:
+                                                System.out.println("This status does not exist");
+                                                break outerLoop;
+                                        }
+                                    }
+                                }
                             }else {
                                 System.out.println("The data you sent is empty");
                             }
-                            //AGV a = irbuscar.updatestatus
                         default:
                             System.out.println("There is no functionality for this code");
                     }

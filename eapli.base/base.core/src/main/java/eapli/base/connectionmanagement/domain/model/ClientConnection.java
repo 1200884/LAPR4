@@ -2,10 +2,11 @@ package eapli.base.connectionmanagement.domain.model;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class ClientConnection {
 
-    private static final String HOST = "10.9.22.214";
+    private static final String HOST = "192.168.56.1";
     private static final int AGV_TWIN_PORT = 123;
     private static final int AGV_MANAGER_PORT = 124;
     private static final int ORDERS_PORT = 125;
@@ -47,13 +48,26 @@ public class ClientConnection {
     }
 
     public String receiveMessage() {
-        String message;
+        String string = "", prov = "";
+        byte[] message = new byte[255];
         try {
-            message = String.valueOf(sIn.read());
+            sIn.read(message);
+            string += message[0] + ";";
+            string += message[1] + ";";
+            string += message[2] + ";";
+            string += message[3] + ";";
+            int finalLength;
+            if (message[2] != 0 || message[3] != 0) {
+                finalLength = message[2] + (256 * message[3]);
+                byte[] dataArray = new byte[finalLength];
+                System.arraycopy(message, 4, dataArray, 0, finalLength);
+                prov = new String(dataArray, StandardCharsets.UTF_8);
+            }
+            string += prov;
         }catch (Exception ignored) {
             return null;
         }
-        return message;
+        return string;
     }
 
     public boolean close() {
