@@ -51,7 +51,7 @@ public final class OtherApp {
                 new BasePasswordPolicy(), new PlainTextEncoder());
 
         // login and go to main menu
-        if (new LoginAction(BaseRoles.CASHIER).execute()) {
+        if (new LoginAction(BaseRoles.AGV_MANAGER).execute()) {
             final MainMenu menu = new MainMenu();
             menu.mainLoop();
         }

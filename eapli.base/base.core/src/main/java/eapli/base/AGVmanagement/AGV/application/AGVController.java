@@ -4,11 +4,14 @@ import eapli.base.AGVmanagement.AGV.domain.AGV;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
+import eapli.base.warehousemanagement.Domain.AGVDocks;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
 import eapli.base.warehousemanagement.Domain.Warehouse;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AGVController {
 
@@ -22,9 +25,12 @@ public class AGVController {
 
     private static List<Warehouse> warehouseList = new ArrayList<>();
 
-    public String createAVG(double maxWeight, String baseLocation, String shortDescription, int modelID) {
+    private static Set<AGVDocks> docks = new HashSet<>();
+
+    public String createAVG(double maxWeight, int baseLocation, String shortDescription, int modelID) {
         Model model = fetchModel(modelID);
-        AGV agv = agvService.createAGV(maxWeight, baseLocation, shortDescription, model);
+        AGVDocks agvDocks = fetchDocks(baseLocation);
+        AGV agv = agvService.createAGV(maxWeight, agvDocks, shortDescription, model);
         return agv.toString();
     }
 
@@ -68,6 +74,28 @@ public class AGVController {
         StringBuilder string = new StringBuilder();
         for (Warehouse warehouse : warehouseList) {
             string.append(warehouse.toString()).append("\n");
+        }
+        return string.toString();
+    }
+
+    private AGVDocks fetchDocks(int dockNum) {
+        for (AGVDocks agvDocks : docks) {
+            if (agvDocks.getId() == dockNum) return agvDocks;
+        }
+        return null;
+    }
+
+    public boolean verifyDock(int dockNum) {
+        return fetchDocks(dockNum) != null;
+    }
+
+    public String findDocks(int warehouseNum) {
+        Warehouse warehouse = fetchWarehouse(warehouseNum);
+        docks.clear();
+        docks = warehouse.getDocks();
+        StringBuilder string = new StringBuilder();
+        for (AGVDocks dock : docks) {
+            string.append(dock.toString()).append("\n");
         }
         return string.toString();
     }

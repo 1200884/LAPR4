@@ -12,7 +12,10 @@ public class CreateAGVUI extends AbstractUI {
     protected boolean doShow() {
         print("Please, for now, introduce the name and the description for the AGV:");
         double masWeight = Console.readDouble("First the max weight the AGV can carry:");
-        String baseLocation = Console.readLine("Now the base location for the AGV:");
+        print(agvController.findWarehouses());
+        int warehouseNum = Console.readInteger("From this list of warehouses, chose the warehouse where the AGV will work:");
+        print(agvController.findDocks(warehouseNum));
+        int dockNum = Console.readInteger("And from this list of docks in the warehouse, chose the one where the AGV will be stationed:");
         String description = Console.readLine("Now a short description for the AGV:");
         print(agvController.findModels());
         int modelNum = Console.readInteger("Lastly, from the list above, select the ID of the model for the AGV:");
@@ -20,7 +23,7 @@ public class CreateAGVUI extends AbstractUI {
             modelNum = Console.readInteger("The number inserted did not match any of the models, please insert a new one:");
         }
         print("Here is the created AGV:");
-        print(agvController.createAVG(masWeight, baseLocation, description, modelNum));
+        print(agvController.createAVG(masWeight, dockNum, description, modelNum));
         return false;
     }
 

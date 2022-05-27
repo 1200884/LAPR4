@@ -1,6 +1,7 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
 import eapli.base.modelmanagement.Model.domain.Model;
+import eapli.base.warehousemanagement.Domain.AGVDocks;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
@@ -14,8 +15,9 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     private int id;
     double maximum_weight;
     private String shortDescription;
-    private String baseLocation;
 
+    @Embedded
+    private AGVDocks baseLocation;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Model model;
     @Embedded
@@ -24,7 +26,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     protected AGV() {
     }
 
-    public AGV(double maximum_weight, String baseLocation, String shortDescription, Model model, Status status) {
+    public AGV(double maximum_weight, AGVDocks baseLocation, String shortDescription, Model model, Status status) {
         this.maximum_weight = maximum_weight;
         this.shortDescription = shortDescription;
         this.model = model;
@@ -84,8 +86,12 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         this.status = status;
     }
 
-    public void setBaseLocation(String baseLocation) {
+    public void setBaseLocation(AGVDocks baseLocation) {
         this.baseLocation = baseLocation;
+    }
+
+    public AGVDocks getBaseLocation() {
+        return baseLocation;
     }
 
     public String getShortDescription() {

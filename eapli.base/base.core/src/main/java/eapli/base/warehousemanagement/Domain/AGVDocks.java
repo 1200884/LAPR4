@@ -98,9 +98,6 @@ public class AGVDocks implements ValueObject {
 
     @Override
     public String toString() {
-        return "AGVDocks{" +
-                "id=" + id +
-                ", accessibility='" + accessibility + '\'' +
-                '}';
+        return "ID: " + id + "\nAccessibility: " + accessibility;
     }
 }

@@ -7,6 +7,7 @@ import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Order;
 import eapli.base.ordermanagement.domain.OrderLevel;
+import eapli.base.warehousemanagement.Domain.AGVDocks;
 
 import java.util.List;
 import java.util.Random;
@@ -29,7 +30,7 @@ public class OrderAGVAssignmentController {
 
     public static AGV notasks() {
         List<AGV> agvs = AGVService.getAgvs();
-        AGV emptyagv = new AGV(1, "Empty", "Empty", new Model("Empty", "Empty"), new Status(2, "Empty", 0));
+        AGV emptyagv = new AGV(1, new AGVDocks(0L, 0L, 0L, 0L, 0L, 0L, 0L, "Empty"), "Empty", new Model("Empty", "Empty"), new Status(2, "Empty", 0));
         for (AGV a : agvs) {
             if (!(a.hastasks())) {
                 return a;
