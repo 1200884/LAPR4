@@ -26,7 +26,10 @@ public class OrderAGVAssignmentUI extends AbstractUI {
                 //valid id at this point
                 if(OrderAGVAssignmentController.assigntaskimmediatlytoagv(orderId).equals("Null")){
                     System.out.println("Currently we cannot assign a task immediately to an AGV as all our AGVs doing some sort of task.");
-            }
+                }
+                else{
+                    System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n"+OrderAGVAssignmentController.assigntaskimmediatlytoagv(orderId));
+                }
                 break;
         }
         return true;

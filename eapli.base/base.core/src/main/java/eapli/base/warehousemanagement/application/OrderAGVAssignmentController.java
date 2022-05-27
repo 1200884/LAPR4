@@ -85,15 +85,18 @@ public class OrderAGVAssignmentController {
 
     public static String assigntaskimmediatlytoagv(String orderid) {
         OrderServices orderServices = new OrderServices();
-        if (notasks().getShortDescription().equals("Empty")) {
-            AGV agvwithlesstasks = agvwithlesstasks();
-            agvwithlesstasks.addTask(orderid);
-            orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
-            orderServices.updateOrders(orderServices.findbyid(orderid));
-            return agvwithlesstasks.toString();
-        } else return "Null";
+        if (orderServices.findbyid(orderid).getOrderLevel().getLevel().equals(OrderLevel.Level.UNASSIGNED)) {
+            if (notasks().getShortDescription().equals("Empty")) {
+                AGV agvwithlesstasks = agvwithlesstasks();
+                agvwithlesstasks.addTask(orderid);
+                orderServices.findbyid(orderid).setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
+                orderServices.updateOrders(orderServices.findbyid(orderid));
+                return agvwithlesstasks.toString();
+            } else return "Null";
+        }
+        else{
+        return "The order you are trying to assign is in a more advanced stage.1";}
     }
-
     public static AGV agvwithlesstasks() {
         int numbertasks = Integer.MAX_VALUE;
         AGV lesstasks = null;
