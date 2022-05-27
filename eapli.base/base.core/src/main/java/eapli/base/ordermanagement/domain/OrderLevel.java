@@ -9,14 +9,19 @@ import javax.persistence.Embeddable;
 public class OrderLevel {
 
     public enum Level {
+        DELIVERED,
         DISPATCHED,
         ASSIGNED,
         UNASSIGNED
     }
+
     private Level level;
-    protected OrderLevel(){}
-    public OrderLevel(Level level){
-        this.level=level;
+
+    protected OrderLevel() {
+    }
+
+    public OrderLevel(Level level) {
+        this.level = level;
     }
 
     public Level getLevel() {
@@ -25,5 +30,10 @@ public class OrderLevel {
 
     private void setLevel(Level level) {
         this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        return "Level is"+level;
     }
 }

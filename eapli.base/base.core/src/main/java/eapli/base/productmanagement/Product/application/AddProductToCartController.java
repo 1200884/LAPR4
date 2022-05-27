@@ -32,13 +32,13 @@ public class AddProductToCartController {
         }
         boolean flag=false;
         for(Product_Quantities product_quantities : this.customer.getShopping_cart().getProduct_quantities()){
-            if(product_quantities.getProduct_id().equals(product.getId())){
+            if(product_quantities.getProduct().equals(product)){
                 product_quantities.addQuantity(quantity);
                 flag=true;
             }
         }
         if(!flag) {
-            this.customer.getShopping_cart().addToCart(new Product_Quantities(product.getId(), quantity));
+            this.customer.getShopping_cart().addToCart(new Product_Quantities(product, quantity));
         }
         return true;
     }

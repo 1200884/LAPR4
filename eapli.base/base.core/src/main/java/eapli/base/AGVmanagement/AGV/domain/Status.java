@@ -4,6 +4,7 @@ package eapli.base.AGVmanagement.AGV.domain;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 
 import java.util.*;
@@ -12,32 +13,38 @@ import java.util.*;
 @Immutable
 public class Status implements ValueObject {
     private int battery_left;
-    private Map<String, Integer> task;
-    private int tasktime;
+    @ElementCollection
+    private Set<String> task=new HashSet<>();
+    public enum Availability{
+        AVAILABLE,
+        WORKING
+    }
+    private Availability availability;
 
-    public Status() {
+    public Availability getAvailability() {
+        return availability;
+
     }
 
-    public Status(int battery_left, String task, int tasktime) {
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
+    }
+
+    protected Status() {
+    }
+
+    public Status(int battery_left, String task) {
         this.battery_left = battery_left;
-        addTask(task, tasktime);
-        this.tasktime=tasktime;
-    }
-
-    public ArrayList<String> gettasks() {
-        ArrayList<String> str = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            str.add(entry.getKey());
+        addTask(task);
+        if (this.task.size()>1){
+            setAvailability(Availability.WORKING);
         }
-        return str;
+
     }
 
-    public int getTasktime() {
-        return tasktime;
-    }
+    public Set<String> gettasks() {
 
-    private void setTasktime(int tasktime) {
-        this.tasktime = tasktime;
+        return this.task;
     }
 
     public int numberoftasks() {
@@ -49,16 +56,18 @@ public class Status implements ValueObject {
     }
 
     public void removetask(String orderid) {
-        for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            if (entry.getKey().equals(orderid)) {
-                this.task.remove(entry);
-            }
+        this.task.removeIf(order -> order.equals(orderid));
+        if (this.task.size()>1){
+            setAvailability(Availability.WORKING);
+        }
+        if (this.task.size()<1){
+            setAvailability(Availability.AVAILABLE);
         }
     }
 
     public boolean hasOrder(String orderid) {
-        for (Map.Entry<String, Integer> entry : task.entrySet()) {
-            if (entry.getKey().equals(orderid)) {
+        for (String order:this.task) {
+            if (order.equals(orderid)) {
                 return true;
             }
         }
@@ -69,8 +78,11 @@ public class Status implements ValueObject {
         return battery_left;
     }
 
-    public void addTask(String task, int tasktime) {
-        this.task.put(task, tasktime);
+    public void addTask(String task) {
+        this.task.add(task);
+        if (this.task.size()>1){
+            setAvailability(Availability.WORKING);
+        }
     }
 
     private void setTask(String task) {

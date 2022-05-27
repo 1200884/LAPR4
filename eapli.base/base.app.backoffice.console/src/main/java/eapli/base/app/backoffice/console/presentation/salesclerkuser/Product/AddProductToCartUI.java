@@ -4,7 +4,7 @@ import eapli.base.productmanagement.Product.application.AddProductToCartControll
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
-public class AddPtoductToCartUI extends AbstractUI {
+public class AddProductToCartUI extends AbstractUI {
 
     private final AddProductToCartController theController = new AddProductToCartController();
 

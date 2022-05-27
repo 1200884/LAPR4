@@ -19,6 +19,7 @@ public class ListProductService {
 
     public StringBuilder allProducts(String f1) {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("#  %-10s%-20s%-30s%-30s%-30s%-1s", "BRAND", "ID", "BASEPRICE", "NAME", "CATEGORY", "DESCRIPTION"+"\n"));
         if(f1.equals("brand")){
             ArrayList<Brand> brandList = (ArrayList<Brand>) brandRepository.findAll();
             Collections.sort(brandList, new Comparator<Brand>() {
@@ -28,8 +29,10 @@ public class ListProductService {
                 }
             });
             for(Brand b : brandList) {
-                stringBuilder.append("->" + b.getName() + ":\n" );
-                stringBuilder.append(productRepository.findByBrand(b));
+                ArrayList<Product> productList = (ArrayList<Product>) productRepository.findByBrand(b);
+                for(Product product : productList){
+                    stringBuilder.append(String.format("%-13s%-20s%-30s%-30s%-30s%-30s"+"\n",product.getBrand().getName(),product.getId(),product.getBase_price(),product.getName(),product.getCategory().getDescription(),product.getDescription().getShort_description()));
+                }
             }
 
         }else {
@@ -41,8 +44,10 @@ public class ListProductService {
                 }
             });
             for(Category c : categoryList) {
-                stringBuilder.append("->" + c.getDescription() + ":\n" );
-                stringBuilder.append(productRepository.findByCategory(c));
+                ArrayList<Product> productList = (ArrayList<Product>)productRepository.findByCategory(c);
+                for(Product product : productList){
+                    stringBuilder.append(String.format("%-13s%-20s%-30s%-30s%-30s%-30s"+"\n",product.getBrand().getName(),product.getId(),product.getBase_price(),product.getName(),product.getCategory().getDescription(),product.getDescription().getShort_description()));
+                }
             }
         }
         return stringBuilder;

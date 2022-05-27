@@ -28,6 +28,7 @@ public class JpaProductRepository extends JpaAutoTxRepository<Product, Integer, 
         return query.getResultList();
     }
 
+
     @Override
     public Iterable<Product> findByBrand(Brand b) {
         final TypedQuery<Product> query = entityManager().createQuery(

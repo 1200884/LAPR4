@@ -1,17 +1,16 @@
 package eapli.base.AGVmanagement.AGV.application;
 
 import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
-import eapli.base.warehousemanagement.Domain.AGVDocks;
+import eapli.base.ordermanagement.application.OrderServices;
+import eapli.base.ordermanagement.domain.Orders;
+import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
 import eapli.base.warehousemanagement.Domain.Warehouse;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AGVController {
 
@@ -25,12 +24,18 @@ public class AGVController {
 
     private static List<Warehouse> warehouseList = new ArrayList<>();
 
-    private static Set<AGVDocks> docks = new HashSet<>();
+    private static final OrderServices orderservice = new OrderServices();
 
-    public String createAVG(double maxWeight, int baseLocation, String shortDescription, int modelID) {
+    private static OrderRepository orderRepository = PersistenceContext.repositories().Order();
+
+    ArrayList<Orders> queue = new ArrayList<>();
+
+    public String createAVG(double maxWeight, String baseLocation, String shortDescription, int modelID) {
         Model model = fetchModel(modelID);
-        AGVDocks agvDocks = fetchDocks(baseLocation);
-        AGV agv = agvService.createAGV(maxWeight, agvDocks, shortDescription, model);
+        System.out.println("alfredo");
+        Status status = new Status(2, "null");
+        System.out.println("alberto");
+        AGV agv = agvService.createAGV(maxWeight, baseLocation, shortDescription, model);
         return agv.toString();
     }
 
@@ -78,25 +83,29 @@ public class AGVController {
         return string.toString();
     }
 
-    private AGVDocks fetchDocks(int dockNum) {
-        for (AGVDocks agvDocks : docks) {
-            if (agvDocks.getId() == dockNum) return agvDocks;
+    public void AllOrders() {
+        ArrayList<Orders> orders = (ArrayList<Orders>) orderRepository.findAll();
+
+        for (Orders s : orderRepository.findAll()) {
+            queue.add(s);
         }
-        return null;
+
     }
 
-    public boolean verifyDock(int dockNum) {
-        return fetchDocks(dockNum) != null;
+    public void RemoveOneOrder(int order){
+
+        queue.remove(order-1);//Selecionar order-1 porque selecionar numeros entre 1 a total orders
     }
 
-    public String findDocks(int warehouseNum) {
-        Warehouse warehouse = fetchWarehouse(warehouseNum);
-        docks.clear();
-        docks = warehouse.getDocks();
-        StringBuilder string = new StringBuilder();
-        for (AGVDocks dock : docks) {
-            string.append(dock.toString()).append("\n");
-        }
-        return string.toString();
+    public void SizeOrder(){
+        int size = queue.size();
     }
+
+    public void HeadOfQueue(){
+        int head = queue.indexOf(0);
+    }
+
+
+
+
 }

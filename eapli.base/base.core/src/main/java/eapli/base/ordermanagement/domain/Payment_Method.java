@@ -4,13 +4,13 @@ import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
 
 @Immutable
 @Embeddable
 public class Payment_Method implements ValueObject {
-    private int payment_methodid;
 
-    enum PaymentMethod {
+    public enum PaymentMethod {
         PAYPAL,
         MBWAY,
         CREDITCARD
@@ -21,13 +21,8 @@ public class Payment_Method implements ValueObject {
     protected Payment_Method() {
     }
 
-    public Payment_Method(int payment_methodid, PaymentMethod paymentMethod) {
-        this.payment_methodid = payment_methodid;
+    public Payment_Method(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    public int getPayment_methodid() {
-        return payment_methodid;
     }
 
     public PaymentMethod getPaymentMethod() {
@@ -36,9 +31,5 @@ public class Payment_Method implements ValueObject {
 
     private void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    private void setPayment_methodid(int payment_methodid) {
-        this.payment_methodid = payment_methodid;
     }
 }

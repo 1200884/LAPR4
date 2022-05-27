@@ -7,6 +7,7 @@ import eapli.framework.domain.model.AggregateRoot;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 public class AGV implements Serializable, AggregateRoot<Integer> {
@@ -46,7 +47,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         return this.status.numberoftasks();
     }
 
-    public ArrayList<String> getagvtasks() {
+    public Set<String> getagvtasks() {
         return this.status.gettasks();
     }
 
@@ -62,8 +63,8 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         return id;
     }
 
-    public void addTask(String task, int tasktime) {
-        this.status.addTask(task, tasktime);
+    public void addTask(String task) {
+        this.status.addTask(task);
     }
 
     public void removeTask(String task) {
@@ -118,6 +119,6 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
 
     @Override
     public String toString() {
-        return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status;
+        return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status.gettasks();
     }
 }

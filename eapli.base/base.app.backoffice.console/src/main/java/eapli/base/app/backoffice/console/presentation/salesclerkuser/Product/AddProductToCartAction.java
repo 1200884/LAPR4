@@ -8,7 +8,7 @@ public class AddProductToCartAction implements Action {
         ListProductUI productUI= new ListProductUI();
         System.out.println("\n" + productUI.headline() + "\n");
         productUI.doShow();
-        AddPtoductToCartUI cartUI = new AddPtoductToCartUI();
+        AddProductToCartUI cartUI = new AddProductToCartUI();
         System.out.println("\n" + cartUI.headline() + "\n");
         cartUI.doShow();
         return true;

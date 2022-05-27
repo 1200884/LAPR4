@@ -29,7 +29,6 @@ import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
-import eapli.base.ordermanagement.domain.Order;
 import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
