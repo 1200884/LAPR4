@@ -34,10 +34,10 @@ public class AGVDigitalTwinServerCommunicate implements Runnable{
         try {
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
-            byte[] message = new byte[255];
             byte[] answer = new byte[255];
             do {
                 String s = null;
+                byte[] message = new byte[255];
                 sIn.read(message);
                 version = message[0];
                 if (version == 1) {
@@ -63,7 +63,7 @@ public class AGVDigitalTwinServerCommunicate implements Runnable{
                             break;
                         case 3:
                             if (s != null){
-                                String[] data = s.split("/", -2);
+                                String[] data = s.split(";", -2);
                                 String[] AGVID = data[0].split("=", -2);
                                 String[] status = data[1].split("=", -2);
 

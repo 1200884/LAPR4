@@ -18,8 +18,8 @@ public class ConnectionController {
         return CLIENT_CONNECTION.establishConnection(3);
     }
 
-    public boolean sendMessage(String message) {
-        return CLIENT_CONNECTION.sendMessage(message);
+    public boolean sendMessage(byte version, byte code, String message) {
+        return CLIENT_CONNECTION.sendMessage(version, code, message);
     }
 
     public String receiveMessage() {

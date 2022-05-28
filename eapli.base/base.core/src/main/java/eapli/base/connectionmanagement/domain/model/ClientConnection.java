@@ -38,9 +38,9 @@ public class ClientConnection {
         return true;
     }
 
-    public boolean sendMessage(String message) {
+    public boolean sendMessage(byte version, byte code, String message) {
         try {
-            sOut.write(convert(message));
+            sOut.write(convertToSend(version, code, message));
         }catch (Exception ignored) {
             return false;
         }
@@ -48,26 +48,15 @@ public class ClientConnection {
     }
 
     public String receiveMessage() {
-        String string = "", prov = "";
+        String returnable;
         byte[] message = new byte[255];
         try {
             sIn.read(message);
-            string += message[0] + ";";
-            string += message[1] + ";";
-            string += message[2] + ";";
-            string += message[3] + ";";
-            int finalLength;
-            if (message[2] != 0 || message[3] != 0) {
-                finalLength = message[2] + (256 * message[3]);
-                byte[] dataArray = new byte[finalLength];
-                System.arraycopy(message, 4, dataArray, 0, finalLength);
-                prov = new String(dataArray, StandardCharsets.UTF_8);
-            }
-            string += prov;
+            returnable = convertToReceive(message);
         }catch (Exception ignored) {
             return null;
         }
-        return string;
+        return returnable;
     }
 
     public boolean close() {
@@ -79,16 +68,33 @@ public class ClientConnection {
         return true;
     }
 
-    private byte[] convert(String message) {
-        //"1;4;10;alface"
-        String[] strings = message.split(";", -2);
-        byte[] bytes = new byte[4+strings[4].length()];
-        bytes[0] = strings[0].getBytes()[0];
-        bytes[1] = strings[1].getBytes()[0];
-        bytes[2] = (byte) (Integer.parseInt(strings[2]) % 256);
-        bytes[3] = (byte) (Integer.parseInt(strings[3]) / 256);
-        byte[] stringBytes = strings[4].getBytes();
+    private byte[] convertToSend(byte version, byte code, String message) {
+        //"1 3 alface"
+        byte[] bytes = new byte[255];
+        bytes[0] = version;
+        bytes[1] = code;
+        bytes[2] = (byte) (message.length() % 256);
+        bytes[3] = (byte) (message.length() / 256);
+        byte[] stringBytes = message.getBytes();
         System.arraycopy(stringBytes, 0, bytes, 4, stringBytes.length);
         return bytes;
+    }
+
+    private String convertToReceive(byte[] bytes) {
+        //"1361231
+        String string = "", prov = "";
+        string += bytes[0] + ";";
+        string += bytes[1] + ";";
+        string += bytes[2] + ";";
+        string += bytes[3] + ";";
+        int finalLength;
+        if (bytes[2] != 0 || bytes[3] != 0) {
+            finalLength = bytes[2] + (256 * bytes[3]);
+            byte[] dataArray = new byte[finalLength];
+            System.arraycopy(bytes, 4, dataArray, 0, finalLength);
+            prov = new String(dataArray, StandardCharsets.UTF_8);
+        }
+        string += prov;
+        return string;
     }
 }

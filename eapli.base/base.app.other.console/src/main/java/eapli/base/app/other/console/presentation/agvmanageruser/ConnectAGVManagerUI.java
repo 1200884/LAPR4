@@ -17,7 +17,7 @@ public class ConnectAGVManagerUI extends AbstractUI {
             print("There was a problem with the connection to the server");
         }
         byte version, code;
-        String message, finalMessage = "";
+        String message;
         do {
             do {
                 try {
@@ -36,8 +36,7 @@ public class ConnectAGVManagerUI extends AbstractUI {
                 }
             }while (true);
             message = Console.readLine("Please insert the message you wish to send to the server:");
-            finalMessage += version + ";" + code + ";" + message.length() + ";" + message;
-            if (!CONNECTION_CONTROLLER.sendMessage(finalMessage)) {
+            if (!CONNECTION_CONTROLLER.sendMessage(version, code, message)) {
                 print("There was a problem sending your message to the server");
                 CONNECTION_CONTROLLER.close();
                 break;

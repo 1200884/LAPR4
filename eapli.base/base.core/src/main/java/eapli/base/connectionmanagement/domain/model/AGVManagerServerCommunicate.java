@@ -61,13 +61,7 @@ public class AGVManagerServerCommunicate implements Runnable{
                             ACK(answer);
                             break;
                         case 3:
-                            String send = "";
-                            send += version + ";";
-                            send += code + ";";
-                            send += length1 + ";";
-                            send += length2 + ";";
-                            send += s;
-                            connectionController.sendMessage(send);
+                            connectionController.sendMessage(version, code, s);
                         default:
                             System.out.println("There is no functionality for this code");
                     }
