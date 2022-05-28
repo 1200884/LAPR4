@@ -27,7 +27,6 @@ import eapli.base.app.backoffice.console.presentation.salesclerkuser.Category.Ca
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.ListCustomerAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.RegisterCustomerUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Order.Shopping_CartUI;
-import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.AddProductToCartAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.AddProductUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.ListProductUI;
 import eapli.base.app.backoffice.console.presentation.warehouseuser.*;
@@ -37,7 +36,6 @@ import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
-import eapli.base.customermanagement.domain.model.Customer;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -154,11 +152,6 @@ public class MainMenu extends AbstractUI {
             mainMenu.addSubMenu(PRODUCT_OPTION, settingsMenu);
         }
 
-        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.CUSTOMER)) {
-            final Menu customerMenu = buildCustomerMenu();
-            mainMenu.addSubMenu(CUSTOMER_OPTION, customerMenu);
-        }
-
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.WAREHOUSE_EMPLOYEE)) {
             final Menu settingsMenu = buildWarehouseEmployeeSettingsMenu();
             mainMenu.addSubMenu(SETTINGS, settingsMenu);
@@ -171,12 +164,6 @@ public class MainMenu extends AbstractUI {
         return mainMenu;
     }
 
-    private Menu buildCustomerMenu() {
-        final Menu menu = new Menu("Options >");
-        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-        menu.addItem(UPLOAD_JSON, "Add products to shopping Cart", new AddProductToCartAction());
-        return menu;
-    }
 
     private Menu buildAdminSettingsMenu() {
         final Menu menu = new Menu("Settings >");

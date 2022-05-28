@@ -1,4 +1,4 @@
-package eapli.base.app.backoffice.console.presentation.salesclerkuser.Product;
+package eapli.base.app.user.console.presentation;
 
 import eapli.framework.actions.Action;
 

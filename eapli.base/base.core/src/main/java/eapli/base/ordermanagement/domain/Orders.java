@@ -141,8 +141,13 @@ public class Orders implements Serializable, DomainEntity<String>, AggregateRoot
 
     public static String generateId() {
         Random rnd = new Random();
-        int number = rnd.nextInt(999999999);
-        return String.valueOf(number);
+        int number=0;
+        String number2="";
+        while(number2.length()!=9) {
+            number = rnd.nextInt(999999999);
+            number2=String.valueOf(number);
+        }
+            return number2;
     }
 
     public static boolean existsId(String id) {
