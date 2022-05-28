@@ -14,11 +14,13 @@ import java.util.*;
 public class Status implements ValueObject {
     private int battery_left;
     @ElementCollection
-    private Set<String> task=new HashSet<>();
-    public enum Availability{
+    private Set<String> task = new HashSet<>();
+
+    public enum Availability {
         AVAILABLE,
         WORKING
     }
+
     private Availability availability;
 
     public Availability getAvailability() {
@@ -36,7 +38,7 @@ public class Status implements ValueObject {
     public Status(int battery_left, String task) {
         this.battery_left = battery_left;
         addTask(task);
-        if (this.task.size()>1){
+        if (this.task.size() > 1) {
             setAvailability(Availability.WORKING);
         }
 
@@ -57,16 +59,16 @@ public class Status implements ValueObject {
 
     public void removetask(String orderid) {
         this.task.removeIf(order -> order.equals(orderid));
-        if (this.task.size()>1){
+        if (this.task.size() > 1) {
             setAvailability(Availability.WORKING);
         }
-        if (this.task.size()<1){
+        if (this.task.size() < 1) {
             setAvailability(Availability.AVAILABLE);
         }
     }
 
     public boolean hasOrder(String orderid) {
-        for (String order:this.task) {
+        for (String order : this.task) {
             if (order.equals(orderid)) {
                 return true;
             }
@@ -80,7 +82,7 @@ public class Status implements ValueObject {
 
     public void addTask(String task) {
         this.task.add(task);
-        if (this.task.size()>1){
+        if (this.task.size() > 1) {
             setAvailability(Availability.WORKING);
         }
     }
@@ -95,6 +97,10 @@ public class Status implements ValueObject {
     @Override
     public String toString() {
         return "Task: " + task + "\nTime Left: " + battery_left;
+    }
+
+    public String availabilityToString() {
+        return "Availability is" + availability;
     }
 
     @Override

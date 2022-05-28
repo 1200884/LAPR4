@@ -1,5 +1,6 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
+import eapli.base.AGVmanagement.AGV.domain.repository.Location;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.warehousemanagement.Domain.AGVDocks;
 import eapli.framework.domain.model.AggregateRoot;
@@ -7,6 +8,7 @@ import eapli.framework.domain.model.AggregateRoot;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 @Entity
@@ -17,12 +19,12 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     double maximum_weight;
     private String shortDescription;
     private String baseLocation;
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Model model;
     @Embedded
     private Status status;
-
+    @Embedded
+    private Location location;
     protected AGV() {
     }
 
@@ -64,14 +66,24 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
 
     public void addTask(String task) {
         this.status.addTask(task);
+        this.getLocation().setX(randomiselocation());
     }
 
     public void removeTask(String task) {
         this.status.removetask(task);
+        this.getLocation().setY(randomiselocation());
     }
 
     public double getMaximum_weight() {
         return maximum_weight;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     public Model getModel() {
@@ -119,5 +131,10 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     @Override
     public String toString() {
         return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status.gettasks();
+    }
+    public int randomiselocation(){
+        Random rnd = new Random();
+        int number = rnd.nextInt(40);
+        return number;
     }
 }
