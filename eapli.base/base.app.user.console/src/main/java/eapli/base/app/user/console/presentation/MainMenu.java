@@ -49,7 +49,7 @@ class MainMenu extends ClientUserBaseUI {
     private static final int EXIT_OPTION = 0;
 
     // MAIN MENU
-    private static final int MY_USER_OPTION = 1;
+    private static final int MY_USER_OPTION = 2;
 
     // Customer
     private static final int CUSTOMER_OPTION = 1;

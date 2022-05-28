@@ -98,6 +98,7 @@ public class JSONReader {
                 Long wsquareDepth = (Long) depth.get("wsquare");
 
                 String acessability = (String) g.get("accessibility");
+                docks.add(new AGVDocks(ida,lsquare,wsquare,lsquareEnd,wsquareEnd,lsquareDepth,wsquareDepth,acessability));
             }
             theController.createWarehouse(length,width,square,unit,aisle,docks);
         } catch (IOException | ParseException e) {

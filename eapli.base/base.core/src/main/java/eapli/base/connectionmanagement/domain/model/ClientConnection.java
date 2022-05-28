@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ClientConnection {
 
-    private static final String HOST = "192.168.56.1";
+    private static final String HOST = "192.168.1.6";
     private static final int AGV_TWIN_PORT = 123;
     private static final int AGV_MANAGER_PORT = 124;
     private static final int ORDERS_PORT = 125;

@@ -9,7 +9,7 @@ import javax.persistence.Embedded;
 @Immutable
 @Embeddable
 public class AGVDocks implements ValueObject {
-    private Long id;
+    private String id;
     private Long bwidth;
     private Long blength;
     private Long ewidth;
@@ -22,7 +22,8 @@ public class AGVDocks implements ValueObject {
 
     }
 
-    public AGVDocks(Long id, Long bwidth,Long blength,Long ewidth,Long elength,Long swidth,Long slength,String accessibility){
+    public AGVDocks(String id, Long bwidth,Long blength,Long ewidth,Long elength,Long swidth,Long slength,String accessibility){
+        this.id=id;
         this.accessibility=accessibility;
         this.ewidth= ewidth;
         this.elength=elength;
@@ -32,7 +33,7 @@ public class AGVDocks implements ValueObject {
         this.dlength=slength;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -40,7 +41,7 @@ public class AGVDocks implements ValueObject {
         return accessibility;
     }
 
-    private void setId(Long id) {
+    private void setId(String id) {
         this.id = id;
     }
 
