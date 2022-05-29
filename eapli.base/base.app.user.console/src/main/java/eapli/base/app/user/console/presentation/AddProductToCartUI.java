@@ -1,8 +1,6 @@
 package eapli.base.app.user.console.presentation;
 
-import eapli.base.connectionmanagement.application.ConnectionController;
-import eapli.base.connectionmanagement.application.OrderServerController;
-import eapli.base.productmanagement.Product.application.AddProductToCartController;
+import eapli.base.app.other.console.connectionmanagement.application.OrderServerController;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 

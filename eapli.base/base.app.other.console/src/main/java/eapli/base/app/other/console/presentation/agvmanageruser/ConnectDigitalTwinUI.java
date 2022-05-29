@@ -1,6 +1,6 @@
 package eapli.base.app.other.console.presentation.agvmanageruser;
 
-import eapli.base.connectionmanagement.application.ConnectionController;
+import eapli.base.app.other.console.connectionmanagement.application.ConnectionController;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 

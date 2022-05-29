@@ -1,8 +1,7 @@
-package eapli.base.connectionmanagement.domain.model;
+package eapli.base.app.other.console.connectionmanagement.domain.model;
 
 
 import eapli.base.productmanagement.Product.application.AddProductToCartController;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -24,8 +23,7 @@ public class OrderServer {
             ClientHandler clientSock
                     = new ClientHandler(skt);
 
-            // This thread will handle the client
-            // separately
+            // This thread will handle the client separately
             new Thread(clientSock).start();
         } catch (IOException ex) {
             ex.printStackTrace();

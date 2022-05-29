@@ -1,6 +1,9 @@
-package eapli.base.connectionmanagement.domain.model;
+package eapli.base.app.other.console.connectionmanagement.domain.model;
 
-import eapli.base.connectionmanagement.application.ConnectionController;
+import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
+import eapli.base.AGVmanagement.AGV.domain.repository.AGVRepository;
+import eapli.base.infrastructure.persistence.PersistenceContext;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,22 +11,21 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
-public class AGVManagerServerCommunicate implements Runnable{
+public class AGVDigitalTwinServerCommunicate implements Runnable{
+
+    private static final AGVRepository agvrepository = PersistenceContext.repositories().AGVs();
 
     private Socket socket;
     private DataOutputStream sOut;
     private DataInputStream sIn;
-    private static final ConnectionController connectionController = new ConnectionController();
 
-    public AGVManagerServerCommunicate(Socket socket) {
+    public AGVDigitalTwinServerCommunicate(Socket socket) {
         this.socket = socket;
     }
 
     @Override
     public void run() {
-        connectionController.establishAGVTwinConnection();
         boolean check = true;
         byte version, code, length1, length2;
         InetAddress clientIP=socket.getInetAddress();
@@ -32,19 +34,18 @@ public class AGVManagerServerCommunicate implements Runnable{
         try {
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
-            byte[] message = new byte[255];
             byte[] answer = new byte[255];
             do {
-                String s = "";
+                String s = null;
+                byte[] message = new byte[255];
                 sIn.read(message);
                 version = message[0];
                 if (version == 1) {
-                    int finalLength = 0;
                     code = message[1];
                     length1 = message[2];
                     length2 = message[3];
                     if (length1 != 0 || length2 != 0) {
-                        finalLength = length1 + (256 * length2);
+                        int finalLength = length1 + (256 * length2);
                         byte[] dataArray = new byte[finalLength];
                         System.arraycopy(message, 4, dataArray, 0, finalLength);
                         s = new String(dataArray, StandardCharsets.UTF_8);
@@ -61,7 +62,30 @@ public class AGVManagerServerCommunicate implements Runnable{
                             ACK(answer);
                             break;
                         case 3:
-                            connectionController.sendMessage(version, code, s);
+                            if (s != null){
+                                String[] data = s.split(";", -2);
+                                String[] AGVID = data[0].split("=", -2);
+                                String[] status = data[1].split("=", -2);
+
+                                outerLoop:
+                                for (AGV agv : agvrepository.findAll()) {
+                                    if (agv.getId() == Integer.parseInt(AGVID[1])) {
+                                        switch (status[1]) {
+                                            case "Available":
+                                                agv.getStatus().setAvailability(Status.Availability.AVAILABLE);
+                                                break outerLoop;
+                                            case "Working":
+                                                agv.getStatus().setAvailability(Status.Availability.WORKING);
+                                                break outerLoop;
+                                            default:
+                                                System.out.println("This status does not exist");
+                                                break outerLoop;
+                                        }
+                                    }
+                                }
+                            }else {
+                                System.out.println("The data you sent is empty");
+                            }
                         default:
                             System.out.println("There is no functionality for this code");
                     }
@@ -69,7 +93,6 @@ public class AGVManagerServerCommunicate implements Runnable{
             }while(check);
 
             System.out.println("Client " + clientIP.getHostAddress() + ", port number: " + socket.getPort() + " disconnected");
-            connectionController.close();
             socket.close();
         }catch(IOException ex) {
             System.out.println("IOException");

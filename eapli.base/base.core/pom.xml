@@ -8,7 +8,7 @@
         <artifactId>base</artifactId>
         <version>1.4.0-SNAPSHOT</version>
     </parent>
-    
+
     <artifactId>base.core</artifactId>
     <packaging>jar</packaging>
 
@@ -18,7 +18,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -32,4 +31,3 @@
         </dependency>
     </dependencies>
 </project>
-

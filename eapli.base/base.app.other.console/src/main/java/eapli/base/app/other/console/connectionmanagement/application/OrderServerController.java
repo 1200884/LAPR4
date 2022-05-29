@@ -1,4 +1,4 @@
-package eapli.base.connectionmanagement.application;
+package eapli.base.app.other.console.connectionmanagement.application;
 
 import java.util.Objects;
 
