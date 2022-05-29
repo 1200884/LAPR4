@@ -31,7 +31,6 @@ public class OrderServices {
     public Orders createOrder(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
         Orders order = new Orders(address, shopping_cart, shipmentMethod, payment_method);
         order_repository.save(order);
-        System.out.println(order_repository.findAll());
         return order;
     }
 

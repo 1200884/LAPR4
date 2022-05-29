@@ -1,14 +1,21 @@
 package eapli.base.AGVmanagement.AGV.domain.repository;
 
+import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Table;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Embeddable
 @Immutable
+@Table(name="Location")
 public class Location implements ValueObject {
+    @Column(name = "x")
     private int x;
+    @Column(name = "y")
     private int y;
 
     public Location(int x, int y){

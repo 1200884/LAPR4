@@ -10,24 +10,24 @@ import java.io.IOException;
 
 public class AGVInfoToJSON {
     public void agvinfotojson() {
-        JSONArray jsonArrayStatus = new JSONArray();
-        JSONArray jsonArrayLocation = new JSONArray();
-        JSONObject jsonObject=new JSONObject();
+        JSONArray jsonArrayAGV = new JSONArray();
+        JSONObject jsonObjectid = new JSONObject();
+        JSONObject jsonObjectstatus = new JSONObject();
+        JSONObject jsonObjectlocation = new JSONObject();
         for (AGV agv : AGVService.getAgvs()) {
-            jsonArrayStatus.add("AGV id ="+agv.getId()+" : Status = "+agv.getStatus().availabilityToString());
+            jsonObjectid.put("id", agv.getId());
+            jsonObjectstatus.put("status", agv.getStatus().getAvailability().toString());
+            jsonObjectlocation.put("location", agv.getLocation().toString());
+            jsonArrayAGV.add(jsonObjectid);
+            jsonArrayAGV.add(jsonObjectstatus);
+            jsonArrayAGV.add(jsonObjectlocation);
         }
-        jsonObject.put("STATUS", jsonArrayStatus);
-        for (AGV agv : AGVService.getAgvs()) {
-            jsonArrayStatus.add("AGV id ="+agv.getId()+" : Location = "+agv.getLocation().toString());
-        }
-        jsonObject.put("BASE LOCATION",jsonArrayLocation);
         try {
-            FileWriter file = new FileWriter("E:/webdashboard.json");
-            file.write(jsonObject.toJSONString());
+            FileWriter file = new FileWriter("jetbrains://idea/navigate/reference?project=eapli.base&path=webdashboard.json");
+            file.write(jsonArrayAGV.toJSONString());
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

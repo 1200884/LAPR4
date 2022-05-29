@@ -4,23 +4,17 @@ import eapli.base.warehousemanagement.application.OrderAGVAssignmentController;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
+import java.awt.*;
+
 public class OrderAGVAssignmentUI extends AbstractUI {
     @Override
     protected boolean doShow() {
-        String answer = Console.readLine("Do you wish to assign a task to the AGV with how much urgency?\n1-Assign the task when the AGV is available\n2-Assign the task with the maximum urgency");
-        String orderId;
-        while (!OrderAGVAssignmentController.validateAnswer(answer)) {
-            answer = Console.readLine("Your answer is invalid. Please introduce a number between 1 and 2.\n1-Assign the task with no urgency\n2-Assign the task with maximum urgency");
-        }
-        switch (answer) {
-            case "1":
+            String orderId;
                 orderId=Console.readLine("Please introduce the id of the order to assign to the AGV, when available");
                 validateId(orderId);
                 //valid id at this point
-                System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n"+OrderAGVAssignmentController.assigntasktoaagv(orderId));
-
-                break;
-            case "2":
+                System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n" + OrderAGVAssignmentController.assigntasktoaagv(orderId));
+            /*case "2":
                 orderId=Console.readLine("Please introduce the id of the order to immediately assign to the AGV");
                 validateId(orderId);
                 //valid id at this point
@@ -31,7 +25,7 @@ public class OrderAGVAssignmentUI extends AbstractUI {
                     System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n"+OrderAGVAssignmentController.assigntaskimmediatlytoagv(orderId));
                 }
                 break;
-        }
+        }*/
         return true;
     }
 

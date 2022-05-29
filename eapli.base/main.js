@@ -1,58 +1,30 @@
-var pageCounter = 1;
 var AGVcontainer = document.getElementById("agv-info");
 var btn = document.getElementById("btn");
 
 btn.addEventListener("click", function() {
     var ourRequest = new XMLHttpRequest();
-    ourRequest.open('GET', 'webdashboard.json' + pageCounter + '.json');
+    ourRequest.open('GET', 'jetbrains://idea/navigate/reference?project=eapli.base&path=webdashboard.json');
     ourRequest.onload = function() {
         if (ourRequest.status >= 200 && ourRequest.status < 400) {
             var ourData = JSON.parse(ourRequest.responseText);
             renderHTML(ourData);
         } else {
             console.log("We connected to the server, but it returned an error.");
-        }
-
-    };
+        }};
 
     ourRequest.onerror = function() {
         console.log("Connection error");
     };
 
     ourRequest.send();
-    pageCounter++;
-    if (pageCounter > 20) {
-        btn.classList.add("hide-me");
-    }
 });
 
 function renderHTML(data) {
     var htmlString = "";
 
     for (i = 0; i < data.length; i++) {
-        htmlString += "<p>" + data[i].name + " is a " + data[i].species + " that likes to eat ";
-
-        for (ii = 0; ii < data[i].foods.likes.length; ii++) {
-            if (ii == 0) {
-                htmlString += data[i].foods.likes[ii];
-            } else {
-                htmlString += " and " + data[i].foods.likes[ii];
-            }
-        }
-
-        htmlString += ' and dislikes ';
-
-        for (ii = 0; ii < data[i].foods.dislikes.length; ii++) {
-            if (ii == 0) {
-                htmlString += data[i].foods.dislikes[ii];
-            } else {
-                htmlString += " and " + data[i].foods.dislikes[ii];
-            }
-        }
-
-        htmlString += '.</p>';
-
+        htmlString += "<p>" + data[i].id + " status is " + data[i].status +"location is"+ data[i].location+  ".</p>";
     }
-
     AGVcontainer.insertAdjacentHTML('beforeend', htmlString);
 }
+//tratar do erro do x e y nas us ja feitas

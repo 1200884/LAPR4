@@ -52,7 +52,6 @@ public class AGVBootstrapperBase {
         AGV agv = null;
         try {
 
-            System.out.println("37");
             agv = agvService.createAGV(maximum_weight, baseLocation, shortDescription, model);
 
         }catch (final IntegrityViolationException | ConcurrencyException e) {

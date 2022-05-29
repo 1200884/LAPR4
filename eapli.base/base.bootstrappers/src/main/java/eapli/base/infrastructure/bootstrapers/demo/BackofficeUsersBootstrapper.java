@@ -44,7 +44,6 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
         registerSalesClerk("sales_clerk",TestDataConstants.PASSWORD1,"Abilio","Maia","sirAbilio@gmail.com");
         registerWarehouseEmployee("warehouse_employee",PASSWORD1,"Kuku", "Fidelis","kuku@email.com");
         registerAGVManager("AGV_Manager",PASSWORD1,"Fernando", "Andrade","nandices@email.com");
-        System.out.println("kalulu");
         return true;
     }
 

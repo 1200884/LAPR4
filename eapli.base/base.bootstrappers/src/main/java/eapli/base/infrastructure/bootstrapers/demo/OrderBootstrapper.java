@@ -15,7 +15,6 @@ public class OrderBootstrapper extends OrderBootstrapperBase implements Action {
     @Override
     public boolean execute() {
         createOrder("Rua das Flores", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        System.out.println("teste");
         createOrder("Rua das 7 casas, nº10", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
         createOrder("Rua de casa do simões", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
         createOrder("Rua de casa da Ana", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));

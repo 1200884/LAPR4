@@ -34,6 +34,9 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         this.model = model;
         this.baseLocation = baseLocation;
         this.status = status;
+        Location location=new Location(randomiselocation(),randomiselocation());
+        this.location=location;
+
     }
 
     public Status getStatus() {
