@@ -1,6 +1,6 @@
 package eapli.base.app.other.console.connectionmanagement.application;
 
-import eapli.base.app.other.console.connectionmanagement.domain.model.ClientConnection;
+import eapli.base.app.other.console.connectionmanagement.application.model.ClientConnection;
 
 public class ConnectionController {
 

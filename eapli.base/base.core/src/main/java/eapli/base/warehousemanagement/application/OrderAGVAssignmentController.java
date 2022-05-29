@@ -63,6 +63,7 @@ public class OrderAGVAssignmentController {
                     }
                 }
                 agvwithlesstasks.addTask(orderid);
+
                 orderServices.findbyid(orderid).setOrderLevel(orderLevel);
                 orderServices.updateOrders(orderServices.findbyid(orderid));
                 System.out.println("agvId " + agvwithlesstasks.getId());

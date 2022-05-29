@@ -41,7 +41,9 @@ public class Status implements ValueObject {
         if (this.task.size() > 1) {
             setAvailability(Availability.WORKING);
         }
-
+        else {
+            setAvailability(Availability.AVAILABLE);
+        }
     }
 
     public Set<String> gettasks() {
@@ -82,6 +84,7 @@ public class Status implements ValueObject {
 
     public void addTask(String task) {
         this.task.add(task);
+        this.availability=Availability.WORKING;
     }
 
     private void setTask(String task) {
@@ -104,8 +107,10 @@ public class Status implements ValueObject {
         if (this.availability == Availability.AVAILABLE) {
             return "AVAILABLE";
         }
-        return "WORKING";
-
+        if (this.availability == Availability.WORKING) {
+            return "WORKING";
+        }
+        return "AVAILABLE";
     }
 
 

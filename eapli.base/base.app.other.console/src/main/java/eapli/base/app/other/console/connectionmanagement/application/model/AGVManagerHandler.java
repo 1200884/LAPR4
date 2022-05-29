@@ -1,4 +1,4 @@
-package eapli.base.app.other.console.connectionmanagement.domain.model;
+package eapli.base.app.other.console.connectionmanagement.application.model;
 
 import eapli.base.app.other.console.connectionmanagement.application.ConnectionController;
 import eapli.base.warehousemanagement.application.OrderAGVAssignmentController;
