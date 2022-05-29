@@ -1,4 +1,4 @@
-package eapli.base.app.other.console.connectionmanagement.domain.model;
+package eapli.base.app.other.console.connectionmanagement.application.model;
 
 import eapli.base.AGVmanagement.AGV.domain.AGV;
 import eapli.base.AGVmanagement.AGV.domain.Status;
@@ -105,6 +105,8 @@ public class AGVDigitalTwinHandler implements Runnable{
             }while(check);
 
             System.out.println("Client " + clientIP.getHostAddress() + ", port number: " + socket.getPort() + " disconnected");
+            sOut.close();
+            sIn.close();
             socket.close();
         }catch(IOException ex) {
             System.out.println("There was a problem with the input/output streams");

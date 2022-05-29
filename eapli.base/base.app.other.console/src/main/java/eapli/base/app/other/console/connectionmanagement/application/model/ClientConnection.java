@@ -1,4 +1,4 @@
-package eapli.base.app.other.console.connectionmanagement.domain.model;
+package eapli.base.app.other.console.connectionmanagement.application.model;
 
 import java.io.*;
 import java.net.Socket;
