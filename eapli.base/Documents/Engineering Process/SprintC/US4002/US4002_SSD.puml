@@ -22,4 +22,18 @@ Admin->UI: enter one agv and emergency
 UI->Controller: assigntasktoaagv(String orderid)
 UI->Controller: assigntaskimmediatlytoagv(String orderid)
 end
+
+loop while user want remove task or don´t have more tasks
+Admin->UI: enter task that want to remove
+UI->Controller: removeTask()
+Controller-->Admin: Task successfully removed
+end
+
+Admin->UI: Want to see how many tasks we have
+UI->Controller: SizeOrder()
+Controller-->Admin: number of tasks
+
+Admin->UI: Wanto to see the first task
+UI->Controller: HeadofQueue()
+Controller-->Admin: First Task
 @enduml
