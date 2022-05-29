@@ -15,10 +15,9 @@
             return response.json();
         })
         .then(function (data) {
-            for (var i = 0; i < data.length; i=i+4) {
+            for (var i = 0; i < data.length; i = i + 4) {
                 document.getElementById("data").innerHTML +=
-                 "The AGV which id is "+ data[i].Id + " has a availability status of " + data[i+1].Status + " and its location on their warehouse is x = " + data[i+2].X + ", y = " + data[i+3].Y + "<br />";
-
+                    "The AGV which id is " + data[i].Id + " has a availability status of " + data[i + 1].Status + " and its location on their warehouse is x = " + data[i + 2].X + ", y = " + data[i + 3].Y + "<br />";
             }
         })    </script>
 </body>

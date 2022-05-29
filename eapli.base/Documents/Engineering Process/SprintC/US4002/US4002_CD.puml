@@ -9,7 +9,6 @@ AGVRepository --> JpaAGVRepository
 
 
 
-
 class AGV{
  +getStatus()
  +numberoftasks()

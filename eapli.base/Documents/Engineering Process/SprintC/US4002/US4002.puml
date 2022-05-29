@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor AGVManager as Admin
+
+participant ":AGV" as AGV
+participant ":OrderAGVAssigmentUI" as UI
+participant ":OrderAGVAssigmentController" as Controller
+participant ":AGVRepository" as Repository
+ activate Admin
+Admin->AGV: Request to order one task to agv
+activate UI
+AGV->UI: doShow()
+UI-->Admin: show all tasks
+Admin->UI: enter one task
+Controller->Controller: existsOrderId(String answer)
+UI->Controller: noTasks()
+Repository-->Admin: show all agvs available
+loop while user want to add more tasks or don´t have more tasks
+Admin->UI: enter one agv and emergency
+UI->Controller: assigntasktoaagv(String orderid)
+UI->Controller: assigntaskimmediatlytoagv(String orderid)
+end
+@enduml
