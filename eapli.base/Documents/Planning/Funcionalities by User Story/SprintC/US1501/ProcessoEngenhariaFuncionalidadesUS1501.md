@@ -26,11 +26,10 @@ The Customer can choose the product by its name and can choose the amount to add
 
 ## 3.1. Functionalities (SSD)
 
-*Nesta secção deve apresentar e descrever o fluxo/sequência que permite realizar a funcionalidade.*
-
+![US1501_SSD.svg](US1501_SSD.svg)
 ## 3.2. Class Diagram
 
-- This diagram can be found under Documents> Engineering Process> SprintC> US1501
+![US1501_CD.svg](US1501_CD.svg)
 
 ## 3.3. Applied standards
 

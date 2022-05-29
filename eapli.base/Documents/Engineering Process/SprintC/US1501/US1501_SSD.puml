@@ -1,0 +1,79 @@
+@startuml
+autonumber
+actor SalesClerk as Admin
+participant ":AddProductToCartAction" as Action
+participant ":ListProductUI" as UI2
+participant ":AddProductToCartUI" as UI
+participant ":OrderServerController" as ServerController
+participant ":OrderServer" as Server
+participant ":AddProductToCartController" as Controller
+participant ":CustomerRepository" as CR
+
+
+activate Admin
+Admin -> Action: Requests to add a product to Shopping Cart
+activate Action
+Action ->UI2: doShow()
+activate UI2
+UI2 --> Admin: Show options to sort by (category or brand)
+Admin -> UI2: Enters one of the options
+UI2 --> Admin: Shows the Catalog
+deactivate UI2
+Action ->UI: doShow()
+activate UI
+UI->ServerController:establishConnection()
+activate ServerController
+ServerController->Server:establishOrdersConnection()
+activate Server
+Server->ServerController: accept()
+ServerController->UI:"Connection established"
+deactivate ServerController
+loop while data is incorrect
+UI-->Admin: Asks for Customer VAT
+Admin -> UI: Enters the requested data
+UI->ServerController:validateCustomer(customer)
+activate ServerController
+ServerController->Server:sendMessage(version,code,message)
+Server->Controller:validateCustomer(customer)
+activate Controller
+Controller->CR:ofIdentity(customer)
+activate CR
+deactivate CR
+deactivate Controller
+Server->ServerController:WriteMessage(version,code,message)
+deactivate ServerController
+end
+loop while user wants more products
+UI-->Admin: Asks for the Product to Add and its quantity
+Admin -> UI: Enters the requested data
+UI->ServerController:addProduct(name,quantity)
+activate ServerController
+ServerController->Server:sendMessage(version,code,message)
+Server->Controller:addProduct(name, quantity)
+activate Controller
+Controller -> Customer: AddProduct(product, quantity)
+activate Customer
+deactivate Customer
+deactivate Controller
+deactivate ServerController
+end
+UI->ServerController: saveCart()
+activate ServerController
+ServerController->Server:sendMessage(version,code,message)
+Server->Controller:saveCart()
+activate Controller
+Controller->CR:save(customer)
+activate CR
+deactivate CR
+deactivate Controller
+deactivate ServerController
+UI->ServerController:disconnect()
+activate ServerController
+ServerController->Server:sendMessage(version,code,message)
+Server->Server:skt.close();
+deactivate ServerController
+deactivate UI
+deactivate Action
+deactivate Admin
+
+@enduml
