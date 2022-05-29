@@ -15,26 +15,23 @@ public class AddProductToCartUI extends AbstractUI {
         System.out.println("Establishing connection with the server");
         if (theController.establishConnection()) {
             System.out.println("Connection established with success!");
-        }else {
+        } else {
             System.out.println("There was a problem with the connection to the server");
         }
-        String option="Y";
+        String option = "Y";
         int customer = chooseCustomer();
-        while(!theController.validateCustomer(customer)){
+        while (!theController.validateCustomer(customer)) {
             System.out.println("Invalid Input.Please check if the customer VAT is correct");
             customer = chooseCustomer();
         }
-        /*while(option.equals("Y")) {
+        while (option.equals("Y")) {
             String name = chooseProduct();
             int quantity = chooseQuantity();
-            while (!theController.addProduct(name, quantity)) {
-                System.out.println("Invalid Input.Please check if the name of the Product is correct");
-                name = chooseProduct();
-                quantity = chooseQuantity();
-            }
+            System.out.println(theController.addProduct(name,quantity));
             option = repeatLoop();
         }
-        theController.saveCart();*/
+        System.out.println(theController.saveCart());
+        System.out.println(theController.disconnect());
         return true;
     }
 

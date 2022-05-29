@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ClientConnection {
 
-    private static final String HOST = "192.168.1.6";
+    private static final String HOST = "localhost";
     private static final int AGV_TWIN_PORT = 123;
     private static final int AGV_MANAGER_PORT = 124;
     private static final int ORDERS_PORT = 125;
@@ -69,13 +69,12 @@ public class ClientConnection {
     }
 
     private byte[] convertToSend(byte version, byte code, String message) {
-        //"1 3 alface"
         byte[] bytes = new byte[255];
         bytes[0] = version;
         bytes[1] = code;
-        bytes[2] = (byte) (message.length() % 256);
-        bytes[3] = (byte) (message.length() / 256);
         byte[] stringBytes = message.getBytes();
+        bytes[2] = (byte) (stringBytes.length % 256);
+        bytes[3] = (byte) (stringBytes.length / 256);
         System.arraycopy(stringBytes, 0, bytes, 4, stringBytes.length);
         return bytes;
     }
