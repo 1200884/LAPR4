@@ -34,10 +34,10 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         this.model = model;
         this.baseLocation = baseLocation;
         this.status = status;
+        this.status.setAvailability(Status.Availability.AVAILABLE);
         Location location=new Location(randomiselocation(),randomiselocation());
         this.location=location;
-
-    }
+   }
 
     public Status getStatus() {
         return status;
@@ -135,9 +135,9 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     public String toString() {
         return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status.gettasks();
     }
-    public int randomiselocation(){
+    public static int randomiselocation(){
         Random rnd = new Random();
-        int number = rnd.nextInt(40);
+        int number = rnd.nextInt(20);
         return number;
     }
 }

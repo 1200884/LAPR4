@@ -91,7 +91,7 @@ public class OrderAGVAssignmentController {
                     return agvwithnotasks.toString();
                 }
             } else {
-                return "It is impossible to assign your order as it already is in a hihgher stage";
+                return "It is impossible to assign your order as it already is in a higher stage";
             }
         }
 

@@ -100,8 +100,17 @@ public class Status implements ValueObject {
     }
 
     public String availabilityToString() {
-        return "Availability is" + availability;
+        if (this.availability != Availability.AVAILABLE && this.availability != Availability.WORKING) {
+            this.availability = Availability.AVAILABLE;
+            return "AVAILABLE";
+        }
+        if (this.availability == Availability.AVAILABLE) {
+            return "AVAILABLE";
+        }
+        return "WORKING";
+
     }
+
 
     @Override
     public boolean equals(Object o) {

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class UpdateOrdersController {
     public static boolean updateOrderToDispatched(String orderid) {
         OrderServices orderServices = new OrderServices();
-
         ArrayList<Orders> orderstodispatch= (ArrayList<Orders>) orderServices.findReadyAssigned();
         AGV agvresponsible=new AGV(2,"base location","AGV responsible for ready tasks",null,null);
         for (AGV agv: AGVService.getAgvs()){
