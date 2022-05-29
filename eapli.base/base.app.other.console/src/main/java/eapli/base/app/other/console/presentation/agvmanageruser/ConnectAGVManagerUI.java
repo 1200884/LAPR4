@@ -39,22 +39,20 @@ public class ConnectAGVManagerUI extends AbstractUI {
             message = Console.readLine("Please insert the message you wish to send to the server:");
             if (!CONNECTION_CONTROLLER.sendMessage(version, code, message)) {
                 print("There was a problem sending your message to the server");
-                CONNECTION_CONTROLLER.close();
                 break;
             }
             String answer = CONNECTION_CONTROLLER.receiveMessage();
             if (answer == null) {
                 print("The server could not receive the message");
-                CONNECTION_CONTROLLER.close();
                 break;
             }
             if (code == 2) {
                 print("The connection will be ended now!");
-                CONNECTION_CONTROLLER.close();
                 break;
             }
             print(answer);
         }while (true);
+        CONNECTION_CONTROLLER.close();
         return true;
     }
 

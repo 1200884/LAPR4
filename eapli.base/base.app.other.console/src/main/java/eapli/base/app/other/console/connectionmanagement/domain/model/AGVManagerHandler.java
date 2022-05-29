@@ -76,6 +76,8 @@ public class AGVManagerHandler implements Runnable {
             System.out.println("Client " + clientIP.getHostAddress() + ", port number: " + socket.getPort() + " disconnected");
             connectionController.sendMessage((byte) 1, (byte) 1, "");
             connectionController.close();
+            sOut.close();
+            sIn.close();
             socket.close();
         } catch (IOException ex) {
             System.out.println("IOException");

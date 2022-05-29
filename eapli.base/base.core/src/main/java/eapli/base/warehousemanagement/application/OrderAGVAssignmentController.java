@@ -74,6 +74,7 @@ public class OrderAGVAssignmentController {
                 AGV agvwithnotasks = noTasks();
                 if (agvwithnotasks.hasOrder(orderid)) {
                     for (AGV agv : AGVService.getAgvs()) {
+                        System.out.println(agv.getStatus().getAvailability() + " availability");
                         if (!agv.equals(agvwithnotasks)) {
                             agvwithnotasks = agv;
                             break;
