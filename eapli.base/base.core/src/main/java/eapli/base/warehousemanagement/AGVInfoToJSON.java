@@ -6,8 +6,11 @@ import eapli.base.AGVmanagement.AGV.domain.repository.Location;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class AGVInfoToJSON {
     public static void agvinfotojson() {
@@ -39,6 +42,21 @@ public class AGVInfoToJSON {
             FileWriter file = new FileWriter("./webdashboard.json");
             file.write(jsonArray.toJSONString());
             file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*
+        try {
+            File file=new File("example.html");
+            Files.write(file.toPath(), content.getBytes());
+            Desktop.getDesktop().browse(file.toURI());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+        }*/
+        String url = "example.html";
+        File htmlFile = new File(url);
+        try {
+            Desktop.getDesktop().browse(htmlFile.toURI());
         } catch (IOException e) {
             e.printStackTrace();
         }

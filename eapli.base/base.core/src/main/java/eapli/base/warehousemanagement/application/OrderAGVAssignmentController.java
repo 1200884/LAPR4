@@ -41,6 +41,7 @@ public class OrderAGVAssignmentController {
     }
 
     public static String assigntasktoaagv(String orderid) {
+        AGVService agvService=new AGVService();
         OrderServices orderServices = new OrderServices();
         OrderLevel orderLevel = new OrderLevel(OrderLevel.Level.ASSIGNED);
         try{
@@ -66,11 +67,9 @@ public class OrderAGVAssignmentController {
                         }
                     }
                     agvwithlesstasks.addTask(orderid);
-                    System.out.println("Order certa" + orderServices.findbyid(orderid).getId());
-                    System.out.println("Order level before" + orderServices.findbyid(orderid).getOrderLevel());
                     orderServices.findbyid(orderid).setOrderLevel(orderLevel);
                     orderServices.updateOrders(orderServices.findbyid(orderid));
-                    System.out.println("Order level after" + orderServices.findbyid(orderid).getOrderLevel());
+                  agvService.updateAGV(agvwithlesstasks);
                     return agvwithlesstasks.toString();
                     //Otherwise, the AGV that will be responsible for the order will be one that has 0 tasks.
                 } else {
@@ -84,10 +83,9 @@ public class OrderAGVAssignmentController {
                         }
                     }
                     agvwithnotasks.addTask(orderid);
-                    System.out.println("Order level before" + orderServices.findbyid(orderid).getOrderLevel());
                     orderServices.findbyid(orderid).setOrderLevel(orderLevel);
                     orderServices.updateOrders(orderServices.findbyid(orderid));
-                    System.out.println("Order level after" + orderServices.findbyid(orderid).getOrderLevel());
+                    agvService.updateAGV(agvwithnotasks);
                     return agvwithnotasks.toString();
                 }
             } else {
