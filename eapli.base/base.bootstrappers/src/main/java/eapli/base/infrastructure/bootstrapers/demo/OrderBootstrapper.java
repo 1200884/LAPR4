@@ -14,6 +14,7 @@ import eapli.framework.actions.Action;
 public class OrderBootstrapper extends OrderBootstrapperBase implements Action {
     @Override
     public boolean execute() {
+        createCustomer("Edinho",123456789,987654321,"Goatdinho@email.com");
         createOrder("Rua das Flores", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
         createOrder("Rua das 7 casas, nº10", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
         createOrder("Rua de casa do simões", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
@@ -50,6 +51,10 @@ public class OrderBootstrapper extends OrderBootstrapperBase implements Action {
         orderServices.findbyAddress("Rua 13 de outubro").setOrderLevel(new OrderLevel(OrderLevel.Level.DISPATCHED));
         orderServices.updateOrders(orderServices.findbyAddress("Rua 13 de outubro"));
         return true;
+    }
+
+    private void createCustomer(String name,int vat,int number,String email) {
+        registerCustomer(name,vat,number,email);
     }
 
     private Orders createOrder(final String address, final Shopping_Cart shopping_cart, final Shipment_Method shipmentMethod, final Payment_Method payment_method) {

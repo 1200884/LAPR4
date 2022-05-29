@@ -1,5 +1,7 @@
 package eapli.base.infrastructure.bootstrapers;
 
+import eapli.base.customermanagement.application.CustomerPersist;
+import eapli.base.customermanagement.domain.model.Customer;
 import eapli.base.customermanagement.domain.model.Shopping_Cart;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Orders;
@@ -12,6 +14,7 @@ import eapli.framework.domain.repositories.IntegrityViolationException;
 
 public class OrderBootstrapperBase {
     OrderServices orderServices=new OrderServices();
+    CustomerPersist customerPersist=new CustomerPersist();
     protected Orders registerOrder(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
         Orders order=null;
         try {
@@ -20,5 +23,14 @@ public class OrderBootstrapperBase {
             order = null;
         }
         return order;
+    }
+    protected void registerCustomer(String name,int vat,int number,String email){
+        Customer customer=null;
+        try {
+            customer=new Customer(name,vat,number,email);
+            customerPersist.createCustomerPersist(customer);
+        } catch (final IntegrityViolationException | ConcurrencyException e) {
+            customer = null;
+        }
     }
 }
