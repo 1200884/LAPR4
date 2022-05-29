@@ -1,5 +1,6 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
+import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.repository.Location;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.warehousemanagement.Domain.AGVDocks;
@@ -14,7 +15,6 @@ import java.util.Set;
 @Entity
 public class AGV implements Serializable, AggregateRoot<Integer> {
     @Id
-    @GeneratedValue
     private int id;
     double maximum_weight;
     private String shortDescription;
@@ -29,6 +29,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     }
 
     public AGV(double maximum_weight, String baseLocation, String shortDescription, Model model, Status status) {
+        this.id = Integer.parseInt(generateId());
         this.maximum_weight = maximum_weight;
         this.shortDescription = shortDescription;
         this.model = model;
@@ -75,6 +76,17 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     public void removeTask(String task) {
         this.status.removetask(task);
         this.getLocation().setY(randomiselocation());
+    }
+
+    public static String generateId() {
+        Random rnd = new Random();
+        int number=0;
+        String number2="";
+        while(number2.length()!=9) {
+            number = rnd.nextInt(999999999);
+            number2=String.valueOf(number);
+        }
+        return number2;
     }
 
     public double getMaximum_weight() {

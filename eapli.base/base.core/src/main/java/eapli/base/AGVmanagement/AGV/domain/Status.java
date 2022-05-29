@@ -82,9 +82,6 @@ public class Status implements ValueObject {
 
     public void addTask(String task) {
         this.task.add(task);
-        if (this.task.size() > 1) {
-            setAvailability(Availability.WORKING);
-        }
     }
 
     private void setTask(String task) {

@@ -12,12 +12,14 @@ public class AGVManagerServerConnection {
         ServerSocket serverSocket = new ServerSocket(124);
         while(true) {
             try {
+                System.out.println("Waiting...");
                 sock = serverSocket.accept();
+                System.out.println("Connection established!");
             }catch(IOException ex) {
-                System.out.println("Failed to open socket");
+                System.out.println("Failed to connect to the client");
                 System.exit(1);
             }
-            new Thread(new AGVDigitalTwinServerCommunicate(sock)).start();
+            new Thread(new AGVManagerHandler(sock)).start();
         }
     }
 }
