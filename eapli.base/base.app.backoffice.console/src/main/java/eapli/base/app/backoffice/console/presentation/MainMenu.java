@@ -23,6 +23,7 @@
  */
 package eapli.base.app.backoffice.console.presentation;
 
+import eapli.base.app.backoffice.console.presentation.SalesManager.QuestionerUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Category.CategoryUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.ListCustomerAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.RegisterCustomerUI;
@@ -151,7 +152,10 @@ public class MainMenu extends AbstractUI {
             final Menu settingsMenu = buildSalesClerkProductMenu();
             mainMenu.addSubMenu(PRODUCT_OPTION, settingsMenu);
         }
-
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.SALES_MANAGER)) {
+            final Menu customerMenu = buildSalesManagerMenu();
+            mainMenu.addSubMenu(CUSTOMER_OPTION, customerMenu);
+        }
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.WAREHOUSE_EMPLOYEE)) {
             final Menu settingsMenu = buildWarehouseEmployeeSettingsMenu();
             mainMenu.addSubMenu(SETTINGS, settingsMenu);
@@ -162,6 +166,13 @@ public class MainMenu extends AbstractUI {
         mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
         return mainMenu;
+    }
+
+    private Menu buildSalesManagerMenu() {
+        final Menu menu = new Menu("Options >");
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+        menu.addItem(UPLOAD_JSON, "Validate questionnaire", new QuestionerUI()::show);
+        return menu;
     }
 
 
