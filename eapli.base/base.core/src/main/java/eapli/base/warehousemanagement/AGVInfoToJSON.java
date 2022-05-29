@@ -10,6 +10,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 
 public class AGVInfoToJSON {
@@ -56,8 +58,13 @@ public class AGVInfoToJSON {
         String url = "example.html";
         File htmlFile = new File(url);
         try {
+            URI oURL = new URI("http://localhost:63342/eapli.base/base/example.html?_ijt=4pi3sne8v86qpq3oa2huqlmrp4&_ij_reload=RELOAD_ON_SAVE");
+            Desktop.getDesktop().browse(oURL);
+
             Desktop.getDesktop().browse(htmlFile.toURI());
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
