@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor SalesManager as Admin
+participant ":ListProductUI" as UI
+participant ":Calc" as Controller
+participant ":EvalVisitor" as Service
+
+activate Admin
+Admin -> UI: Requests to validate the questionnaire with the grammar
+activate UI
+
+UI -> Controller:validateGrammar()
+activate Controller
+Controller -> Service: visit(tree)
+activate Service
+
+Service --> Controller: T
+deactivate Service
+Controller --> UI
+deactivate Controller
+UI --> Admin: Shows if operation was a success or not
+deactivate Admin
+@enduml
