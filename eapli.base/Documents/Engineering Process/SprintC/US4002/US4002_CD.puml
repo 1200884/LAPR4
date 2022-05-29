@@ -1,0 +1,60 @@
+@startuml
+
+
+AGV --> OrderAGVAssignmentUI
+OrderAGVAssignmentUI --> OrderAGVAssignmentController
+OrderAGVAssignmentController --> AGVRepository
+AGVRepository --> InMemoryAGVRepository
+AGVRepository --> JpaAGVRepository
+
+
+
+
+class AGV{
+ +getStatus()
+ +numberoftasks()
+ +getagvtasks()
+ +hasOrder(String orderid)
+ +setId(int id)
+ +getId()
+ +addTask(String task)
+ +removeTask(String task)
+ +getLocation()
+ +getModel()
+ +setModel(Model model)
+ +setStatus(Status status)
+ +getShortDescription()
+ +sameAs(Object other)
+ +toString()
+ }
+
+
+class OrderAGVAssignmentController{
+ +validateAnswer(String answer)
+ +isValidId(String answer)
+ +existsOrderId(String answer)
+ +notasks()
+ +assigntasktoaagv(String orderid)
+ +assigntaskimmediatlytoagv(String orderid)
+ +agvwithlesstasks()
+}
+
+Interface AGVRepository{
+ +findAll()
+}
+
+class OrderAGVAssignmentUI{
+ +doShow()
+ +validateId(String orderId)
+ +headline()
+}
+
+class JpaAGVRepository{
+ +JpaAGVRepository(final String puname)
+}
+
+class InMemoryAGVRepository{
+    +findAll()
+}
+
+@enduml
