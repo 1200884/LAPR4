@@ -26,15 +26,10 @@ public class AGVInfoToJSON {
             JSONObject jsonObjectstatus = new JSONObject();
             JSONObject jsonObjectlocationx = new JSONObject();
             JSONObject jsonObjectlocationy = new JSONObject();
-            System.out.println("eusebio1");
             jsonObjectid.put("Id", agv.getId());
-            System.out.println("eusebio2");
             jsonObjectstatus.put("Status", agv.getStatus().availabilityToString());
-            System.out.println("eusebio3");
             jsonObjectlocationx.put("X", agv.getLocation().getX());
-            System.out.println("eusebio4");
             jsonObjectlocationy.put("Y", agv.getLocation().getY());
-            System.out.println("eusebio6");
             jsonArray.add(jsonObjectid);
             jsonArray.add(jsonObjectstatus);
             jsonArray.add(jsonObjectlocationx);
