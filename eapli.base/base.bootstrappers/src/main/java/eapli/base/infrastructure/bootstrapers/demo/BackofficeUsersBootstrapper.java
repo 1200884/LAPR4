@@ -40,7 +40,7 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
     @Override
     public boolean execute() {
         registerCustomer("customer", PASSWORD1, "Pierre", "Kalulu", "kalulu@emai.l.com");
-        registerMenuManager("chef", PASSWORD1, "Master", "Chef", "master.chef@emai.l.com");
+        registerSalesManager("sales_manager", PASSWORD1, "Duvan", "Zapata", "Toco@emai.l.com");
         registerSalesClerk("sales_clerk",TestDataConstants.PASSWORD1,"Abilio","Maia","sirAbilio@gmail.com");
         registerWarehouseEmployee("warehouse_employee",PASSWORD1,"Kuku", "Fidelis","kuku@email.com");
         registerAGVManager("AGV_Manager",PASSWORD1,"Fernando", "Andrade","nandices@email.com");
@@ -60,10 +60,10 @@ public class BackofficeUsersBootstrapper extends UsersBootstrapperBase implement
         registerUser(username,password,firstName,lastName,email,roles);
     }
 
-    private void registerMenuManager(final String username, final String password,
+    private void registerSalesManager(final String username, final String password,
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
-        roles.add(BaseRoles.MENU_MANAGER);
+        roles.add(BaseRoles.SALES_MANAGER);
 
         registerUser(username, password, firstName, lastName, email, roles);
     }
