@@ -52,7 +52,7 @@ public class ConnectAGVManagerUI extends AbstractUI {
             }
             print(answer);
         }while (true);
-        CONNECTION_CONTROLLER.close();
+        CONNECTION_CONTROLLER.closeClientConnection();
         return true;
     }
 

@@ -15,13 +15,14 @@ public class AGVManagerController {
         return split[4];
     }
 
-    public void changeStatus(String AGV_ID, String status) {
-        String string = "AGV="+AGV_ID+"/STATUS="+status;
+    public void changeStatus(String AGV_ID) {
+        String string = "AGV=" + AGV_ID;
         connectionController.sendMessage((byte) 1, (byte) 3, string);
+        connectionController.receiveMessage();
     }
 
     public void closeServer() {
         connectionController.sendMessage((byte) 1, (byte) 1, "");
-        connectionController.close();
+        connectionController.closeClientConnection();
     }
 }

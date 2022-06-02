@@ -11,7 +11,7 @@ import eapli.base.ordermanagement.domain.OrderLevel;
 import java.util.ArrayList;
 
 public class UpdateOrdersController {
-    public static boolean updateOrderToDispatched(String orderid) {
+    public static String updateOrderToDispatched(String orderid) {
         OrderServices orderServices = new OrderServices();
         ArrayList<Orders> orderstodispatch = (ArrayList<Orders>) orderServices.findReadyAssigned();
         AGV agvresponsible=new AGV(2,"base location","AGV responsible for ready tasks",new Model("great model","description"),new Status(2,"null"));
@@ -28,9 +28,9 @@ public class UpdateOrdersController {
                     agvresponsible.removeTask(orderid);
                 }
                 orderServices.updateOrders(o);
-                return true;
+                return String.valueOf(agvresponsible.getId());
             }
         }
-        return false;
+        return "";
     }
 }

@@ -33,13 +33,12 @@ public class AGVManagerHandler implements Runnable {
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
             byte[] message = new byte[255];
-            byte[] answer = new byte[255];
             do {
                 String s = "";
                 sIn.read(message);
                 version = message[0];
                 if (version == 1) {
-                    int finalLength = 0;
+                    int finalLength;
                     code = message[1];
                     length1 = message[2];
                     length2 = message[3];
@@ -51,21 +50,23 @@ public class AGVManagerHandler implements Runnable {
                     }
                     switch (code) {
                         case 0:
-                            ACK(answer);
+                            sOut.write(ServerFunctions.ACK());
                             break;
                         case 1:
-                            ACK(answer);
+                            sOut.write(ServerFunctions.ACK());
                             check = false;
                             break;
                         case 2:
-                            ACK(answer);
+                            sOut.write(ServerFunctions.ACK());
                             break;
                         case 3:
                             System.out.println("Sending message to the AGV Digital Twin");
                             connectionController.sendMessage(version, code, s);
+                            System.out.println("Message sent!");
+                            sOut.write(ServerFunctions.sendMessage(1, 3, "The message was sent with success"));
                             break;
                         case 4:
-                            sOut.write(ServerFunctions.sendMessage(answer, 4, String.valueOf(OrderAGVAssignmentController.assignTaskToAGV(s))));
+                            sOut.write(ServerFunctions.sendMessage(1, 4, String.valueOf(OrderAGVAssignmentController.assignTaskToAGV(s))));
                             break;
                         default:
                             System.out.println("There is no functionality for this code");
@@ -75,22 +76,13 @@ public class AGVManagerHandler implements Runnable {
 
             System.out.println("Client " + clientIP.getHostAddress() + ", port number: " + socket.getPort() + " disconnected");
             connectionController.sendMessage((byte) 1, (byte) 1, "");
-            connectionController.close();
+            connectionController.receiveMessage();
+            connectionController.closeClientConnection();
             sOut.close();
             sIn.close();
             socket.close();
         } catch (IOException ex) {
             System.out.println("IOException");
-        }
-    }
-
-    private void ACK(byte[] message) {
-        message[0] = 1;
-        message[1] = 2;
-        try {
-            sOut.write(message);
-        } catch (Exception ignored) {
-            System.out.println("There was a problem sending the message");
         }
     }
 }

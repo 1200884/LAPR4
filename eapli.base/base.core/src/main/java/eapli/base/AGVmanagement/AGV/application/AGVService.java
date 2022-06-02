@@ -9,6 +9,7 @@ import eapli.base.AGVmanagement.AGV.domain.repository.AGVPersist;
 import eapli.base.ordermanagement.domain.Orders;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AGVService {
 
@@ -20,8 +21,8 @@ public class AGVService {
         return agvPersist.createAGVPersist(agv);
     }
 
-    public static ArrayList<AGV> getAgvs() {
-        return (ArrayList<AGV>) agvrepository.findAll();
+    public static Iterable<AGV> getAgvs() {
+        return agvrepository.findAll();
     }
 
     public void updateAGV(AGV agv) {

@@ -12,19 +12,20 @@ public class OrderServer {
     private static final AddProductToCartController theController = new AddProductToCartController();
 
     public static void main(String[] args) {
-        ServerSocket myServerSocket = null;
+        ServerSocket myServerSocket;
         try {
             myServerSocket = new ServerSocket(125);
-            System.out.println("Waiting...");
+            while (true) {
+                System.out.println("Waiting...");
 
-            skt = myServerSocket.accept();
-            System.out.println("Accepted");
-            // create a new thread object
-            ClientHandler clientSock
-                    = new ClientHandler(skt);
+                skt = myServerSocket.accept();
+                System.out.println("Accepted");
+                // create a new thread object
+                ClientHandler clientSock = new ClientHandler(skt);
 
-            // This thread will handle the client separately
-            new Thread(clientSock).start();
+                // This thread will handle the client separately
+                new Thread(clientSock).start();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
             System.out.println("Failed");

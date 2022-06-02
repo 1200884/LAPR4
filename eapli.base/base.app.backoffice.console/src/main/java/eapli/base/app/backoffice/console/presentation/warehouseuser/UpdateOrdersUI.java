@@ -1,5 +1,6 @@
 package eapli.base.app.backoffice.console.presentation.warehouseuser;
 
+import eapli.base.app.other.console.connectionmanagement.application.AGVManagerController;
 import eapli.base.warehousemanagement.application.OrderAGVAssignmentController;
 import eapli.base.warehousemanagement.application.UpdateOrdersController;
 import eapli.framework.io.util.Console;
@@ -12,7 +13,10 @@ public class UpdateOrdersUI extends AbstractUI {
          while(!OrderAGVAssignmentController.existsOrderId(orderid)||!OrderAGVAssignmentController.isValidId(orderid)){
              orderid=Console.readLine("The order id that you introduced is invalid. Please enter a valid order id.");
          }
-        if (UpdateOrdersController.updateOrderToDispatched(orderid)){
+         String AGV_ID = UpdateOrdersController.updateOrderToDispatched(orderid);
+        if (!AGV_ID.equals("")){
+            AGVManagerController agvManagerController = new AGVManagerController();
+            agvManagerController.changeStatus(AGV_ID);
             System.out.println("The order status was successfully updated, and as of right now, being delivered to the customer.");
         }
         else{
