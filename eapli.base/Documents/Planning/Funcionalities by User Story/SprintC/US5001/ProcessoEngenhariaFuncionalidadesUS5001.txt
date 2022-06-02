@@ -1,0 +1,37 @@
+# US5001
+=======================================
+
+
+# 1. Requirements
+
+**5001** As Project Manager, I want that the team start developing the input communication module of the AGV digital twin to accept requests from the "AGVManager".
+
+- 5001.1. Main goal: The goal is to establish a connection between the AGVManager and the AGV digital twin for them both to communicate between them.
+
+- 5001.2. Functionalities: The AGVManager can send messages acording to the SPOMS protocol to the AGV digital twin and recieve messages back.
+
+- 5001.3. Dependencies: This US has no other dependencies other than the 2 servers which communicate between them.
+
+# 2. Analysis
+
+
+- 1. **Concepts**:The two servers just communicate in the background to make changes to the required parts of the project.
+
+- 2. **Organization**:The AGV digital twin recieves the requests from the AGVManager and procedes to it's treatment, after that it will act according to what the request contained.
+
+- 3. **Code**:There is a class that gets the server running with an infinite loop that waits for connections, then it creates a thread to treat the recieved socket and work on it's requests until restarted.
+
+# 3. Design
+
+## 3.1. Functionalities (SSD)
+
+![US5001_SSD.png](US5001_SSD.png)
+
+# 4. Implementation
+
+*Nesta secção a equipa deve providenciar, se necessário, algumas evidências de que a implementação está em conformidade com o design efetuado. Para além disso, deve mencionar/descrever a existência de outros ficheiros (e.g. de configuração) relevantes e destacar commits relevantes;*
+
+- When analysing the code it is possible to see how it is in accordance with the diagrams done for this US.
+
+- Relevant commits:
+  de31f59, 65b9f63, 0891000

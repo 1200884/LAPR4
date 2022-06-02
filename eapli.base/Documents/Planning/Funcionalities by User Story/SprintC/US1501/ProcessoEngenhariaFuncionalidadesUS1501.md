@@ -6,12 +6,12 @@
 
 **1501** As Customer, I want to view/search the product catalog and be able to add a product to the shopping cart.
 
-- 1004.1. Main goal: Save the items in the shopping cart until it turns to an order 
+- 1501.1. Main goal: Save the items in the shopping cart until it turns to an order 
 
-- 1004.2. Functionalities: The Customer can choose if the catalog is alphabetically organized by brand or by category.
+- 1501.2. Functionalities: The Customer can choose if the catalog is alphabetically organized by brand or by category.
 The Customer can choose the product by its name and can choose the amount to add to the shopping cart.
 
-- 1004.3. Dependencies: This Us has a dependencies in US1001 and mainly in the US1002.
+- 1501.3. Dependencies: This Us has a dependencies in US1001 and mainly in the US1002.
 
 # 2. Analysis
 

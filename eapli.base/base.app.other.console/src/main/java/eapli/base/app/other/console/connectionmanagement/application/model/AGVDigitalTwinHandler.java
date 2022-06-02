@@ -109,6 +109,7 @@ public class AGVDigitalTwinHandler implements Runnable{
             sIn.close();
             socket.close();
         }catch(IOException ex) {
+            System.out.println(ex);
             System.out.println("There was a problem with the input/output streams");
         }
     }
@@ -118,7 +119,8 @@ public class AGVDigitalTwinHandler implements Runnable{
         message[1] = 2;
         try {
             sOut.write(message);
-        }catch (Exception ignored) {
+        }catch (Exception ex) {
+            System.out.println(ex);
             System.out.println("There was a problem sending the message");
         }
     }
