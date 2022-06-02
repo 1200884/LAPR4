@@ -9,6 +9,7 @@ import eapli.framework.visitor.Visitor;
 public class ListDispatchedOrders extends AbstractListUI<Orders> {
     @Override
     protected Iterable<Orders> elements() {
+
         OrderServices orderServices = new OrderServices();
         return orderServices.findDispatched();
     }

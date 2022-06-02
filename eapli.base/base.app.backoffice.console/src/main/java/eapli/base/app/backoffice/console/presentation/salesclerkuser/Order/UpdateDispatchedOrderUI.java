@@ -13,6 +13,7 @@ public class UpdateDispatchedOrderUI extends AbstractUI {
             orderId = Console.readLine("Your order is invalid or isn't in the dispatched stage yet. Please introduce another order ID.");
         }
         if (dispatchedOrderController.updateOrderToDelivered(orderId)) {
+
             System.out.println("The order you introduced was updated sucessfully!");
         }
         return true;
