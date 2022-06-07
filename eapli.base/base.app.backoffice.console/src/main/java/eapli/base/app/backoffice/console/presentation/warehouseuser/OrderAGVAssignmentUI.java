@@ -13,14 +13,22 @@ public class OrderAGVAssignmentUI extends AbstractUI {
         validateId(orderId);
         //valid id at this point
         AGVManagerController agvManagerController = new AGVManagerController();
+        System.out.println("1");
         String AGV_ID = agvManagerController.serverTaskAssign(orderId);
+        System.out.println("2");
         agvManagerController.changeStatus(AGV_ID, "Working");
+        System.out.println("3");
         String string = OrderAGVAssignmentController.getAGV(AGV_ID);
-        System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n" + string);
-        agvManagerController.closeServer();
+        System.out.println("4");
+        if (OrderAGVAssignmentController.assignTaskToAGV(orderId) == 0) {
+            System.out.println("5");
+            System.out.println("Sorry, we couldn't assign the order");
+        } else {
+            System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n" + string);
+            agvManagerController.closeServer();
+        }
         return true;
     }
-
     private void validateId(String orderId) {
         while (!OrderAGVAssignmentController.existsOrderId(orderId) || !OrderAGVAssignmentController.isValidId(orderId)) {
             if (!OrderAGVAssignmentController.existsOrderId(orderId)) {

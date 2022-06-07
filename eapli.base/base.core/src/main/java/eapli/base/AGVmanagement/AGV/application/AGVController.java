@@ -30,7 +30,7 @@ public class AGVController {
 
     ArrayList<Orders> queue = new ArrayList<>();
 
-    public String createAVG(double maxWeight, String baseLocation, String shortDescription, int modelID) {
+    public String createAVG(double maxWeight,int port, String baseLocation, String shortDescription, int modelID) {
         Model model = fetchModel(modelID);
         System.out.println("alfredo");
         Status status = new Status(2, "null");

@@ -43,14 +43,6 @@ public class OrderServices {
     }
 
     public Orders findbyid(String id) {
-        /*ArrayList<Orders> orders = (ArrayList<Orders>) order_repository.findAll();
-        for (Orders o : orders) {
-            if (o.getId().equals(id)) {
-                return o;
-            }
-        }
-        return null;*/
-
         if (order_repository.ofIdentity(id).isPresent()) {
             return order_repository.ofIdentity(id).get();
         } else return null;
