@@ -7,7 +7,6 @@ public class UpdateDispatchedOrderController {
     OrderServices orderServices = new OrderServices();
 
     public boolean existsOrder(String orderid) {
-
         return orderServices.findbyid(orderid).getOrderLevel().getLevel().equals(OrderLevel.Level.DISPATCHED);
     }
 

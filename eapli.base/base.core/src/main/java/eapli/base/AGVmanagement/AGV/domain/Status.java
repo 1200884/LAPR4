@@ -14,7 +14,7 @@ import java.util.*;
 public class Status implements ValueObject {
     private int battery_left;
     @ElementCollection
-    private Set<String> task = new HashSet<>();
+    private List<String> task = new ArrayList<>();
 
     public enum Availability {
         AVAILABLE,
@@ -40,13 +40,12 @@ public class Status implements ValueObject {
         addTask(task);
         if (this.task.size() > 1) {
             setAvailability(Availability.WORKING);
-        }
-        else {
+        } else {
             setAvailability(Availability.AVAILABLE);
         }
     }
 
-    public Set<String> gettasks() {
+    public List<String> gettasks() {
 
         return this.task;
     }
@@ -84,7 +83,7 @@ public class Status implements ValueObject {
 
     public void addTask(String task) {
         this.task.add(task);
-        this.availability=Availability.WORKING;
+        this.availability = Availability.WORKING;
     }
 
     private void setTask(String task) {

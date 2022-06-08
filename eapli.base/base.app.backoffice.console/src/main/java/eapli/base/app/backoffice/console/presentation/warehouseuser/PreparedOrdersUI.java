@@ -24,7 +24,7 @@ public class PreparedOrdersUI extends AbstractListUI<Orders> {
 
     @Override
     protected String listHeader() {
-        return String.format("#  %-10s%-20s%-30s%-30s", "ID", "TIME", "ADDRESS", "SHOPPING CART", "SHIPMENT METHOD", "PAYMENT METHOD", "LEVEL");
+        return String.format("#  %-10s%-20s%-30s%-30s%-30s%-30s%-30s","ID","TIME", "ADDRESS", "SHIPMENT METHOD", "PAYMENT METHOD","PRICE","LEVEL");
     }
 
     @Override

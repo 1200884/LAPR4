@@ -9,6 +9,7 @@ import eapli.framework.domain.model.AggregateRoot;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -25,6 +26,8 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     private Status status;
     @Embedded
     private Location location;
+    private int port;
+
     protected AGV() {
     }
 
@@ -32,13 +35,22 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         this.id = Integer.parseInt(generateId());
         this.maximum_weight = maximum_weight;
         this.shortDescription = shortDescription;
+        this.port = 0;
         this.model = model;
         this.baseLocation = baseLocation;
         this.status = status;
         this.status.setAvailability(Status.Availability.AVAILABLE);
-        Location location=new Location(randomiselocation(),randomiselocation());
-        this.location=location;
-   }
+        Location location = new Location(randomiselocation(), randomiselocation());
+        this.location = location;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
 
     public Status getStatus() {
         return status;
@@ -52,7 +64,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
         return this.status.numberoftasks();
     }
 
-    public Set<String> getagvtasks() {
+    public List<String> getagvtasks() {
         return this.status.gettasks();
     }
 
@@ -71,6 +83,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     public void addTask(String task) {
         this.status.addTask(task);
         this.getLocation().setX(randomiselocation());
+        this.getLocation().setX(randomiselocation());
     }
 
     public void removeTask(String task) {
@@ -80,11 +93,11 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
 
     public static String generateId() {
         Random rnd = new Random();
-        int number=0;
-        String number2="";
-        while(number2.length()!=9) {
+        int number = 0;
+        String number2 = "";
+        while (number2.length() != 9) {
             number = rnd.nextInt(999999999);
-            number2=String.valueOf(number);
+            number2 = String.valueOf(number);
         }
         return number2;
     }
@@ -147,7 +160,8 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     public String toString() {
         return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status.gettasks();
     }
-    public static int randomiselocation(){
+
+    public static int randomiselocation() {
         Random rnd = new Random();
         int number = rnd.nextInt(20);
         return number;
