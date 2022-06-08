@@ -1,5 +1,7 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +13,7 @@ public class ClientConnection {
     private static final int AGV_MANAGER_PORT = 124;
     private static final int ORDERS_PORT = 125;
 
-    private static Socket socket;
+    private static SSLSocket socket;
     private static DataOutputStream sOut;
     private static DataInputStream sIn;
 
@@ -29,10 +31,18 @@ public class ClientConnection {
     }
     private boolean establishConnection(String host, int port) {
         try {
-            socket = new Socket(host, port);
+            SSLSocketFactory sslsocketfactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
+            //specifing the trustStore file which contains the certificate & public of the server
+            System.setProperty("javax.net.ssl.trustStore","C:\\Users\\PC\\OneDrive - Instituto Superior de Engenharia do Porto\\Desktop\\Gustavo\\ISEP\\LAPR4\\eapli.base\\Documents\\ClientAuth\\myTrustStore.jts");
+            //specifing the password of the trustStore file
+            System.setProperty("javax.net.ssl.trustStorePassword","Password1");
+            //This optional and it is just to show the dump of the details of the handshake process
+            System.setProperty("javax.net.debug","all");
+            socket = (SSLSocket) sslsocketfactory.createSocket(host,port);
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
         }catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;

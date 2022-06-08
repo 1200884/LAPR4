@@ -3,21 +3,28 @@ package eapli.base.app.other.console.connectionmanagement.application.model;
 
 import eapli.base.productmanagement.Product.application.AddProductToCartController;
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
 
 public class OrderServer {
-    private static Socket skt;
+    private static SSLSocket skt;
     private static final AddProductToCartController theController = new AddProductToCartController();
 
     public static void main(String[] args) {
-        ServerSocket myServerSocket = null;
+        SSLServerSocketFactory sslServerSocketfactory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
+        SSLServerSocket myServerSocket;
+        System.setProperty("javax.net.ssl.keyStore","C:\\Users\\PC\\OneDrive - Instituto Superior de Engenharia do Porto\\Desktop\\Gustavo\\ISEP\\LAPR4\\eapli.base\\Documents\\ClientAuth\\myKeyStore.jks");
+        //specifing the password of the keystore file
+        System.setProperty("javax.net.ssl.keyStorePassword","Password1");
+        //This optional and it is just to show the dump of the details of the handshake process
+        System.setProperty("javax.net.debug","all");
         try {
-            myServerSocket = new ServerSocket(125);
+            myServerSocket = (SSLServerSocket) sslServerSocketfactory.createServerSocket(125);
             while(true) {
                 System.out.println("Waiting...");
-                skt = myServerSocket.accept();
+                skt = (SSLSocket)myServerSocket.accept();
                 System.out.println("Accepted");
                 // create a new thread object
                 ClientHandler clientSock = new ClientHandler(skt);
@@ -34,9 +41,9 @@ public class OrderServer {
 
     private static class ClientHandler implements Runnable {
 
-        private final Socket skt;
+        private final SSLSocket skt;
 
-        public ClientHandler(Socket socket) {
+        public ClientHandler(SSLSocket socket) {
             this.skt = socket;
         }
 
@@ -45,12 +52,17 @@ public class OrderServer {
             try {
                 DataOutputStream myOutput = new DataOutputStream(skt.getOutputStream());
                 DataInputStream myInput = new DataInputStream(skt.getInputStream());
+                System.out.println("teste0");
                 while (true) {
                     System.out.println("Waiting for message...");
                     byte[] buf = new byte[255];
+                    //String buf2=myInput.readUTF();
+                    System.out.println("teste");
                     myInput.read(buf);
+                    System.out.println("teste1");
                     String answer = readMessage(buf);
                     if (buf[1] != 1) {
+                        System.out.println("teste2");
                         myOutput.write(writeMessage(answer));
                     } else {
                         break;
