@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ClientConnection {
 
-    private static final String HOST = "localhost";
+    private static final String HOST = "172.18.159.246";
     private static final int AGV_TWIN_PORT = 123;
     private static final int AGV_MANAGER_PORT = 124;
     private static final int ORDERS_PORT = 125;
@@ -29,16 +29,12 @@ public class ClientConnection {
                return false;
        }
     }
+
     private boolean establishConnection(String host, int port) {
         try {
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
-            //specifing the trustStore file which contains the certificate & public of the server
-            System.setProperty("javax.net.ssl.trustStore","C:\\Users\\PC\\OneDrive - Instituto Superior de Engenharia do Porto\\Desktop\\Gustavo\\ISEP\\LAPR4\\eapli.base\\Documents\\ClientAuth\\myTrustStore.jts");
-            //specifing the password of the trustStore file
-            System.setProperty("javax.net.ssl.trustStorePassword","Password1");
-            //This optional and it is just to show the dump of the details of the handshake process
-            System.setProperty("javax.net.debug","all");
             socket = (SSLSocket) sslsocketfactory.createSocket(host,port);
+            socket.startHandshake();
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
         }catch (Exception e) {

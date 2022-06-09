@@ -3,60 +3,68 @@ package eapli.base.app.other.console.connectionmanagement.application.model;
 
 import eapli.base.productmanagement.Product.application.AddProductToCartController;
 import java.io.*;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 
 public class OrderServer {
-    private static SSLSocket skt;
+    private static Socket skt;
     private static final AddProductToCartController theController = new AddProductToCartController();
+    static final int SERVER_PORT=125;
+    static final String KEY_STORE="Documents/ClientAuth/myKeyStore.jks";
+    static final String TRUSTED_STORE="Documents/ClientAuth/myTrustStore.jts";
+    static final String KEYSTORE_PASS="Password1";
 
-    public static void main(String[] args) {
-        SSLServerSocketFactory sslServerSocketfactory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
-        SSLServerSocket myServerSocket;
-        System.setProperty("javax.net.ssl.keyStore","C:\\Users\\PC\\OneDrive - Instituto Superior de Engenharia do Porto\\Desktop\\Gustavo\\ISEP\\LAPR4\\eapli.base\\Documents\\ClientAuth\\myKeyStore.jks");
-        //specifing the password of the keystore file
-        System.setProperty("javax.net.ssl.keyStorePassword","Password1");
-        //This optional and it is just to show the dump of the details of the handshake process
-        System.setProperty("javax.net.debug","all");
+    public static void main(String[] args) throws Exception{
+        SSLServerSocket sock=null;
+
+
+        // Trust these certificates provided by authorized clients
+        System.setProperty("javax.net.ssl.trustStore", TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.trustStorePassword",KEYSTORE_PASS);
+
+        // Use this certificate and private key as server certificate
+        System.setProperty("javax.net.ssl.keyStore",KEY_STORE);
+        System.setProperty("javax.net.ssl.keyStorePassword",KEYSTORE_PASS);
+        SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         try {
-            myServerSocket = (SSLServerSocket) sslServerSocketfactory.createServerSocket(125);
-            while(true) {
-                System.out.println("Waiting...");
-                skt = (SSLSocket)myServerSocket.accept();
-                System.out.println("Accepted");
-                // create a new thread object
-                ClientHandler clientSock = new ClientHandler(skt);
-
-                // This thread will handle the client separately
-                new Thread(clientSock).start();
-            }
-        } catch (IOException ex) {
+            sock = (SSLServerSocket) sslF.createServerSocket(SERVER_PORT);
+            sock.setNeedClientAuth(true);
+        }
+        catch(IOException ex) {
             ex.printStackTrace();
-            System.out.println("Failed");
+            System.out.println("Server failed to open local port " + SERVER_PORT);
+            System.exit(1);
+        }
+
+        while(true) {
+            skt=sock.accept();
+            new Thread(new ClientHandler(skt)).start();
         }
     }
 
 
     private static class ClientHandler implements Runnable {
 
-        private final SSLSocket skt;
+        private final Socket skt;
+        private DataOutputStream sOut;
+        private DataInputStream sIn;
 
-        public ClientHandler(SSLSocket socket) {
-            this.skt = socket;
+        public ClientHandler(Socket cli_s) {
+            this.skt = cli_s;
         }
 
         @Override
         public void run() {
             try {
+                System.out.println("New client connection");
                 DataOutputStream myOutput = new DataOutputStream(skt.getOutputStream());
                 DataInputStream myInput = new DataInputStream(skt.getInputStream());
                 System.out.println("teste0");
                 while (true) {
                     System.out.println("Waiting for message...");
                     byte[] buf = new byte[255];
-                    //String buf2=myInput.readUTF();
                     System.out.println("teste");
                     myInput.read(buf);
                     System.out.println("teste1");
