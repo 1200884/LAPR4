@@ -1,17 +1,18 @@
 
 package eapli.base.warehousemanagement.application;
 
-        import eapli.base.AGVmanagement.AGV.application.AGVService;
-        import eapli.base.AGVmanagement.AGV.domain.AGV;
-        import eapli.base.AGVmanagement.AGV.domain.Status;
-        import eapli.base.modelmanagement.Model.domain.Model;
-        import eapli.base.ordermanagement.application.OrderServices;
-        import eapli.base.ordermanagement.domain.Orders;
-        import eapli.base.ordermanagement.domain.OrderLevel;
+import eapli.base.AGVmanagement.AGV.application.AGVService;
+import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
+import eapli.base.modelmanagement.Model.domain.Model;
+import eapli.base.ordermanagement.application.OrderServices;
+import eapli.base.ordermanagement.domain.Orders;
+import eapli.base.ordermanagement.domain.OrderLevel;
 
-        import java.util.List;
-        import java.util.Random;
-        import java.util.Set;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Random;
+import java.util.Set;
 
 
 public class OrderAGVAssignmentController {
@@ -26,6 +27,7 @@ public class OrderAGVAssignmentController {
     }
 
     public static boolean existsOrderId(String answer) {
+
         return Orders.existsId(answer);
     }
 
@@ -44,9 +46,11 @@ public class OrderAGVAssignmentController {
         AGVService agvService = new AGVService();
         OrderServices orderServices = new OrderServices();
         OrderLevel orderLevel = new OrderLevel(OrderLevel.Level.ASSIGNED);
+        System.out.println("albert");
         try {
             orderServices.findbyid(orderid);
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
+            System.out.println("No Such Element exceção");
             return 0;
         }
         if (orderServices.findbyid(orderid) == null) {
@@ -67,7 +71,7 @@ public class OrderAGVAssignmentController {
 
     public static AGV agvwithlesstasks() {
         int numbertasks = Integer.MAX_VALUE;
-        AGV lesstasks = new AGV(50,"isep","ze",new Model("abilio","alfred"),new Status(2,"NULL"));
+        AGV lesstasks = new AGV(50, "isep", "ze", new Model("abilio", "alfred"), new Status(2, "NULL"));
         Iterable<AGV> agvs = AGVService.getAgvs();
         for (AGV a : agvs) {
             if (numbertasks > a.numberoftasks()) {
