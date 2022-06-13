@@ -27,6 +27,8 @@ import eapli.base.app.backoffice.console.presentation.SalesManager.QuestionerUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Category.CategoryUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.ListCustomerAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.RegisterCustomerUI;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.Order.ListDispatchedOrders;
+import eapli.base.app.backoffice.console.presentation.salesclerkuser.Order.UpdateDispatchedOrderUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Order.Shopping_CartUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.AddProductUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Product.ListProductUI;
@@ -81,6 +83,8 @@ public class MainMenu extends AbstractUI {
     private static final int CUSTOMER_REGISTER = 3;
     private static final int PRODUCT_CATEGORY = 5;
     private static final int BRAND_CATEGORY = 6;
+    private static final int LIST_DISPATCHED_ORDERS = 7;
+    private static final int UPDATE_DELIVERED_ORDERS = 8;
 
     // Warehouse Employee
     private static final int SETTINGS = 2;
@@ -208,6 +212,8 @@ public class MainMenu extends AbstractUI {
                 new CategoryUI()::show);
         menu.addItem(BRAND_CATEGORY, "Define a new Brand of Products",
                 new CategoryUI()::show);
+        menu.addItem(LIST_DISPATCHED_ORDERS, "List the orders that are being dispatched to the customers", new ListDispatchedOrders()::show);
+        menu.addItem(UPDATE_DELIVERED_ORDERS, "Update a order status to delivered to the customer.", new UpdateDispatchedOrderUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
         return menu;
     }

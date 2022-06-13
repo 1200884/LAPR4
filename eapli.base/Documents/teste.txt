@@ -93,7 +93,7 @@ The options are:
 * Yes, one or more, and I am willing to answer more questions.
 ]
 
-[ Section 7: About kids. -----Condition dependent S6, Q14, further questions.
+[ Section 7: About kids. -----Condition dependent S6, Q14, Op4, further questions.
 >Q15: How many kids do you have. (Single Choice)
 * 1 or 2.
 * 3 or 4.

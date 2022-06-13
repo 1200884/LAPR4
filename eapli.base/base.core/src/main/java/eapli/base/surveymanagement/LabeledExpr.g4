@@ -15,13 +15,13 @@ final_message: text;
 
 type:repeatability;
 repeatability: repeatable|non_repeatable;
-repeatable: free_text|numeric|single_choice|single_choice_input|multiple_choice|multiple_choice_input;
-non_repeatable:sorting_options|scaling_options;
+repeatable:free_text|numeric|single_choice_input|multiple_choice_input;
+non_repeatable:single_choice|multiple_choice|sorting_options|scaling_options;
 obligatoriness: mandatory|optional|cd;
 
 mandatory:MANDATORY;
 optional:OPTIONAL;
-cd:CD NEXT id NEXT id NEXT 'further questions.' ;
+cd:CD NEXT id NEXT id NEXT id NEXT 'further questions.' ;
 
 free_text: '(Free Text)';
 numeric:'(Numeric)';

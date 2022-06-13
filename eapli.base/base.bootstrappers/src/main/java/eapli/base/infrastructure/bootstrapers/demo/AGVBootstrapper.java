@@ -32,7 +32,7 @@ public class AGVBootstrapper extends AGVBootstrapperBase implements Action {
         return registerModel(name, description);
     }
 
-    private AGV createAGV(final double maxWeight, final String baseLocation, final String shortDescription, final Model model,final Status status) {
+    private AGV createAGV(final double maxWeight,final String baseLocation, final String shortDescription, final Model model,final Status status) {
         return registerAGV(maxWeight, baseLocation, shortDescription, model);
     }
 

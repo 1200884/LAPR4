@@ -1,15 +1,17 @@
-package eapli.base.app.backoffice.console.presentation.warehouseuser;
+package eapli.base.app.backoffice.console.presentation.salesclerkuser.Order;
 
+import eapli.base.app.backoffice.console.presentation.warehouseuser.SystemOrderPrinter;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Orders;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
 
-public class PreparedOrdersUI extends AbstractListUI<Orders> {
+public class ListDispatchedOrders extends AbstractListUI<Orders> {
     @Override
     protected Iterable<Orders> elements() {
+
         OrderServices orderServices = new OrderServices();
-        return orderServices.findAssigned();
+        return orderServices.findDispatched();
     }
 
     @Override
@@ -19,7 +21,7 @@ public class PreparedOrdersUI extends AbstractListUI<Orders> {
 
     @Override
     protected String elementName() {
-        return "Ready Order";
+        return "Dispatched Order";
     }
 
     @Override
@@ -29,12 +31,11 @@ public class PreparedOrdersUI extends AbstractListUI<Orders> {
 
     @Override
     protected String emptyMessage() {
-        return "No orders to dispatch yet.";
-
+        return "Unfortunately, there are no orders yet dispatched to the Customers";
     }
 
     @Override
     public String headline() {
-        return "List of orders to dispatch";
+        return "Orders that are being dispatched to the customers";
     }
 }
