@@ -21,7 +21,7 @@ obligatoriness: mandatory|optional|cd;
 
 mandatory:MANDATORY;
 optional:OPTIONAL;
-cd:CD NEXT id NEXT id NEXT 'further questions.' ;
+cd:CD NEXT id NEXT id NEXT id NEXT 'further questions.' ;
 
 free_text: '(Free Text)';
 numeric:'(Numeric)';
