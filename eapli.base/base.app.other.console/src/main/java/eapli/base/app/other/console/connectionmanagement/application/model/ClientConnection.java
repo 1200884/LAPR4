@@ -1,38 +1,69 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
+import eapli.base.AGVmanagement.AGV.application.AGVService;
+import eapli.base.AGVmanagement.AGV.domain.AGV;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class ClientConnection {
 
     private static final String HOST = "localhost";
-    private static final int AGV_TWIN_PORT = 123;
-    private static final int AGV_MANAGER_PORT = 124;
-    private static final int ORDERS_PORT = 125;
+    private static final int AGV_MANAGER_PORT = 123;
+    private static final int ORDERS_PORT = 124;
+    private static final int AGV_TWIN_PORT_START = 125;
+    private static final int NUM_AGVS = 5;
 
-    private static Socket socket;
-    private static DataOutputStream sOut;
-    private static DataInputStream sIn;
+    private Socket socket;
+    private List<Socket> twinSocket = new ArrayList<>();
+    private DataOutputStream sOut;
+    private List<DataOutputStream> twinSOut = new ArrayList<>();
+    private DataInputStream sIn;
+    private List<DataInputStream> twinSIn = new ArrayList<>();
 
     public boolean establishConnection(int num) {
-       switch (num) {
-           case 1:
-               return establishConnection(HOST, AGV_TWIN_PORT);
-           case 2:
-               return establishConnection(HOST, AGV_MANAGER_PORT);
-           case 3:
-               return establishConnection(HOST, ORDERS_PORT);
-           default:
-               return false;
-       }
+        switch (num) {
+            case 1:
+                for (int i = AGV_TWIN_PORT_START; i < (AGV_TWIN_PORT_START + NUM_AGVS); i++) {
+                    if (!establishTwinConnection(HOST, i, i - AGV_TWIN_PORT_START)) {
+                        System.out.println("Nao foi feita a conexao com os agvs digital twins");
+                        return false;
+                    }
+
+                }
+                System.out.println("Foi feita a conexao com os agvs digital twins");
+                return true;
+            case 2:
+                return establishConnection(HOST, AGV_MANAGER_PORT);
+            case 3:
+                return establishConnection(HOST, ORDERS_PORT);
+            default:
+                return false;
+        }
     }
+
     private boolean establishConnection(String host, int port) {
         try {
             socket = new Socket(host, port);
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
-        }catch (Exception e) {
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean establishTwinConnection(String host, int port, int i) {
+        try {
+            twinSocket.add(new Socket(host, port));
+            twinSOut.add(new DataOutputStream(twinSocket.get(i).getOutputStream()));
+            twinSIn.add(new DataInputStream(twinSocket.get(i).getInputStream()));
+        } catch (Exception e) {
+            System.out.println("Erro na conexao - " + e);
             return false;
         }
         return true;
@@ -41,7 +72,16 @@ public class ClientConnection {
     public boolean sendMessage(byte version, byte code, String message) {
         try {
             sOut.write(convertToSend(version, code, message));
-        }catch (Exception ignored) {
+        } catch (Exception ignored) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean sendTwinMessage(byte version, byte code, String message, int i) {
+        try {
+            twinSOut.get(i - AGV_TWIN_PORT_START).write(convertToSend(version, code, message));
+        } catch (Exception ignored) {
             return false;
         }
         return true;
@@ -53,7 +93,19 @@ public class ClientConnection {
         try {
             sIn.read(message);
             returnable = convertToReceive(message);
-        }catch (Exception ignored) {
+        } catch (Exception ignored) {
+            return null;
+        }
+        return returnable;
+    }
+
+    public String receiveTwinMessage(int i) {
+        String returnable;
+        byte[] message = new byte[255];
+        try {
+            twinSIn.get(i - AGV_TWIN_PORT_START).read(message);
+            returnable = convertToReceive(message);
+        } catch (Exception ignored) {
             return null;
         }
         return returnable;
@@ -62,7 +114,18 @@ public class ClientConnection {
     public boolean close() {
         try {
             socket.close();
-        }catch (Exception ignored) {
+        } catch (Exception ignored) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean twinClose() {
+        try {
+            for (int i = AGV_TWIN_PORT_START; i < (AGV_TWIN_PORT_START + NUM_AGVS); i++) {
+                twinSocket.get(i - AGV_TWIN_PORT_START).close();
+            }
+        } catch (Exception ignored) {
             return false;
         }
         return true;
@@ -80,7 +143,6 @@ public class ClientConnection {
     }
 
     private String convertToReceive(byte[] bytes) {
-        //"1361231
         String string = "", prov = "";
         string += bytes[0] + ";";
         string += bytes[1] + ";";
@@ -95,5 +157,9 @@ public class ClientConnection {
         }
         string += prov;
         return string;
+    }
+
+    public List<Socket> getTwinSocket() {
+        return twinSocket;
     }
 }

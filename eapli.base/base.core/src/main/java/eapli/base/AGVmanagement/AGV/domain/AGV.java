@@ -18,6 +18,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     double maximum_weight;
     private String shortDescription;
     private String baseLocation;
+    private int port = 0;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Model model;
     @Embedded
@@ -66,6 +67,14 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
 
     public int getId() {
         return id;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
     public void addTask(String task) {

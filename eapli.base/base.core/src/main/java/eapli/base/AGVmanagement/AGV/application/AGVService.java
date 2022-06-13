@@ -21,8 +21,8 @@ public class AGVService {
         return agvPersist.createAGVPersist(agv);
     }
 
-    public static Iterable<AGV> getAgvs() {
-        return agvrepository.findAll();
+    public static ArrayList<AGV> getAgvs() {
+        return (ArrayList<AGV>) agvrepository.findAll();
     }
 
     public void updateAGV(AGV agv) {

@@ -9,7 +9,7 @@ public class AGVManagerServerConnection {
 
     public static void main(String args[]) throws Exception {
 
-        ServerSocket serverSocket = new ServerSocket(124);
+        ServerSocket serverSocket = new ServerSocket(123);
         while(true) {
             try {
                 System.out.println("Waiting...");

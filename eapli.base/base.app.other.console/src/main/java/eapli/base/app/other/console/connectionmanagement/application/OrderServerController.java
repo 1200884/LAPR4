@@ -18,8 +18,8 @@ public class OrderServerController {
         byte version = VERSION_SERVER;
         byte code = CODE_VALIDATE;
         String message=String.valueOf(customer);
-        theController.sendMessage(version,code,message);
-        String answer=theController.receiveMessage();
+        theController.sendMessage(version,code,message, 0);
+        String answer=theController.receiveMessage(0);
         String data = answer.split(";",-2)[4];
         System.out.println("message:"+data);
         return Objects.equals(data, "yes");
@@ -29,8 +29,8 @@ public class OrderServerController {
         byte version = VERSION_SERVER;
         byte code = CODE_ADD_PRODUCT;
         String message=name+";"+quantity;
-        theController.sendMessage(version,code,message);
-        String answer=theController.receiveMessage();
+        theController.sendMessage(version,code,message, 0);
+        String answer=theController.receiveMessage(0);
         return answer.split(";",-2)[4];
     }
 
@@ -38,8 +38,8 @@ public class OrderServerController {
         byte version = VERSION_SERVER;
         byte code = CODE_SAVE;
         String message="";
-        theController.sendMessage(version,code,message);
-        String answer=theController.receiveMessage();
+        theController.sendMessage(version,code,message, 0);
+        String answer=theController.receiveMessage(0);
         return answer.split(";",-2)[4];
     }
 
@@ -47,8 +47,8 @@ public class OrderServerController {
         byte version= VERSION_SERVER;
         byte code=CODE_DISCONNECT;
         String message="";
-        theController.sendMessage(version,code,message);
-        String answer=theController.receiveMessage();
+        theController.sendMessage(version,code,message, 0);
+        String answer=theController.receiveMessage(0);
         return answer.split(";",-2)[4];
     }
 }

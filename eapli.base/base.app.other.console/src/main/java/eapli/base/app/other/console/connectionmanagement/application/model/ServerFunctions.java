@@ -1,5 +1,7 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
+import java.util.Random;
+
 public class ServerFunctions {
 
     public static byte[] sendMessage(int version, int code, String message) {
@@ -23,5 +25,11 @@ public class ServerFunctions {
             System.out.println("There was a problem sending the message");
         }
         return message;
+    }
+
+    public static int randomiseLocation() {
+        Random rnd = new Random();
+        int number = rnd.nextInt(20);
+        return number;
     }
 }

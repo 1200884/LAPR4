@@ -2,15 +2,11 @@ package eapli.base.warehousemanagement.application;
 
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
-import eapli.base.AGVmanagement.AGV.domain.Status;
-import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Orders;
 import eapli.base.ordermanagement.domain.OrderLevel;
 
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 
 public class OrderAGVAssignmentController {
@@ -39,45 +35,23 @@ public class OrderAGVAssignmentController {
         return emptyagv;
     }
 */
-    public static int assignTaskToAGV(String orderid) {
+    public static void assignTaskToAGV(AGV agv, String orderid) {
         AGVService agvService = new AGVService();
         OrderServices orderServices = new OrderServices();
         OrderLevel orderLevel = new OrderLevel(OrderLevel.Level.ASSIGNED);
         try {
             orderServices.findbyid(orderid);
         } catch (Exception e) {
-            return 0;
+            return;
         }
         if (orderServices.findbyid(orderid) == null) {
-            return 0;
-        }
-        System.out.println("1");
-        System.out.println(AGVService.getAgvs());
-        AGV agvwithnotasks = agvwithlesstasks();
-        agvService.updateAGV(agvwithnotasks);
-        if (agvwithnotasks.hasOrder(orderid)) {
-            return agvwithnotasks.getId();
+            return;
         }
         orderServices.findbyid(orderid).setOrderLevel(orderLevel);
         orderServices.updateOrders(orderServices.findbyid(orderid));
-        System.out.println(agvwithnotasks.getStatus().gettasks());
-        agvwithnotasks.addTask(orderid);
-        agvService.updateAGV(agvwithnotasks);
+        agv.addTask(orderid);
+        agvService.updateAGV(agv);
         System.out.println(AGVService.getAgvs());
-        return agvwithnotasks.getId();
-    }
-
-    public static AGV agvwithlesstasks() {
-        int numbertasks = Integer.MAX_VALUE;
-        AGV lesstasks = new AGV(50,"isep","ze",new Model("abilio","alfred"),new Status(2,"NULL"));
-        Iterable<AGV> agvs = AGVService.getAgvs();
-        for (AGV a : agvs) {
-            if (numbertasks > a.numberoftasks()) {
-                numbertasks = a.numberoftasks();
-                lesstasks = a;
-            }
-        }
-        return lesstasks;
     }
 
     public static int randomizetasktime() {
@@ -96,7 +70,6 @@ public class OrderAGVAssignmentController {
             return "There was a problem retrieving the AGV";
         }
         for (AGV agv : AGVService.getAgvs()) {
-            System.out.println(agv);
             if (agv.getId() == intAGV) {
                 return agv.toString();
             }

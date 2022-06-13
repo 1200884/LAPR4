@@ -1,6 +1,5 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
-
 import eapli.base.productmanagement.Product.application.AddProductToCartController;
 import java.io.*;
 import java.net.ServerSocket;
@@ -14,7 +13,7 @@ public class OrderServer {
     public static void main(String[] args) {
         ServerSocket myServerSocket;
         try {
-            myServerSocket = new ServerSocket(125);
+            myServerSocket = new ServerSocket(124);
             while (true) {
                 System.out.println("Waiting...");
 

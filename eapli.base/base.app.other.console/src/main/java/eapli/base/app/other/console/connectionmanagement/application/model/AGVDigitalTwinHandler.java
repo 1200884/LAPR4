@@ -1,20 +1,23 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
-import eapli.base.AGVmanagement.AGV.domain.AGV;
-import eapli.base.AGVmanagement.AGV.domain.Status;
-import eapli.base.AGVmanagement.AGV.domain.repository.AGVRepository;
-import eapli.base.infrastructure.persistence.PersistenceContext;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
-public class AGVDigitalTwinHandler implements Runnable{
+public class AGVDigitalTwinHandler implements Runnable {
 
-    private static final AGVRepository agvrepository = PersistenceContext.repositories().AGVs();
+    private int agvID;
+    private int posX = 0;
+    private int posY = 0;
+    private List<String> tasks = new ArrayList<>();
+    private String status = "Available";
 
     private final Socket socket;
     private DataOutputStream sOut;
@@ -28,7 +31,7 @@ public class AGVDigitalTwinHandler implements Runnable{
     public void run() {
         boolean check = true;
         byte version, code, length1, length2;
-        InetAddress clientIP=socket.getInetAddress();
+        InetAddress clientIP = socket.getInetAddress();
         System.out.println("New client connection from " + clientIP.getHostAddress() + ", port number " + socket.getPort());
 
         try {
@@ -61,42 +64,56 @@ public class AGVDigitalTwinHandler implements Runnable{
                         case 2:
                             sOut.write(ServerFunctions.ACK());
                             break;
-                        case 3:
-                            if (s != null){
-                                String[] AGVID = s.split("=", -2);
-
-                                for (AGV agv : agvrepository.findAll()) {
-                                    if (agv.getId() == Integer.parseInt(AGVID[1])) {
-
-                                        System.out.println("agvID " + agv.getId());
-                                        System.out.println(agv.getStatus().gettasks() + " status");
-                                        System.out.println(agv.getStatus().getAvailability() + " availability");
-
-                                        if (agv.getStatus().gettasks().size() <= 1) {
-                                            agv.getStatus().setAvailability(Status.Availability.AVAILABLE);
-                                        } else {
-                                            agv.getStatus().setAvailability(Status.Availability.WORKING);
-                                        }
-                                        System.out.println("Status updated with success to " + agv.getStatus().getAvailability());
-                                        break;
-                                    }
+                        case 3://returnin the amount of the tasks the agv has
+                            System.out.println("AGVID " + agvID);
+                            System.out.println("size " + tasks.size());
+                            sOut.write(ServerFunctions.sendMessage(1, code, agvID + ";" + tasks.size()));
+                            break;
+                        case 4://adding task to the task list
+                            if (s != null) {
+                                String[] strings = s.split(";", -2);
+                                String agvID = strings[0];
+                                if (Objects.equals(agvID, String.valueOf(this.agvID))) {
+                                    System.out.println("este agv esta certo");
+                                    tasks.add(strings[1]);
+                                    this.status = "Working";
+                                    sOut.write(ServerFunctions.sendMessage(1,4, "Success"));
+                                }else {
+                                    System.out.println("este agv esta errado");
+                                    sOut.write(ServerFunctions.sendMessage(1,4, "No Success"));
                                 }
-                                sOut.write(ServerFunctions.sendMessage(1, code, "The status update was a success"));
-                            }else {
+                            } else {
                                 System.out.println("The data you sent is empty");
                             }
+                            break;
+                        case 5://codigo para lhe atribuir as coisas, a sua posicao e id
+                            if (s != null) {
+                                String[] strings = s.split(";", -2);
+                                this.agvID = Integer.parseInt(strings[0]);
+                                this.posX = Integer.parseInt(strings[1]);
+                                this.posY = Integer.parseInt(strings[2]);
+                                this.status = strings[3];
+                            }
+                            System.out.println("AGV " + this.agvID + " atualizado");
+                            break;
+                        case 6://dar assign as tasks
+                            if (s != null) {
+                                String[] strings = s.split(";", -2);
+                                Collections.addAll(this.tasks, strings);
+                            }
+                            System.out.println("AGV " + this.agvID + " com tasks atualizadas");
                             break;
                         default:
                             System.out.println("There is no functionality for this code");
                     }
                 }
-            }while(check);
+            } while (check);
 
             System.out.println("Client " + clientIP.getHostAddress() + ", port number: " + socket.getPort() + " disconnected");
             sOut.close();
             sIn.close();
             socket.close();
-        }catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println(ex);
             System.out.println("There was a problem with the input/output streams");
         }
