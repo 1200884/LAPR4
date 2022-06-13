@@ -144,8 +144,9 @@ public class AGVManagerHandler implements Runnable {
         connectionController.sendMessage((byte) 1, (byte) 5, agv.getId() + ";" + agv.getLocation().getX() + ";" + agv.getLocation().getY() + ";" + agv.getStatus().getAvailability(), agv.getPort());
         StringBuilder tasksString = new StringBuilder();
         List<String> tasks = agv.getStatus().gettasks();
-        System.out.println(tasks.size());
+        System.out.println(agv.getId());
         for (String task : tasks) {
+            System.out.println(task);
             tasksString.append(task).append(";");
         }
         connectionController.sendMessage((byte) 1, (byte) 6, tasksString.toString(), agv.getPort());

@@ -19,7 +19,6 @@ public class AGVDigitalTwinServerConnection {
             for (int i = STARTING_AGV_PORT; i < (STARTING_AGV_PORT+NUMBER_OF_AGVS); i++) {
                 try {
                     System.out.println("Waiting...");
-                    System.out.println(i);
                     sock[i-STARTING_AGV_PORT] = serverSockets[i-STARTING_AGV_PORT].accept();
                     System.out.println("Connection established!");
                 }catch(IOException ex) {
