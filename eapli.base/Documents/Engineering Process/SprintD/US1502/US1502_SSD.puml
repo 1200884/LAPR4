@@ -1,0 +1,13 @@
+@startuml
+autonumber
+actor Costumer as Admin
+participant ":ListProductUI" as UI
+
+
+activate Admin
+Admin -> UI: Requests to view/check the status of their open orders
+activate UI
+
+UI --> Admin: Shows if operation was a success or not
+deactivate Admin
+@enduml
