@@ -1,5 +1,5 @@
-// Generated from C:/Users/marga/OneDrive - ISEP/ISEP/2ºANO/lei21_22_s4_2db_01/eapli.base/base.core/src/main/java/eapli/base/surveymanagement\LabeledExpr.g4 by ANTLR 4.10.1
-package eapli.base.surveymanagement;
+// Generated from C:/Users/PC/OneDrive - Instituto Superior de Engenharia do Porto/Desktop/Gustavo/ISEP/LAPR4/eapli.base/base.core/src/main/java/eapli/base/surveymanagement/ANTLR\LabeledExpr.g4 by ANTLR 4.10.1
+package eapli.base.surveymanagement.ANTLR;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -40,13 +40,13 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSection(LabeledExprParser.SectionContext ctx) { }
+	@Override public void enterHandleSection(LabeledExprParser.HandleSectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSection(LabeledExprParser.SectionContext ctx) { }
+	@Override public void exitHandleSection(LabeledExprParser.HandleSectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -76,37 +76,37 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTitle(LabeledExprParser.TitleContext ctx) { }
+	@Override public void enterPrintTitle(LabeledExprParser.PrintTitleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTitle(LabeledExprParser.TitleContext ctx) { }
+	@Override public void exitPrintTitle(LabeledExprParser.PrintTitleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterId(LabeledExprParser.IdContext ctx) { }
+	@Override public void enterPrintId(LabeledExprParser.PrintIdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitId(LabeledExprParser.IdContext ctx) { }
+	@Override public void exitPrintId(LabeledExprParser.PrintIdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWelcome_message(LabeledExprParser.Welcome_messageContext ctx) { }
+	@Override public void enterPrintExpr(LabeledExprParser.PrintExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWelcome_message(LabeledExprParser.Welcome_messageContext ctx) { }
+	@Override public void exitPrintExpr(LabeledExprParser.PrintExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -239,6 +239,18 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCd(LabeledExprParser.CdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOption(LabeledExprParser.OptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOption(LabeledExprParser.OptionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

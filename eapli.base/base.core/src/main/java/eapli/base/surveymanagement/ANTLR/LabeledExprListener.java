@@ -1,5 +1,5 @@
-// Generated from C:/Users/marga/OneDrive - ISEP/ISEP/2ºANO/lei21_22_s4_2db_01/eapli.base/base.core/src/main/java/eapli/base/surveymanagement\LabeledExpr.g4 by ANTLR 4.10.1
-package eapli.base.surveymanagement;
+// Generated from C:/Users/PC/OneDrive - Instituto Superior de Engenharia do Porto/Desktop/Gustavo/ISEP/LAPR4/eapli.base/base.core/src/main/java/eapli/base/surveymanagement/ANTLR\LabeledExpr.g4 by ANTLR 4.10.1
+package eapli.base.surveymanagement.ANTLR;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -28,15 +28,17 @@ public interface LabeledExprListener extends ParseTreeListener {
 	 */
 	void exitList_of_sections(LabeledExprParser.List_of_sectionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LabeledExprParser#section}.
+	 * Enter a parse tree produced by the {@code handleSection}
+	 * labeled alternative in {@link LabeledExprParser#section}.
 	 * @param ctx the parse tree
 	 */
-	void enterSection(LabeledExprParser.SectionContext ctx);
+	void enterHandleSection(LabeledExprParser.HandleSectionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LabeledExprParser#section}.
+	 * Exit a parse tree produced by the {@code handleSection}
+	 * labeled alternative in {@link LabeledExprParser#section}.
 	 * @param ctx the parse tree
 	 */
-	void exitSection(LabeledExprParser.SectionContext ctx);
+	void exitHandleSection(LabeledExprParser.HandleSectionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LabeledExprParser#content}.
 	 * @param ctx the parse tree
@@ -58,35 +60,41 @@ public interface LabeledExprListener extends ParseTreeListener {
 	 */
 	void exitQuestion_struct(LabeledExprParser.Question_structContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LabeledExprParser#title}.
+	 * Enter a parse tree produced by the {@code printTitle}
+	 * labeled alternative in {@link LabeledExprParser#title}.
 	 * @param ctx the parse tree
 	 */
-	void enterTitle(LabeledExprParser.TitleContext ctx);
+	void enterPrintTitle(LabeledExprParser.PrintTitleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LabeledExprParser#title}.
+	 * Exit a parse tree produced by the {@code printTitle}
+	 * labeled alternative in {@link LabeledExprParser#title}.
 	 * @param ctx the parse tree
 	 */
-	void exitTitle(LabeledExprParser.TitleContext ctx);
+	void exitPrintTitle(LabeledExprParser.PrintTitleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LabeledExprParser#id}.
+	 * Enter a parse tree produced by the {@code printId}
+	 * labeled alternative in {@link LabeledExprParser#id}.
 	 * @param ctx the parse tree
 	 */
-	void enterId(LabeledExprParser.IdContext ctx);
+	void enterPrintId(LabeledExprParser.PrintIdContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LabeledExprParser#id}.
+	 * Exit a parse tree produced by the {@code printId}
+	 * labeled alternative in {@link LabeledExprParser#id}.
 	 * @param ctx the parse tree
 	 */
-	void exitId(LabeledExprParser.IdContext ctx);
+	void exitPrintId(LabeledExprParser.PrintIdContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LabeledExprParser#welcome_message}.
+	 * Enter a parse tree produced by the {@code printExpr}
+	 * labeled alternative in {@link LabeledExprParser#welcome_message}.
 	 * @param ctx the parse tree
 	 */
-	void enterWelcome_message(LabeledExprParser.Welcome_messageContext ctx);
+	void enterPrintExpr(LabeledExprParser.PrintExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LabeledExprParser#welcome_message}.
+	 * Exit a parse tree produced by the {@code printExpr}
+	 * labeled alternative in {@link LabeledExprParser#welcome_message}.
 	 * @param ctx the parse tree
 	 */
-	void exitWelcome_message(LabeledExprParser.Welcome_messageContext ctx);
+	void exitPrintExpr(LabeledExprParser.PrintExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LabeledExprParser#section_description}.
 	 * @param ctx the parse tree
@@ -197,6 +205,16 @@ public interface LabeledExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCd(LabeledExprParser.CdContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LabeledExprParser#option}.
+	 * @param ctx the parse tree
+	 */
+	void enterOption(LabeledExprParser.OptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LabeledExprParser#option}.
+	 * @param ctx the parse tree
+	 */
+	void exitOption(LabeledExprParser.OptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LabeledExprParser#free_text}.
 	 * @param ctx the parse tree

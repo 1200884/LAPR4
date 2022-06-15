@@ -184,7 +184,6 @@ public final class Console {
         } while (option < low || option > high);
         return option;
     }
-
     /**
      * Reads a date from the console.
      *

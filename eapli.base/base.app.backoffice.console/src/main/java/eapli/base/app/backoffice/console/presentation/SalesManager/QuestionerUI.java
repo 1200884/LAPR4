@@ -1,6 +1,7 @@
 package eapli.base.app.backoffice.console.presentation.SalesManager;
 
-import eapli.base.surveymanagement.Calc;
+import eapli.base.surveymanagement.ANTLR.Calc;
+import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
 import java.io.IOException;
@@ -11,7 +12,8 @@ public class QuestionerUI extends AbstractUI {
     protected boolean doShow() {
         Calc calc = new Calc();
         try {
-            calc.validateGrammar();
+            String path = Console.readLine("Write the path of the questionnaire you want to validate");
+            calc.validateGrammar(path,2);
         } catch (IOException e) {
             System.out.println("FALHOU");
             e.printStackTrace();
@@ -21,6 +23,6 @@ public class QuestionerUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "The grammar is being used to validate the .txt file";
+        return "Validate Grammar";
     }
 }

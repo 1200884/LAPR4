@@ -1,33 +1,47 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
+
 import eapli.base.productmanagement.Product.application.AddProductToCartController;
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
 
 public class OrderServer {
     private static Socket skt;
     private static final AddProductToCartController theController = new AddProductToCartController();
+    static final int SERVER_PORT=124;
+    static final String KEY_STORE="Documents/ClientAuth/myKeyStore.jks";
+    static final String TRUSTED_STORE="Documents/ClientAuth/myTrustStore.jts";
+    static final String KEYSTORE_PASS="Password1";
 
-    public static void main(String[] args) {
-        ServerSocket myServerSocket;
+    public static void main(String[] args) throws Exception{
+        SSLServerSocket sock=null;
+
+
+        // Trust these certificates provided by authorized clients
+        System.setProperty("javax.net.ssl.trustStore", TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.trustStorePassword",KEYSTORE_PASS);
+
+        // Use this certificate and private key as server certificate
+        System.setProperty("javax.net.ssl.keyStore",KEY_STORE);
+        System.setProperty("javax.net.ssl.keyStorePassword",KEYSTORE_PASS);
+        SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         try {
-            myServerSocket = new ServerSocket(124);
-            while (true) {
-                System.out.println("Waiting...");
-
-                skt = myServerSocket.accept();
-                System.out.println("Accepted");
-                // create a new thread object
-                ClientHandler clientSock = new ClientHandler(skt);
-
-                // This thread will handle the client separately
-                new Thread(clientSock).start();
-            }
-        } catch (IOException ex) {
+            sock = (SSLServerSocket) sslF.createServerSocket(SERVER_PORT);
+            sock.setNeedClientAuth(true);
+        }
+        catch(IOException ex) {
             ex.printStackTrace();
-            System.out.println("Failed");
+            System.out.println("Server failed to open local port " + SERVER_PORT);
+            System.exit(1);
+        }
+
+        while(true) {
+            System.out.println("waiting...");
+            skt=sock.accept();
+            new Thread(new ClientHandler(skt)).start();
         }
     }
 
@@ -36,13 +50,14 @@ public class OrderServer {
 
         private final Socket skt;
 
-        public ClientHandler(Socket socket) {
-            this.skt = socket;
+        public ClientHandler(Socket cli_s) {
+            this.skt = cli_s;
         }
 
         @Override
         public void run() {
             try {
+                System.out.println("New client connection");
                 DataOutputStream myOutput = new DataOutputStream(skt.getOutputStream());
                 DataInputStream myInput = new DataInputStream(skt.getInputStream());
                 while (true) {

@@ -6,71 +6,71 @@ Thank you very much for your time and support."
 -----------------------------------------------------
 [ Section 1: About you. -----Mandatory
 >Q01: What is your gender? (Single Choice)
-* I am male.
-* I am female.
-* Other or no answer.
+A- I am male.
+B- I am female.
+C- Other or no answer.
 >Q02: What is your age? (Single Choice)
-* 18 to 24 years old.
-* 25 to 34 years old.
-* 35 to 44 years old.
-* 45 to 54 years old.
-* 55 to 64 years old.
-* 65 to 74 years old.
-* More than 75 years old.
+A- 18 to 24 years old.
+B- 25 to 34 years old.
+C- 35 to 44 years old.
+D- 45 to 54 years old.
+E- 55 to 64 years old.
+F- 65 to 74 years old.
+G- More than 75 years old.
 >Q03: In which city do you live in? (Single Choice)
-* Portugal, Porto.
-* UK, London.
-* Jamaica, Kingston.
-* Spain, Sevilha.
+A- Portugal, Porto.
+B- UK, London.
+C- Jamaica, Kingston.
+D- Spain, Seville.
 ]
 
 [ Section 2: Buying habits. -----Mandatory
->Q04: Describe what you buy products in our store, tick no more than 4 factors. (Multiple Choice)
-* Buy groceries.
-* Buy the best deals available.
-* Buy national products.
-* Gifts for the holidays.
-* Exclusive products of our store.
-* Curated book collection.
+>Q04: Describe what you buy products in our store. (Multiple Choice)
+A- Buy groceries.
+B- Buy the best deals available.
+C- Buy national products.
+D- Gifts for the holidays.
+E- Exclusive products of our store.
+F- Curated book collection.
 ]
 
 [ Section 3: About groceries. -----Mandatory
 >Q05: What are your allergens? (Multiple Choice)
-* Dairy products.
-* Gluten containing products.
-* Products with peanuts.
-* Products containing soy.
+A- Dairy products.
+B- Gluten containing products.
+C- Products with peanuts.
+D- Products containing soy.
 >Q06: For how many people are you grocery shopping? (Numeric)
 >Q07: What are you most frequently running out of? (Single Choice)
-* Fish and meat.
-* Yogurts, milk or eggs.
-* Fruits and veggies.
-* Canned goods.
+A- Fish and meat.
+B- Yogurts, milk or eggs.
+C- Fruits and veggies.
+D- Canned goods.
 ]
 
 [ Section 4: Favourite books. -----Mandatory
 >Q08: Sort these genres from most to least liked. (Sorting Options)
-1: Action and Adventure.
-2: Literary Fiction.
-3: Comic Book or Graphic Novel.
-4: Detective and Mystery.
-5: Fantasy and Sci Fi.
-6: Historical Fiction.
-7: Horror and Thriller.
+A- Action and Adventure.
+B- Literary Fiction.
+C- Comic Book or Graphic Novel.
+D- Detective and Mystery.
+E- Fantasy and Sci Fi.
+F- Historical Fiction.
+G- Horror and Thriller.
 >Q09: How many books a month do you read? (Numeric)
 >Q10: When do you most often read? (Sorting Options)
-1: During the morning.
-2: Between chores.
-3: Before going to sleep.
+A- During the morning.
+B- Between chores.
+C- Before going to sleep.
 ]
 
 [ Section 5: State your opinion. -----Mandatory
 >Q11: Do you agree with the following statements? (Scaling Options)
-* The cheapest products are as good as expensive.
-* I spend too much money on books.
-* I enjoy being loyal to a certain author.
-* I love trying new products.
-* I buy the same products out of habit.
+A- The cheapest products are as good as expensive.
+B- I spend too much money on books.
+C- I enjoy being loyal to a certain author.
+D- I love trying new products.
+E- I buy the same products out of habit.
 The options are:
 1: Totally agree.
 2: Partially agree.
@@ -79,30 +79,30 @@ The options are:
 
 [ Section 6: Extra information. -----Optional
 >Q12: Working status. (Single Choice)
-* Currently employed.
-* Between jobs.
-* I am a student.
+A- Currently employed.
+B- Between jobs.
+C- I am a student.
 >Q13: Marital status. (Single Choice)
-* I am married.
-* I am divorced.
-* I am single.
+A- I am married.
+B- I am divorced.
+C- I am single.
 >Q14: Do you have children? (Single Choice)
-* No, I dont.
-* Planning to do so.
-* Yes, one or more, and I not am willing to answer more questions.
-* Yes, one or more, and I am willing to answer more questions.
+A- No, I do not.
+B- Planning to do so.
+C- Yes, one or more, and I not am willing to answer more questions.
+D- Yes, one or more, and I am willing to answer more questions.
 ]
 
 [ Section 7: About kids. -----Condition dependent S6, Q14, Op4, further questions.
 >Q15: How many kids do you have. (Single Choice)
-* 1 or 2.
-* 3 or 4.
-* 5 or more.
+A- 1 or 2.
+B- 3 or 4.
+C- 5 or more.
 >Q16: What is their average age? (Single Choice)
-* 1 to 5.
-* 6 to 10.
-* 11 to 20.
-* More than 20.
+A- 1 to 5.
+B- 6 to 10.
+C- 11 to 20.
+D- More than 20.
 ]
 "You have successfully completed the questionnaire.
 Thank you for your help."

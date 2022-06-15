@@ -53,7 +53,7 @@ class MainMenu extends ClientUserBaseUI {
 
     // Customer
     private static final int CUSTOMER_OPTION = 1;
-    private static final int ADD_PRODUCT = 2;
+    private static final int ADD_PRODUCT = 1;
 
     private final AuthorizationService authz =
             AuthzRegistry.authorizationService();

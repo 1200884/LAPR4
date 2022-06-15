@@ -1,5 +1,5 @@
-// Generated from C:/Users/marga/OneDrive - ISEP/ISEP/2ºANO/lei21_22_s4_2db_01/eapli.base/base.core/src/main/java/eapli/base/surveymanagement\LabeledExpr.g4 by ANTLR 4.10.1
-package eapli.base.surveymanagement;
+// Generated from C:/Users/PC/OneDrive - Instituto Superior de Engenharia do Porto/Desktop/Gustavo/ISEP/LAPR4/eapli.base/base.core/src/main/java/eapli/base/surveymanagement/ANTLR\LabeledExpr.g4 by ANTLR 4.10.1
+package eapli.base.surveymanagement.ANTLR;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -23,11 +23,12 @@ public interface LabeledExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitList_of_sections(LabeledExprParser.List_of_sectionsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LabeledExprParser#section}.
+	 * Visit a parse tree produced by the {@code handleSection}
+	 * labeled alternative in {@link LabeledExprParser#section}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSection(LabeledExprParser.SectionContext ctx);
+	T visitHandleSection(LabeledExprParser.HandleSectionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LabeledExprParser#content}.
 	 * @param ctx the parse tree
@@ -41,23 +42,26 @@ public interface LabeledExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitQuestion_struct(LabeledExprParser.Question_structContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LabeledExprParser#title}.
+	 * Visit a parse tree produced by the {@code printTitle}
+	 * labeled alternative in {@link LabeledExprParser#title}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTitle(LabeledExprParser.TitleContext ctx);
+	T visitPrintTitle(LabeledExprParser.PrintTitleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LabeledExprParser#id}.
+	 * Visit a parse tree produced by the {@code printId}
+	 * labeled alternative in {@link LabeledExprParser#id}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitId(LabeledExprParser.IdContext ctx);
+	T visitPrintId(LabeledExprParser.PrintIdContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LabeledExprParser#welcome_message}.
+	 * Visit a parse tree produced by the {@code printExpr}
+	 * labeled alternative in {@link LabeledExprParser#welcome_message}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWelcome_message(LabeledExprParser.Welcome_messageContext ctx);
+	T visitPrintExpr(LabeledExprParser.PrintExprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LabeledExprParser#section_description}.
 	 * @param ctx the parse tree
@@ -124,6 +128,12 @@ public interface LabeledExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCd(LabeledExprParser.CdContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LabeledExprParser#option}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOption(LabeledExprParser.OptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LabeledExprParser#free_text}.
 	 * @param ctx the parse tree
