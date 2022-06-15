@@ -113,4 +113,5 @@ public class Warehouse implements Serializable, DomainEntity<Long>, AggregateRoo
     public String toString() {
         return "Warehouse: id=" + id + ", dimensions=" + width +", square=" + square +", unit='" + unit;
     }
+
 }

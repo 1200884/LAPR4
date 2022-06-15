@@ -1,10 +1,8 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
 import eapli.base.modelmanagement.Model.domain.Model;
-import eapli.base.warehousemanagement.application.OrderAGVAssignmentController;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,6 +56,6 @@ class AGVTest {
 
     @Test
     void randomiselocation() {
-        assertNotEquals(41,AGV.randomiselocation());
+        assertNotEquals(41,AGV.randomiselocationx());
     }
 }

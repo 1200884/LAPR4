@@ -21,7 +21,7 @@
 				{
 					"Id":2, 
 					"begin": {"lsquare":8, "wsquare":1}, 
-					"end": {"lsquare:12", "wsquare":1}, 
+					"end": {"lsquare:":12, "wsquare":1},
 					"shelves":4
 				},
 				{
@@ -36,7 +36,7 @@
 			"Id":2, 
 			"begin": {"lsquare":5, "wsquare":8}, 
 			"end": {"lsquare":16, "wsquare":8}, 
-			"depth":{"lsquare":16, "wsquare":9}, 
+			"depth":{"lsquare":16, "wsquare":8},
 			"accessibility":"w-", 
 			"rows":[ 
 				{
@@ -69,7 +69,7 @@
 			"Id":3, 
 			"begin": {"lsquare":5, "wsquare":11}, 
 			"end": {"lsquare":16, "wsquare":11}, 
-			"depth":{"lsquare":16, "wsquare":10}, 
+			"depth":{"lsquare":16, "wsquare":11},
 			"accessibility":"w+", 
 			"rows":[ 
 				{

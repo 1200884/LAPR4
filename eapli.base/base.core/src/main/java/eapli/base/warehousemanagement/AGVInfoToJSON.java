@@ -12,36 +12,41 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
+import java.util.Date;
 
 public class AGVInfoToJSON {
     public static void agvinfotojson() {
-        JSONArray jsonArray = new JSONArray();
-        for (AGV agv : AGVService.getAgvs()) {
-            agv.setLocation(new Location(AGV.randomiselocation(),AGV.randomiselocation()));
-            if (agv.getStatus().availabilityToString().equals("AVAILABLE")) {
-                agv.setLocation(new Location(0, 0));
+        int i = 0;
+
+        while (true) {
+
+            JSONArray jsonArray = new JSONArray();
+            for (AGV agv : AGVService.getAgvs()) {
+               // agv.setLocation(new Location(AGV.randomiselocationx(), AGV.randomiselocationy()));
+            /*    if (agv.getStatus().availabilityToString().equals("AVAILABLE")) {
+                    agv.setLocation(new Location(0, 0));
+                }*/ //tirar isto depois
+                agv.moveRight();
+                JSONObject jsonObjectid = new JSONObject();
+                JSONObject jsonObjectstatus = new JSONObject();
+                JSONObject jsonObjectlocationx = new JSONObject();
+                JSONObject jsonObjectlocationy = new JSONObject();
+                jsonObjectid.put("Id", agv.getId());
+                jsonObjectstatus.put("Status", agv.getStatus().availabilityToString());
+                jsonObjectlocationx.put("X", agv.getLocation().getX());
+                jsonObjectlocationy.put("Y", agv.getLocation().getY());
+                jsonArray.add(jsonObjectid);
+                jsonArray.add(jsonObjectstatus);
+                jsonArray.add(jsonObjectlocationx);
+                jsonArray.add(jsonObjectlocationy);
             }
-            JSONObject jsonObjectid = new JSONObject();
-            JSONObject jsonObjectstatus = new JSONObject();
-            JSONObject jsonObjectlocationx = new JSONObject();
-            JSONObject jsonObjectlocationy = new JSONObject();
-            jsonObjectid.put("Id", agv.getId());
-            jsonObjectstatus.put("Status", agv.getStatus().availabilityToString());
-            jsonObjectlocationx.put("X", agv.getLocation().getX());
-            jsonObjectlocationy.put("Y", agv.getLocation().getY());
-            jsonArray.add(jsonObjectid);
-            jsonArray.add(jsonObjectstatus);
-            jsonArray.add(jsonObjectlocationx);
-            jsonArray.add(jsonObjectlocationy);
-        }
-        try {
-            FileWriter file = new FileWriter("./webdashboard.json");
-            file.write(jsonArray.toJSONString());
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                FileWriter file = new FileWriter("./webdashboard.json");
+                file.write(jsonArray.toJSONString());
+                file.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         /*
         try {
             File file=new File("example.html");
@@ -50,17 +55,23 @@ public class AGVInfoToJSON {
         } catch (IOException e) {
             // TODO Auto-generated catch block
         }*/
-        String url = "example.html";
-        File htmlFile = new File(url);
-        try {
-            URI oURL = new URI("http://localhost:63342/eapli.base/base/example.html?_ijt=4pi3sne8v86qpq3oa2huqlmrp4&_ij_reload=RELOAD_ON_SAVE");
-            Desktop.getDesktop().browse(oURL);
+            if (i == 0) {
+                String url = "example.html";
+                File htmlFile = new File(url);
+               try {
+                    URI oURL = new URI("http://localhost:63342/eapli.base/base/example.html?_ijt=4pi3sne8v86qpq3oa2huqlmrp4&_ij_reload=RELOAD_ON_SAVE");
+                    Desktop.getDesktop().browse(oURL);
 
-            Desktop.getDesktop().browse(htmlFile.toURI());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+                    Desktop.getDesktop().browse(htmlFile.toURI());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+            i++;
+
         }
+
     }
 }
