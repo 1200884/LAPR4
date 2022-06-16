@@ -12,6 +12,8 @@ import java.util.Set;
 public class Customer implements Serializable, DomainEntity<Integer>, AggregateRoot<Integer>{
     @Id
     private int vat;
+    @GeneratedValue
+    private int id;
     private String birth_date;
     private String gender;
     @Column(nullable = false)
@@ -35,7 +37,7 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
-        this.shopping_cart=new Shopping_Cart();
+        this.shopping_cart=new Shopping_Cart(this.id);
     }
 
     public Set<Billing_Address> getBilling_addresses() {

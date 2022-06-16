@@ -28,6 +28,11 @@ public class OrderServices {
         return customer_repository.ofIdentity(vat);
     }
 
+    public Iterable<Orders> findOrdersByVAT(Customer customer) {
+        int sc = customer.getShopping_cart().getID();
+        return order_repository.findOrdersByShoppingCart(sc);
+    }
+
     public Orders createOrder(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
         Orders order = new Orders(address, shopping_cart, shipmentMethod, payment_method);
         order_repository.save(order);

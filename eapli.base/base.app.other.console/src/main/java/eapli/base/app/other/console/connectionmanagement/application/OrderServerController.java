@@ -8,6 +8,7 @@ public class OrderServerController {
     private final byte CODE_VALIDATE=3;
     private final byte CODE_ADD_PRODUCT=4;
     private final byte CODE_SAVE=5;
+    private final byte CODE_FIND_ORDERS=6;
     private final ConnectionController theController = new ConnectionController();
 
     public boolean establishConnection() {
@@ -50,5 +51,27 @@ public class OrderServerController {
         theController.sendMessage(version,code,message, 0);
         String answer=theController.receiveMessage(0);
         return answer.split(";",-2)[4];
+    }
+
+    public String findOrdersByVAT(int vat){
+        byte version = VERSION_SERVER;
+        byte code = CODE_FIND_ORDERS;
+        String message=String.valueOf(vat);
+        theController.sendMessage(version,code,message, 0);
+        String answer=theController.receiveMessage(0);
+        String data = answer.split(";",-2)[4];
+        if(data.equals("no")){
+            return "no customer with such VAT";
+        }
+        if(data.equals("no orders")){
+            return "this customer has no orders associated";
+        }
+        String[] ars = data.split("/", -2);
+        String s = "";
+        for(String s1: ars){
+            s+= s1;
+            s+="\n";
+        }
+        return s;
     }
 }

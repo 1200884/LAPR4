@@ -99,7 +99,7 @@ public class ClientConnection {
 
     public String receiveMessage() {
         String returnable;
-        byte[] message = new byte[255];
+        byte[] message = new byte[1023];
         try {
             sIn.read(message);
             returnable = convertToReceive(message);

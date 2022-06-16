@@ -3,9 +3,7 @@ package eapli.base.customermanagement.domain.model;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,12 +12,14 @@ import java.util.Set;
 @Embeddable
 
 public class Shopping_Cart implements ValueObject {
-    @GeneratedValue
     private int shoppingCart_ID;
     @ElementCollection
     private Set<Product_Quantities> product_quantities = new HashSet<>();
 
-    public Shopping_Cart(){
+    public Shopping_Cart(int shoppingCart_ID){
+        this.shoppingCart_ID = shoppingCart_ID;
+    }
+    protected Shopping_Cart(){
     }
 
     public Integer getID() {

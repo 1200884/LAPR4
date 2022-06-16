@@ -10,13 +10,13 @@ class OrdersTest {
 
     @Test
     void ensureIdHas9Letters() {
-        Orders order = new Orders("Rua das Flores", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        Orders order = new Orders("Rua das Flores", new Shopping_Cart(1), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
         Assert.assertTrue(order.getId().length()==9);
     }
 
     @Test
     void ensureMustHaveAddress() {
-        assertThrows(IllegalArgumentException.class, () -> new Orders(null, new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD)));
+        assertThrows(IllegalArgumentException.class, () -> new Orders(null, new Shopping_Cart(1), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD)));
     }
 
     @Test

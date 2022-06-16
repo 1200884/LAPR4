@@ -1,7 +1,9 @@
 package eapli.base.infrastructure.bootstrapers.demo;
 
 import eapli.base.customermanagement.domain.model.Shopping_Cart;
+import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.bootstrapers.OrderBootstrapperBase;
+import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Orders;
 import eapli.base.ordermanagement.domain.OrderLevel;
@@ -15,24 +17,25 @@ public class OrderBootstrapper extends OrderBootstrapperBase implements Action {
     @Override
     public boolean execute() {
         createCustomer("Edinho",123456789,987654321,"Goatdinho@email.com");
-        createOrder("Rua das Flores", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua das 7 casas, nº10", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
-        createOrder("Rua de casa do simões", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua de casa da Ana", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua de casa do Sr.Miguel", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 5 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 6 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 7 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
-        createOrder("Rua 8 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 9 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 10 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 11 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 12 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 13 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
-        createOrder("Rua 14 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 15 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 16 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
-        createOrder("Rua 17 de outubro", new Shopping_Cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        CustomerRepository cr = PersistenceContext.repositories().customers();
+        createOrder("Rua das Flores", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua das 7 casas, nº10", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
+        createOrder("Rua de casa do simões",cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua de casa da Ana",cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua de casa do Sr.Miguel", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 5 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 6 de outubro",cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 7 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
+        createOrder("Rua 8 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 9 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 10 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 11 de outubro",cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 12 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 13 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.MBWAY));
+        createOrder("Rua 14 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 15 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 16 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        createOrder("Rua 17 de outubro", cr.ofIdentity(123456789).get().getShopping_cart(), new Shipment_Method(Shipment_Method.ShipmentMethod.NORMAL), new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
         OrderServices orderServices=new OrderServices();
         orderServices.findbyAddress("Rua 6 de outubro").setOrderLevel(new OrderLevel(OrderLevel.Level.ASSIGNED));
         orderServices.updateOrders(orderServices.findbyAddress("Rua 6 de outubro"));

@@ -5,6 +5,6 @@ import eapli.framework.domain.repositories.DomainRepository;
 
 public interface OrderRepository extends DomainRepository<String, Orders> {
     Iterable<Orders> findAll();
-
+    Iterable<Orders> findOrdersByShoppingCart(int shopping_cart);
 
 }

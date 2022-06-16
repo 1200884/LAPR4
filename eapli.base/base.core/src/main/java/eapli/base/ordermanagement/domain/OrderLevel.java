@@ -34,6 +34,6 @@ public class OrderLevel {
 
     @Override
     public String toString() {
-        return "Level is"+level;
+        return "Level is: "+level;
     }
 }

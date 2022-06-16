@@ -1,6 +1,7 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
 
+import eapli.base.ordermanagement.application.ListOrdersOfCostumerController;
 import eapli.base.productmanagement.Product.application.AddProductToCartController;
 import java.io.*;
 import java.net.Socket;
@@ -11,6 +12,7 @@ import javax.net.ssl.SSLServerSocketFactory;
 public class OrderServer {
     private static Socket skt;
     private static final AddProductToCartController theController = new AddProductToCartController();
+    private static final ListOrdersOfCostumerController theController2 = new ListOrdersOfCostumerController();
     static final int SERVER_PORT=124;
     static final String KEY_STORE="Documents/ClientAuth/myKeyStore.jks";
     static final String TRUSTED_STORE="Documents/ClientAuth/myTrustStore.jts";
@@ -119,18 +121,22 @@ public class OrderServer {
             case 5:
                 theController.saveCart();
                 return "Cart saved successfully";
+            case 6:
+                return theController2.findOrdersByVAT(Integer.parseInt(message));
             default:
                 return "Error while connecting with the server!";
         }
     }
 
     private static byte[] writeMessage(String answer) {
-        byte[] bytes = new byte[255];
+        System.out.println(answer);
+        byte[] bytes = new byte[1023];
         bytes[0] = 1;
         bytes[1] = 3;
         bytes[2] = (byte) (answer.length() % 256);
         bytes[3] = (byte) (answer.length() / 256);
         byte[] stringBytes = answer.getBytes();
+        System.out.println(answer.getBytes());
         System.arraycopy(stringBytes, 0, bytes, 4, stringBytes.length);
         return bytes;
     }
