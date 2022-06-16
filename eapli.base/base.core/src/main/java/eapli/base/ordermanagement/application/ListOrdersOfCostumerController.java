@@ -25,10 +25,10 @@ public class ListOrdersOfCostumerController {
         if (io.isEmpty()){
             return "no orders";
         }
-        String sf = "";
+        StringBuilder sf = new StringBuilder();
         for(Orders o : io){
-            sf+= o.getId() + "- " + o.getOrderLevel().getLevel() + "/";
+            sf.append(o.getId()).append("-").append(o.getOrderLevel().getLevel()).append("/");
         }
-        return sf;
+        return sf.toString();
     }
 }

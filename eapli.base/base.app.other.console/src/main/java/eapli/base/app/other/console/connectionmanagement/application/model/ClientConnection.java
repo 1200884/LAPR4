@@ -51,18 +51,12 @@ public class ClientConnection {
     private boolean establishConnection(String host, int port) {
         try {
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            //specifing the trustStore file which contains the certificate & public of the server
-            System.setProperty("javax.net.ssl.trustStore","C:\\Users\\PC\\OneDrive - Instituto Superior de Engenharia do Porto\\Desktop\\Gustavo\\ISEP\\LAPR4\\eapli.base\\Documents\\ClientAuth\\myTrustStore.jts");
-            //specifing the password of the trustStore file
-            System.setProperty("javax.net.ssl.trustStorePassword","Password1");
-            //This optional and it is just to show the dump of the details of the handshake process
-            System.setProperty("javax.net.debug","all");
             socket = (SSLSocket) sslsocketfactory.createSocket(host,port);
             socket.startHandshake();
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
         }
         return true;
     }
