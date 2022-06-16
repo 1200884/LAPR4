@@ -65,7 +65,7 @@ public class Orders implements Serializable, DomainEntity<String>, AggregateRoot
     private Price calculatePrice() {
         int final_price=0;
         for(Product_Quantities product_quantities: shopping_cart.getProduct_quantities()){
-            final_price+=product_quantities.getProduct().getBase_price();
+            final_price+=(product_quantities.getProduct().getBase_price())*(product_quantities.getQuantity());
         }
         double final_price_with_tax=final_price+(final_price*0.23);
         return new Price(final_price,final_price_with_tax);
