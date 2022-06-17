@@ -13,7 +13,7 @@ public class QuestionerUI extends AbstractUI {
         Calc calc = new Calc();
         try {
             String path = Console.readLine("Write the path of the questionnaire you want to validate");
-            calc.validateGrammar(path,2);
+            calc.validateGrammar(path,1,0);
         } catch (IOException e) {
             System.out.println("FALHOU");
             e.printStackTrace();

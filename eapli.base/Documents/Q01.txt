@@ -1,31 +1,27 @@
+*123456789*
+Section 1:
+Question Q01:A
+Question Q02:A
+Question Q03:A
+*123456789*
 Section 1:
 Question Q01:A
 Question Q02:A
 Question Q03:A
 Section 2:
-Question Q04:ABD
+Question Q04:AB
 Section 3:
 Question Q05:AB
 Question Q06:2
 Question Q07:A
 Section 4:
 Question Q08:ABCDEFG
-Question Q09:4
-Question Q10:BCA
-Section 5:
-Question Q11:A-1 B-3 C-2 D-1 E-2 Section 1:
-Question Q01:A
-Question Q02:G
-Question Q03:B
-Section 2:
-Question Q04:EFA
-Section 3:
-Question Q05:AD
-Question Q06:3
-Question Q07:A
-Section 4:
-Question Q08:FA0BCDE
 Question Q09:2
 Question Q10:ABC
 Section 5:
-Question Q11:A-1 B-2 C-1 D-3 E-1 
+Question Q11:A-1 B-2 C-3 D-2 E-1 
+Section 6:
+Question Q12:A
+Question Q13:A
+Question Q14:A
+Section 7:

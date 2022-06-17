@@ -3,7 +3,7 @@ questionnaire : title NEXT id NEXT welcome_message NEXT '-----------------------
 list_of_sections: section+;
 section : '[' title NEXT id NEXT section_description NEXT obligatoriness NEXT content ']' NEXT #handleSection;
 content: question_struct+;
-question_struct : '>' id NEXT instruction NEXT type NEXT;
+question_struct : '>' id DEPENDENT? NEXT instruction NEXT type NEXT;
 
 title:NEXT (number|word)+ #printTitle;
 id: (number|word)+ PONTUATION #printId;
@@ -21,7 +21,7 @@ obligatoriness: mandatory|optional|cd;
 
 mandatory:MANDATORY;
 optional:OPTIONAL;
-cd:CD NEXT id NEXT id NEXT id NEXT 'further questions.' ;
+cd:CD NEXT id id id NEXT 'further questions.' ;
 option: LETTER '-'NEXT;
 
 free_text: '(Free Text)';
@@ -47,8 +47,7 @@ DIGIT: [0-9];
 LETTER: [A-Z]|[a-z];
 PONTUATION: ',' | ':';
 NEXT: [ \t\r\n]+;
-//ARROWF: 'begin';
-//ARROWB: 'end';
+DEPENDENT: '<';
 
 MANDATORY:'-----Mandatory';
 OPTIONAL:'-----Optional';

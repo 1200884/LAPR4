@@ -12,6 +12,13 @@ import java.util.Objects;
 public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
 
     File myObj = new File("Documents\\Q01.txt");
+    ArrayList<String> conditionals = new ArrayList<>();
+    private final int vat;
+
+    public EvalVisitor2(int vat) {
+        this.vat=vat;
+    }
+
     @Override
     public String visitPrintExpr(LabeledExprParser.PrintExprContext ctx) {
         System.out.println(ctx.getText());
@@ -23,26 +30,37 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
         BufferedWriter myWriter = null;
         try {
             myWriter = new BufferedWriter(new FileWriter("Documents\\Q01.txt", true));
+            if(ctx.id().getText().equals("1:")) {
+                myWriter.write("*" + vat + "*\n");
+            }
             myWriter.write("Section " + ctx.id().getText()+"\n");
             System.out.println(ctx.title().getText() + " " + ctx.id().getText() + " " + ctx.section_description().getText());
             if (ctx.obligatoriness().getText().equals("-----Mandatory")) {
                 for (LabeledExprParser.Question_structContext question : ctx.content().question_struct()) {
                     myWriter.write("Question " + question.id().getText());
-                    answerQuestion(question, myWriter);
+                    answerQuestion(question, myWriter,ctx.id().getText());
                 }
-                myWriter.close();
             } else if (ctx.obligatoriness().getText().equals("-----Optional")) {
-
-            } else {
-                System.out.println("falhou");
+                if(Console.readBoolean("This section is optional. Do you wish to answer it?(Y/N)")){
+                    for (LabeledExprParser.Question_structContext question : ctx.content().question_struct()) {
+                        myWriter.write("Question " + question.id().getText());
+                        answerQuestion(question, myWriter,ctx.id().getText());
+                    }
+                }
+            } else if(conditionals.contains(ctx.obligatoriness().cd().id(0).getText()+ctx.obligatoriness().cd().id(1).getText()+ctx.obligatoriness().cd().id(2).getText())){
+                for (LabeledExprParser.Question_structContext question : ctx.content().question_struct()) {
+                    myWriter.write("Question " + question.id().getText());
+                    answerQuestion(question, myWriter,ctx.id().getText());
+                }
             }
+            myWriter.close();
         }catch (IOException e) {
             e.printStackTrace();
         }
         return super.visitHandleSection(ctx);
     }
 
-    private void answerQuestion(LabeledExprParser.Question_structContext question, BufferedWriter myWriter) throws IOException {
+    private void answerQuestion(LabeledExprParser.Question_structContext question, BufferedWriter myWriter, String section) throws IOException {
         System.out.println(question.getText());
         String a = question.type().repeatability().getText().split("\\)")[0];
         switch (a){
@@ -50,6 +68,7 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
                 int size=question.type().repeatability().repeatable().single_choice().option().size()-1;
                 String answer= readOptionLetters(question.type().repeatability().repeatable().single_choice().option(0).getText().charAt(0)-64,question.type().repeatability().repeatable().single_choice().option(size).getText().charAt(0)-64,"0");
                 myWriter.write(answer + "\n");
+                checkConditional(section,question,answer);
                 break;
             case "(Multiple Choice":
                 int size2=question.type().repeatability().repeatable().multiple_choice().option().size()-1;
@@ -89,6 +108,7 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
                     System.out.println(question.type().repeatability().non_repeatable().scaling_options().option(i).getText().charAt(0)+": ");
                     myWriter.write(question.type().repeatability().non_repeatable().scaling_options().option(i).getText().charAt(0) + "-" + readOption(question.type().repeatability().non_repeatable().scaling_options().id(0).getText().charAt(0)-48,question.type().repeatability().non_repeatable().scaling_options().id(size5).getText().charAt(0)-48,0)+" ");
                 }
+                myWriter.write("\n");
                 break;
             case "(Free Text":
                 myWriter.write(Console.readLine("Answer")+"\n");
@@ -96,6 +116,16 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
             default:
                 break;
 
+        }
+    }
+
+    private void checkConditional(String section, LabeledExprParser.Question_structContext question, String answer) {
+        try {
+            if (question.DEPENDENT().getText().equals("<")) {
+                conditionals.add("S" + section + question.id().getText() + "Op" + answer + ",");
+            }
+        }catch (java.lang.NullPointerException e){
+            return;
         }
     }
 
