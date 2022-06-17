@@ -14,6 +14,7 @@ import eapli.base.ordermanagement.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 public class OrderServices {
@@ -53,10 +54,11 @@ public class OrderServices {
         } else return null;
 
     }
-    public Orders findbyAddress(String address){
+
+    public Orders findbyAddress(String address) {
         ArrayList<Orders> orders = (ArrayList<Orders>) order_repository.findAll();
-        for (Orders o:orders){
-            if (o.getAddress().equals(address)){
+        for (Orders o : orders) {
+            if (o.getAddress().equals(address)) {
                 return o;
             }
         }
@@ -71,6 +73,7 @@ public class OrderServices {
                 dispatched.add(o);
             }
         }
+        sort(dispatched);
         return dispatched;
     }
 
@@ -82,6 +85,7 @@ public class OrderServices {
                 assigned.add(o);
             }
         }
+        sort(assigned);
         return assigned;
     }
 
@@ -97,7 +101,15 @@ public class OrderServices {
                 }
             }
         }
+        sort(assigned);
         return assigned;
+    }
+
+    public static void sort(ArrayList<Orders> list) {
+
+        list.sort((o1, o2)
+                -> o1.getTime().compareTo(
+                o2.getTime()));
     }
 
     public Iterable<Orders> findUnassigned() {
@@ -108,6 +120,7 @@ public class OrderServices {
                 unassigned.add(o);
             }
         }
+        sort(unassigned);
         return unassigned;
     }
 }

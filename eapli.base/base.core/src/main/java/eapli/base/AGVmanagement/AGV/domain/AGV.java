@@ -26,8 +26,8 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     @Embedded
     private Location location;
     private int velocity;
-    private static final int DEFAULTVELOCITY = 6;
-    private static final int REDUCEDVELOCITY = 3;
+    private static final int DEFAULTVELOCITY = 2;
+    private static final int REDUCEDVELOCITY = 1;
     private int batteryleft;
     private static final int BATTERYFULLYCHARGED=1000;//minutes
     protected AGV() {

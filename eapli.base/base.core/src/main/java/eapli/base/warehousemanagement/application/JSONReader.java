@@ -108,7 +108,7 @@ public class JSONReader {
         }
     }
 
-    public int[][] walls() {
+    public static int[][] walls() {
         //spots that have
         int[][] warehouse = new int[20][18];
         for (int i = 0; i < 20; i++) {
