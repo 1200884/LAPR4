@@ -14,8 +14,8 @@ public class OrderServer {
     private static final AddProductToCartController theController = new AddProductToCartController();
     private static final ListOrdersOfCostumerController theController2 = new ListOrdersOfCostumerController();
     static final int SERVER_PORT=124;
-    static final String KEY_STORE="Documents/ClientAuth/myKeyStore.jks";
-    static final String TRUSTED_STORE="Documents/ClientAuth/myTrustStore.jts";
+    static final String KEY_STORE="Documents/ClientAuth/server1_J.jks";
+    static final String TRUSTED_STORE="Documents/ClientAuth/server1_J.jks";
     static final String KEYSTORE_PASS="Password1";
 
     public static void main(String[] args) throws Exception{

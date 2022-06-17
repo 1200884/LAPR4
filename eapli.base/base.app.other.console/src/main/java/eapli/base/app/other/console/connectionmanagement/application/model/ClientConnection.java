@@ -23,7 +23,7 @@ public class ClientConnection {
     private static SSLSocket socket;
     private static DataOutputStream sOut;
     private static DataInputStream sIn;
-    private List<Socket> twinSocket = new ArrayList<>();
+    private List<SSLSocket> twinSocket = new ArrayList<>();
     private List<DataOutputStream> twinSOut = new ArrayList<>();
     private List<DataInputStream> twinSIn = new ArrayList<>();
 
@@ -63,7 +63,9 @@ public class ClientConnection {
 
     private boolean establishTwinConnection(String host, int port, int i) {
         try {
-            twinSocket.add(new Socket(host, port));
+            SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            twinSocket.add((SSLSocket) sslsocketfactory.createSocket(host,port));
+            twinSocket.get(i).startHandshake();
             twinSOut.add(new DataOutputStream(twinSocket.get(i).getOutputStream()));
             twinSIn.add(new DataInputStream(twinSocket.get(i).getInputStream()));
         } catch (Exception e) {
@@ -163,7 +165,7 @@ public class ClientConnection {
         return string;
     }
 
-    public List<Socket> getTwinSocket() {
+    public List<SSLSocket> getTwinSocket() {
         return twinSocket;
     }
 }

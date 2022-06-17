@@ -11,8 +11,6 @@ public class Questionnaire {
     @GeneratedValue
     private int id;
     private String path;
-    /*@OneToMany(cascade = CascadeType.ALL)
-    private Collection<Section> sections = new ArrayList<>();*/
 
 
     protected Questionnaire(){
