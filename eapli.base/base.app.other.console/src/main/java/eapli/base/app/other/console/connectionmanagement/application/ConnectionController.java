@@ -22,11 +22,11 @@ public class ConnectionController {
     }
 
     public boolean establishAGVManagerConnection() {
-        System.setProperty("javax.net.ssl.keyStore","Documents/ClientAuth/myKeyStore.jks");
+        System.setProperty("javax.net.ssl.keyStore","Documents/ClientAuth/client2_J.jks");
         //specifing the password of the keystore file
         System.setProperty("javax.net.ssl.keyStorePassword","Password1");
         //specifing the trustStore file which contains the certificate & public of the server
-        System.setProperty("javax.net.ssl.trustStore","Documents/ClientAuth/myTrustStore.jts");
+        System.setProperty("javax.net.ssl.trustStore","Documents/ClientAuth/client2_J.jks");
         //specifing the password of the trustStore file
         System.setProperty("javax.net.ssl.trustStorePassword","Password1");
         return CLIENT_CONNECTION.establishConnection(2);

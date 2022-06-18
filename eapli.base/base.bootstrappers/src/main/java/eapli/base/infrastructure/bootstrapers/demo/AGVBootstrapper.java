@@ -17,7 +17,6 @@ public class AGVBootstrapper extends AGVBootstrapperBase implements Action {
     @Override
     public boolean execute() {
 
-
         Model model = createModel("BOT-AGV", "The best AGVs in the west");
         Status status=new Status(2,null);
         createAGV(60, "AGV Dock", "Fast and good AGV", model,status);
@@ -33,7 +32,13 @@ public class AGVBootstrapper extends AGVBootstrapperBase implements Action {
     }
 
     private AGV createAGV(final double maxWeight,final String baseLocation, final String shortDescription, final Model model,final Status status) {
-        return registerAGV(maxWeight, baseLocation, shortDescription, model);
+        try {
+            return registerAGV(maxWeight, baseLocation, shortDescription, model);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

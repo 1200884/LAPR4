@@ -8,8 +8,8 @@ import java.net.Socket;
 
 public class AGVManagerServerConnection {
     static Socket sock;
-    static final String KEY_STORE = "Documents/ClientAuth/myKeyStore.jks";
-    static final String TRUSTED_STORE = "Documents/ClientAuth/myTrustStore.jts";
+    static final String KEY_STORE="Documents/ClientAuth/server2_J.jks";
+    static final String TRUSTED_STORE="Documents/ClientAuth/server2_J.jks";
     static final String KEYSTORE_PASS = "Password1";
 
     public static void main(String args[]) throws Exception {

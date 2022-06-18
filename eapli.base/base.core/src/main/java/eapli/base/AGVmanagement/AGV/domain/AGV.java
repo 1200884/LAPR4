@@ -21,7 +21,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
     private int port = 0;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Model model;
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Status status;
     @Embedded
     private Location location;
