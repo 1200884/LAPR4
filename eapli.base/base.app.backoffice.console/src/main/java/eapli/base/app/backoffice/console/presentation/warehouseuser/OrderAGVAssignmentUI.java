@@ -14,9 +14,8 @@ public class OrderAGVAssignmentUI extends AbstractUI {
         //valid id at this point
         AGVManagerController agvManagerController = new AGVManagerController();
         String AGV_ID = agvManagerController.serverTaskAssign(orderId);
-        String string = OrderAGVAssignmentController.getAGV(AGV_ID);
         agvManagerController.closeServer();
-        System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n" + string);
+        System.out.println("Your request was successful! The information regarding the AGV responsible for this order is:\n" + OrderAGVAssignmentController.getAGV(AGV_ID));
         agvManagerController.closeServer();
         return true;
     }

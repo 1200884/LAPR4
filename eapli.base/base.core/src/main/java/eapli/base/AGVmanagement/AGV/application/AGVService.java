@@ -22,7 +22,8 @@ public class AGVService {
     }
 
     public static ArrayList<AGV> getAgvs() {
-        return (ArrayList<AGV>) agvrepository.findAll();
+        AGVRepository agvrepository2=PersistenceContext.repositories().AGVs();
+        return (ArrayList<AGV>) agvrepository2.findAll();
     }
 
     public void updateAGV(AGV agv) {

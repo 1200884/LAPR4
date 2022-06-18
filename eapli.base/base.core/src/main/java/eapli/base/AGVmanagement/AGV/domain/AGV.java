@@ -166,7 +166,7 @@ public class AGV implements Serializable, AggregateRoot<Integer> {
 
     @Override
     public String toString() {
-        return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status.gettasks();
+        return "ID: " + id + "\nMax Weight: " + maximum_weight + "\nDescription: " + shortDescription + "\nBase Location: " + baseLocation + "\nModel:\n" + model + "\nStatus:\n" + status.gettasks()+"\n";
     }
 
     public int getVelocity() {

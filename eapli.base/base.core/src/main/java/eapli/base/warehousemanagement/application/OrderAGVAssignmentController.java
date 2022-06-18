@@ -51,6 +51,9 @@ public class OrderAGVAssignmentController {
         orderServices.updateOrders(orderServices.findbyid(orderid));
         agv.addTask(orderid);
         agvService.updateAGV(agv);
+        System.out.println("--------------------------------------------------------------------------------------");
+        System.out.println(agv.toString());
+        System.out.println("--------------------------------------------------------------------------------------");
         System.out.println(AGVService.getAgvs());
     }
 

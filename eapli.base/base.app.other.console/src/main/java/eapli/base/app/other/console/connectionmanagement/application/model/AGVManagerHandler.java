@@ -97,7 +97,7 @@ public class AGVManagerHandler implements Runnable {
                                     String[] receivedMessageString = receivedMessage.split(";", -2);
                                     if (receivedMessageString[4].equals("Success")) {
                                         OrderAGVAssignmentController.assignTaskToAGV(agv, s);
-                                        System.out.println("AGV e order atualizados");
+                                        System.out.println("--------------------------------AGV e order atualizados----------------------------------------");
                                         sOut.write(ServerFunctions.sendMessage(1, 3, String.valueOf(lessBusyAGV)));
                                         break switches;
                                     }
