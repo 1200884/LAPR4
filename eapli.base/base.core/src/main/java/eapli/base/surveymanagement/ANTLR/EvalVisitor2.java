@@ -1,6 +1,8 @@
 package eapli.base.surveymanagement.ANTLR;
 
 import eapli.framework.io.util.Console;
+import org.antlr.v4.runtime.BufferedTokenStream;
+import org.springframework.expression.ExpressionParser;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,26 +35,33 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
             if(ctx.id().getText().equals("1:")) {
                 myWriter.write("*" + vat + "*\n");
             }
-            myWriter.write("Section " + ctx.id().getText()+"\n");
+            myWriter.write("[ Section " + ctx.id().getText()+"\n");
             System.out.println(ctx.title().getText() + " " + ctx.id().getText() + " " + ctx.section_description().getText());
             if (ctx.obligatoriness().getText().equals("-----Mandatory")) {
                 for (LabeledExprParser.Question_structContext question : ctx.content().question_struct()) {
-                    myWriter.write("Question " + question.id().getText());
+                    myWriter.write("> Question " + question.id().getText());
                     answerQuestion(question, myWriter,ctx.id().getText());
                 }
             } else if (ctx.obligatoriness().getText().equals("-----Optional")) {
                 if(Console.readBoolean("This section is optional. Do you wish to answer it?(Y/N)")){
                     for (LabeledExprParser.Question_structContext question : ctx.content().question_struct()) {
-                        myWriter.write("Question " + question.id().getText());
+                        myWriter.write("> Question " + question.id().getText());
                         answerQuestion(question, myWriter,ctx.id().getText());
                     }
+                }else{
+                    myWriter.write("No answers.");
                 }
-            } else if(conditionals.contains(ctx.obligatoriness().cd().id(0).getText()+ctx.obligatoriness().cd().id(1).getText()+ctx.obligatoriness().cd().id(2).getText())){
-                for (LabeledExprParser.Question_structContext question : ctx.content().question_struct()) {
-                    myWriter.write("Question " + question.id().getText());
-                    answerQuestion(question, myWriter,ctx.id().getText());
+            } else{
+                if(conditionals.contains(ctx.obligatoriness().cd().id(0).getText()+ctx.obligatoriness().cd().id(1).getText()+ctx.obligatoriness().cd().id(2).getText())) {
+                    for (LabeledExprParser.Question_structContext question : ctx.content().question_struct()) {
+                        myWriter.write("> Question " + question.id().getText());
+                        answerQuestion(question, myWriter, ctx.id().getText());
+                    }
+                }else {
+                    myWriter.write("No answers.");
                 }
             }
+            myWriter.write("]\n");
             myWriter.close();
         }catch (IOException e) {
             e.printStackTrace();
@@ -67,13 +76,14 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
             case "(Single Choice":
                 int size=question.type().repeatability().repeatable().single_choice().option().size()-1;
                 String answer= readOptionLetters(question.type().repeatability().repeatable().single_choice().option(0).getText().charAt(0)-64,question.type().repeatability().repeatable().single_choice().option(size).getText().charAt(0)-64,"0");
-                myWriter.write(answer + "\n");
+                myWriter.write("(Single Choice)" +answer + "\n");
                 checkConditional(section,question,answer);
                 break;
             case "(Multiple Choice":
                 int size2=question.type().repeatability().repeatable().multiple_choice().option().size()-1;
                 ArrayList<String> answers = new ArrayList<>();
                 String answer2="";
+                myWriter.write("(Multiple Choice)");
                 while (!Objects.equals(answer2, "0")) {
                     answer2 = readOptionLetters(question.type().repeatability().repeatable().multiple_choice().option(0).getText().charAt(0) - 64, question.type().repeatability().repeatable().multiple_choice().option(size2).getText().charAt(0) - 64,"0");
                     if(!answers.contains(answer2) && !Objects.equals(answer2, "0")){
@@ -84,12 +94,13 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
                 myWriter.write("\n");
                 break;
             case "(Numeric":
-                myWriter.write(Console.readInteger("Answer")+"\n");
+                myWriter.write("(Numeric)" + Console.readInteger("Answer")+"\n");
                 break;
             case "(Sorting Options":
                 int size3=question.type().repeatability().non_repeatable().sorting_options().option().size()-1;
                 String answer3;
                 ArrayList<String> answers2 = new ArrayList<>();
+                myWriter.write("(Sorting Options)");
                 for(int i=0;i<=size3;i++){
                     answer3 = readOptionLetters(question.type().repeatability().non_repeatable().sorting_options().option(0).getText().charAt(0) - 64, question.type().repeatability().non_repeatable().sorting_options().option(size3).getText().charAt(0) - 64,"0");
                     while(answers2.contains(answer3)) {
@@ -104,6 +115,7 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
             case "(Scaling Options":
                 int size4=question.type().repeatability().non_repeatable().scaling_options().option().size()-1;
                 int size5=question.type().repeatability().non_repeatable().scaling_options().id().size()-1;
+                myWriter.write("(Scaling Options)");
                 for(int i=0;i<=size4;i++){
                     System.out.println(question.type().repeatability().non_repeatable().scaling_options().option(i).getText().charAt(0)+": ");
                     myWriter.write(question.type().repeatability().non_repeatable().scaling_options().option(i).getText().charAt(0) + "-" + readOption(question.type().repeatability().non_repeatable().scaling_options().id(0).getText().charAt(0)-48,question.type().repeatability().non_repeatable().scaling_options().id(size5).getText().charAt(0)-48,0)+" ");
@@ -111,7 +123,7 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
                 myWriter.write("\n");
                 break;
             case "(Free Text":
-                myWriter.write(Console.readLine("Answer")+"\n");
+                myWriter.write("(Free Text)" + Console.readLine("Answer")+"\n");
                 break;
             default:
                 break;
