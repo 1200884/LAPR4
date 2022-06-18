@@ -20,8 +20,8 @@ public class ListOrdersOfCostumerUI extends AbstractUI {
         System.out.println("Write the VAT of the customer you want to access the respective Shopping Cart");
         int vat=Console.readInteger("Answer: ");
         System.out.println(theController.findOrdersByVAT(vat));
-
-        return false;
+        System.out.println(theController.disconnect());
+        return true;
     }
 
     @Override
