@@ -115,7 +115,7 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
             case "(Scaling Options":
                 int size4=question.type().repeatability().non_repeatable().scaling_options().option().size()-1;
                 int size5=question.type().repeatability().non_repeatable().scaling_options().id().size()-1;
-                myWriter.write("(Scaling Options)");
+                myWriter.write("(Scaling Options) ");
                 for(int i=0;i<=size4;i++){
                     System.out.println(question.type().repeatability().non_repeatable().scaling_options().option(i).getText().charAt(0)+": ");
                     myWriter.write(question.type().repeatability().non_repeatable().scaling_options().option(i).getText().charAt(0) + "-" + readOption(question.type().repeatability().non_repeatable().scaling_options().id(0).getText().charAt(0)-48,question.type().repeatability().non_repeatable().scaling_options().id(size5).getText().charAt(0)-48,0)+" ");

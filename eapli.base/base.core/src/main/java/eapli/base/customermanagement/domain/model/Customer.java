@@ -1,6 +1,8 @@
 package eapli.base.customermanagement.domain.model;
 
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.surveymanagement.domain.Questionnaire;
+import eapli.base.surveymanagement.domain.Repository.QuestionnaireRepository;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntity;
 
@@ -27,7 +29,8 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
     private Set<Delivering_Address> delivering_addresses = new HashSet<>();
     @Embedded
     private Shopping_Cart shopping_cart;
-
+    @ManyToMany(cascade = { CascadeType.ALL })
+    private Set<Questionnaire> questionnaires;
 
     protected Customer() {
     }
@@ -38,11 +41,16 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
         this.phone_number = phone_number;
         this.email = email;
         this.shopping_cart=new Shopping_Cart(generateValue());
+        this.questionnaires=new HashSet<>();
     }
 
     private int generateValue() {
         ArrayList<Customer> list = (ArrayList<Customer>) PersistenceContext.repositories().customers().findAll();
         return list.size()+1;
+    }
+
+    public void addQuestionnaire(Questionnaire questionnaire){
+        this.questionnaires.add(questionnaire);
     }
 
     public Set<Billing_Address> getBilling_addresses() {
@@ -55,6 +63,10 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
 
     public Shopping_Cart getShopping_cart() {
         return shopping_cart;
+    }
+
+    public Set<Questionnaire> getQuestionnaires() {
+        return questionnaires;
     }
 
     public void setBilling_addresses(Set<Billing_Address> billing_addresses) {

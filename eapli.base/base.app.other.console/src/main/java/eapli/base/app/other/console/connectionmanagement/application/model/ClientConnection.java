@@ -3,6 +3,7 @@ package eapli.base.app.other.console.connectionmanagement.application.model;
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
 
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
@@ -10,7 +11,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import javax.security.cert.X509Certificate;
 
 public class ClientConnection {
 
@@ -53,6 +54,21 @@ public class ClientConnection {
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             socket = (SSLSocket) sslsocketfactory.createSocket(host,port);
             socket.startHandshake();
+            SSLSession ssl = socket.getSession();
+            System.out.println("------------------------------------------------------");
+            System.out.println("SSL/TLS version: " + ssl.getProtocol() +
+                    "         Cypher suite: " + ssl.getCipherSuite());
+
+            X509Certificate[] chain=ssl.getPeerCertificateChain();
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate subject: " + chain[0].getSubjectDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate issuer: " + chain[0].getIssuerDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not before: " + chain[0].getNotBefore());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not after:  " + chain[0].getNotAfter());
+            System.out.println("------------------------------------------------------");
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
         } catch (Exception e) {

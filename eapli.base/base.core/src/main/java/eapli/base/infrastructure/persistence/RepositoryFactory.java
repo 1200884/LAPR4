@@ -28,6 +28,7 @@ import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
 import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
+import eapli.base.surveymanagement.domain.Repository.QuestionnaireRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.base.customermanagement.domain.repositories.CustomerRepository;
@@ -116,4 +117,7 @@ public interface RepositoryFactory {
 
     OrderRepository Order(TransactionalContext autoTx);
 
+    QuestionnaireRepository Questionnaire();
+
+    QuestionnaireRepository Questionnaire(TransactionalContext autoTx);
 }

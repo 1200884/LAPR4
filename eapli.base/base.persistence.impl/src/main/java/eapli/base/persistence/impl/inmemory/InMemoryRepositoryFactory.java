@@ -31,6 +31,7 @@ import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
 import eapli.base.categorymanagement.domain.repositories.CategoryRepository;
 import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
+import eapli.base.surveymanagement.domain.Repository.QuestionnaireRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -70,6 +71,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public OrderRepository Order() {
         return Order(null);
+    }
+
+    @Override
+    public QuestionnaireRepository Questionnaire() {
+        return Questionnaire(null);
+    }
+
+    @Override
+    public QuestionnaireRepository Questionnaire(TransactionalContext autoTx) {
+        return new InMemoryQuestionnaireRepository();
     }
 
     @Override

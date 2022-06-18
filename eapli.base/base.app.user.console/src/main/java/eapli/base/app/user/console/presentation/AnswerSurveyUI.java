@@ -1,12 +1,15 @@
-package eapli.base.app.backoffice.console.presentation.SalesManager;
+package eapli.base.app.user.console.presentation;
 
 import eapli.base.surveymanagement.ANTLR.Calc;
+import eapli.base.surveymanagement.Application.SurveyController;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
 import java.io.IOException;
 
 public class AnswerSurveyUI extends AbstractUI {
+    private static final SurveyController theController = new SurveyController();
+
     /**
      * rendering of the UI. follows the Template Method pattern
      *
@@ -17,8 +20,15 @@ public class AnswerSurveyUI extends AbstractUI {
         Calc calc = new Calc();
         System.out.println("Write your respective VAT");
         int vat= Console.readInteger("Answer: ");
+        while (!theController.checkVat(vat)){
+            vat= Console.readInteger("Answer: ");
+        }
+        String surveys =theController.seeSurveys();
+        System.out.println(surveys);
+        String[] lines = surveys.split("\r\n|\r|\n");
+        String path = theController.chosenSurvey(Console.readOption(1,lines.length,0));
         try {
-            calc.validateGrammar("Documents/teste.txt",2,vat);
+            calc.validateGrammar(path,2,vat);
         } catch (IOException e) {
             e.printStackTrace();
         }

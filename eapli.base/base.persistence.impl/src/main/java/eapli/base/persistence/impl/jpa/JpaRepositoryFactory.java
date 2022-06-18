@@ -31,6 +31,7 @@ import eapli.base.modelmanagement.Model.domain.repositories.ModelRepository;
 import eapli.base.ordermanagement.repositories.OrderRepository;
 import eapli.base.persistence.impl.inmemory.InMemoryProductRepository;
 import eapli.base.productmanagement.Product.domain.repositories.ProductRepository;
+import eapli.base.surveymanagement.domain.Repository.QuestionnaireRepository;
 import eapli.base.warehousemanagement.Domain.Repositories.WarehouseRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -152,6 +153,16 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public OrderRepository Order(TransactionalContext autoTx) {
         return new JpaOrderRepository(autoTx);
+    }
+
+    @Override
+    public QuestionnaireRepository Questionnaire() {
+        return new JpaQuestionnaireRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public QuestionnaireRepository Questionnaire(TransactionalContext autoTx) {
+        return new JpaQuestionnaireRepository(autoTx);
     }
 
     @Override

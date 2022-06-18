@@ -55,6 +55,8 @@ class MainMenu extends ClientUserBaseUI {
     private static final int CUSTOMER_OPTION = 1;
     private static final int ADD_PRODUCT = 1;
     private static final int LIST_STATUS_ORDER = 2;
+    private static final int ANSWER_SURVEY = 3;
+
 
 
     private final AuthorizationService authz =
@@ -106,6 +108,7 @@ class MainMenu extends ClientUserBaseUI {
         menu.addItem(EXIT_OPTION, RETURN, Actions.SUCCESS);
         menu.addItem(ADD_PRODUCT, "Add products to shopping Cart", new AddProductToCartAction());
         menu.addItem(LIST_STATUS_ORDER, "List the status of my orders", new ListOrdersOfCostumerUI()::show);
+        menu.addItem(ANSWER_SURVEY, "View the list of Surveys to answer", new AnswerSurveyUI()::show);
         return menu;
     }
 }

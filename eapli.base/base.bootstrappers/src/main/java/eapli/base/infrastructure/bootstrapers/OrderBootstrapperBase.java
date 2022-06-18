@@ -9,6 +9,7 @@ import eapli.base.ordermanagement.domain.OrderLevel;
 import eapli.base.ordermanagement.domain.Orders;
 import eapli.base.ordermanagement.domain.Payment_Method;
 import eapli.base.ordermanagement.domain.Shipment_Method;
+import eapli.base.surveymanagement.domain.Questionnaire;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 
@@ -28,6 +29,7 @@ public class OrderBootstrapperBase {
         Customer customer=null;
         try {
             customer=new Customer(name,vat,number,email);
+            customer.addQuestionnaire(new Questionnaire("Documents/teste.txt"));
             customerPersist.createCustomerPersist(customer);
         } catch (final IntegrityViolationException | ConcurrencyException e) {
             customer = null;
