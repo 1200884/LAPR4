@@ -100,8 +100,7 @@ public class AGVManagerHandler implements Runnable {
                                         System.out.println("--------------------------------AGV e order atualizados----------------------------------------");
                                         sOut.write(ServerFunctions.sendMessage(1, 3, String.valueOf(lessBusyAGV)));
                                         break switches;
-                                    }
-                                }
+                                    }                                }
                             }
                             sOut.write(ServerFunctions.sendMessage(1, 3, String.valueOf(lessBusyAGV)));
                             break;

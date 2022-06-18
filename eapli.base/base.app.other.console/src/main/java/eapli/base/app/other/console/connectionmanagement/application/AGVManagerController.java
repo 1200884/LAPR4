@@ -1,5 +1,7 @@
 package eapli.base.app.other.console.connectionmanagement.application;
 
+import eapli.base.AGVmanagement.AGV.application.AGVService;
+
 public class AGVManagerController {
 
     private final ConnectionController connectionController = new ConnectionController();
@@ -18,6 +20,8 @@ public class AGVManagerController {
 
     public void changeStatus(String AGV_ID) {
         String string = "AGV=" + AGV_ID;
+        AGVService agvService= new AGVService();
+
         connectionController.sendMessage((byte) 1, (byte) 3, string, 0);
         connectionController.receiveMessage(0);
     }
