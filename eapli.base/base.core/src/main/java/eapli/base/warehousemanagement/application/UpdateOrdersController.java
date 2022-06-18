@@ -24,9 +24,10 @@ public class UpdateOrdersController {
             if (o.getId().equals(orderid)) {
                 OrderLevel dispatched = new OrderLevel(OrderLevel.Level.DISPATCHED);
                 o.setOrderLevel(dispatched);
-                if (!(agvresponsible.getShortDescription().equals("AGV responsible for ready tasks"))) {
+                //if (!(agvresponsible.getShortDescription().equals("AGV responsible for ready tasks"))) {
                     agvresponsible.removeTask(orderid);
-                }
+                AGVService agvService=new AGVService();
+                agvService.updateAGV(agvresponsible);
                 orderServices.updateOrders(o);
                 return String.valueOf(agvresponsible.getId());
             }
