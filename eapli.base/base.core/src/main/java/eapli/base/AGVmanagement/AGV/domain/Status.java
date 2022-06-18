@@ -9,17 +9,16 @@ import javax.persistence.*;
 
 import java.util.*;
 
-@Entity
-public class Status implements ValueObject, AggregateRoot<Integer> {
-    @GeneratedValue
-    @Id
-    private int id;
+@Embeddable
+@Immutable
+public class Status implements ValueObject {
+
     private int battery_left;
     @Column
     @ElementCollection(targetClass=String.class,fetch = FetchType.EAGER)
     private List<String> task;
-    @OneToOne(fetch = FetchType.EAGER)
-    private AGV AGV;
+    //@OneToOne(fetch = FetchType.EAGER)
+    //private AGV AGV;
 
     /**
      * Returns the primary <b>business</b> id of the entity.
@@ -29,7 +28,7 @@ public class Status implements ValueObject, AggregateRoot<Integer> {
      *
      * @return the primary <b>business</b> id of the entity
      */
-    @Override
+    //@Override
     public Integer identity() {
         return null;
     }
@@ -148,7 +147,7 @@ public class Status implements ValueObject, AggregateRoot<Integer> {
      * @return {@code true} if this domain entity have the "same content" as the
      * {@code other}
      */
-    @Override
+    //@Override
     public boolean sameAs(Object other) {
         return false;
     }

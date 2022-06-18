@@ -17,7 +17,6 @@
     <class>eapli.base.productmanagement.Product.domain.Product</class>
     <class>eapli.base.categorymanagement.domain.Category</class>
     <class>eapli.base.AGVmanagement.AGV.domain.AGV</class>
-    <class>eapli.base.AGVmanagement.AGV.domain.Status</class>
     <class>eapli.base.modelmanagement.Model.domain.Model</class>
     <class>eapli.base.warehousemanagement.Domain.Warehouse</class>
     <class>eapli.base.warehousemanagement.Domain.Aisle</class>
