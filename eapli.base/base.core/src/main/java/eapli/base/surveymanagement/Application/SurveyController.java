@@ -17,6 +17,8 @@ public class SurveyController {
         StringBuilder stringBuilder = new StringBuilder();
         int i =1;
         for(Questionnaire questionnaire : customer.getQuestionnaires()){
+            System.out.println(questionnaire.getPath());
+            System.out.println(questionnaire.getPath2());
             stringBuilder.append(i).append("-").append(questionnaire.getId()).append("\n");
             i++;
         }

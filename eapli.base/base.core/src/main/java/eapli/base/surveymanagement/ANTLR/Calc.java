@@ -1,7 +1,9 @@
 package eapli.base.surveymanagement.ANTLR;
 import java.io.*;
+import java.util.Objects;
 import java.util.Optional;
 
+import eapli.base.customermanagement.domain.model.Customer;
 import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.surveymanagement.domain.Questionnaire;
@@ -18,21 +20,27 @@ public class Calc {
         LabeledExprParser parser = new LabeledExprParser(tokens);
         ParseTree tree = parser.questionnaire(); // parse
         QuestionnaireRepository repository = PersistenceContext.repositories().Questionnaire();
+        CustomerRepository customerRepository = PersistenceContext.repositories().customers();
         if(i==1) {
             EvalVisitor eval = new EvalVisitor();
             eval.visit(tree);
             Questionnaire questionnaire = new Questionnaire(path);
             questionnaire.setRule(new Survey_Rules(Survey_Rules.SurveyRules.CUSTOMERS));
-            CustomerRepository customerRepository = PersistenceContext.repositories().customers();
             repository.save(questionnaire);
             System.out.println("The .txt file was validated with success.");
         }else{
             EvalVisitor2 eval = new EvalVisitor2(vat);
             eval.visit(tree);
-            Optional<Questionnaire> optional= repository.ofIdentity(vat);
+            Optional<Customer> optional= customerRepository.ofIdentity(vat);
             if(optional.isPresent()){
-                optional.get().setPath2(eval.getFile());
-                repository.save(optional.get());
+                for(Questionnaire questionnaire:optional.get().getQuestionnaires()){
+                    if(Objects.equals(questionnaire.getPath(), path)){
+                        System.out.println("boa");
+                        questionnaire.setPath2("Documents\\" + eval.getFile() + ".txt");
+                        repository.save(questionnaire);
+                        customerRepository.save(optional.get());
+                    }
+                }
             }
         }
     }
