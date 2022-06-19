@@ -24,6 +24,7 @@
 package eapli.base.app.backoffice.console.presentation;
 
 import eapli.base.app.backoffice.console.presentation.SalesManager.QuestionerUI;
+import eapli.base.app.backoffice.console.presentation.SalesManager.StatisticsUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Category.CategoryUI;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.ListCustomerAction;
 import eapli.base.app.backoffice.console.presentation.salesclerkuser.Customer.RegisterCustomerUI;
@@ -179,7 +180,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Options >");
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
         menu.addItem(VALIDATE_GRAMMAR, "Validate questionnaire", new QuestionerUI()::show);
-        //menu.addItem(CREATE_STATISTICS, "Validate questionnaire", new AnswerSurveyUI()::show);
+        menu.addItem(CREATE_STATISTICS, "Generate Statistics.", new StatisticsUI()::show);
         return menu;
     }
 

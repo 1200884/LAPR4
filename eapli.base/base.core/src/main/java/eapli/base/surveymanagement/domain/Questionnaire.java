@@ -16,6 +16,7 @@ public class Questionnaire implements AggregateRoot<Integer> {
     @GeneratedValue
     private int id;
     private String path;
+    private String path2;
     @Embedded
     private Survey_Rules rule;
     @ManyToMany
@@ -35,6 +36,10 @@ public class Questionnaire implements AggregateRoot<Integer> {
     public String getPath() {
         return path;
     }
+
+    public String getPath2(){return path2;}
+
+    public void setPath2(String path2){this.path2=path2;}
 
     public void setRule(Survey_Rules rule) {
         this.rule = rule;

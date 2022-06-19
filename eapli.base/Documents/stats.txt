@@ -1,0 +1,40 @@
+    Statistics 2022:
+Section 1:
+Q01: (Single Choice) A=30%, B=20%, C=50%, D=0%
+Q02: (Multiple Choice) A = 30%, B = A = 30%, B = 27%, C = 40%, Others = 3%
+Q03: (Sorting Options) 1st Place = A(40%) B (60%) C(0%); 2nd Place = A(50%) B(40%) C(10%); 3rd Place =A(10%) C(90%)
+Q04: (Scaling Options)
+
+
+A   1
+B-3
+C-2
+D-1
+A-1 B-2 C-3 D-1 E-2
+A-2 B-2 C-1 D-2 E-3
+A-1, B-3, C-2, D-1
+A-2, B-1, C-3, D-2
+A -- 1+2 -- 3/2= 1.5
+B -- 3+1 -- 4/2= 2
+C -- 2+3 -- 5/2= 2.5
+D -- 1+2 -- 3/2= 1.5
+Q04: (Scaling Options) by average per option:
+    A= 1.5, B= 2, C= 2.5, D= 1.5
+ABC
+BAC
+BAC
+CBA
+  / A ----1
+1º- B ----2
+  \ C ----1
+
+  / A ----2
+2º- B ----2
+  \ C ----0
+
+  / A ----1
+3º- B ----0
+  \ C ----3
+1st Place = A(40%) B (60%) C(0%);
+2nd Place = A(50%) B(40%) C(10%);
+3rd Place =A(10%) C(90%)

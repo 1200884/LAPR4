@@ -1,3 +1,4 @@
+    Answers 2022:
 *123456789*
 [ Section 1:
 > Question Q01:(Single Choice)A
@@ -18,12 +19,42 @@
 > Question Q10:(Sorting Options)ACB
 ]
 [ Section 5:
-> Question Q11:(Scaling Options)A-1 B-2 C-3 D-1 E-2 
+> Question Q11:(Scaling Options) A-1 B-2 C-3 D-1 E-2
 ]
 [ Section 6:
 > Question Q12:(Single Choice)A
 > Question Q13:(Single Choice)B
 > Question Q14:(Single Choice)A
+]
+[ Section 7:
+No answers.]
+
+*123123123*
+[ Section 1:
+> Question Q01:(Single Choice)B
+> Question Q02:(Single Choice)C
+> Question Q03:(Single Choice)A
+]
+[ Section 2:
+> Question Q04:(Multiple Choice)AC
+]
+[ Section 3:
+> Question Q05:(Multiple Choice)ABC
+> Question Q06:(Numeric)1
+> Question Q07:(Single Choice)D
+]
+[ Section 4:
+> Question Q08:(Sorting Options)CABFEGD
+> Question Q09:(Numeric)5
+> Question Q10:(Sorting Options)ABC
+]
+[ Section 5:
+> Question Q11:(Scaling Options) A-2 B-2 C-1 D-2 E-3
+]
+[ Section 6:
+> Question Q12:(Single Choice)C
+> Question Q13:(Single Choice)A
+> Question Q14:(Single Choice)B
 ]
 [ Section 7:
 No answers.]

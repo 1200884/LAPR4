@@ -1,63 +1,30 @@
     Answers 2022:
------------------------------------------------------
-* Client: Edinho 123456789 *
-[ Section 1: -----Mandatory
-> Q01: (Single Choice) A
-> Q02: (Single Choice) A
-> Q03: (Single Choice) A ]
-
-[ Section 2: -----Mandatory
-> Q04: (Multiple Choice) AB ]
-
-[ Section 3: -----Mandatory
-> Q05: (Multiple Choice) AB
-> Q06: (Numeric) 2
-> Q07: (Single Choice) A ]
-
-[ Section 4: -----Mandatory
-> Q08: (Sorting Options) ABCDEFG
-> Q09: (Numeric) 2
-> Q10: (Sorting Options) ABC ]
-
-[ Section 5: -----Mandatory
-> Q11: (Scaling Options) A-1 B-2 C-3 D-2 E-1 ]
-
-[ Section 6: -----Optional
-> Q12: (Single Choice) A
-> Q13: (Single Choice) A
-> Q14: (Single Choice) A ]
-
-[ Section 7: -----Condition dependent
+*123456789*
+[ Section 1:
+> Question Q01:(Single Choice)A
+> Question Q02:(Single Choice)A
+> Question Q03:(Single Choice)B
+]
+[ Section 2:
+> Question Q04:(Multiple Choice)AB
+]
+[ Section 3:
+> Question Q05:(Multiple Choice)AC
+> Question Q06:(Numeric)3
+> Question Q07:(Single Choice)C
+]
+[ Section 4:
+> Question Q08:(Sorting Options)DABEFGC
+> Question Q09:(Numeric)4
+> Question Q10:(Sorting Options)ACB
+]
+[ Section 5:
+> Question Q11:(Scaling Options) A-1 B-2 C-3 D-1 E-2
+]
+[ Section 6:
+> Question Q12:(Single Choice)A
+> Question Q13:(Single Choice)B
+> Question Q14:(Single Choice)A
+]
+[ Section 7:
 No answers.]
-
-* Client: Catarina 123123123 *
-[ Section 1: -----Mandatory
-> Q01: (Single Choice) D
-> Q02: (Single Choice) B
-> Q03: (Single Choice) A ]
-
-[ Section 2: -----Mandatory
-> Q04: (Multiple Choice) BC ]
-
-[ Section 3: -----Mandatory
-> Q05: (Multiple Choice) AD
-> Q06: (Numeric) 3
-> Q07: (Single Choice) C ]
-
-[ Section 4: -----Mandatory
-> Q08: (Sorting Options) EFGABCD
-> Q09: (Numeric) 1
-> Q10: (Sorting Options) ACB ]
-
-[ Section 5: -----Mandatory
-> Q11: (Scaling Options) A-2 B-1 C-3 D-1 E-1 ]
-
-[ Section 6: -----Optional
-> Q12: (Single Choice) B
-> Q13: (Single Choice) D
-> Q14: (Single Choice) C ]
-
-[ Section 7: -----Condition dependent
-No answers.]
-
-"There are no more answers. Thank you."
