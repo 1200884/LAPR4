@@ -2,6 +2,8 @@ package eapli.base.app.other.console.connectionmanagement.application.model;
 
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
+import eapli.base.AGVmanagement.AGV.domain.Status;
+import eapli.base.AGVmanagement.AGV.domain.repository.Location;
 import eapli.base.app.other.console.connectionmanagement.application.ConnectionController;
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.OrderLevel;
@@ -15,6 +17,8 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import static eapli.base.AGVmanagement.AGV.domain.Status.Availability.AVAILABLE;
 
 public class AGVManagerHandler implements Runnable {
 
@@ -41,6 +45,7 @@ public class AGVManagerHandler implements Runnable {
         InetAddress clientIP = socket.getInetAddress();
         System.out.println("New client connection from " + clientIP.getHostAddress() + ", port number " + socket.getPort());
 
+        AGVService agvService = new AGVService();
         try {
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
@@ -119,7 +124,6 @@ public class AGVManagerHandler implements Runnable {
                                 } else {
                                     agv.setPort(TWIN_STARTING_PORT + i);
                                     updateAGV(agv, agv.getStatus().gettasks());
-                                    AGVService agvService = new AGVService();
                                     agvService.updateAGV(agv);
                                 }
                                 i++;
@@ -129,7 +133,22 @@ public class AGVManagerHandler implements Runnable {
                             StringBuilder positions = new StringBuilder();
                             for (int j = TWIN_STARTING_PORT; j < TWIN_STARTING_PORT + 5; j++) {
                                 connectionController.sendMessage((byte) 1, (byte) 7, "", j);
-                                positions.append(connectionController.receiveMessage(j)).append(";");
+                                String agvPosition = connectionController.receiveMessage(j);
+                                positions.append(agvPosition).append(";");
+
+                                if (!agvPosition.equals("")) {
+                                    try {
+                                        ArrayList<AGV> agvList = AGVService.getAgvs();
+                                        String[] fullMessage = agvPosition.split(";", -2);
+                                        String[] position = fullMessage[4].split(":", -2);
+                                        agvList.get(j - TWIN_STARTING_PORT).setLocation(new Location(Integer.parseInt(position[0]), Integer.parseInt(position[1])));
+                                        agvService.updateAGV(agvList.get(j - TWIN_STARTING_PORT));
+                                        System.out.println("Pos updated");
+                                    }catch (Exception e) {
+                                        System.out.println("There was a problem updating the AGVs location in the database");
+                                        System.out.println(e);
+                                    }
+                                }
                             }
 
                             sOut.write(ServerFunctions.sendMessage(1, 7, positions.toString()));
@@ -159,6 +178,15 @@ public class AGVManagerHandler implements Runnable {
 
                             System.out.println("Message sent with success");
                             break;
+                        /*case 9:
+                            ArrayList<AGV> agvList = AGVService.getAgvs();
+                            for (AGV agv : agvList) {
+                                if (s.equals(String.valueOf(agv.getId()))) {
+                                    agv.getagvtasks().remove(0);
+                                    agv.getStatus().setAvailability(AVAILABLE);
+                                }
+                            }
+                            break;*/
                         default:
                             System.out.println("There is no functionality for this code");
                     }
@@ -166,14 +194,18 @@ public class AGVManagerHandler implements Runnable {
             } while (check);
 
             System.out.println("Client " + clientIP.getHostAddress() + ", port number: " + socket.getPort() + " disconnected");
-            for (int i = 0; i < AGVService.getAgvs().size(); i++) {
-                connectionController.sendMessage((byte) 1, (byte) 1, "", TWIN_STARTING_PORT + i);
-                connectionController.receiveMessage(TWIN_STARTING_PORT + i);
+            try {
+                for (int i = 0; i < AGVService.getAgvs().size(); i++) {
+                    connectionController.sendMessage((byte) 1, (byte) 1, "", TWIN_STARTING_PORT + i);
+                    connectionController.receiveMessage(TWIN_STARTING_PORT + i);
+                }
+                connectionController.closeClientConnection();
+                sOut.close();
+                sIn.close();
+                socket.close();
+            }catch (Exception ignored) {
+
             }
-            connectionController.closeClientConnection();
-            sOut.close();
-            sIn.close();
-            socket.close();
         } catch (IOException ex) {
             System.out.println("IOException");
         }

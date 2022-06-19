@@ -11,15 +11,18 @@ public class BatteryManagement implements Runnable {
     @Override
     public void run() {
         do {
-            int speed = sharedMemory.getSpeed();
+            double speed = sharedMemory.getSpeed();
             if (speed != 0) {
-                sharedMemory.setBattery(sharedMemory.getBattery()-speed);
+                sharedMemory.setBattery((int) (sharedMemory.getBattery() - speed));
+            }
+            if (sharedMemory.getX() == 0 && sharedMemory.getY() == 0) {
+                sharedMemory.setBattery(sharedMemory.getBattery() + 2);
             }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }while (!sharedMemory.getDone());
+        } while (!sharedMemory.getDone());
     }
 }

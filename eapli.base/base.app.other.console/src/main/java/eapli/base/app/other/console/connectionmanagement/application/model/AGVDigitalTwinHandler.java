@@ -35,14 +35,6 @@ public class AGVDigitalTwinHandler implements Runnable {
         System.out.println("New client connection from " + clientIP.getHostAddress() + ", port number " + socket.getPort());
 
         SharedMemory sharedMemory = new SharedMemory();
-        boolean[] isThereObstacle = {false, false};
-        int finalX = 15;
-        int finalY = 15;
-        sharedMemory.setIsThereObstacle(isThereObstacle);
-        sharedMemory.setX(posX);
-        sharedMemory.setY(posY);
-        sharedMemory.setFinalX(finalX);
-        sharedMemory.setFinalY(finalY);
 
         try {
             sOut = new DataOutputStream(socket.getOutputStream());
@@ -86,6 +78,7 @@ public class AGVDigitalTwinHandler implements Runnable {
                                     System.out.println("This is the right agv");
                                     tasks.add(strings[1]);
                                     this.status = "Working";
+
                                     assignTask(sharedMemory);
                                     sOut.write(ServerFunctions.sendMessage(1, 4, "Success"));
                                 } else {
@@ -142,6 +135,22 @@ public class AGVDigitalTwinHandler implements Runnable {
     }
 
     private void assignTask(SharedMemory sharedMemory) {
+        List<String> tasksCoords = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            int finalX = 15;
+            int finalY = 15;
+            sharedMemory.setFinalX(finalX);
+            sharedMemory.setFinalY(finalY);
+            String coords = finalX + ":" + finalY;
+            tasksCoords.add(coords);
+        }
+        sharedMemory.setOrders(tasksCoords);
+        boolean[] isThereObstacle = {false, false};
+        sharedMemory.setId(agvID);
+        sharedMemory.setIsThereObstacle(isThereObstacle);
+        sharedMemory.setX(posX);
+        sharedMemory.setY(posY);
+
         int[][] sensorsInfo = new int[5][5];
         sharedMemory.setSensorsInfo(sensorsInfo);
 
@@ -149,7 +158,7 @@ public class AGVDigitalTwinHandler implements Runnable {
         Thread simulationEngineThread = new Thread(simulationEngine);
         simulationEngineThread.start();
 
-        ControlSystem controlSystem = new ControlSystem(sharedMemory, tasks);
+        ControlSystem controlSystem = new ControlSystem(sharedMemory);
         Thread sensorsThread = new Thread(controlSystem);
         sensorsThread.start();
     }

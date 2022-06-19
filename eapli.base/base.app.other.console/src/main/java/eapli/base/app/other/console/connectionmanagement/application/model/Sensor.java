@@ -51,28 +51,27 @@ public class Sensor {
 
     public int checkClose(int x, int y, int[][] map) {
         try {
-            if (map[x + directions[0]][y + directions[1]] == 1) {
-                //System.out.println("obstaculo encontrado perto em " + (x + directions[0]) + ":" + (y + directions[1]));
-                return 1;
-            } else {
+            if (map[x + directions[0]][y + directions[1]] == 0) {
+                System.out.println("Object detected by the sensors in " + (x + directions[0]) + ":" + (y + directions[1]));
                 return 0;
+            } else {
+                return 1;
             }
         } catch (Exception e) {
-            return -1;
+            return 1;
         }
     }
 
     public int checkFurther(int x, int y, int[][] map) {
         try {
-            if (map[x + (directions[0] * 2)][y + (directions[1] * 2)] == 1) {
-                //System.out.println("obstaculo encontrado longe em " + (x + (directions[0] * 2)) + ":" + (y + (directions[1] * 2)));
-                return 1;
-            } else {
+            if (map[x + (directions[0] * 2)][y + (directions[1] * 2)] == 0) {
+                System.out.println("Object detected by the sensors in " + (x + (2 * directions[0])) + ":" + (y + (2 * directions[1])));
                 return 0;
+            } else {
+                return 1;
             }
         } catch (Exception e) {
-            return -1;
+            return 1;
         }
     }
-
 }

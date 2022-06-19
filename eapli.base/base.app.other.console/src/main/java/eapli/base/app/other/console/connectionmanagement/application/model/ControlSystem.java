@@ -6,11 +6,8 @@ import java.util.List;
 public class ControlSystem implements Runnable {
 
     private SharedMemory sharedMemory;
-    private List<String> orders;
-    private boolean isComingBack = false;
 
-    public ControlSystem(SharedMemory sharedMemory, List<String> orders) {
-        this.orders = orders;
+    public ControlSystem(SharedMemory sharedMemory) {
         this.sharedMemory = sharedMemory;
         List<Position> path = new ArrayList<>();
         sharedMemory.setPath(path);
@@ -47,27 +44,29 @@ public class ControlSystem implements Runnable {
     public void run() {
         do {
             if (sharedMemory.getIsThereObstacle()[0]) {
-                sharedMemory.setSpeed(1);
-            }else if (sharedMemory.getIsThereObstacle()[1]) {
+                sharedMemory.setSpeed(0.5);
+            } else if (sharedMemory.getIsThereObstacle()[1]) {
                 sharedMemory.setSpeed(0);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                sharedMemory.setSpeed(0.5);
+            } else {
                 sharedMemory.setSpeed(1);
-            }else {
-                sharedMemory.setSpeed(2);
             }
 
-            if (sharedMemory.getX() == sharedMemory.getFinalX() && sharedMemory.getY() == sharedMemory.getFinalY() && !isComingBack) {
+            if (sharedMemory.getX() == sharedMemory.getFinalX() && sharedMemory.getY() == sharedMemory.getFinalY() && !sharedMemory.getIsComingBack()) {
                 System.out.println("The AGV arrived at the destination");
+                sharedMemory.getMap()[sharedMemory.getX()][sharedMemory.getY()] = 1;
                 sharedMemory.setFinalX(0);
                 sharedMemory.setFinalY(0);
-                this.isComingBack = true;
+                sharedMemory.getIsThereObstacle()[1] = true;
+                sharedMemory.setIsComingBack(true);
             }
 
-            if (sharedMemory.getX() == sharedMemory.getFinalX() && sharedMemory.getY() == sharedMemory.getFinalY() && isComingBack) {
+            if (sharedMemory.getX() == sharedMemory.getFinalX() && sharedMemory.getY() == sharedMemory.getFinalY() && sharedMemory.getIsComingBack()) {
                 System.out.println("The AGV arrived at the dock");
                 sharedMemory.setDone(true);
             }

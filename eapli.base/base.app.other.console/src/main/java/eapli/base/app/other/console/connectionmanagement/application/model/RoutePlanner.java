@@ -8,6 +8,7 @@ public class RoutePlanner implements Runnable {
 
     private SharedMemory sharedMemory;
     private boolean remap;
+    private boolean comingBack = false;
 
     public RoutePlanner() {
 
@@ -35,9 +36,15 @@ public class RoutePlanner implements Runnable {
     @Override
     public void run() {
         do {
-            boolean[] remapArray = sharedMemory.getIsThereObstacle();
-            remap = remapArray[1];
+            if (sharedMemory.getIsThereObstacle()[1]) {
+                remap = true;
+            }
+            if (sharedMemory.getIsComingBack() && !comingBack) {
+                remap = true;
+                comingBack = true;
+            }
             if (remap) {
+                System.out.println("Object detected, remapping...");
                 int[] start = new int[2];
                 start[0] = sharedMemory.getX();
                 start[1] = sharedMemory.getY();
@@ -51,11 +58,17 @@ public class RoutePlanner implements Runnable {
                         path.add(new Position(cell.x, cell.y));
                     }
                 }
-                sharedMemory.setPath(path);
-                //System.out.println(sharedMemory.getPath());
+                if (!path.isEmpty()) {
+                    sharedMemory.setPath(path);
+                }
                 remap = false;
             }
-        } while (true);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (!sharedMemory.getDone());
     }
 
     private static class Cell {
@@ -83,7 +96,6 @@ public class RoutePlanner implements Runnable {
         int dx = end[0], dy = end[1];
         //if start or end value is 0, return
         if (matrix[sx][sy] == 0 || matrix[dx][dy] == 0) {
-            System.out.println("There is no path.");
             return null;
         }
         //initialize the cells
@@ -122,7 +134,6 @@ public class RoutePlanner implements Runnable {
 
         //compose the path if path exists
         if (dest == null) {
-            System.out.println("there is no path.");
             return null;
         } else {
             LinkedList<Cell> path = new LinkedList<>();
@@ -157,8 +168,8 @@ public class RoutePlanner implements Runnable {
                 {0, 0, 1}};
 
         //case1, there is no path
-        int[] start = {0, 0};
-        int[] end = {1, 1};
+        int[] start = {0, 1};
+        int[] end = {2, 2};
         System.out.print("case 1: ");
         shortestPath(matrix, start, end);
 

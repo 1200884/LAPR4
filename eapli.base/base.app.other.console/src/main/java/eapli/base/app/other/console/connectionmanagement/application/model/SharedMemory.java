@@ -5,24 +5,28 @@ import java.util.List;
 
 public class SharedMemory {
 
+    private int id;
     private int x;
     private int y;
     private int finalX;
     private int finalY;
-    private int speed;
+    private double speed;
     private int battery = 100;
     private int[][] sensorsInfo;
     private int[][] map;
     private List<Position> path;
     private boolean[] isThereObstacle;
+    private List<String> orders;
 
+    private boolean isComingBack = false;
     private boolean isDone = false;
 
     public SharedMemory() {
 
     }
 
-    public SharedMemory(int x, int y, int finalX, int finalY, int speed, int[][] sensorsInfo, int[][] map, List<Position> path, boolean[] isThereObstacle) {
+    public SharedMemory(int id, int x, int y, int finalX, int finalY, int speed, int[][] sensorsInfo, int[][] map, List<Position> path, boolean[] isThereObstacle, List<String> orders) {
+        this.id = id;
         this.x = x;
         this.y = y;
         this.finalX = finalX;
@@ -32,6 +36,15 @@ public class SharedMemory {
         this.map = map;
         this.path = path;
         this.isThereObstacle = isThereObstacle;
+        this.orders = orders;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public synchronized void setId(int id) {
+        this.id = id;
     }
 
     public int getX() {
@@ -66,11 +79,11 @@ public class SharedMemory {
         this.finalY = finalY;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public synchronized void setSpeed(int speed) {
+    public synchronized void setSpeed(double speed) {
         this.speed = speed;
     }
 
@@ -112,6 +125,22 @@ public class SharedMemory {
 
     public synchronized void setIsThereObstacle(boolean[] isThereObstacle) {
         this.isThereObstacle = isThereObstacle;
+    }
+
+    public void setOrders(List<String> orders) {
+        this.orders = orders;
+    }
+
+    public synchronized List<String> getOrders() {
+        return orders;
+    }
+
+    public void setIsComingBack(boolean comingBack) {
+        isComingBack = comingBack;
+    }
+
+    public synchronized boolean getIsComingBack() {
+        return isComingBack;
     }
 
     public void setDone(boolean done) {

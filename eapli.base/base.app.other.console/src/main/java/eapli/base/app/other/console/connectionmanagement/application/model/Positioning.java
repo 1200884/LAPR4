@@ -18,24 +18,38 @@ public class Positioning implements Runnable {
         do {
             try {
                 List<Position> path = sharedMemory.getPath();
-                System.out.println(path);
-                int speed = sharedMemory.getSpeed();
+                double speed = sharedMemory.getSpeed();
                 if (path.size() > 1 && speed > 0) {
-                    System.out.println("Proxima posicao " + path.get(1));
+                    System.out.println("=============================================");
+
+                    int[][] map = sharedMemory.getMap();
+                    for (int j = 0; j < map.length; j++) {
+                        for (int k = 0; k < map[0].length; k++) {
+                            if (j == sharedMemory.getX() && k == sharedMemory.getY()) {
+                                System.out.print("\033[0;31m" + map[j][k] + "\033[0m");
+                            }else {
+                                System.out.print(map[j][k]);
+                            }
+                        }
+                        System.out.println();
+                    }
+
+                    System.out.println("=============================================");
+                    sharedMemory.getMap()[sharedMemory.getX()][sharedMemory.getY()] = 1;
                     calculatePosition(path.get(1).getX(), path.get(1).getY());
+                    sharedMemory.getMap()[sharedMemory.getX()][sharedMemory.getY()] = 0;
                     path.remove(1);
-                    System.out.println("Currently in position " + sharedMemory.getX() + ":" + sharedMemory.getY() + " with a speed of " + sharedMemory.getSpeed());
-                    Thread.sleep(10000 * (1 / sharedMemory.getSpeed()));
+                    System.out.println("AGV " + sharedMemory.getId() + " moved to position " + sharedMemory.getX() + ":" + sharedMemory.getY() + " with a speed of " + sharedMemory.getSpeed());
+                    System.out.println("=============================================");
+                    Thread.sleep((long) (1000 * (1 / sharedMemory.getSpeed())));
                 }
             } catch (InterruptedException ignored) {
-
+                System.out.println(ignored);
             }
         } while (!sharedMemory.getDone());
     }
 
     public void calculatePosition(int directionX, int directionY) {
-        System.out.println("directionX = " + directionX);
-        System.out.println("directionY = " + directionY);
         sharedMemory.setX(directionX);
         sharedMemory.setY(directionY);
     }

@@ -2,7 +2,6 @@ package eapli.base.app.other.console.connectionmanagement.application.model;
 
 import eapli.base.app.other.console.connectionmanagement.application.ConnectionController;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +72,16 @@ public class SimulationEngine implements Runnable {
                     } catch (Exception e) {
                         sharedMemory.getSensorsInfo()[i][j] = 1;
                     }
+                }
+            }
+            if (sharedMemory.getDone()) {
+                if (sharedMemory.getOrders().size() > 1) {
+                    sharedMemory.getOrders().remove(0);
+                    String[] coords = sharedMemory.getOrders().get(0).split(":", -2);
+                    sharedMemory.setFinalX(Integer.parseInt(coords[0]));
+                    sharedMemory.setFinalY(Integer.parseInt(coords[1]));
+                } else {
+                    //connectionController.sendMessage((byte) 1, (byte) 9, String.valueOf(sharedMemory.getId()), 0);
                 }
             }
             try {

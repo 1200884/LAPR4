@@ -44,7 +44,7 @@ public class AGVInfoToJSON {
                     agv.setLocation(new Location(0, 0));
                 }
                 // agv.setLocation(new Location(AGV.randomiselocationx(), AGV.randomiselocationy()));
-                agv.moveRight();
+                //agv.moveRight();
                 JSONObject jsonObjectid = new JSONObject();
                 JSONObject jsonObjectstatus = new JSONObject();
                 JSONObject jsonObjectlocationx = new JSONObject();

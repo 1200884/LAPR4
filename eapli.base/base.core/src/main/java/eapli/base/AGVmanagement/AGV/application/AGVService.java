@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class AGVService {
 
     private static final AGVPersist agvPersist = new AGVPersist();
-    private static final AGVRepository agvrepository = PersistenceContext.repositories().AGVs();
+    private static AGVRepository agvRepository;
 
     public AGV createAGV(double maxWeight, String baseLocation, String shortDescription, Model model) {
         AGV agv = new AGV(maxWeight, baseLocation, shortDescription, model, new Status(2, "null"));
@@ -20,11 +20,12 @@ public class AGVService {
     }
 
     public synchronized static ArrayList<AGV> getAgvs() {
-        AGVRepository agvRepository2 = PersistenceContext.repositories().AGVs();
-        return (ArrayList<AGV>) agvRepository2.findAll();
+        agvRepository = PersistenceContext.repositories().AGVs();
+        return (ArrayList<AGV>) agvRepository.findAll();
     }
 
     public synchronized void updateAGV(AGV agv) {
-        agvrepository.save(agv);
+        agvRepository = PersistenceContext.repositories().AGVs();
+        agvRepository.save(agv);
     }
 }
