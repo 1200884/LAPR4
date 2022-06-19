@@ -137,6 +137,7 @@ public class AGVManagerHandler implements Runnable {
                                 positions.append(agvPosition).append(";");
 
                                 if (!agvPosition.equals("")) {
+
                                     try {
                                         ArrayList<AGV> agvList = AGVService.getAgvs();
                                         String[] fullMessage = agvPosition.split(";", -2);

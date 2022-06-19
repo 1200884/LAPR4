@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class AGVDigitalTwinHandler implements Runnable {
 
@@ -108,7 +109,7 @@ public class AGVDigitalTwinHandler implements Runnable {
                                     }
                                 }
                                 if (this.tasks.size() >= 1) {
-                                    assignTask(sharedMemory);
+                                    //assignTask(sharedMemory);
                                 }
                             }
                             System.out.println("AGV " + this.agvID + " com tasks atualizadas");

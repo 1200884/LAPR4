@@ -26,9 +26,11 @@ public class Positioning implements Runnable {
                     for (int j = 0; j < map.length; j++) {
                         for (int k = 0; k < map[0].length; k++) {
                             if (j == sharedMemory.getX() && k == sharedMemory.getY()) {
-                                System.out.print("\033[0;31m" + map[j][k] + "\033[0m");
-                            }else {
-                                System.out.print(map[j][k]);
+                                System.out.print("\033[0;31m" + "@" + "\033[0m");
+                            }else if (map[j][k]==0){
+                                System.out.print("|");
+                            }else{
+                                System.out.print(".");
                             }
                         }
                         System.out.println();
