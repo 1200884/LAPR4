@@ -1,13 +1,10 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
-import eapli.base.AGVmanagement.AGV.application.AGVService;
-import eapli.base.AGVmanagement.AGV.domain.AGV;
 
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
-import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;

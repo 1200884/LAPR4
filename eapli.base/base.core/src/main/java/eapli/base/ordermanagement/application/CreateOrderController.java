@@ -1,5 +1,6 @@
 package eapli.base.ordermanagement.application;
 
+import eapli.base.customermanagement.application.CustomerPersist;
 import eapli.base.customermanagement.domain.model.Customer;
 import eapli.base.ordermanagement.domain.Payment_Method;
 import eapli.base.ordermanagement.domain.Shipment_Method;
@@ -14,7 +15,7 @@ public class CreateOrderController {
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
     @Autowired
     private OrderServices os = new OrderServices();
-
+    private CustomerPersist cp = new CustomerPersist();
     public Optional<Customer> optionMenu(int vat) {
         authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.SALES_CLERK);
         return os.findByvat(vat);
@@ -30,6 +31,7 @@ public class CreateOrderController {
         Payment_Method paymentMethod= new Payment_Method(Payment_Method.PaymentMethod.valueOf(payment_method));
         os.createOrder("rua das 5 casas porta 6",customer.get().getShopping_cart(),shipmentMethod,paymentMethod);
         customer.get().getShopping_cart().getProduct_quantities().clear();
+        cp.updateCustomer(customer.get());
         return true;
     }
 

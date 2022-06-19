@@ -1,0 +1,38 @@
+            SmallQuestionnaire 2022:
+"Hello,
+This questionnaire aims to better our services to you.
+It takes approximately 10 minutes.
+Thank you very much for your time and support."
+-----------------------------------------------------
+[ Section 1: About you. -----Mandatory
+>Q01: What is your gender? (Single Choice)
+A- I am male.
+B- I am female.
+C- Other or no answer.
+>Q02: What is your age? (Single Choice)
+A- 18 to 24 years old.
+B- 25 to 34 years old.
+C- 35 to 44 years old.
+D- 45 to 54 years old.
+E- 55 to 64 years old.
+F- 65 to 74 years old.
+G- More than 75 years old.
+>Q03: In which city do you live in? (Single Choice)
+A- Portugal, Porto.
+B- UK, London.
+C- Jamaica, Kingston.
+D- Spain, Seville.
+]
+
+[ Section 2: Buying habits. -----Mandatory
+>Q04: Describe what you buy products in our store. (Multiple Choice)
+A- Buy groceries.
+B- Buy the best deals available.
+C- Buy national products.
+D- Gifts for the holidays.
+E- Exclusive products of our store.
+F- Curated book collection.
+]
+
+"You have successfully completed the questionnaire.
+Thank you for your help."

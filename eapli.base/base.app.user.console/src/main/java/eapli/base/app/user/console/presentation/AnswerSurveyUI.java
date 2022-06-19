@@ -25,12 +25,16 @@ public class AnswerSurveyUI extends AbstractUI {
         }
         String surveys =theController.seeSurveys();
         System.out.println(surveys);
-        String[] lines = surveys.split("\r\n|\r|\n");
-        String path = theController.chosenSurvey(Console.readOption(1,lines.length,0));
-        try {
-            calc.validateGrammar(path,2,vat);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(!surveys.isEmpty()) {
+            String[] lines = surveys.split("\r\n|\r|\n");
+            String path = theController.chosenSurvey(Console.readOption(1, lines.length, 0));
+            try {
+                calc.validateGrammar(path, 2, vat);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("You have no Questionnaires to answer");
         }
         return true;
     }

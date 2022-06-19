@@ -42,6 +42,7 @@ public class Customer implements Serializable, DomainEntity<Integer>, AggregateR
         this.email = email;
         this.shopping_cart=new Shopping_Cart(generateValue());
         this.questionnaires=new HashSet<>();
+        this.gender="Not Specified";
     }
 
     private int generateValue() {

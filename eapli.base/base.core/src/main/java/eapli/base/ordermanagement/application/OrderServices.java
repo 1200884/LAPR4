@@ -3,6 +3,7 @@ package eapli.base.ordermanagement.application;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
 import eapli.base.AGVmanagement.AGV.domain.repository.AGVRepository;
 import eapli.base.customermanagement.domain.model.Customer;
+import eapli.base.customermanagement.domain.model.Product_Quantities;
 import eapli.base.customermanagement.domain.model.Shopping_Cart;
 import eapli.base.customermanagement.domain.repositories.CustomerRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -11,19 +12,24 @@ import eapli.base.ordermanagement.domain.OrderLevel;
 import eapli.base.ordermanagement.domain.Payment_Method;
 import eapli.base.ordermanagement.domain.Shipment_Method;
 import eapli.base.ordermanagement.repositories.OrderRepository;
+import eapli.base.surveymanagement.domain.Questionnaire;
+import eapli.base.surveymanagement.domain.Repository.QuestionnaireRepository;
+import eapli.base.surveymanagement.domain.Survey_Rules;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Optional;
 
 public class OrderServices {
+    private static final String ADIDAS="Adidas";
     @Autowired
     CustomerRepository customer_repository = PersistenceContext.repositories().customers();
     @Autowired
     OrderRepository order_repository = PersistenceContext.repositories().Order();
     @Autowired
     AGVRepository agvRepository = PersistenceContext.repositories().AGVs();
+
+    QuestionnaireRepository questionnaireRepository=PersistenceContext.repositories().Questionnaire();
 
     public Optional<Customer> findByvat(int vat) {
         return customer_repository.ofIdentity(vat);
@@ -35,6 +41,19 @@ public class OrderServices {
     }
 
     public Orders createOrder(String address, Shopping_Cart shopping_cart, Shipment_Method shipmentMethod, Payment_Method payment_method) {
+        boolean flag=false;
+        for(Product_Quantities pq : shopping_cart.getProduct_quantities()){
+            if(pq.getProduct().getBrand().getName().equals(ADIDAS)){
+                flag=true;
+                break;
+            }
+        }
+        for(Questionnaire questionnaire : questionnaireRepository.findAll()){
+            if(questionnaire.getRule().getRules().equals(Survey_Rules.SurveyRules.ADIDAS_BUYERS) && flag){
+                Optional<Customer> customers =customer_repository.findByShoppingCartId(shopping_cart.getID());
+                customers.ifPresent(customer -> customer.addQuestionnaire(questionnaire));
+            }
+        }
         Orders order = new Orders(address, shopping_cart, shipmentMethod, payment_method);
         order_repository.save(order);
         return order;

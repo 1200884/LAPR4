@@ -29,7 +29,6 @@ public class OrderBootstrapperBase {
         Customer customer=null;
         try {
             customer=new Customer(name,vat,number,email);
-            customer.addQuestionnaire(new Questionnaire("Documents/teste.txt"));
             customerPersist.createCustomerPersist(customer);
         } catch (final IntegrityViolationException | ConcurrencyException e) {
             customer = null;

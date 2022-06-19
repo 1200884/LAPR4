@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
-
-    File myObj = new File("Documents\\Q01.txt");
+    int i;
+    String file;
+    File myObj;
     ArrayList<String> conditionals = new ArrayList<>();
     private final int vat;
 
     public EvalVisitor2(int vat) {
         this.vat=vat;
+        i=0;
     }
 
     @Override
@@ -28,10 +30,25 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
     }
 
     @Override
+    public String visitPrintTitle(LabeledExprParser.PrintTitleContext ctx) {
+        if(i==0){
+            String title=ctx.getText().replaceAll(" ","");
+            myObj = new File("Documents\\" + title + ".txt");
+            file=title;
+            i++;
+        }
+        return super.visitPrintTitle(ctx);
+    }
+
+    public String getFile(){
+        return this.file;
+    }
+
+    @Override
     public String visitHandleSection(LabeledExprParser.HandleSectionContext ctx) {
         BufferedWriter myWriter = null;
         try {
-            myWriter = new BufferedWriter(new FileWriter("Documents\\Q01.txt", true));
+            myWriter = new BufferedWriter(new FileWriter("Documents\\" + file + ".txt", true));
             if(ctx.id().getText().equals("1:")) {
                 myWriter.write("*" + vat + "*\n");
             }
@@ -129,6 +146,7 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
                 break;
 
         }
+
     }
 
     private void checkConditional(String section, LabeledExprParser.Question_structContext question, String answer) {
