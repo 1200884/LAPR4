@@ -49,7 +49,7 @@ public class AGVDigitalTwinHandler implements Runnable {
             sIn = new DataInputStream(socket.getInputStream());
             do {
                 String s = null;
-                byte[] message = new byte[750];
+                byte[] message = new byte[1023];
                 sIn.read(message);
                 version = message[0];
                 if (version == 1) {

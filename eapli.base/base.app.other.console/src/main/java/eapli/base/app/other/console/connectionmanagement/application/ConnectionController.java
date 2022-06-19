@@ -3,7 +3,6 @@ package eapli.base.app.other.console.connectionmanagement.application;
 import eapli.base.app.other.console.connectionmanagement.application.model.ClientConnection;
 
 import javax.net.ssl.SSLSocket;
-import java.net.Socket;
 import java.util.List;
 
 public class ConnectionController {

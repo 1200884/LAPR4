@@ -3,12 +3,15 @@ package eapli.base.app.other.console.connectionmanagement.application.model;
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
 
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+import javax.security.cert.X509Certificate;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ClientConnection {
 
@@ -18,11 +21,11 @@ public class ClientConnection {
     private static final int AGV_TWIN_PORT_START = 125;
     private static final int NUM_AGVS = 5;
 
-    private Socket socket;
-    private List<Socket> twinSocket = new ArrayList<>();
-    private DataOutputStream sOut;
+    private static SSLSocket socket;
+    private List<SSLSocket> twinSocket = new ArrayList<>();
+    private static DataOutputStream sOut;
     private List<DataOutputStream> twinSOut = new ArrayList<>();
-    private DataInputStream sIn;
+    private static DataInputStream sIn;
     private List<DataInputStream> twinSIn = new ArrayList<>();
 
     public boolean establishConnection(int num) {
@@ -57,7 +60,24 @@ public class ClientConnection {
 
     private boolean establishConnection(String host, int port) {
         try {
-            socket = new Socket(host, port);
+            SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            socket = (SSLSocket) sslsocketfactory.createSocket(host,port);
+            socket.startHandshake();
+            SSLSession ssl = socket.getSession();
+            System.out.println("------------------------------------------------------");
+            System.out.println("SSL/TLS version: " + ssl.getProtocol() +
+                    "         Cypher suite: " + ssl.getCipherSuite());
+
+            X509Certificate[] chain=ssl.getPeerCertificateChain();
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate subject: " + chain[0].getSubjectDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate issuer: " + chain[0].getIssuerDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not before: " + chain[0].getNotBefore());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not after:  " + chain[0].getNotAfter());
+            System.out.println("------------------------------------------------------");
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
         } catch (Exception e) {
@@ -68,7 +88,24 @@ public class ClientConnection {
 
     private boolean establishTwinConnection(String host, int port, int i) {
         try {
-            twinSocket.add(new Socket(host, port));
+            SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            twinSocket.add((SSLSocket) sslsocketfactory.createSocket(host,port));
+            twinSocket.get(i).startHandshake();
+            SSLSession ssl = twinSocket.get(i).getSession();
+            System.out.println("------------------------------------------------------");
+            System.out.println("SSL/TLS version: " + ssl.getProtocol() +
+                    "         Cypher suite: " + ssl.getCipherSuite());
+
+            X509Certificate[] chain=ssl.getPeerCertificateChain();
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate subject: " + chain[0].getSubjectDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate issuer: " + chain[0].getIssuerDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not before: " + chain[0].getNotBefore());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not after:  " + chain[0].getNotAfter());
+            System.out.println("------------------------------------------------------");
             twinSOut.add(new DataOutputStream(twinSocket.get(i).getOutputStream()));
             twinSIn.add(new DataInputStream(twinSocket.get(i).getInputStream()));
         } catch (Exception e) {
@@ -98,7 +135,7 @@ public class ClientConnection {
 
     public String receiveMessage() {
         String returnable;
-        byte[] message = new byte[750];
+        byte[] message = new byte[1023];
         try {
             sIn.read(message);
             returnable = convertToReceive(message);
@@ -110,7 +147,7 @@ public class ClientConnection {
 
     public String receiveTwinMessage(int i) {
         String returnable;
-        byte[] message = new byte[750];
+        byte[] message = new byte[1023];
         try {
             twinSIn.get(i - AGV_TWIN_PORT_START).read(message);
             returnable = convertToReceive(message);
@@ -141,7 +178,7 @@ public class ClientConnection {
     }
 
     private byte[] convertToSend(byte version, byte code, String message) {
-        byte[] bytes = new byte[750];
+        byte[] bytes = new byte[1023];
         bytes[0] = version;
         bytes[1] = code;
         byte[] stringBytes = message.getBytes();
@@ -168,7 +205,7 @@ public class ClientConnection {
         return string;
     }
 
-    public List<Socket> getTwinSocket() {
+    public List<SSLSocket> getTwinSocket() {
         return twinSocket;
     }
 }

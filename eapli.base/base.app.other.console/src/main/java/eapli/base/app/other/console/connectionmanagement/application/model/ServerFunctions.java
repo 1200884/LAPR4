@@ -5,7 +5,7 @@ import java.util.Random;
 public class ServerFunctions {
 
     public static byte[] sendMessage(int version, int code, String message) {
-        byte[] array = new byte[750];
+        byte[] array = new byte[1023];
         array[0] = (byte) version;
         array[1] = (byte) code;
         byte[] stringBytes = message.getBytes();
@@ -16,7 +16,7 @@ public class ServerFunctions {
     }
 
     public static byte[] ACK() {
-        byte[] message = new byte[750];
+        byte[] message = new byte[1023];
         message[0] = 1;
         message[1] = 2;
         try {

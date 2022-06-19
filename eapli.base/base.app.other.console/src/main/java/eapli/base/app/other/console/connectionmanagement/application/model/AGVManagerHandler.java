@@ -6,7 +6,6 @@ import eapli.base.app.other.console.connectionmanagement.application.ConnectionC
 import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.OrderLevel;
 import eapli.base.warehousemanagement.application.JSONReader;
-import eapli.base.warehousemanagement.application.OrderAGVAssignmentController;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -16,7 +15,6 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class AGVManagerHandler implements Runnable {
 
@@ -46,7 +44,7 @@ public class AGVManagerHandler implements Runnable {
         try {
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
-            byte[] message = new byte[750];
+            byte[] message = new byte[1023];
             do {
                 String s = "";
                 sIn.read(message);
