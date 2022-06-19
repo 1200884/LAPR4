@@ -15,7 +15,7 @@ class UpdateDispatchedOrderControllerTest {
 
     @Test
     void updateOrderToDelivered() {
-        Orders orders=new Orders("Rua de casa do Sr Miguel",new Shopping_Cart(1234568789),new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS),new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
+        Orders orders=new Orders("Rua 5 de outubro",new Shopping_Cart(1234568789),new Shipment_Method(Shipment_Method.ShipmentMethod.EXPRESS),new Payment_Method(Payment_Method.PaymentMethod.CREDITCARD));
         orders.setOrderLevel(new OrderLevel(OrderLevel.Level.DISPATCHED));
         orders.setOrderLevel(new OrderLevel(OrderLevel.Level.DELIVERED));
         assertEquals(orders.getOrderLevel().getLevel(),OrderLevel.Level.DELIVERED);

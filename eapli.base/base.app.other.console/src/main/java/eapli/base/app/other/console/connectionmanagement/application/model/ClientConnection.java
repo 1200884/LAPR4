@@ -79,9 +79,25 @@ public class ClientConnection {
 
     private boolean establishTwinConnection(String host, int port, int i) {
         try {
+
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             twinSocket.add((SSLSocket) sslsocketfactory.createSocket(host,port));
             twinSocket.get(i).startHandshake();
+            SSLSession ssl = twinSocket.get(i).getSession();
+            System.out.println("------------------------------------------------------");
+            System.out.println("SSL/TLS version: " + ssl.getProtocol() +
+                    "         Cypher suite: " + ssl.getCipherSuite());
+
+            X509Certificate[] chain=ssl.getPeerCertificateChain();
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate subject: " + chain[0].getSubjectDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Certificate issuer: " + chain[0].getIssuerDN());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not before: " + chain[0].getNotBefore());
+            System.out.println("------------------------------------------------------");
+            System.out.println("Not after:  " + chain[0].getNotAfter());
+            System.out.println("------------------------------------------------------");
             twinSOut.add(new DataOutputStream(twinSocket.get(i).getOutputStream()));
             twinSIn.add(new DataInputStream(twinSocket.get(i).getInputStream()));
         } catch (Exception e) {
