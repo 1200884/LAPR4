@@ -25,7 +25,7 @@ public class StatisticsUI extends AbstractUI {
             for (String s : theController.findQuestionnaires()){
                 System.out.println(s);
             }
-            String f= Console.readLine("Write the ID of one questionnaire.");
+            int f= Console.readInteger("Write the ID of one questionnaire.");
             theController.getQuestionnaire(f);
         } catch (IOException e) {
             e.printStackTrace();

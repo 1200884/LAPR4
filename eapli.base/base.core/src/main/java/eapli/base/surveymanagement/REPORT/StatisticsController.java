@@ -23,10 +23,9 @@ public class StatisticsController {
         return strings;
     }
 
-    public void getQuestionnaire(String f) throws IOException {
+    public void getQuestionnaire(int f) throws IOException {
         Calc2 calc = new Calc2();
-        int j= Integer.parseInt(f);
-        Optional<Questionnaire> optionalQuestionnaire= questionnaireRepository.ofIdentity(j);
+        Optional<Questionnaire> optionalQuestionnaire= questionnaireRepository.ofIdentity(f);
         if(optionalQuestionnaire.isPresent()){
             calc.readAnswers(optionalQuestionnaire.get().getPath2());
         }
