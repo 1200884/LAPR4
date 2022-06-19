@@ -52,6 +52,7 @@ public class OrderServices {
             if(questionnaire.getRule().getRules().equals(Survey_Rules.SurveyRules.ADIDAS_BUYERS) && flag){
                 Optional<Customer> customers =customer_repository.findByShoppingCartId(shopping_cart.getID());
                 customers.ifPresent(customer -> customer.addQuestionnaire(questionnaire));
+                System.out.println("You are now available to answer a new Questionnaire");
             }
         }
         Orders order = new Orders(address, shopping_cart, shipmentMethod, payment_method);

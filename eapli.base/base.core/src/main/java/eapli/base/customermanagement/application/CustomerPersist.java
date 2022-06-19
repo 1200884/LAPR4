@@ -23,9 +23,11 @@ public class CustomerPersist {
                     }
                 }
                 customer.addQuestionnaire(questionnaire);
+                System.out.println("You are now available to answer a new Questionnaire");
             }
             if(questionnaire.getRule().getRules().equals(Survey_Rules.SurveyRules.FEMALE_GENDER) && customer.getGender().equals("female")){
                 customer.addQuestionnaire(questionnaire);
+                System.out.println("You are now available to answer a new Questionnaire");
             }
         }
         customerRepository.save(customer);
