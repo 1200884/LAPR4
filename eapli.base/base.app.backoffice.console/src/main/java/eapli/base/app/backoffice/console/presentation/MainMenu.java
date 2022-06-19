@@ -107,7 +107,7 @@ public class MainMenu extends AbstractUI {
 
     //Sales Manager
     private static final int VALIDATE_GRAMMAR = 1;
-    private static final int CREATE_STATISTICS = 3;
+    private static final int CREATE_STATISTICS = 2;
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -180,7 +180,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Options >");
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
         menu.addItem(VALIDATE_GRAMMAR, "Validate questionnaire", new QuestionerUI()::show);
-        menu.addItem(CREATE_STATISTICS, "Generate Statistics.", new StatisticsUI()::show);
+        menu.addItem(CREATE_STATISTICS, "Generate Statistics", new StatisticsUI()::show);
         return menu;
     }
 

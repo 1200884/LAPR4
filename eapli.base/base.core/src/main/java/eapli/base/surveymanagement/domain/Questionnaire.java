@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 public class Questionnaire implements AggregateRoot<Integer> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String path;
     private String path2;
