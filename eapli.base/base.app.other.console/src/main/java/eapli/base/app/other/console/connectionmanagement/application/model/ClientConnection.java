@@ -1,14 +1,14 @@
 package eapli.base.app.other.console.connectionmanagement.application.model;
 
+import eapli.base.AGVmanagement.AGV.application.AGVService;
+import eapli.base.AGVmanagement.AGV.domain.AGV;
 
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import javax.security.cert.X509Certificate;
+import java.util.Set;
 
 public class ClientConnection {
 
@@ -18,22 +18,31 @@ public class ClientConnection {
     private static final int AGV_TWIN_PORT_START = 125;
     private static final int NUM_AGVS = 5;
 
-    private static SSLSocket socket;
-    private static DataOutputStream sOut;
-    private static DataInputStream sIn;
-    private List<SSLSocket> twinSocket = new ArrayList<>();
+    private Socket socket;
+    private List<Socket> twinSocket = new ArrayList<>();
+    private DataOutputStream sOut;
     private List<DataOutputStream> twinSOut = new ArrayList<>();
+    private DataInputStream sIn;
     private List<DataInputStream> twinSIn = new ArrayList<>();
 
     public boolean establishConnection(int num) {
         switch (num) {
             case 1:
-                for (int i = AGV_TWIN_PORT_START; i < (AGV_TWIN_PORT_START + NUM_AGVS); i++) {
-                    if (!establishTwinConnection(HOST, i, i - AGV_TWIN_PORT_START)) {
-                        System.out.println("Nao foi feita a conexao com os agvs digital twins");
-                        return false;
+                int i = AGV_TWIN_PORT_START;
+                List<AGV> AGVs = AGVService.getAgvs();
+                for (AGV agv : AGVs) {
+                    if (agv.getPort() == 0) {
+                        if (!establishTwinConnection(HOST, i, i - AGV_TWIN_PORT_START)) {
+                            System.out.println("Nao foi feita a conexao com os agvs digital twins");
+                            return false;
+                        }
+                    }else {
+                        if (!establishTwinConnection(HOST, agv.getPort(), agv.getPort() - AGV_TWIN_PORT_START)) {
+                            System.out.println("Nao foi feita a conexao com os agvs digital twins");
+                            return false;
+                        }
                     }
-
+                    i++;
                 }
                 System.out.println("Foi feita a conexao com os agvs digital twins");
                 return true;
@@ -48,53 +57,18 @@ public class ClientConnection {
 
     private boolean establishConnection(String host, int port) {
         try {
-            SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            socket = (SSLSocket) sslsocketfactory.createSocket(host,port);
-            socket.startHandshake();
-            SSLSession ssl = socket.getSession();
-            System.out.println("------------------------------------------------------");
-            System.out.println("SSL/TLS version: " + ssl.getProtocol() +
-                    "         Cypher suite: " + ssl.getCipherSuite());
-
-            X509Certificate[] chain=ssl.getPeerCertificateChain();
-            System.out.println("------------------------------------------------------");
-            System.out.println("Certificate subject: " + chain[0].getSubjectDN());
-            System.out.println("------------------------------------------------------");
-            System.out.println("Certificate issuer: " + chain[0].getIssuerDN());
-            System.out.println("------------------------------------------------------");
-            System.out.println("Not before: " + chain[0].getNotBefore());
-            System.out.println("------------------------------------------------------");
-            System.out.println("Not after:  " + chain[0].getNotAfter());
-            System.out.println("------------------------------------------------------");
+            socket = new Socket(host, port);
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
         return true;
     }
 
     private boolean establishTwinConnection(String host, int port, int i) {
         try {
-
-            SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            twinSocket.add((SSLSocket) sslsocketfactory.createSocket(host,port));
-            twinSocket.get(i).startHandshake();
-            SSLSession ssl = twinSocket.get(i).getSession();
-            System.out.println("------------------------------------------------------");
-            System.out.println("SSL/TLS version: " + ssl.getProtocol() +
-                    "         Cypher suite: " + ssl.getCipherSuite());
-
-            X509Certificate[] chain=ssl.getPeerCertificateChain();
-            System.out.println("------------------------------------------------------");
-            System.out.println("Certificate subject: " + chain[0].getSubjectDN());
-            System.out.println("------------------------------------------------------");
-            System.out.println("Certificate issuer: " + chain[0].getIssuerDN());
-            System.out.println("------------------------------------------------------");
-            System.out.println("Not before: " + chain[0].getNotBefore());
-            System.out.println("------------------------------------------------------");
-            System.out.println("Not after:  " + chain[0].getNotAfter());
-            System.out.println("------------------------------------------------------");
+            twinSocket.add(new Socket(host, port));
             twinSOut.add(new DataOutputStream(twinSocket.get(i).getOutputStream()));
             twinSIn.add(new DataInputStream(twinSocket.get(i).getInputStream()));
         } catch (Exception e) {
@@ -124,7 +98,7 @@ public class ClientConnection {
 
     public String receiveMessage() {
         String returnable;
-        byte[] message = new byte[1023];
+        byte[] message = new byte[750];
         try {
             sIn.read(message);
             returnable = convertToReceive(message);
@@ -136,7 +110,7 @@ public class ClientConnection {
 
     public String receiveTwinMessage(int i) {
         String returnable;
-        byte[] message = new byte[255];
+        byte[] message = new byte[750];
         try {
             twinSIn.get(i - AGV_TWIN_PORT_START).read(message);
             returnable = convertToReceive(message);
@@ -167,7 +141,7 @@ public class ClientConnection {
     }
 
     private byte[] convertToSend(byte version, byte code, String message) {
-        byte[] bytes = new byte[255];
+        byte[] bytes = new byte[750];
         bytes[0] = version;
         bytes[1] = code;
         byte[] stringBytes = message.getBytes();
@@ -194,7 +168,7 @@ public class ClientConnection {
         return string;
     }
 
-    public List<SSLSocket> getTwinSocket() {
+    public List<Socket> getTwinSocket() {
         return twinSocket;
     }
 }

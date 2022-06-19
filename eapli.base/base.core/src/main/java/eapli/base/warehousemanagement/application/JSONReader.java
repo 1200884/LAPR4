@@ -19,7 +19,6 @@ import java.util.Set;
 public class JSONReader {
     JSONParser jsonParser = new JSONParser();
     CreateWarehouseController theController = new CreateWarehouseController();
-
     public void jsonReader(String path) throws FileNotFoundException {
 
         try (Reader reader = new FileReader(path)) {
@@ -59,7 +58,7 @@ public class JSONReader {
                 String acessability = (String) c.get("accessibility");
 
                 JSONArray rows = (JSONArray) c.get("rows");
-                Aisle aisle1 = new Aisle(id, lsquare, wsquare, lsquareEnd, wsquareEnd, lsquareDepth, wsquareDepth, acessability);
+                Aisle aisle1 = new Aisle(id,lsquare,wsquare,lsquareEnd,wsquareEnd,lsquareDepth,wsquareDepth,acessability);
                 Set<Rowe> row = new HashSet<>();
                 for (Object d : rows) {
                     JSONObject e = (JSONObject) d;
@@ -74,7 +73,7 @@ public class JSONReader {
                     Long wsquareEndRow = (Long) endRow.get("wsquare");
 
                     Long shelves = (Long) e.get("shelves");
-                    row.add(new Rowe(idr, lsquareRow, wsquareRow, lsquareEndRow, wsquareEndRow, shelves));
+                    row.add(new Rowe(idr,lsquareRow,wsquareRow,lsquareEndRow,wsquareEndRow,shelves));
                 }
                 aisle1.setRows(row);
                 aisle.add(aisle1);
@@ -99,10 +98,9 @@ public class JSONReader {
                 Long wsquareDepth = (Long) depth.get("wsquare");
 
                 String acessability = (String) g.get("accessibility");
-                docks.add(new AGVDocks(ida, lsquare, wsquare, lsquareEnd, wsquareEnd, lsquareDepth, wsquareDepth, acessability));
+                docks.add(new AGVDocks(ida,lsquare,wsquare,lsquareEnd,wsquareEnd,lsquareDepth,wsquareDepth,acessability));
             }
-            theController.createWarehouse(length, width, square, unit, aisle, docks);
-
+            theController.createWarehouse(length,width,square,unit,aisle,docks);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -113,20 +111,20 @@ public class JSONReader {
         int[][] warehouse = new int[20][18];
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 18; j++) {
-                warehouse[i][j] = 0;
+                warehouse[i][j] = 1;
             }
         }
-        for (int k = 4; k < 15; k++) {
-            warehouse[k][1] = 1;
+        for (int k = 4; k < 13; k++) {
+            warehouse[k][1] = 0;
         }
-        for (int k = 4; k < 15; k++) {
-            warehouse[k][8] = 1;
+        for (int k = 4; k < 13; k++) {
+            warehouse[k][8] = 0;
         }
-        for (int k = 4; k < 15; k++) {
-            warehouse[k][11] = 1;
+        for (int k = 4; k < 13; k++) {
+            warehouse[k][11] = 0;
         }
-        for (int k = 4; k < 15; k++) {
-            warehouse[k][18] = 1;
+        for (int k = 4; k < 13; k++) {
+            warehouse[k][17] = 0;
         }
 
         return warehouse;

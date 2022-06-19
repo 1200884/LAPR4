@@ -3,6 +3,9 @@ package eapli.base.app.other.console.connectionmanagement.application.model;
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
 import eapli.base.app.other.console.connectionmanagement.application.ConnectionController;
+import eapli.base.ordermanagement.application.OrderServices;
+import eapli.base.ordermanagement.domain.OrderLevel;
+import eapli.base.warehousemanagement.application.JSONReader;
 import eapli.base.warehousemanagement.application.OrderAGVAssignmentController;
 
 import java.io.DataInputStream;
@@ -13,6 +16,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class AGVManagerHandler implements Runnable {
 
@@ -20,6 +24,8 @@ public class AGVManagerHandler implements Runnable {
     private DataOutputStream sOut;
     private DataInputStream sIn;
     private ConnectionController connectionController;
+
+    private static final int TWIN_STARTING_PORT = 125;
 
     public AGVManagerHandler(Socket socket) {
         this.socket = socket;
@@ -31,6 +37,7 @@ public class AGVManagerHandler implements Runnable {
         System.out.println("Establecendo conexao com os agv digital twins");
         connectionController.establishAGVTwinConnection();
         System.out.println("Conexao com os agv digital twins feita");
+
         boolean check = true;
         byte version, code, length1, length2;
         InetAddress clientIP = socket.getInetAddress();
@@ -39,7 +46,7 @@ public class AGVManagerHandler implements Runnable {
         try {
             sOut = new DataOutputStream(socket.getOutputStream());
             sIn = new DataInputStream(socket.getInputStream());
-            byte[] message = new byte[255];
+            byte[] message = new byte[750];
             do {
                 String s = "";
                 sIn.read(message);
@@ -72,8 +79,8 @@ public class AGVManagerHandler implements Runnable {
                             List<String> list = new ArrayList<>();
                             List<AGV> agvs = AGVService.getAgvs();
                             for (int i = 0; i < agvs.size(); i++) {
-                                connectionController.sendMessage(version, (byte) 3, "", 125 + i);
-                                String s1 = connectionController.receiveMessage(125+i);
+                                connectionController.sendMessage(version, (byte) 3, "", TWIN_STARTING_PORT + i);
+                                String s1 = connectionController.receiveMessage(TWIN_STARTING_PORT + i);
                                 list.add(s1);
                             }
                             System.out.println("Messages sent!");
@@ -84,23 +91,24 @@ public class AGVManagerHandler implements Runnable {
                                 if (lessBusyAGVTasks == -1) {
                                     lessBusyAGVTasks = Integer.parseInt(agvString[5]);
                                     lessBusyAGV = Integer.parseInt(agvString[4]);
-                                }else if (Integer.parseInt(agvString[5]) < lessBusyAGVTasks) {
+                                } else if (Integer.parseInt(agvString[5]) < lessBusyAGVTasks) {
                                     lessBusyAGVTasks = Integer.parseInt(agvString[5]);
                                     lessBusyAGV = Integer.parseInt(agvString[4]);
                                 }
                             }
-                            System.out.println("The least busy AGV is: " + lessBusyAGV);
+                            System.out.println("The least busy AGV is: " + lessBusyAGV + " with " + lessBusyAGVTasks + " tasks");
                             for (AGV agv : agvs) {
                                 if (agv.getId() == lessBusyAGV) {
                                     connectionController.sendMessage(version, (byte) 4, lessBusyAGV + ";" + s, agv.getPort());
                                     String receivedMessage = connectionController.receiveMessage(agv.getPort());
                                     String[] receivedMessageString = receivedMessage.split(";", -2);
                                     if (receivedMessageString[4].equals("Success")) {
-                                        OrderAGVAssignmentController.assignTaskToAGV(agv, s);
-                                        System.out.println("--------------------------------AGV e order atualizados----------------------------------------");
+                                        assignTaskToAGV(agv, s);
+                                        System.out.println("AGV and order updated");
                                         sOut.write(ServerFunctions.sendMessage(1, 3, String.valueOf(lessBusyAGV)));
                                         break switches;
-                                    }                                }
+                                    }
+                                }
                             }
                             sOut.write(ServerFunctions.sendMessage(1, 3, String.valueOf(lessBusyAGV)));
                             break;
@@ -109,15 +117,49 @@ public class AGVManagerHandler implements Runnable {
                             int i = 0;
                             for (AGV agv : set) {
                                 if (agv.getPort() != 0) {
-                                    updateAGV(agv);
+                                    updateAGV(agv, agv.getStatus().gettasks());
                                 } else {
-                                    agv.setPort(125 + i);
-                                    updateAGV(agv);
+                                    agv.setPort(TWIN_STARTING_PORT + i);
+                                    updateAGV(agv, agv.getStatus().gettasks());
                                     AGVService agvService = new AGVService();
                                     agvService.updateAGV(agv);
                                 }
                                 i++;
                             }
+                            break;
+                        case 7://get all agv's positions
+                            StringBuilder positions = new StringBuilder();
+                            for (int j = TWIN_STARTING_PORT; j < TWIN_STARTING_PORT + 5; j++) {
+                                connectionController.sendMessage((byte) 1, (byte) 7, "", j);
+                                positions.append(connectionController.receiveMessage(j)).append(";");
+                            }
+
+                            sOut.write(ServerFunctions.sendMessage(1, 7, positions.toString()));
+                            break;
+                        case 8://mandar o mapa
+                            int[][] map = JSONReader.walls();
+                            for (int j = 0; j < map.length; j++) {
+                                StringBuilder mapString = new StringBuilder();
+                                for (int k = 0; k < map[0].length; k++) {
+                                    mapString.append(map[j][k]).append(":");
+                                }
+                                sOut.write(ServerFunctions.sendMessage(1, 8, mapString.toString()));
+                            }
+
+                            System.out.println("========================================");
+
+                            for (int j = 0; j < map.length; j++) {
+                                for (int k = 0; k < map[0].length; k++) {
+                                    System.out.print(map[j][k]);
+                                }
+                                System.out.println();
+                            }
+
+                            System.out.println("========================================");
+
+                            sOut.write(ServerFunctions.sendMessage(1, 9, ""));
+
+                            System.out.println("Message sent with success");
                             break;
                         default:
                             System.out.println("There is no functionality for this code");
@@ -127,8 +169,8 @@ public class AGVManagerHandler implements Runnable {
 
             System.out.println("Client " + clientIP.getHostAddress() + ", port number: " + socket.getPort() + " disconnected");
             for (int i = 0; i < AGVService.getAgvs().size(); i++) {
-                connectionController.sendMessage((byte) 1, (byte) 1, "", 125+i);
-                connectionController.receiveMessage(125+i);
+                connectionController.sendMessage((byte) 1, (byte) 1, "", TWIN_STARTING_PORT + i);
+                connectionController.receiveMessage(TWIN_STARTING_PORT + i);
             }
             connectionController.closeClientConnection();
             sOut.close();
@@ -139,15 +181,30 @@ public class AGVManagerHandler implements Runnable {
         }
     }
 
-    private void updateAGV(AGV agv) {
+    private synchronized void updateAGV(AGV agv, List<String> tasks) {
         connectionController.sendMessage((byte) 1, (byte) 5, agv.getId() + ";" + agv.getLocation().getX() + ";" + agv.getLocation().getY() + ";" + agv.getStatus().getAvailability(), agv.getPort());
         StringBuilder tasksString = new StringBuilder();
-        List<String> tasks = agv.getStatus().gettasks();
-        System.out.println(agv.getId());
         for (String task : tasks) {
-            System.out.println(task);
             tasksString.append(task).append(";");
         }
         connectionController.sendMessage((byte) 1, (byte) 6, tasksString.toString(), agv.getPort());
+    }
+
+    private static void assignTaskToAGV(AGV agv, String orderID) {
+        AGVService agvService = new AGVService();
+        OrderServices orderServices = new OrderServices();
+        OrderLevel orderLevel = new OrderLevel(OrderLevel.Level.ASSIGNED);
+        try {
+            orderServices.findbyid(orderID);
+        } catch (Exception e) {
+            return;
+        }
+        if (orderServices.findbyid(orderID) == null) {
+            return;
+        }
+        orderServices.findbyid(orderID).setOrderLevel(orderLevel);
+        orderServices.updateOrders(orderServices.findbyid(orderID));
+        agv.addTask(orderID);
+        agvService.updateAGV(agv);
     }
 }

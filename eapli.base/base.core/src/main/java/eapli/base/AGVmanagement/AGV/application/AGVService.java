@@ -6,10 +6,8 @@ import eapli.base.AGVmanagement.AGV.domain.repository.AGVRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.modelmanagement.Model.domain.Model;
 import eapli.base.AGVmanagement.AGV.domain.repository.AGVPersist;
-import eapli.base.ordermanagement.domain.Orders;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class AGVService {
 
@@ -21,12 +19,12 @@ public class AGVService {
         return agvPersist.createAGVPersist(agv);
     }
 
-    public static ArrayList<AGV> getAgvs() {
-        AGVRepository agvrepository2=PersistenceContext.repositories().AGVs();
-        return (ArrayList<AGV>) agvrepository2.findAll();
+    public synchronized static ArrayList<AGV> getAgvs() {
+        AGVRepository agvRepository2 = PersistenceContext.repositories().AGVs();
+        return (ArrayList<AGV>) agvRepository2.findAll();
     }
 
-    public void updateAGV(AGV agv) {
+    public synchronized void updateAGV(AGV agv) {
         agvrepository.save(agv);
     }
 }

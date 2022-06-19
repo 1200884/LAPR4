@@ -1,34 +1,24 @@
 package eapli.base.AGVmanagement.AGV.domain;
 
 
-import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.Immutable;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 
 import java.util.*;
 
 @Embeddable
 @Immutable
 public class Status implements ValueObject {
-
     private int battery_left;
     @Column
     @ElementCollection(targetClass=String.class,fetch = FetchType.EAGER)
     private List<String> task;
-    //@OneToOne(fetch = FetchType.EAGER)
-    //private AGV AGV;
 
-    /**
-     * Returns the primary <b>business</b> id of the entity.
-     *
-     * <p>
-     * This method is marked as a getter for Jackson serialization
-     *
-     * @return the primary <b>business</b> id of the entity
-     */
-    //@Override
     public Integer identity() {
         return null;
     }
@@ -53,7 +43,7 @@ public class Status implements ValueObject {
     }
 
     public Status(int battery_left, String task) {
-        this.task=new ArrayList<>();
+        this.task = new ArrayList<>();
         this.battery_left = battery_left;
         addTask(task);
         if (this.task.size() > 1) {
@@ -138,16 +128,6 @@ public class Status implements ValueObject {
         return Objects.hash(battery_left, task);
     }
 
-    /**
-     * Entities are compared by identity only, so equals() must only compare
-     * identities. In some situations however we might want to compare the
-     * contents of the object by value.
-     *
-     * @param other the other object to compare
-     * @return {@code true} if this domain entity have the "same content" as the
-     * {@code other}
-     */
-    //@Override
     public boolean sameAs(Object other) {
         return false;
     }

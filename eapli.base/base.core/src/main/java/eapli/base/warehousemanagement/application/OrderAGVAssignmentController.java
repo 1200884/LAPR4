@@ -2,9 +2,7 @@ package eapli.base.warehousemanagement.application;
 
 import eapli.base.AGVmanagement.AGV.application.AGVService;
 import eapli.base.AGVmanagement.AGV.domain.AGV;
-import eapli.base.ordermanagement.application.OrderServices;
 import eapli.base.ordermanagement.domain.Orders;
-import eapli.base.ordermanagement.domain.OrderLevel;
 
 import java.util.Random;
 
@@ -35,27 +33,6 @@ public class OrderAGVAssignmentController {
         return emptyagv;
     }
 */
-    public static void assignTaskToAGV(AGV agv, String orderid) {
-        AGVService agvService = new AGVService();
-        OrderServices orderServices = new OrderServices();
-        OrderLevel orderLevel = new OrderLevel(OrderLevel.Level.ASSIGNED);
-        try {
-            orderServices.findbyid(orderid);
-        } catch (Exception e) {
-            return;
-        }
-        if (orderServices.findbyid(orderid) == null) {
-            return;
-        }
-        orderServices.findbyid(orderid).setOrderLevel(orderLevel);
-        orderServices.updateOrders(orderServices.findbyid(orderid));
-        agv.addTask(orderid);
-        agvService.updateAGV(agv);
-        System.out.println("--------------------------------------------------------------------------------------");
-        System.out.println(agv.toString());
-        System.out.println("--------------------------------------------------------------------------------------");
-        System.out.println(AGVService.getAgvs());
-    }
 
     public static int randomizetasktime() {
         Random rand = new Random(); //instance of random class
