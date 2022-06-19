@@ -1,19 +1,10 @@
-    Answers 2022:
-*123456789*
+    Small 2021:
+*987654321*
 [ Section 1:
 > Question Q01:(Single Choice)A
-> Question Q02:(Single Choice)D
-> Question Q03:(Single Choice)B
-]
-[ Section 2:
-> Question Q04:(Multiple Choice)BCA
-]
-*123123123*
-[ Section 1:
-> Question Q01:(Single Choice)B
 > Question Q02:(Single Choice)B
 > Question Q03:(Single Choice)A
 ]
 [ Section 2:
-> Question Q04:(Multiple Choice)BCD
+> Question Q04:(Multiple Choice)BC
 ]

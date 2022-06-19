@@ -36,6 +36,12 @@ public class EvalVisitor2 extends LabeledExprBaseVisitor<String> {
             myObj = new File("Documents\\" + title + ".txt");
             file=title;
             i++;
+            try {
+                BufferedWriter myWriter = new BufferedWriter(new FileWriter("Documents\\" + file + ".txt", true));
+                myWriter.write("   Answers " + title + ":");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return super.visitPrintTitle(ctx);
     }

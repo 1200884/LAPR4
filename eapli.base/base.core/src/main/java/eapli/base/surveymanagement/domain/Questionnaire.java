@@ -4,6 +4,7 @@ package eapli.base.surveymanagement.domain;
 
 import eapli.base.customermanagement.domain.model.Customer;
 import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.util.Strategy;
 
 import javax.persistence.*;
 import java.util.ArrayList;

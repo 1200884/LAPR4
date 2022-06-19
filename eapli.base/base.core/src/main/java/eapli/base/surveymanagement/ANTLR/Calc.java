@@ -1,7 +1,9 @@
 package eapli.base.surveymanagement.ANTLR;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import eapli.base.customermanagement.domain.model.Customer;
 import eapli.base.customermanagement.domain.repositories.CustomerRepository;
@@ -33,7 +35,8 @@ public class Calc {
             eval.visit(tree);
             Optional<Customer> optional= customerRepository.ofIdentity(vat);
             if(optional.isPresent()){
-                for(Questionnaire questionnaire:optional.get().getQuestionnaires()){
+                Customer customer =optional.get();
+                for(Questionnaire questionnaire:customer.getQuestionnaires()){
                     if(Objects.equals(questionnaire.getPath(), path)){
                         System.out.println("boa");
                         questionnaire.setPath2("Documents\\" + eval.getFile() + ".txt");
