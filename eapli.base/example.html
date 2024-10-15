@@ -10,19 +10,6 @@
 <h2 style="color: #ff0000">AGV STATUS AND LOCATION</h2>
 <P id="data"></P>
 <script type="text/javascript">
-  /*  let walls = function () {
-        var myClass = Java.type("eapli/base/warehousemanagement/application/JSONReader.java");
-        return myClass.walls();
-    }
-
-    function display() {
-        var matrix = walls();
-        for (var i = 0; i < matrix.length; i++) {
-            document.write('&nbsp;&nbsp' + matrix().get(i).join('') + <br />);
-        }
-    }
-display();
-*/
    fetch('./webdashboard.json')
         .then(function (response) {
             return response.json();

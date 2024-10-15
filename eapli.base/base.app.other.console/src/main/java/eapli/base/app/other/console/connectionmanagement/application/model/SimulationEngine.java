@@ -11,7 +11,6 @@ public class SimulationEngine implements Runnable {
     private ConnectionController connectionController;
 
     public SimulationEngine() {
-
     }
 
     public SimulationEngine(SharedMemory sharedMemory) {

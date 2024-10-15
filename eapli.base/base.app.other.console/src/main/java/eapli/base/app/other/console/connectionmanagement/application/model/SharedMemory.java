@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SharedMemory {
-
     private int id;
     private int x;
     private int y;
